@@ -1,17 +1,17 @@
 # PyLibMS
+[![Python Versions](https://img.shields.io/pypi/pyversions/PyLibMS)](https://pypi.org/project/PyLibMS/) 
+[![PyPI version](https://badge.fury.io/py/PyLibMS.svg)](https://badge.fury.io/py/PyLibMS)
 
-PylibMS is a library built in Python 3.12+ for the libMessageStudio (LMS) proprietary file formats (`msbt`, `msbp`,
-`msbf`) from Nintendo. It supports the following:
+PyLibMS is a library built for Python 3.10 and above for the libMessageStudio (LMS) proprietary file formats from Nintendo. 
 
+The following is supported
 | Format | Read | Write | Configuration Support                                                                     |
 |-------------|------|-------|-------------------------------------------------------------------------------------------|
-| MSBT        | ✅    | ✅     | Complete attribute decoding + tag decoding down to official `mstxt` Nintendo tool syntax. |
-| MSBF        | ✅    | ✅     | Flexible node + parameter decoding through configuration definitions.                     |
-| MSBP        | ✅    | ❌     | N/A                                                                                       |
+| `MSBT`        | ✅    | ✅     | Support for full attribute (`ATR1`) decoding. Tag decoding 1:1 with the official Nintendo `.mstxt` file format. |
+| `MSBF`        | ✅    | ✅     | Support for custom node definitions, attaching names and descriptions to nodes. Altering parameter datatypes for flexibility between games.  |
+| `MSBP`        | ✅    | ❌     | N/A                                                                                       |
 
-This library is designed to support LMS revision 3.0+ from most Nintendo consoles. 
-
-**Note**: MSBF files that use `FLW1` and `FLW2` are not supported, and will not be supported as they are revision <3.0 of LMS.
+This library is designed to support LMS revision >=3.0. These include files generated for late **Wii** titles, **Nintendo 3DS**, **Wii U**, **Mobile**, **Nintendo Switch** and **Nintendo Switch 2** games.
 
 # Features and Usage
 
@@ -54,14 +54,14 @@ pip install PylibMS
 
 # Build Instructions
 
-Python version must be `>=3.12.`
+Python version must be `3.10` or higher.
 
 Clone the repository, then run `pip install` (venv recommended)
 
 ```bash
 git clone https://github.com/AbdyyEee/PylibMS.git
-cd PylibMS
-pip install -e 
+cd PyLibMS
+pip install -e .
 ```
 
 # Credits & Sources

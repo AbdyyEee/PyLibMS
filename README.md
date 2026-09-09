@@ -47,7 +47,7 @@ To add or edit Preset, you may create an issue with the relevant `yaml` file and
 # Installation
 
 ```
-pip install PylibMS
+pip install PyLibMS
 ```
 
 [Pip Page](https://pypi.org/project/PyLibMS/)

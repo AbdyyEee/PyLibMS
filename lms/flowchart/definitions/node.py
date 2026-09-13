@@ -365,6 +365,7 @@ class LMS_EventNode(LMS_BaseNode):
 
         :param parameter_type: the parameter type.
         :param parameter_value: the parameter value.
+        :param action_id: the action_id of the node.
 
         """
         verify_parameter_structure(parameter_value, parameter_type)
@@ -435,7 +436,7 @@ class LMS_JumpNode(LMS_BaseNode):
         self.next_flowchart: LMS_EntryNode | None = None
 
         # TODO: Document this unknown value at 0xA in the node
-        # This value is usually -1 in TL but is a set value in other games
+        # This value is usually -1 in TL 3DS but is a set value in other games
         self.unknown_short0a = unknown_short0a
 
     @classmethod

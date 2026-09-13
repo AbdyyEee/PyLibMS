@@ -1,5 +1,5 @@
 from types import MappingProxyType
-from typing import Callable
+from typing import Callable, Iterator
 
 from lms.flowchart.definitions.node import LMS_EntryNode, LMS_BranchNode, LMS_BaseNode
 
@@ -15,6 +15,9 @@ class LMS_Flowchart:
         if entry_point is not None:
             for node in entry_point.get_descendents():
                 self._nodes[node.id] = node
+
+    def __iter__(self) -> Iterator[LMS_BaseNode]:
+        return iter(self._nodes.values())
 
     def __len__(self) -> int:
         return len(self._nodes)
@@ -89,7 +92,7 @@ class LMS_Flowchart:
 
         del self._nodes[node_id]
 
-    def get_dangling_nodes(self):
+    def get_dangling_nodes(self) -> list[LMS_BaseNode]:
         """
         Retrieves all the nodes that do not have a parent in the flowchart.
         """

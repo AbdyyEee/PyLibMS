@@ -7,12 +7,22 @@ include = ["lms*"]
 
 [project]
 name = "PyLibMS"
-version = "4.1.6"
+version = "4.1.7"
 requires-python = ">=3.10"
 description = "Python library built for the libMessageStudio (LMS) proprietary file formats from Nintendo. Supports MSBT, MSBP, and MSBF."
 readme = "README.md"
 authors = [{ name = "AbdyyEee" }]
-keywords = ["nintendo", "msbf", "msbt", "msbp", "modding", "lms", "libmessagestudio", "flw3"]
+keywords = [
+    "nintendo",
+    "msbt",
+    "message text",
+    "msbp",
+    "message project",
+    "msbf",
+    "message flowchart",
+    "flw3",
+    "modding",
+    "libmessagestudio"]
 license = "MIT"
 license-files = ["LICENSE*"]
 classifiers = [

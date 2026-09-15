@@ -20,24 +20,45 @@ and examples.
 
 ## Reading
 
-MSBT/MSBF
+### MSBT
 
 ```py
 from lms.message.msbtio import read_msbt_path
-from lms.flowchart.msbfio import read_msbf_path
 
-msbt = read_msbt_path("Game.msbt")
-msbf = read_msbf_path("Game_Flowchart.msbf")
+msbt = read_msbt_path("Text.msbt")
 ```
 
-## Writing
+### MSBP
+```py
+from lms.project.msbpread import read_msbp_path
 
+msbp = read_msbp_path("Project.msbp")
+```
+
+
+### MSBF
+```py
+from lms.flowchart.msbfio import read_msbf_path
+
+msbt = read_msbf_path("Flowchart.msbf")
+```
+
+
+## Writing
+There is no writing for `MSBP` files as there is no conventional need for them.
+
+### MSBT
 ```py
 from lms.message.msbtio import write_msbt_path
+
+write_msbt_path("Out_text.msbt")
+```
+
+### MSBF
+```py
 from lms.flowchart.msbfio import write_msbf_path
 
-write_msbt_path("Out_Game.msbt")
-write_msbf_path("Out_Game_Flowchart.msbt")
+write_msbf_path("Out_Flowchart.msbt")
 ```
 
 # Adding/Editing Presets

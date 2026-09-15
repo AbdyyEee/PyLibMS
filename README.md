@@ -2,7 +2,7 @@
 [![Python Versions](https://img.shields.io/pypi/pyversions/PyLibMS)](https://pypi.org/project/PyLibMS/) 
 [![PyPI version](https://badge.fury.io/py/PyLibMS.svg)](https://badge.fury.io/py/PyLibMS)
 
-PyLibMS is a library built for Python 3.10 and above for the libMessageStudio (LMS) proprietary file formats from Nintendo. 
+PyLibMS is a library built in Python 3.10 and above for reading and writing of libMessageStudio (LMS) proprietary file formats from Nintendo. 
 
 The following is supported
 | Format | Read | Write | Configuration Support                                                                     |
@@ -40,7 +40,7 @@ msbp = read_msbp_path("Project.msbp")
 ```py
 from lms.flowchart.msbfio import read_msbf_path
 
-msbt = read_msbf_path("Flowchart.msbf")
+msbf = read_msbf_path("Flowchart.msbf")
 ```
 
 

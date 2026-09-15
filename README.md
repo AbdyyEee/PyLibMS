@@ -45,7 +45,7 @@ msbt = read_msbf_path("Flowchart.msbf")
 
 
 ## Writing
-There is no writing for `MSBP` files as there is no conventional need for them.
+There is no writing for `MSBP` files as most of the time it acts as leftover metadata and not actually loaded by games.
 
 ### MSBT
 ```py
@@ -58,7 +58,7 @@ write_msbt_path("Out_text.msbt")
 ```py
 from lms.flowchart.msbfio import write_msbf_path
 
-write_msbf_path("Out_Flowchart.msbt")
+write_msbf_path("Out_Flowchart.msbf")
 ```
 
 # Adding/Editing Presets

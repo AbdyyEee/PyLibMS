@@ -8,6 +8,7 @@ node_definitions:
         - name: exp
     - id: 1
       name: SwitchVariable
+      case_format: "var == {case}"
       parameter_type: string
       parameters:
         - name: var

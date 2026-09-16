@@ -61,6 +61,7 @@ class NodeDefinition:
     @classmethod
     def from_dict(cls, id: int, node_type: LMS_NodeType, data: dict) -> NodeDefinition:
 
+        description = data.get("description", "")
         converted_parameters: list[ValueDefinition] = []
         parameter_type = LMS_NodeParameterType.from_string(data["parameter_type"])
 
@@ -84,10 +85,10 @@ class NodeDefinition:
                             (LMS_DataType.UINT8, LMS_DataType.UINT8, LMS_DataType.UINT8, LMS_DataType.UINT8)[i]
                     case LMS_NodeParameterType.STRING:
                         datatype_from_dict = LMS_DataType.STRING
-                definition = ValueDefinition(parameter["name"], data.get("description", ""), datatype_from_dict,
+                definition = ValueDefinition(parameter["name"], description, datatype_from_dict,
                                              list_items)
             else:
-                definition = ValueDefinition(parameter["name"], data["description"],
+                definition = ValueDefinition(parameter["name"], description,
                                              LMS_DataType.from_string(datatype_from_dict),
                                              list_items)
 

@@ -1,7 +1,7 @@
-from typing import Type
 from enum import IntEnum
+from typing import Type
 
-from lms.common.lms_exceptions import LMS_Error
+from lms.common.field.lms_datatype import LMS_DataType
 
 PARAMETER_ALIASES = {
     "p32_0": "PARAM_32_0",
@@ -54,7 +54,26 @@ class LMS_NodeParameterType(IntEnum):
     NONE = -1
 
     @property
+    def sliced_datatype(self):
+        """The parameter type split into the raw datatypes. Not valid for PARAM_32_0, PARAM_32_1, and STRING."""
+        if self in [
+            LMS_NodeParameterType.NONE,
+            LMS_NodeParameterType.PARAM_32_0,
+            LMS_NodeParameterType.PARAM_32_1,
+            LMS_NodeParameterType.STRING]:
+            raise TypeError(f"There is no sliced datatypes for {self} parameter types!")
+
+        return {
+            LMS_NodeParameterType.PARAM_16_16: (LMS_DataType.UINT16, LMS_DataType.UINT16),
+            LMS_NodeParameterType.PARAM_16_8_8: (LMS_DataType.UINT16, LMS_DataType.UINT8, LMS_DataType.UINT8),
+            LMS_NodeParameterType.PARAM_8_8_16: (LMS_DataType.UINT8, LMS_DataType.UINT8, LMS_DataType.UINT16),
+            LMS_NodeParameterType.PARAM_8_8_8_8: (LMS_DataType.UINT8, LMS_DataType.UINT8, LMS_DataType.UINT8,
+                                                  LMS_DataType.UINT8)
+        }[self]
+
+    @property
     def value_count(self) -> int:
+        """Amount of values the parameter holds."""
         if self is LMS_NodeParameterType.NONE:
             raise TypeError("There is no value count for NONE parameter types!")
 
@@ -70,6 +89,7 @@ class LMS_NodeParameterType(IntEnum):
 
     @property
     def builtin_type(self) -> Type[int] | Type[tuple[int, ...]] | Type[str]:
+        """The builtin type of the parameter type."""
         if self is LMS_NodeParameterType.NONE:
             raise TypeError("There is no builtin type for NONE parameter types!")
 

@@ -1,4 +1,5 @@
 from lms.common.field.io import read_field, write_field
+from lms.common.field.lms_datatype import LMS_DataType
 from lms.common.field.lms_field import LMS_FieldMap, LMS_Field
 from lms.common.lms_exceptions import LMS_Error
 from lms.fileio.io import FileReader, FileWriter
@@ -12,6 +13,8 @@ from lms.titleconfig.definitions.nodes import NodeConfig, NodeDefinition
 NO_NEXT_NODE = 0xFFFF
 FLW3_HEADER_SIZE = 16
 NODE_SIZE = 16
+
+VARIABLE_WIDTH_DATATYPES = (LMS_DataType.BOOL, LMS_DataType.LIST)
 
 
 def read_flw3(reader: FileReader, config: NodeConfig | None, msbt: MSBT | None, ) -> tuple[
@@ -155,8 +158,10 @@ def evaluate_node_parameter(reader: FileReader,
                 param_definition.name: LMS_Field(value, param_definition)
             })
 
-        for param_definition in definition.parameter_definitions:
-            result[param_definition.name] = read_field(reader, param_definition)
+        for i, param_definition in enumerate(definition.parameter_definitions):
+            stream_map = {1: reader.read_uint8, 2: reader.read_uint16, 3: reader.read_uint32}
+            result[param_definition.name] = read_field(reader, param_definition,
+                                                       stream_map[parameter_type.sliced_datatype[i].stream_size])
 
         return LMS_FieldMap(result)
     else:
@@ -297,8 +302,13 @@ def write_node_parameter(writer: FileWriter,
                          value: LMS_NodeParameter,
                          parameter_type: LMS_NodeParameterType) -> None:
     if isinstance(value, LMS_FieldMap):
-        for field in value:
-            write_field(writer, field)
+        for i, field in enumerate(value):
+            # In MSBF files there could be a case where naturally one bit datatypes take up 2/4 bits.
+            if field.datatype in VARIABLE_WIDTH_DATATYPES:
+                stream_map = {1: writer.write_uint8, 2: writer.write_uint16, 3: writer.write_uint32}
+                write_field(writer, field, stream_map[parameter_type.sliced_datatype[i].stream_size])
+            else:
+                write_field(writer, field)
         return
 
     match parameter_type:

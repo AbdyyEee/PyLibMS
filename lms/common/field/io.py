@@ -8,7 +8,8 @@ from lms.fileio.io import FileReader, FileWriter
 from lms.titleconfig.definitions.value import ValueDefinition
 
 
-def read_field(reader: FileReader, definition: ValueDefinition) -> LMS_Field:
+def read_field(reader: FileReader, definition: ValueDefinition,
+               read_variable_width_value: Callable | None = None) -> LMS_Field:
     # String is excluded as their reading varies between MSBT/MSBF
     match definition.datatype:
         case LMS_DataType.UINT8:
@@ -26,17 +27,23 @@ def read_field(reader: FileReader, definition: ValueDefinition) -> LMS_Field:
         case LMS_DataType.FLOAT32:
             value = reader.read_float32()
         case LMS_DataType.LIST:
-            index = reader.read_uint8()
+            if read_variable_width_value is not None:
+                index = read_variable_width_value()
+            else:
+                index = reader.read_uint8()
             value = definition.list_items[index]
         case LMS_DataType.BOOL:
-            value = bool(reader.read_uint8())
+            if read_variable_width_value is not None:
+                value = bool(read_variable_width_value())
+            else:
+                value = bool(reader.read_uint8())
         case LMS_DataType.BYTES:
             value = reader.read_bytes(1)
 
     return LMS_Field(value, definition)  # type: ignore
 
 
-def write_field(writer: FileWriter, field: LMS_Field) -> None:
+def write_field(writer: FileWriter, field: LMS_Field, write_variable_width_value: Callable | None = None) -> None:
     if is_number_datatype(field.value, field.datatype):
         write_functions: dict[LMS_DataType, Callable] = {
             LMS_DataType.UINT8: writer.write_uint8,
@@ -51,10 +58,17 @@ def write_field(writer: FileWriter, field: LMS_Field) -> None:
         return
 
     if is_list_datatype(field.value, field.datatype):
-        writer.write_uint8(field.list_items.index(field.value))
+        value = field.list_items.index(field.value)
+        if write_variable_width_value is not None:
+            write_variable_width_value(value)
+        else:
+            writer.write_uint8(value)
     elif is_bytes_datatype(field.value, field.datatype):
         writer.write_bytes(field.value)
     elif is_bool_datatype(field.value, field.datatype):
-        writer.write_uint8(bool(field.value))
+        if write_variable_width_value is not None:
+            write_variable_width_value(bool(field.value))
+        else:
+            writer.write_uint8(bool(field.value))
     else:
         raise ValueError(f"Unsupported datatype: {field.datatype}")

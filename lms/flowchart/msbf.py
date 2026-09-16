@@ -63,17 +63,13 @@ class MSBF:
         """The flowcharts of the MSBF instance."""
         return MappingProxyType({flowchart.name: flowchart for flowchart in self._flowcharts})
 
-    @property
-    def global_node_id(self) -> int:
-        """Current node ID count."""
-        return self._global_node_id
-
     def set_global_id_count(self, value: int) -> None:
-        if value < self._global_node_id:
-            raise ValueError("Cannot decrease global node ID below existing count.")
         self._global_node_id = value
 
     def generate_next_id(self) -> int:
+        """
+        Lazy generation for the next ID of a node. IDs are normalized properly when the msbf file is being written.
+        """
         next_id = self._global_node_id
         self._global_node_id += 1
         return next_id
@@ -97,7 +93,7 @@ class MSBF:
     def delete_flowchart(self, name: str):
         """Delete a flowchart from the MSBF instance."""
 
-        if name not in self._flowcharts:
+        if name not in self.flowcharts:
             raise KeyError(f"Flowchart with name {name} does not exist!")
 
         del self._flowcharts[name]

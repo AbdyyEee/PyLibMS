@@ -55,7 +55,7 @@ class NodeDefinition:
     type: LMS_NodeType.BRANCH | LMS_NodeType.EVENT
     parameter_type: LMS_NodeParameterType
     parameter_definitions: tuple[ValueDefinition, ...]
-    case_format: str
+    case_format: str | None
     next_node_dependency: bool = False
 
     @classmethod

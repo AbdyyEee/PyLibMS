@@ -16,6 +16,7 @@ class LMS_Flowchart:
             for node in entry_point.get_descendents():
                 self._nodes[node.id] = node
 
+
     def __iter__(self) -> Iterator[LMS_BaseNode]:
         return iter(self._nodes.values())
 

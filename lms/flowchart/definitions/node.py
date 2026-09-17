@@ -218,6 +218,11 @@ class LMS_BranchNode(LMS_BaseNode):
         self._branches: dict[int, LMS_BaseNode | None] = {}
         self._definition = definition
 
+    def __repr__(self):
+        if self._definition is None:
+            return super().__repr__()
+        return f"{self._definition.name}({ {field.name: field.value for field in self._parameter_value} } {self.id}"
+
     @classmethod
     def new(cls,
             parameter_type: LMS_NodeParameterType,
@@ -357,6 +362,11 @@ class LMS_EventNode(LMS_BaseNode):
 
         self._action_id = action_id
         self._definition = definition
+
+    def __repr__(self):
+        if self._definition is None:
+            return super().__repr__()
+        return f"{self._definition.name}({ {field.name: field.value for field in self._parameter_value} } {self.id}"
 
     @classmethod
     def new(cls, parameter_type: LMS_NodeParameterType, parameter_value: int | str | tuple[int, ...], action_id: int):

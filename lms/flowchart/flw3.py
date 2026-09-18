@@ -159,7 +159,7 @@ def evaluate_node_parameter(reader: FileReader,
             })
 
         for i, param_definition in enumerate(definition.parameter_definitions):
-            stream_map = {1: reader.read_uint8, 2: reader.read_uint16, 3: reader.read_uint32}
+            stream_map = {1: reader.read_uint8, 2: reader.read_uint16, 4: reader.read_uint32}
             result[param_definition.name] = read_field(reader, param_definition,
                                                        stream_map[parameter_type.sliced_datatype[i].stream_size])
 

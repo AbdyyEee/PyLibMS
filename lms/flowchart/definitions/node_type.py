@@ -54,21 +54,21 @@ class LMS_NodeParameterType(IntEnum):
     NONE = -1
 
     @property
-    def sliced_datatype(self):
-        """The parameter type split into the raw datatypes. Not valid for PARAM_32_0, PARAM_32_1, and STRING."""
+    def sliced_datatype(self) -> tuple[LMS_DataType, ...]:
+        """The parameter type split into the raw datatypes. Not valid for STRING."""
         if self in [
             LMS_NodeParameterType.NONE,
-            LMS_NodeParameterType.PARAM_32_0,
-            LMS_NodeParameterType.PARAM_32_1,
             LMS_NodeParameterType.STRING]:
             raise TypeError(f"There is no sliced datatypes for {self} parameter types!")
 
         return {
+            LMS_NodeParameterType.PARAM_32_0: (LMS_DataType.UINT32,),
             LMS_NodeParameterType.PARAM_16_16: (LMS_DataType.UINT16, LMS_DataType.UINT16),
             LMS_NodeParameterType.PARAM_16_8_8: (LMS_DataType.UINT16, LMS_DataType.UINT8, LMS_DataType.UINT8),
             LMS_NodeParameterType.PARAM_8_8_16: (LMS_DataType.UINT8, LMS_DataType.UINT8, LMS_DataType.UINT16),
             LMS_NodeParameterType.PARAM_8_8_8_8: (LMS_DataType.UINT8, LMS_DataType.UINT8, LMS_DataType.UINT8,
-                                                  LMS_DataType.UINT8)
+                                                  LMS_DataType.UINT8),
+            LMS_NodeParameterType.PARAM_32_1: (LMS_DataType.UINT32,)
         }[self]
 
     @property

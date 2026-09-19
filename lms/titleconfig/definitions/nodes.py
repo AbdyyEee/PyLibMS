@@ -99,10 +99,10 @@ class NodeDefinition:
         if "case_format" in data and "case_options" in data:
             raise ValueError("There may only be one of case_format and options in the definition.")
 
-        if (options := data.get("case_options", None)) is not None and type == LMS_NodeType.EVENT:
+        if (case_options := data.get("case_options", None)) is not None and node_type == LMS_NodeType.EVENT:
             raise ValueError("There may only be options for branch nodes!")
 
-        if (case_format := data.get("case_format", None)) is not None and type == LMS_NodeType.EVENT:
+        if (case_format := data.get("case_format", None)) is not None and node_type == LMS_NodeType.EVENT:
             raise ValueError("There may only be case_format for branch nodes!")
 
         return NodeDefinition(
@@ -113,6 +113,6 @@ class NodeDefinition:
             parameter_type=parameter_type,
             parameter_definitions=converted_parameters,
             case_format=case_format,
-            case_options=options,
+            case_options=case_options,
             next_node_dependency=data.get("next_node_dependency", False)
         )

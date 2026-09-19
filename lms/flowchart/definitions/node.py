@@ -315,7 +315,7 @@ class LMS_BranchNode(LMS_BaseNode):
         else:
             for case, branch in self._branches.items():
                 case_message = f"Case {case}"
-                result.append((case,), case_message, branch)
+                result.append(((case,), case_message, branch))
 
         return result
 

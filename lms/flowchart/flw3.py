@@ -263,7 +263,7 @@ def write_flw3(writer: FileWriter, nodes: list[LMS_BaseNode], stream_ids: dict[L
                     write_node_parameter(writer, node.parameter_value, node.parameter_type)
 
                 write_next_node_id(writer, None if node.next_node is None else stream_ids[node.next_node])
-                writer.write_uint16(node.action_id)
+                writer.write_uint16(node.event_id)
 
                 writer.write_bytes(b"\x00" * 4)
             case LMS_EntryNode():

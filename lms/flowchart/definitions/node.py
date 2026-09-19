@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import string
 from collections import deque
 from types import MappingProxyType
 from typing import Generator
@@ -161,7 +162,7 @@ class LMS_MessageNode(LMS_BaseNode):
     @classmethod
     def new_msbt(cls, file_index: int, entry: MSBTEntry, msbt: MSBT):
         """
-        Creates a new LMS_MessageNode given a MSBT object.
+        Creates a new ``LMS_MessageNode`` given a MSBT object.
 
         :param file_index: index of the MSBT file in a folder/archive.
         :param entry: the MSBTEntry object to reference.
@@ -270,6 +271,67 @@ class LMS_BranchNode(LMS_BaseNode):
         """The node branches."""
         return MappingProxyType(self._branches)
 
+    def get_case_options(self, compress_shared_references: bool = False) -> list[
+        tuple[tuple[int, ...], str, LMS_BaseNode | None]]:
+        """
+        Retrieves the cases from this node formatted with the proper messages.
+
+        If a definition is provided, and either ``case_format`` or ``case_options`` are provied, the resulting
+        message will utilize those values to format the message.
+
+        :param compress_shared_references: whether to compress shared references into one case.
+        """
+        result, case_map = [], {}
+
+        for case, branch in self._branches.items():
+            case_map.setdefault(branch, []).append(case)
+
+        if self.definition is not None:
+
+            if self.definition.case_options:
+                for case, branch in self._branches.items():
+                    case_message = self.definition.case_options.get(case, f"Case {case}")
+
+                    result.append(((case,), case_message, branch))
+
+                return result
+
+            if self.definition.case_format is not None:
+                if compress_shared_references:
+                    for branch, cases in case_map.items():
+                        case_message = self._format_case_message(merge_shared_cases(cases))
+                        result.append((tuple(cases), case_message, branch))
+                else:
+                    for case, branch in self._branches.items():
+                        case_message = self._format_case_message(case)
+                        result.append(((case,), case_message, branch))
+
+                return result
+
+        if compress_shared_references:
+            for branch, cases in case_map.items():
+                case_message = f"Case {cases[0]}" if len(cases) == 1 else f"Cases {merge_shared_cases(cases)}"
+                result.append((tuple(cases), case_message, branch))
+        else:
+            for case, branch in self._branches.items():
+                case_message = f"Case {case}"
+                result.append((case,), case_message, branch)
+
+        return result
+
+    def _format_case_message(self, case_prefix: str):
+        prefix = string.Template(self._definition.case_format)
+
+        # Unpack dict for formatting $case and $param formats
+        # Allows inserting parameter values dynamically into the case message
+        string_map = {}
+        for param_definition in self.definition.parameter_definitions:
+            string_map[param_definition.name] = self.parameter_value[
+                param_definition.name].value
+
+        string_map["case"] = case_prefix
+        return prefix.substitute(**string_map)
+
     def add_branch(self, node: LMS_BaseNode | None) -> None:
         """
         Adds a branch to the node.
@@ -348,7 +410,7 @@ class LMS_EventNode(LMS_BaseNode):
             parameter_type,
             parameter_value)
 
-        self._action_id = action_id
+        self._event_id = action_id
         self._definition = definition
 
     def __repr__(self):
@@ -357,17 +419,17 @@ class LMS_EventNode(LMS_BaseNode):
         return f"{self._definition.name}({ {field.name: field.value for field in self._parameter_value} } {self.id}"
 
     @classmethod
-    def new(cls, parameter_type: LMS_NodeParameterType, parameter_value: int | str | tuple[int, ...], action_id: int):
+    def new(cls, parameter_type: LMS_NodeParameterType, parameter_value: int | str | tuple[int, ...], event_id: int):
         """
         Instantiates a new event node.
 
         :param parameter_type: the parameter type.
         :param parameter_value: the parameter value.
-        :param action_id: the action_id of the node.
+        :param event_id: the event_id of the node.
 
         """
         verify_parameter_structure(parameter_value, parameter_type)
-        return cls(None, parameter_type, parameter_value, action_id)
+        return cls(None, parameter_type, parameter_value, event_id)
 
     @classmethod
     def new_from_definition(cls,
@@ -397,9 +459,9 @@ class LMS_EventNode(LMS_BaseNode):
         return self._definition.name
 
     @property
-    def action_id(self) -> int:
+    def event_id(self) -> int:
         """The identifier to determine which action to run."""
-        return self._action_id
+        return self._event_id
 
 
 class LMS_EntryNode(LMS_BaseNode):
@@ -474,3 +536,24 @@ def verify_parameter_structure(value: int | tuple[int, ...] | str, parameter_typ
     if isinstance(value, tuple) and len(value) != parameter_type.value_count:
         raise node_exceptions.LMS_NodeMissingParameterValueError(
             f"Parameter type {parameter_type} expects {parameter_type.value_count} parameter values, got {len(value)}!")
+
+
+def merge_shared_cases(cases: list[int]) -> str:
+    cases = sorted(cases)
+
+    result = []
+    start = cases[0]
+    end = cases[0]
+
+    for case in cases[1:]:
+        if case == end + 1:
+            end = case
+            continue
+
+        result.append(str(start) if start == end else f"{start}-{end}")
+
+        start = case
+        end = case
+
+    result.append(str(start) if start == end else f"{start}-{end}")
+    return ", ".join(result)

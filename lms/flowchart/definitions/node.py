@@ -76,14 +76,6 @@ class LMS_BaseNode:
         if not isinstance(value, self._parameter_type.builtin_type):
             raise TypeError(f"Wrong value provided! Expected {self._parameter_type.builtin_type} got {type(value)}")
 
-        sliced_datatype = {
-            LMS_NodeParameterType.PARAM_16_16: (LMS_DataType.UINT16, LMS_DataType.UINT16),
-            LMS_NodeParameterType.PARAM_16_8_8: (LMS_DataType.UINT16, LMS_DataType.UINT8, LMS_DataType.UINT8),
-            LMS_NodeParameterType.PARAM_8_8_16: (LMS_DataType.UINT8, LMS_DataType.UINT8, LMS_DataType.UINT16),
-            LMS_NodeParameterType.PARAM_8_8_8_8: (LMS_DataType.UINT8, LMS_DataType.UINT8, LMS_DataType.UINT8,
-                                                  LMS_DataType.UINT8)
-        }
-
         match self._parameter_type:
             case LMS_NodeParameterType.STRING:
                 self._parameter_value = value
@@ -92,7 +84,8 @@ class LMS_BaseNode:
                 self._parameter_value = value
             case _:
                 for i, parameter in enumerate(value):
-                    verify_number_from_datatype(parameter, sliced_datatype[self._parameter_type][i])
+                    verify_number_from_datatype(parameter,
+                                                self._parameter_type.sliced_datatype[self._parameter_type][i])
 
         self._parameter_value = value
 

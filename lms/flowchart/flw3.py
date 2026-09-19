@@ -28,6 +28,8 @@ def read_flw3(reader: FileReader, config: NodeConfig | None, msbt: MSBT | None, 
 
     nodes: list[LMS_BaseNode] = []
     entry_nodes: list[LMS_EntryNode] = []
+
+    next_id_map: dict[LMS_BaseNode, int | None] = {}
     branch_metadata: dict[LMS_BranchNode, dict] = {}
 
     for i in range(node_count):
@@ -45,7 +47,7 @@ def read_flw3(reader: FileReader, config: NodeConfig | None, msbt: MSBT | None, 
                 stream_next_id = read_next_node_id(reader)
                 file_index = reader.read_uint16()
                 message_index = reader.read_uint16()
-                node = LMS_MessageNode(i, stream_next_id, file_index, message_index, msbt)
+                node = LMS_MessageNode(i, file_index, message_index, msbt)
                 reader.skip(2)
             case LMS_NodeType.BRANCH:
                 # There is no next node id as the next node is determined by the branches
@@ -78,27 +80,29 @@ def read_flw3(reader: FileReader, config: NodeConfig | None, msbt: MSBT | None, 
                 definition = get_config_definition(config, LMS_NodeType.EVENT, parameter_type, event_id)
                 parameter_value = evaluate_node_parameter(reader, section_start, parameter_type, definition)
 
-                node = LMS_EventNode(i, parameter_type, parameter_value, event_id, stream_next_id, definition)
+                node = LMS_EventNode(i, parameter_type, parameter_value, event_id, definition)
                 reader.seek(end)
             case LMS_NodeType.ENTRY:
                 reader.seek(node_data)
                 stream_next_id = read_next_node_id(reader)
-                node = LMS_EntryNode(i, stream_next_id)
+                node = LMS_EntryNode(i)
                 entry_nodes.append(node)
                 reader.skip(6)
             case LMS_NodeType.JUMP:
                 reader.seek(node_data)
-                next_flowchart_id = read_next_node_id(reader)
+                stream_next_id = read_next_node_id(reader)
                 unknown_short0a = reader.read_uint16()
-                node = LMS_JumpNode(i, next_flowchart_id, unknown_short0a)
+                node = LMS_JumpNode(i, unknown_short0a)
                 reader.skip(4)
 
+        next_id_map[node] = stream_next_id
         nodes.append(node)
 
     node_map: dict[int, LMS_BaseNode] = {node.id: node for node in nodes}
     branch_ids = [read_next_node_id(reader) for _ in range(branch_table_id_count)]
 
     for node in nodes:
+        next_node_id = next_id_map[node]
 
         if isinstance(node, LMS_BranchNode):
             case_count, starting_index = branch_metadata[node]
@@ -112,13 +116,13 @@ def read_flw3(reader: FileReader, config: NodeConfig | None, msbt: MSBT | None, 
 
             continue
         elif isinstance(node, LMS_JumpNode):
-            node.next_flowchart = node_map[node.next_node_id]
+            node.next_flowchart = node_map[next_node_id]
             continue
 
-        if node.next_node_id is None:
+        if next_node_id is None:
             continue
 
-        node.set_next_node(node_map[node.next_node_id])
+        node.set_next_node(node_map[next_node_id])
 
     return node_count, entry_nodes
 

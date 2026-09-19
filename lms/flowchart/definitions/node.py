@@ -27,15 +27,14 @@ class LMS_BaseNode:
                  id: int | None,
                  node_type: LMS_NodeType,
                  parameter_type: LMS_NodeParameterType,
-                 parameter_value: LMS_NodeParameter | None,
-                 stream_next_id: int | None = None):
+                 parameter_value: LMS_NodeParameter | None):
         self.id = id
         self._node_type = node_type
 
         self._parameter_type = parameter_type
         self._parameter_value = parameter_value
 
-        self._stream_next_id: int | None = stream_next_id
+        self._stream_next_id: int | None = None
         self._next_node: LMS_BaseNode | None = None
 
     @property
@@ -93,8 +92,6 @@ class LMS_BaseNode:
         """Set the next node for the instance.
 
         :param node: the node object, None for no next node."""
-        # Once next_node is properly set, stream_id is never accessed again
-        # While it does become stale, there is no point to altering it afterward
         self._next_node = node
         return node
 
@@ -136,7 +133,6 @@ class LMS_MessageNode(LMS_BaseNode):
 
     def __init__(self,
                  id: int | None,
-                 stream_next_node: int,
                  msbt_index: int,
                  label_index: int,
                  msbt: MSBT | None = None
@@ -146,7 +142,6 @@ class LMS_MessageNode(LMS_BaseNode):
             LMS_NodeType.MESSAGE,
             LMS_NodeParameterType.NONE,
             None,
-            stream_next_node
         )
 
         self.msbt_index = msbt_index
@@ -204,7 +199,6 @@ class LMS_BranchNode(LMS_BaseNode):
             LMS_NodeType.BRANCH,
             parameter_type,
             parameter_value,
-            NO_NEXT_NODE
         )
 
         self._condition_id = condition_id
@@ -346,15 +340,13 @@ class LMS_EventNode(LMS_BaseNode):
                  parameter_type: LMS_NodeParameterType,
                  parameter_value: LMS_FieldMap | int | str | tuple[int, ...],
                  action_id: int,
-                 stream_next_id: int | None = None,
                  definition: NodeDefinition | None = None,
                  ):
         super().__init__(
             id,
             LMS_NodeType.EVENT,
             parameter_type,
-            parameter_value,
-            stream_next_id)
+            parameter_value)
 
         self._action_id = action_id
         self._definition = definition
@@ -415,13 +407,12 @@ class LMS_EntryNode(LMS_BaseNode):
     Class that represents an entry node. Node that is at the start of a flowchart.
     """
 
-    def __init__(self, id: int, stream_next_id=None, flowchart_name: str = ""):
+    def __init__(self, id: int, flowchart_name: str = ""):
         super().__init__(
             id,
             LMS_NodeType.ENTRY,
             LMS_NodeParameterType.NONE,
-            None,
-            stream_next_id)
+            None)
 
         self.flowchart_name = flowchart_name
 
@@ -431,13 +422,12 @@ class LMS_JumpNode(LMS_BaseNode):
     Class that represents a jump node. Node that jumps to another flowchart.
     """
 
-    def __init__(self, id: int, next_flowchart_id: int, unknown_short0a: int):
+    def __init__(self, id: int, unknown_short0a: int):
         super().__init__(
             id,
             LMS_NodeType.JUMP,
             LMS_NodeParameterType.NONE,
-            None,
-            next_flowchart_id)
+            None)
 
         self.next_flowchart: LMS_EntryNode | None = None
 

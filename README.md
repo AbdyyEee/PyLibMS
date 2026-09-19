@@ -86,7 +86,7 @@ pip install -e .
 ```
 
 # Credits & Sources
-
+* [SS-Decomp](https://github.com/zeldaret/ss): Referenced some parts of their MSBF decomp when adding the format to [Nintendo-File-Formats](https://nintendo-formats.com) and this library.
 * [Nintendo-File-Formats](https://nintendo-formats.com) by Kinnay: For existing information on the MSBT and MSBP file
   formats.
 * [Trippixyz](https://github.com/Trippixyz): For helping me get started general decompilation of the formats and general

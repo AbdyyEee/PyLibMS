@@ -216,6 +216,9 @@ class LMS_BranchNode(LMS_BaseNode):
             return super().__repr__()
         return f"{self._definition.name}({ {field.name: field.value for field in self._parameter_value} } {self.id}"
 
+    def set_next_node(self, node: LMS_BaseNode | None) -> LMS_BaseNode | None:
+        raise NotImplementedError("Use function set_branch_case to alter the flow of a branch node!")
+
     @classmethod
     def new(cls,
             parameter_type: LMS_NodeParameterType,

@@ -56,6 +56,7 @@ class NodeDefinition:
     parameter_type: LMS_NodeParameterType
     parameter_definitions: tuple[ValueDefinition, ...]
     case_format: str | None
+    case_options: dict[int, str]
     next_node_dependency: bool = False
 
     @classmethod
@@ -95,6 +96,12 @@ class NodeDefinition:
             converted_parameters.append(definition)
 
         # case_format is only for branch nodesa
+        if "case_format" in data and "case_options" in data:
+            raise ValueError("There may only be one of case_format and options in the definition.")
+
+        if (options := data.get("case_options", None)) is not None and type == LMS_NodeType.EVENT:
+            raise ValueError("There may only be options for branch nodes!")
+
         if (case_format := data.get("case_format", None)) is not None and type == LMS_NodeType.EVENT:
             raise ValueError("There may only be case_format for branch nodes!")
 
@@ -106,5 +113,6 @@ class NodeDefinition:
             parameter_type=parameter_type,
             parameter_definitions=converted_parameters,
             case_format=case_format,
+            case_options=options,
             next_node_dependency=data.get("next_node_dependency", False)
         )

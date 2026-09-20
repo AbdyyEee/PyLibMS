@@ -14,7 +14,7 @@ class NodeConfig:
     """
 
     branch_definitions: dict[int, NodeDefinition | tuple[NodeDefinition, ...]]
-    event_definitions: dict[int, NodeDefinition, tuple[NodeDefinition, ...]]
+    event_definitions: dict[int, NodeDefinition | tuple[NodeDefinition, ...]]
 
     def get_definition(self, id: int,
                        node_type: LMS_NodeType.BRANCH | LMS_NodeType.EVENT,

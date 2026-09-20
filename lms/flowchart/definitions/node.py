@@ -157,7 +157,7 @@ class LMS_MessageNode(LMS_BaseNode):
         :param file_index: index of the MSBT file in a folder/archive.
         :param label_index: index of the label entry in that MSBT file.
         """
-        return cls(None, None, file_index, label_index)
+        return cls(None, file_index, label_index)
 
     @classmethod
     def new_msbt(cls, file_index: int, entry: MSBTEntry, msbt: MSBT):
@@ -168,7 +168,7 @@ class LMS_MessageNode(LMS_BaseNode):
         :param entry: the MSBTEntry object to reference.
         :param msbt: the MSBT file.
         """
-        return cls(None, None, file_index, msbt.entries.index(entry), msbt)
+        return cls(None, file_index, msbt.entries.index(entry), msbt)
 
     @property
     def msbt(self) -> MSBT | None:
@@ -401,7 +401,7 @@ class LMS_EventNode(LMS_BaseNode):
                  id: int,
                  parameter_type: LMS_NodeParameterType,
                  parameter_value: LMS_FieldMap | int | str | tuple[int, ...],
-                 action_id: int,
+                 event_id: int,
                  definition: NodeDefinition | None = None,
                  ):
         super().__init__(
@@ -410,7 +410,7 @@ class LMS_EventNode(LMS_BaseNode):
             parameter_type,
             parameter_value)
 
-        self._event_id = action_id
+        self._event_id = event_id
         self._definition = definition
 
     def __repr__(self):
@@ -505,7 +505,7 @@ class LMS_JumpNode(LMS_BaseNode):
         :param next_entry_point: the next entry point.
         :param unknown_short0a: unknown short value. -1 if there is no value.
         """
-        node = cls(None, next_entry_point.id, unknown_short0a)
+        node = cls(None, unknown_short0a)
         node.next_flowchart = next_entry_point
         return node
 

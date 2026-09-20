@@ -147,10 +147,6 @@ def evaluate_node_parameter(reader: FileReader,
     # If the user believes a better interpretation fits, then they may utilize a node configuration
     # and cast individual parameters to any LMS_Datatype.
     # This is my understanding of how node parameters work, but updating may be necessary as more research surfaces.
-    # -
-    # It also noted that by default LIST types are allocated a single byte for its index, it is unknown if
-    # some games may utilize a whole 4 byte stack as an index and/or 2 bytes depending on the parameter type.
-    # For now, by PyLibMS will read a single byte for its index until proven otherwise.
     if definition is not None:
         result = {}
 
@@ -163,6 +159,8 @@ def evaluate_node_parameter(reader: FileReader,
             })
 
         for i, param_definition in enumerate(definition.parameter_definitions):
+            # By default VARIABLE_WIDTH_DATATYPES are allocated a single byte for its index.
+            # Some games may utilize a whole 4 byte stack as an index and/or 2 bytes depending on the parameter type.
             stream_map = {1: reader.read_uint8, 2: reader.read_uint16, 4: reader.read_uint32}
             result[param_definition.name] = read_field(reader, param_definition,
                                                        stream_map[parameter_type.sliced_datatype[i].stream_size])

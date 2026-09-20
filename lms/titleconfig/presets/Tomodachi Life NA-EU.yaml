@@ -4,25 +4,75 @@ node_definitions:
     - id: 0
       name: EvaluateExpression
       parameter_type: string
+      case_options:
+        0: "true"
+        1: "false"
       parameters:
         - name: exp
     - id: 1
       name: SwitchVariable
-      case_format: "var == $case"
       parameter_type: string
+      case_format: "$var == $case"
       parameters:
         - name: var
+    - id: 16
+      name: MiiHasPhraseSet
+      parameter_type: p32_1
+      case_options:
+        0: "true"
+        1: "false"
+      parameters:
+        - name: Parameter
+          datatype: list
+          list_items:
+            - Worried_Phrase
+            - Good_Phrase
+            - Nervous_Phrase
+            - Despond_Phase
+    - id: 16
+      name: EvaluateLayoutResult
+      parameter_type: string
+      case_format: "button $case clicked"
+      parameters:
+        - name: layout
+    - id: 30
+      name: EvaluateMiiRelationshipScore
+      parameter_type: p32_1
+      case_options:
+        0: "Status.BEST (80+)"
+        1: "Status.GOOD (60-79)"
+        2: "Status.AVERAGE (40-59)"
+        3: "Status.POOR (20-39)"
+        4: "Status.TERRIBLE (0-19)"
+      parameters:
+        - name: Parameter
   event:
     - id: 3
       name: SetVariable
       parameter_type: string
       parameters:
         - name: expression
+    - id: 39
+      name: SelectMii
+      parameter_type: string
+      parameters:
+        - name: mii
     - id: 43
       name: SetMiiPosition
       parameter_type: string
       parameters:
         - name: pos
+    - id: 44
+      name: PlayMiiAnimation
+      parameter_type: string
+      parameters:
+        - name: anim
+    - id: 48
+      name: SetupMessage
+      parameter_type: p16_16
+      parameters:
+        - name: "Parameter 1"
+        - name: "Parameter 2"
     - id: 58
       name: SetupButtonPrompt
       next_node_dependency: true
@@ -34,11 +84,17 @@ node_definitions:
       parameter_type: string
       parameters:
         - name: group
+          description: ''
     - id: 96
       name: PlaySE
       parameter_type: string
       parameters:
         - name: name
+    - id: 106
+      name: SetLayoutVisibility
+      parameter_type: string
+      parameters:
+        - name: layout,visibility
 tag_definitions:
   groups:
     0: System

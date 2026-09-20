@@ -36,20 +36,26 @@ class LMS_FieldMap:
         """Converts the field map to a regular dictionary."""
         return {field.name: field.value for field in self.fields.values()}
 
-    @classmethod
-    def create_default_map(cls, definitions: list[ValueDefinition]):
-        field_map = {}
+    @staticmethod
+    def create_default_dict_map(definitions: list[ValueDefinition]) -> dict[str, FieldValue]:
+        map = {}
         for definition in definitions:
             match definition.datatype:
+                case LMS_DataType.STRING:
+                    map[definition.name] = ""
                 case LMS_DataType.LIST:
-                    field_map[definition.name] = definition.list_items[0]
+                    map[definition.name] = definition.list_items[0]
                 case LMS_DataType.BOOL:
-                    field_map[definition.name] = False
+                    map[definition.name] = False
                 case LMS_DataType.FLOAT32:
-                    field_map[definition.name] = 0.0
+                    map[definition.name] = 0.0
                 case _:
-                    field_map[definition.name] = 0
-        return cls.from_dict(field_map, definitions)
+                    map[definition.name] = 0
+        return map
+
+    @classmethod
+    def create_default_map(cls, definitions: list[ValueDefinition]):
+        return cls.from_dict(LMS_FieldMap.create_default_map(definitions), definitions)
 
     @classmethod
     def from_dict(cls, data: dict[str, FieldValue], definitions: list[ValueDefinition]):

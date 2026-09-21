@@ -7,12 +7,13 @@
 PyLibMS is a library built in Python 3.10 and above for reading and writing of libMessageStudio (LMS) proprietary file
 formats from Nintendo.
 
-The following is supported | Format | Read | Write | Configuration
-Support | |-------------|------|-------|-------------------------------------------------------------------------------------------| |
-`MSBT`        | ✅ | ✅ | Support for full attribute (`ATR1`) decoding. Tag decoding 1:1 with the official Nintendo
-`.mstxt` file format. | | `MSBF`        | ✅ | ✅ | Support for custom node definitions, attaching names and descriptions
-to nodes. Altering parameter datatypes for flexibility between games. | | `MSBP`        | ✅ | ❌ | Generating
-configuration files for use with `MSBT` files. |
+The following is supported
+| Format | Read | Write | Configuration Support                                                                     |
+|-------------|------|-------|-------------------------------------------------------------------------------------------|
+| `MSBT`        | ✅    | ✅     | Support for full attribute (`ATR1`) decoding. Tag decoding 1:1 with the official Nintendo `.mstxt` file format. |
+| `MSBF`        | ✅    | ✅     | Support for custom node definitions, attaching names and descriptions to nodes. Altering parameter datatypes for flexibility between games.  |
+| `MSBP`        | ✅    | ❌     | Generating configuration files for use with `MSBT` files.                                                                                       |
+
 
 This library is designed to support LMS revision >=3.0. These include files generated for late **Wii** titles,
 **Nintendo 3DS**, **Wii U**, **Mobile**, **Nintendo Switch** and **Nintendo Switch 2** games.

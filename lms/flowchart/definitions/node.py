@@ -241,7 +241,7 @@ class LMS_BranchNode(LMS_BaseNode):
         :param parameter_values: keyword arguments of parameters.
         """
         converted = LMS_FieldMap.from_dict(parameter_values, definition.parameter_definitions)
-        return cls(None, definition.parameter_type, converted, definition.id)
+        return cls(None, definition.parameter_type, converted, definition.id, definition)
 
     @property
     def definition(self) -> NodeDefinition | None:
@@ -443,7 +443,7 @@ class LMS_EventNode(LMS_BaseNode):
         :param parameter_values: keyword arguments of parameters.
         """
         converted = LMS_FieldMap.from_dict(parameter_values, definition.parameter_definitions)
-        return cls(None, definition.parameter_type, converted, definition.id)
+        return cls(None, definition.parameter_type, converted, definition.id, definition)
 
     @property
     def definition(self) -> NodeDefinition | None:

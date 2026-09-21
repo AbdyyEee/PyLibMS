@@ -1,3 +1,7 @@
+"""
+IO interface for ``MSBT`` files.
+"""
+
 from typing import BinaryIO, overload
 
 from lms.common import lms_exceptions

@@ -1,3 +1,7 @@
+"""
+Read interface for ``MSBP`` files.
+"""
+
 import os
 from typing import BinaryIO
 

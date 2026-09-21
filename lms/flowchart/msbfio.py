@@ -1,3 +1,7 @@
+"""
+IO interface for ``MSBF`` files.
+"""
+
 from typing import BinaryIO
 
 from lms.common.lms_exceptions import LMS_Error, LMS_UnsupportedSectionError

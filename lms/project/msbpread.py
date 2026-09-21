@@ -16,7 +16,7 @@ from lms.project.section.tag2 import read_tag2
 from lms.project.section.tgg2 import read_tgg2
 from lms.project.section.tgp2 import read_tgp2
 
-__all__ = ["read_msbp", "read_msbp_path"]
+__all__ = ("read_msbp", "read_msbp_path")
 
 
 def read_msbp_path(file_path: str) -> MSBP:

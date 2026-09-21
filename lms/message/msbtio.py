@@ -1,4 +1,4 @@
-from typing import BinaryIO
+from typing import BinaryIO, overload
 
 from lms.common import lms_exceptions
 from lms.common.stream.fileinfo import read_file_info, write_file_info, write_file_size
@@ -15,7 +15,11 @@ from lms.message.section.tsy1 import read_tsy1, write_tsy1
 from lms.message.section.txt2 import read_txt2, write_txt2
 from lms.titleconfig.config import AttributeConfig, TagConfig
 
-__all__ = ["read_msbt", "read_msbt_path", "write_msbt", "write_msbt_path"]
+__all__ = ("read_msbt", "read_msbt_path", "write_msbt", "write_msbt_path")
+
+
+@overload
+def read_msbt_path(file_path: str, attribute_config: AttributeConfig) -> MSBT: ...
 
 
 def read_msbt_path(

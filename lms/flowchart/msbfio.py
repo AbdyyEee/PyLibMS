@@ -11,7 +11,7 @@ from lms.flowchart.msbf import MSBF
 from lms.message.msbt import MSBT
 from lms.titleconfig.definitions.nodes import NodeConfig
 
-__all__ = ["read_msbf", "read_msbf_path", "write_msbf", "write_msbf_path"]
+__all__ = ("read_msbf", "read_msbf_path", "write_msbf", "write_msbf_path")
 
 
 def read_msbf_path(
@@ -49,7 +49,7 @@ def read_msbf(stream: BinaryIO | bytes, node_config: NodeConfig | None = None, m
     =====
     Usage
     =====
-    msbf = read_msbf(stream)
+    >>> msbf = read_msbf(stream)
     """
     reader = FileReader(stream)
     file_info = read_file_info(reader, MSBF.MAGIC)
@@ -85,7 +85,7 @@ def write_msbf_path(file_path: str, file: MSBF) -> None:
     =====
     Usage
     =====
-    write_msbf("path/to/file.msbf", msbt)
+    >>> write_msbf("path/to/file.msbf", msbt)
     """
     with open(file_path, "wb") as stream:
         data = write_msbf(file)
@@ -101,7 +101,7 @@ def write_msbf(file: MSBF) -> bytes:
     =====
     Usage
     =====
-    data = write_msbf(msbf)
+    >>> data = write_msbf(msbf)
     """
     if not isinstance(file, MSBF):
         raise LMS_Error(

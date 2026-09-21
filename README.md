@@ -1,8 +1,8 @@
 # PyLibMS
 
 [![Python Versions](https://img.shields.io/pypi/pyversions/PyLibMS)](https://pypi.org/project/PyLibMS/)
-[![PyPI version](https://badge.fury.io/py/PyLibMS.svg)](https://badge.fury.io/py/PyLibMS)
 ![LICENSE](https://img.shields.io/badge/license-MIT-blue)
+[![PyPI version](https://badge.fury.io/py/PyLibMS.svg)](https://badge.fury.io/py/PyLibMS)
 
 PyLibMS is a library built in Python 3.10 and above for reading and writing of libMessageStudio (LMS) proprietary file
 formats from Nintendo.

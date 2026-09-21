@@ -14,7 +14,9 @@ from lms.titleconfig.definitions.nodes import NodeConfig, NodeDefinition
 from lms.titleconfig.definitions.tags import TagConfig, TagDefinition
 from lms.titleconfig.definitions.value import ValueDefinition
 
-PRESETS_URL = "https://api.github.com/repos/AbdyyEee/PyLibMS/contents/lms/titleconfig/presets"
+PRESETS_URL = (
+    "https://api.github.com/repos/AbdyyEee/PyLibMS/contents/lms/titleconfig/presets"
+)
 
 
 class TitleConfig:
@@ -40,11 +42,11 @@ class TitleConfig:
     ]
 
     def __init__(
-            self,
-            game: str | None,
-            attribute_config_map: dict[str, AttributeConfig] | None = None,
-            tag_config: TagConfig | None = None,
-            node_config: NodeConfig | None = None,
+        self,
+        game: str | None,
+        attribute_config_map: dict[str, AttributeConfig] | None = None,
+        tag_config: TagConfig | None = None,
+        node_config: NodeConfig | None = None,
     ):
         self._game = game
         self._attribute_config_map = attribute_config_map
@@ -102,7 +104,9 @@ class TitleConfig:
 
         preset_list = cls._request_preset_list()
 
-        if game.lower() not in {preset.lower(): data for preset, data in preset_list.items()}:
+        if game.lower() not in {
+            preset.lower(): data for preset, data in preset_list.items()
+        }:
             raise FileNotFoundError(f"Preset '{game}' not found.")
 
         raw = cls._request_preset_file(game, preset_list)
@@ -134,7 +138,9 @@ class TitleConfig:
             raw_response = requests.get(preset_list[game]["download_url"], timeout=10)
             raw_response.raise_for_status()
         except requests.exceptions.RequestException as e:
-            raise RuntimeError(f"An error occurred fetching the file data for preset '{game}'") from e
+            raise RuntimeError(
+                f"An error occurred fetching the file data for preset '{game}'"
+            ) from e
 
         return raw_response
 
@@ -224,9 +230,7 @@ class TitleConfig:
             node_id = definition["id"]
 
             node_definition = NodeDefinition.from_dict(
-                node_id,
-                LMS_NodeType.BRANCH,
-                definition
+                node_id, LMS_NodeType.BRANCH, definition
             )
 
             if node_id not in branch_nodes:
@@ -244,9 +248,7 @@ class TitleConfig:
             node_id = definition["id"]
 
             node_definition = NodeDefinition.from_dict(
-                node_id,
-                LMS_NodeType.EVENT,
-                definition
+                node_id, LMS_NodeType.EVENT, definition
             )
 
             if node_id not in event_nodes:
@@ -295,12 +297,10 @@ class TitleConfig:
             config[TitleConfig.TAG_KEY] = {
                 "groups": {group.group_id: group.name for group in project.tag_groups},
                 "tags": [],
-
             }
 
             for group in project.tag_groups:
                 for i, tag_def in enumerate(group.tag_definitions):
-
                     definition = {
                         "name": tag_def.name,
                         "group_id": group.group_id,
@@ -327,7 +327,6 @@ class TitleConfig:
 
         config[TitleConfig.ATTR_KEY] = []
         if project.attribute_definitions is not None:
-
             attr_definitions = []
             for attr_def in project.attribute_definitions:
                 definition = {

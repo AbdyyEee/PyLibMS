@@ -19,9 +19,9 @@ __all__ = ("read_msbf", "read_msbf_path", "write_msbf", "write_msbf_path")
 
 
 def read_msbf_path(
-        file_path: str,
-        config: NodeConfig | None = None,
-        msbt: MSBT | None = None,
+    file_path: str,
+    config: NodeConfig | None = None,
+    msbt: MSBT | None = None,
 ) -> MSBF:
     """
     Reads a MSBF file from a path.
@@ -36,14 +36,14 @@ def read_msbf_path(
     >>> msbf = read_msbf_path("path/to/file.msbf")
     """
     with open(file_path, "rb") as stream:
-        return read_msbf(
-            stream,
-            config,
-            msbt
-        )
+        return read_msbf(stream, config, msbt)
 
 
-def read_msbf(stream: BinaryIO | bytes, node_config: NodeConfig | None = None, msbt: MSBT | None = None) -> MSBF:
+def read_msbf(
+    stream: BinaryIO | bytes,
+    node_config: NodeConfig | None = None,
+    msbt: MSBT | None = None,
+) -> MSBF:
     """
     Reads a MSBF file from a stream.
 
@@ -108,9 +108,7 @@ def write_msbf(file: MSBF) -> bytes:
     >>> data = write_msbf(msbf)
     """
     if not isinstance(file, MSBF):
-        raise LMS_Error(
-            f"File provided is not valid. Expected MSBT got {type(file)}."
-        )
+        raise LMS_Error(f"File provided is not valid. Expected MSBT got {type(file)}.")
 
     writer = FileWriter(file.info.encoding)
     write_file_info(writer, MSBF.MAGIC, file.info)
@@ -129,14 +127,22 @@ def write_msbf(file: MSBF) -> bytes:
 
     for chart in file:
         if amount := len(chart.get_dangling_nodes()):
-            raise LMS_Error(f"Unable to write the flowchart '{chart.name}'! There are {amount} dangling nodes.")
+            raise LMS_Error(
+                f"Unable to write the flowchart '{chart.name}'! There are {amount} dangling nodes."
+            )
 
     index_map = {
-        flowchart.name: stream_ids[flowchart.entry_point]
-        for flowchart in file
+        flowchart.name: stream_ids[flowchart.entry_point] for flowchart in file
     }
 
     write_section(writer, "FLW3", write_flw3, nodes, stream_ids)
-    write_section(writer, "FEN1", write_labels, list(file.flowcharts.keys()), MSBF.DEFAULT_SLOT_COUNT, index_map)
+    write_section(
+        writer,
+        "FEN1",
+        write_labels,
+        list(file.flowcharts.keys()),
+        MSBF.DEFAULT_SLOT_COUNT,
+        index_map,
+    )
     write_file_size(writer)
     return writer.get_data()

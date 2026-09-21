@@ -2,25 +2,25 @@ from lms.common.field.io import read_field, write_field
 from lms.common.field.lms_datatype import LMS_DataType, is_string_datatype
 from lms.common.field.lms_field import LMS_Field, LMS_FieldMap
 from lms.fileio.io import FileReader, FileWriter
-from lms.message.tag.lms_tagexceptions import (LMS_TagReadingError,
-                                               LMS_TagWritingError)
+from lms.message.tag.lms_tagexceptions import LMS_TagReadingError, LMS_TagWritingError
 from lms.titleconfig.definitions.tags import TagDefinition
 
 TAG_PADDING_BYTE = b"\xcd"
 
 
 def read_encoded_parameters(
-        reader: FileReader, parameter_size: int
+    reader: FileReader, parameter_size: int
 ) -> list[int] | None:
     hex_parameters = reader.read_bytes(parameter_size).hex().upper()
     encoded_parameters = [
-        int(f"{hex_parameters[i: i + 2]}", 16) for i in range(0, len(hex_parameters), 2)
+        int(f"{hex_parameters[i : i + 2]}", 16)
+        for i in range(0, len(hex_parameters), 2)
     ]
     return encoded_parameters
 
 
 def read_decoded_parameters(
-        reader: FileReader, definition: TagDefinition
+    reader: FileReader, definition: TagDefinition
 ) -> LMS_FieldMap | None:
     parameters = {}
     for param in definition.parameters:
@@ -49,7 +49,7 @@ def write_encoded_parameters(writer: FileWriter, parameters: list[int]) -> None:
 
 
 def write_decoded_parameters(
-        writer: FileWriter, parameters: LMS_FieldMap, group_name: str, tag_name: str
+    writer: FileWriter, parameters: LMS_FieldMap, group_name: str, tag_name: str
 ) -> None:
     param_size = 0
 

@@ -7,13 +7,15 @@ from typing import BinaryIO, overload
 from lms.common import lms_exceptions
 from lms.common.stream.fileinfo import read_file_info, write_file_info, write_file_size
 from lms.common.stream.hashtable import read_labels, write_labels
-from lms.common.stream.section import (read_section_data, write_section,
-                                       write_unsupported_section)
+from lms.common.stream.section import (
+    read_section_data,
+    write_section,
+    write_unsupported_section,
+)
 from lms.fileio.io import FileReader, FileWriter
 from lms.message.msbt import MSBT
 from lms.message.msbtentry import MSBTEntry
-from lms.message.section.atr1 import (read_atr1, write_decoded_atr1,
-                                      write_encoded_atr1)
+from lms.message.section.atr1 import read_atr1, write_decoded_atr1, write_encoded_atr1
 from lms.message.section.nli1 import read_nli1, write_nli1
 from lms.message.section.tsy1 import read_tsy1, write_tsy1
 from lms.message.section.txt2 import read_txt2, write_txt2
@@ -27,11 +29,11 @@ def read_msbt_path(file_path: str, attribute_config: AttributeConfig) -> MSBT: .
 
 
 def read_msbt_path(
-        file_path: str,
-        *,
-        attribute_config: AttributeConfig | None = None,
-        tag_config: TagConfig | None = None,
-        suppress_tag_errors: bool = False,
+    file_path: str,
+    *,
+    attribute_config: AttributeConfig | None = None,
+    tag_config: TagConfig | None = None,
+    suppress_tag_errors: bool = False,
 ) -> MSBT:
     """
     Reads and retrieves a MSBT file from a given path.
@@ -56,11 +58,11 @@ def read_msbt_path(
 
 
 def read_msbt(
-        stream: BinaryIO | bytes,
-        *,
-        attribute_config: AttributeConfig | None = None,
-        tag_config: TagConfig | None = None,
-        suppress_tag_errors: bool = False,
+    stream: BinaryIO | bytes,
+    *,
+    attribute_config: AttributeConfig | None = None,
+    tag_config: TagConfig | None = None,
+    suppress_tag_errors: bool = False,
 ) -> MSBT:
     """
     Reads and retrieves a MSBT file from a specified stream.
@@ -109,8 +111,12 @@ def read_msbt(
             section_list.append(magic)
 
     file = MSBT(
-        file_info, uses_nli1, section_list,
-        unsupported_sections, attribute_config, tag_config
+        file_info,
+        uses_nli1,
+        section_list,
+        unsupported_sections,
+        attribute_config,
+        tag_config,
     )
     file.slot_count = slot_count
 

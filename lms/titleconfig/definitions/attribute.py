@@ -10,4 +10,3 @@ class AttributeConfig:
     name: str
     description: str
     definitions: list[ValueDefinition]
-

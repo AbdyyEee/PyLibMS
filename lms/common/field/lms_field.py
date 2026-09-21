@@ -37,7 +37,9 @@ class LMS_FieldMap:
         return {field.name: field.value for field in self.fields.values()}
 
     @staticmethod
-    def create_default_dict_map(definitions: list[ValueDefinition]) -> dict[str, FieldValue]:
+    def create_default_dict_map(
+        definitions: list[ValueDefinition],
+    ) -> dict[str, FieldValue]:
         map = {}
         for definition in definitions:
             match definition.datatype:
@@ -101,7 +103,9 @@ class LMS_Field:
     """
 
     def __init__(
-            self, value: int | str | float | bytes | bool, definition: ValueDefinition,
+        self,
+        value: int | str | float | bytes | bool,
+        definition: ValueDefinition,
     ):
         _verify_value_from_definition(value, definition)
         self._definition = definition
@@ -145,7 +149,7 @@ class LMS_Field:
 
 
 def _verify_value_from_definition(
-        value: int | str | float | bytes | bool, definition: ValueDefinition
+    value: int | str | float | bytes | bool, definition: ValueDefinition
 ) -> None:
     datatype = definition.datatype
 

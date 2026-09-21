@@ -106,7 +106,7 @@ class FileReader:
     def read_encoded_string(self):
         message = b""
         while (
-                raw_char := self.read_bytes(self.encoding.width)
+            raw_char := self.read_bytes(self.encoding.width)
         ) != self.encoding.terminator:
             message += raw_char
         return message.decode(self.encoding.to_string_format(self.is_big_endian))

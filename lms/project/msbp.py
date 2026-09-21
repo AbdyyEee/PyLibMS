@@ -23,13 +23,13 @@ class MSBP:
     MAGIC = "MsgPrjBn"
 
     def __init__(
-            self,
-            info: LMS_FileInfo,
-            colors: list[LMS_Color] | None,
-            config: list[LMS_AttributeDefinition] | None,
-            tag_groups: list[LMS_TagGroup] | None,
-            styles: list[LMS_Style] | None,
-            source_files: list[str] | None,
+        self,
+        info: LMS_FileInfo,
+        colors: list[LMS_Color] | None,
+        config: list[LMS_AttributeDefinition] | None,
+        tag_groups: list[LMS_TagGroup] | None,
+        styles: list[LMS_Style] | None,
+        source_files: list[str] | None,
     ):
         self.name = ""
 

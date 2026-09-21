@@ -20,12 +20,14 @@ class MSBF:
     =========
     https://nintendo-formats.com/libs/lms/msbf.html
     """
+
     MAGIC = "MsgFlwBn"
 
     DEFAULT_SLOT_COUNT = 59
 
-    def __init__(self, info: LMS_FileInfo | None = None,
-                 flowcharts: list[LMS_Flowchart] = None):
+    def __init__(
+        self, info: LMS_FileInfo | None = None, flowcharts: list[LMS_Flowchart] = None
+    ):
         self._info = info if info is not None else LMS_FileInfo()
         self._flowcharts = flowcharts or []
         self._global_node_id = 0
@@ -37,11 +39,13 @@ class MSBF:
         return len(self._flowcharts)
 
     @classmethod
-    def new(cls,
-            is_big_endian: bool = False,
-            encoding: FileEncoding = FileEncoding.UTF16,
-            version: int = 3,
-            section_count: int = 2):
+    def new(
+        cls,
+        is_big_endian: bool = False,
+        encoding: FileEncoding = FileEncoding.UTF16,
+        version: int = 3,
+        section_count: int = 2,
+    ):
         """
         Create a new MSBF instance.
 
@@ -61,7 +65,9 @@ class MSBF:
     @property
     def flowcharts(self) -> MappingProxyType[str, LMS_Flowchart]:
         """The flowcharts of the MSBF instance."""
-        return MappingProxyType({flowchart.name: flowchart for flowchart in self._flowcharts})
+        return MappingProxyType(
+            {flowchart.name: flowchart for flowchart in self._flowcharts}
+        )
 
     def set_global_id_count(self, value: int) -> None:
         self._global_node_id = value
@@ -74,7 +80,9 @@ class MSBF:
         self._global_node_id += 1
         return next_id
 
-    def add_flowchart(self, flowchart_name: str, entry_point: LMS_EntryNode | None = None) -> LMS_Flowchart:
+    def add_flowchart(
+        self, flowchart_name: str, entry_point: LMS_EntryNode | None = None
+    ) -> LMS_Flowchart:
         """
         Add a flowchart to the MSBF instance.
 
@@ -84,7 +92,9 @@ class MSBF:
             raise KeyError(f"Flowchart with name '{flowchart_name}' already exists!")
 
         if entry_point is None:
-            entry_point = LMS_EntryNode(self.generate_next_id(), flowchart_name=flowchart_name)
+            entry_point = LMS_EntryNode(
+                self.generate_next_id(), flowchart_name=flowchart_name
+            )
 
         flowchart = LMS_Flowchart(entry_point, self.generate_next_id)
         self._flowcharts.append(flowchart)

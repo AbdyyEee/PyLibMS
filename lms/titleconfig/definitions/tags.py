@@ -9,7 +9,9 @@ from lms.titleconfig.definitions.value import ValueDefinition
 class TagConfig:
     """Class that represents a tag structure definition."""
 
-    def __init__(self, group_map: dict[int, str], definitions: dict[int, list[TagDefinition]]):
+    def __init__(
+        self, group_map: dict[int, str], definitions: dict[int, list[TagDefinition]]
+    ):
         self._group_map = group_map
         self._definitions = definitions
 
@@ -42,7 +44,7 @@ class TagConfig:
         )
 
     def get_definition_by_indices(
-            self, group_id: int, tag_index: int
+        self, group_id: int, tag_index: int
     ) -> TagDefinition | None:
         if group_id not in self._group_map:
             return None

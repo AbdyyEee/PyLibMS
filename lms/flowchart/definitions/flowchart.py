@@ -7,7 +7,9 @@ from lms.flowchart.definitions.node import LMS_EntryNode, LMS_BranchNode, LMS_Ba
 class LMS_Flowchart:
     """Class that represents a flowchart in a MSBF file."""
 
-    def __init__(self, entry_point: LMS_EntryNode, id_generator: Callable[[], int]) -> None:
+    def __init__(
+        self, entry_point: LMS_EntryNode, id_generator: Callable[[], int]
+    ) -> None:
         self._entry_node = entry_point
         self._nodes: dict[int, LMS_BaseNode] = {}
         self._id_generator = id_generator
@@ -15,7 +17,6 @@ class LMS_Flowchart:
         if entry_point is not None:
             for node in entry_point.get_descendents():
                 self._nodes[node.id] = node
-
 
     def __iter__(self) -> Iterator[LMS_BaseNode]:
         return iter(self._nodes.values())
@@ -28,7 +29,7 @@ class LMS_Flowchart:
 
     @property
     def name(self) -> str:
-        """The name of the flowchart. """
+        """The name of the flowchart."""
         return self._entry_node.flowchart_name
 
     @name.setter
@@ -52,10 +53,14 @@ class LMS_Flowchart:
         :param node: the node to add.
         """
         if not isinstance(node, LMS_BaseNode):
-            raise TypeError(f"Node type '{type(node).__name__}' is not a child of LMS_BaseNode!")
+            raise TypeError(
+                f"Node type '{type(node).__name__}' is not a child of LMS_BaseNode!"
+            )
 
         if node in self._nodes.values():
-            raise ValueError(f"Node of ID '{node.id}' is already registered to this flowchart!")
+            raise ValueError(
+                f"Node of ID '{node.id}' is already registered to this flowchart!"
+            )
 
         node.id = self._id_generator()
         self._nodes[node.id] = node

@@ -24,11 +24,13 @@ class LMS_BaseNode:
     Class that represents common structure and methods for a LMS_Node.
     """
 
-    def __init__(self,
-                 id: int | None,
-                 node_type: LMS_NodeType,
-                 parameter_type: LMS_NodeParameterType,
-                 parameter_value: LMS_NodeParameter | None):
+    def __init__(
+        self,
+        id: int | None,
+        node_type: LMS_NodeType,
+        parameter_type: LMS_NodeParameterType,
+        parameter_value: LMS_NodeParameter | None,
+    ):
         self.id = id
         self._node_type = node_type
 
@@ -68,13 +70,19 @@ class LMS_BaseNode:
     @parameter_value.setter
     def parameter_value(self, value: LMS_NodeParameter):
         if self._parameter_type == LMS_NodeParameterType.NONE:
-            raise TypeError("Unable to set parameter values when there is no parameter!")
+            raise TypeError(
+                "Unable to set parameter values when there is no parameter!"
+            )
 
         if isinstance(self._parameter_value, LMS_FieldMap):
-            raise ValueError("Edit a parameter value through the value property of a field!")
+            raise ValueError(
+                "Edit a parameter value through the value property of a field!"
+            )
 
         if not isinstance(value, self._parameter_type.builtin_type):
-            raise TypeError(f"Wrong value provided! Expected {self._parameter_type.builtin_type} got {type(value)}")
+            raise TypeError(
+                f"Wrong value provided! Expected {self._parameter_type.builtin_type} got {type(value)}"
+            )
 
         match self._parameter_type:
             case LMS_NodeParameterType.STRING:
@@ -84,8 +92,10 @@ class LMS_BaseNode:
                 self._parameter_value = value
             case _:
                 for i, parameter in enumerate(value):
-                    verify_number_from_datatype(parameter,
-                                                self._parameter_type.sliced_datatype[self._parameter_type][i])
+                    verify_number_from_datatype(
+                        parameter,
+                        self._parameter_type.sliced_datatype[self._parameter_type][i],
+                    )
 
         self._parameter_value = value
 
@@ -132,12 +142,13 @@ class LMS_MessageNode(LMS_BaseNode):
     Class that represents a message node. Node utilized in juction with MSBT entries.
     """
 
-    def __init__(self,
-                 id: int | None,
-                 msbt_index: int,
-                 label_index: int,
-                 msbt: MSBT | None = None
-                 ):
+    def __init__(
+        self,
+        id: int | None,
+        msbt_index: int,
+        label_index: int,
+        msbt: MSBT | None = None,
+    ):
         super().__init__(
             id,
             LMS_NodeType.MESSAGE,
@@ -189,12 +200,14 @@ class LMS_BranchNode(LMS_BaseNode):
     Class that represents a branch node.
     """
 
-    def __init__(self,
-                 id: int,
-                 parameter_type: LMS_NodeParameterType,
-                 parameter_value: LMS_NodeParameter,
-                 condition_id: int,
-                 definition: NodeDefinition | None = None):
+    def __init__(
+        self,
+        id: int,
+        parameter_type: LMS_NodeParameterType,
+        parameter_value: LMS_NodeParameter,
+        condition_id: int,
+        definition: NodeDefinition | None = None,
+    ):
         super().__init__(
             id,
             LMS_NodeType.BRANCH,
@@ -212,14 +225,17 @@ class LMS_BranchNode(LMS_BaseNode):
         return f"{self._definition.name}({ {field.name: field.value for field in self._parameter_value} } {self.id}"
 
     def set_next_node(self, node: LMS_BaseNode | None) -> LMS_BaseNode | None:
-        raise NotImplementedError("Use function set_branch_case to alter the flow of a branch node!")
+        raise NotImplementedError(
+            "Use function set_branch_case to alter the flow of a branch node!"
+        )
 
     @classmethod
-    def new(cls,
-            parameter_type: LMS_NodeParameterType,
-            parameter_value: LMS_NodeParameter,
-            condition_id: int,
-            ):
+    def new(
+        cls,
+        parameter_type: LMS_NodeParameterType,
+        parameter_value: LMS_NodeParameter,
+        condition_id: int,
+    ):
         """
         Instantiates a new branch node.
 
@@ -230,18 +246,23 @@ class LMS_BranchNode(LMS_BaseNode):
         return cls(None, parameter_type, parameter_value, condition_id)
 
     @classmethod
-    def new_from_definition(cls,
-                            definition: NodeDefinition,
-                            **parameter_values: str | bool | float | bytes,
-                            ):
+    def new_from_definition(
+        cls,
+        definition: NodeDefinition,
+        **parameter_values: str | bool | float | bytes,
+    ):
         """
         Instantiates a new branch node from a definition.
 
         :param definition: the node definition.
         :param parameter_values: keyword arguments of parameters.
         """
-        converted = LMS_FieldMap.from_dict(parameter_values, definition.parameter_definitions)
-        return cls(None, definition.parameter_type, converted, definition.id, definition)
+        converted = LMS_FieldMap.from_dict(
+            parameter_values, definition.parameter_definitions
+        )
+        return cls(
+            None, definition.parameter_type, converted, definition.id, definition
+        )
 
     @property
     def definition(self) -> NodeDefinition | None:
@@ -252,7 +273,9 @@ class LMS_BranchNode(LMS_BaseNode):
     def name(self) -> str:
         """Returns the name of the node. Must have provided a node configuration when reading the file."""
         if self._definition is None:
-            raise LMS_Error("Unable to access the name of the node without a definition set!")
+            raise LMS_Error(
+                "Unable to access the name of the node without a definition set!"
+            )
 
         return self._definition.name
 
@@ -271,8 +294,9 @@ class LMS_BranchNode(LMS_BaseNode):
         """The node branches."""
         return MappingProxyType(self._branches)
 
-    def get_case_options(self, compress_shared_references: bool = False) -> list[
-        tuple[tuple[int, ...], str, LMS_BaseNode | None]]:
+    def get_case_options(
+        self, compress_shared_references: bool = False
+    ) -> list[tuple[tuple[int, ...], str, LMS_BaseNode | None]]:
         """
         Retrieves the cases from this node formatted with the proper messages.
 
@@ -287,10 +311,11 @@ class LMS_BranchNode(LMS_BaseNode):
             case_map.setdefault(branch, []).append(case)
 
         if self.definition is not None:
-
             if self.definition.case_options:
                 for case, branch in self._branches.items():
-                    case_message = self.definition.case_options.get(case, f"Case {case}")
+                    case_message = self.definition.case_options.get(
+                        case, f"Case {case}"
+                    )
 
                     result.append(((case,), case_message, branch))
 
@@ -299,7 +324,9 @@ class LMS_BranchNode(LMS_BaseNode):
             if self.definition.case_format is not None:
                 if compress_shared_references:
                     for branch, cases in case_map.items():
-                        case_message = self._format_case_message(merge_shared_cases(cases))
+                        case_message = self._format_case_message(
+                            merge_shared_cases(cases)
+                        )
                         result.append((tuple(cases), case_message, branch))
                 else:
                     for case, branch in self._branches.items():
@@ -310,7 +337,11 @@ class LMS_BranchNode(LMS_BaseNode):
 
         if compress_shared_references:
             for branch, cases in case_map.items():
-                case_message = f"Case {cases[0]}" if len(cases) == 1 else f"Cases {merge_shared_cases(cases)}"
+                case_message = (
+                    f"Case {cases[0]}"
+                    if len(cases) == 1
+                    else f"Cases {merge_shared_cases(cases)}"
+                )
                 result.append((tuple(cases), case_message, branch))
         else:
             for case, branch in self._branches.items():
@@ -327,7 +358,8 @@ class LMS_BranchNode(LMS_BaseNode):
         string_map = {}
         for param_definition in self.definition.parameter_definitions:
             string_map[param_definition.name] = self.parameter_value[
-                param_definition.name].value
+                param_definition.name
+            ].value
 
         string_map["case"] = case_prefix
         return prefix.substitute(**string_map)
@@ -397,18 +429,15 @@ class LMS_EventNode(LMS_BaseNode):
     Class that represents an event node. Node utilized for in-game actions.
     """
 
-    def __init__(self,
-                 id: int,
-                 parameter_type: LMS_NodeParameterType,
-                 parameter_value: LMS_FieldMap | int | str | tuple[int, ...],
-                 event_id: int,
-                 definition: NodeDefinition | None = None,
-                 ):
-        super().__init__(
-            id,
-            LMS_NodeType.EVENT,
-            parameter_type,
-            parameter_value)
+    def __init__(
+        self,
+        id: int,
+        parameter_type: LMS_NodeParameterType,
+        parameter_value: LMS_FieldMap | int | str | tuple[int, ...],
+        event_id: int,
+        definition: NodeDefinition | None = None,
+    ):
+        super().__init__(id, LMS_NodeType.EVENT, parameter_type, parameter_value)
 
         self._event_id = event_id
         self._definition = definition
@@ -419,7 +448,12 @@ class LMS_EventNode(LMS_BaseNode):
         return f"{self._definition.name}({ {field.name: field.value for field in self._parameter_value} } {self.id}"
 
     @classmethod
-    def new(cls, parameter_type: LMS_NodeParameterType, parameter_value: int | str | tuple[int, ...], event_id: int):
+    def new(
+        cls,
+        parameter_type: LMS_NodeParameterType,
+        parameter_value: int | str | tuple[int, ...],
+        event_id: int,
+    ):
         """
         Instantiates a new event node.
 
@@ -432,18 +466,23 @@ class LMS_EventNode(LMS_BaseNode):
         return cls(None, parameter_type, parameter_value, event_id)
 
     @classmethod
-    def new_from_definition(cls,
-                            definition: NodeDefinition,
-                            **parameter_values: str | int | str | tuple[int, ...],
-                            ):
+    def new_from_definition(
+        cls,
+        definition: NodeDefinition,
+        **parameter_values: str | int | str | tuple[int, ...],
+    ):
         """
         Instantiates a new event node from a definition.
 
         :param definition: the node definition.
         :param parameter_values: keyword arguments of parameters.
         """
-        converted = LMS_FieldMap.from_dict(parameter_values, definition.parameter_definitions)
-        return cls(None, definition.parameter_type, converted, definition.id, definition)
+        converted = LMS_FieldMap.from_dict(
+            parameter_values, definition.parameter_definitions
+        )
+        return cls(
+            None, definition.parameter_type, converted, definition.id, definition
+        )
 
     @property
     def definition(self) -> NodeDefinition | None:
@@ -470,11 +509,7 @@ class LMS_EntryNode(LMS_BaseNode):
     """
 
     def __init__(self, id: int, flowchart_name: str = ""):
-        super().__init__(
-            id,
-            LMS_NodeType.ENTRY,
-            LMS_NodeParameterType.NONE,
-            None)
+        super().__init__(id, LMS_NodeType.ENTRY, LMS_NodeParameterType.NONE, None)
 
         self.flowchart_name = flowchart_name
 
@@ -485,11 +520,7 @@ class LMS_JumpNode(LMS_BaseNode):
     """
 
     def __init__(self, id: int, unknown_short0a: int):
-        super().__init__(
-            id,
-            LMS_NodeType.JUMP,
-            LMS_NodeParameterType.NONE,
-            None)
+        super().__init__(id, LMS_NodeType.JUMP, LMS_NodeParameterType.NONE, None)
 
         self.next_flowchart: LMS_EntryNode | None = None
 
@@ -524,18 +555,24 @@ class LMS_JumpNode(LMS_BaseNode):
         return node
 
 
-def verify_parameter_structure(value: int | tuple[int, ...] | str, parameter_type: LMS_NodeParameterType) -> None:
+def verify_parameter_structure(
+    value: int | tuple[int, ...] | str, parameter_type: LMS_NodeParameterType
+) -> None:
     if parameter_type is LMS_NodeParameterType.NONE:
-        raise node_exceptions.LMS_NodeInvalidParameterTypeError("There must be a parameter type!")
+        raise node_exceptions.LMS_NodeInvalidParameterTypeError(
+            "There must be a parameter type!"
+        )
 
     if not isinstance(value, parameter_type.builtin_type):
         raise node_exceptions.LMS_NodeInvalidParameterValueError(
             f"Parameter type {parameter_type} expects type {parameter_type.builtin_type},"
-            f" but got {type(value)}.")
+            f" but got {type(value)}."
+        )
 
     if isinstance(value, tuple) and len(value) != parameter_type.value_count:
         raise node_exceptions.LMS_NodeMissingParameterValueError(
-            f"Parameter type {parameter_type} expects {parameter_type.value_count} parameter values, got {len(value)}!")
+            f"Parameter type {parameter_type} expects {parameter_type.value_count} parameter values, got {len(value)}!"
+        )
 
 
 def merge_shared_cases(cases: list[int]) -> str:

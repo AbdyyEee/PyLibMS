@@ -1,15 +1,22 @@
 from typing import Callable
 
-from lms.common.field.lms_datatype import (LMS_DataType, is_bool_datatype,
-                                           is_bytes_datatype, is_list_datatype,
-                                           is_number_datatype)
+from lms.common.field.lms_datatype import (
+    LMS_DataType,
+    is_bool_datatype,
+    is_bytes_datatype,
+    is_list_datatype,
+    is_number_datatype,
+)
 from lms.common.field.lms_field import LMS_Field
 from lms.fileio.io import FileReader, FileWriter
 from lms.titleconfig.definitions.value import ValueDefinition
 
 
-def read_field(reader: FileReader, definition: ValueDefinition,
-               read_variable_width_value: Callable | None = None) -> LMS_Field:
+def read_field(
+    reader: FileReader,
+    definition: ValueDefinition,
+    read_variable_width_value: Callable | None = None,
+) -> LMS_Field:
     # String is excluded as their reading varies between MSBT/MSBF
     match definition.datatype:
         case LMS_DataType.UINT8:
@@ -43,7 +50,11 @@ def read_field(reader: FileReader, definition: ValueDefinition,
     return LMS_Field(value, definition)  # type: ignore
 
 
-def write_field(writer: FileWriter, field: LMS_Field, write_variable_width_value: Callable | None = None) -> None:
+def write_field(
+    writer: FileWriter,
+    field: LMS_Field,
+    write_variable_width_value: Callable | None = None,
+) -> None:
     if is_number_datatype(field.value, field.datatype):
         write_functions: dict[LMS_DataType, Callable] = {
             LMS_DataType.UINT8: writer.write_uint8,

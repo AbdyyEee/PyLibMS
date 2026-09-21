@@ -27,7 +27,12 @@ def read_labels(reader: FileReader) -> tuple[dict, int]:
     return sorted_labels, slot_count
 
 
-def write_labels(writer: FileWriter, labels: list[str], slot_count: int, index_map: dict[str, int] = None) -> None:
+def write_labels(
+    writer: FileWriter,
+    labels: list[str],
+    slot_count: int,
+    index_map: dict[str, int] = None,
+) -> None:
     writer.write_uint32(slot_count)
 
     hash_slots = {}

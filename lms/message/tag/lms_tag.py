@@ -2,7 +2,10 @@ import re
 from typing import TypeGuard
 
 from lms.common.field.lms_field import LMS_FieldMap
-from lms.message.tag.lms_tagexceptions import LMS_TagInvalidFormatError, LMS_TagForbiddenParametersError
+from lms.message.tag.lms_tagexceptions import (
+    LMS_TagInvalidFormatError,
+    LMS_TagForbiddenParametersError,
+)
 from lms.titleconfig.definitions.tags import TagConfig, TagDefinition
 
 TAG_PADDING_VALUE = 0xCD
@@ -17,12 +20,12 @@ class LMS_EncodedTag:
     PARAMETER_FORMAT = re.compile(r"^\s*([0-9A-Fa-f]{2})(\s*-\s*[0-9A-Fa-f]{2})*\s*$")
 
     def __init__(
-            self,
-            group_id: int,
-            tag_index: int,
-            parameters: list[int] | None = None,
-            is_fallback: bool = False,
-            is_closing: bool = False,
+        self,
+        group_id: int,
+        tag_index: int,
+        parameters: list[int] | None = None,
+        is_fallback: bool = False,
+        is_closing: bool = False,
     ):
         self._group_id = group_id
         self._tag_index = tag_index
@@ -69,7 +72,9 @@ class LMS_EncodedTag:
             return f"[{self.group_id}:{self.tag_index}]"
 
         # 02x format to convert any int to hexadecimal uppercase
-        parameters = "-".join(format(param, "02x").upper() for param in self._parameters)
+        parameters = "-".join(
+            format(param, "02x").upper() for param in self._parameters
+        )
         return f"[{fallback_prefix}{self.group_id}:{self.tag_index} {parameters}]"
 
     @classmethod
@@ -88,11 +93,13 @@ class LMS_EncodedTag:
             )
 
         group_id, tag_index = int(group_id), int(tag_index)
-        param_str = tag[match.end(3):].strip().removesuffix("]").strip()
+        param_str = tag[match.end(3) :].strip().removesuffix("]").strip()
 
         if is_closing:
             if param_str:
-                raise LMS_TagForbiddenParametersError("There may not be parameters for closing tags!")
+                raise LMS_TagForbiddenParametersError(
+                    "There may not be parameters for closing tags!"
+                )
 
             return cls(group_id, tag_index, is_closing=True)
 
@@ -105,10 +112,13 @@ class LMS_EncodedTag:
             )
 
         try:
-            parameters = [int(param.strip().upper(), 16) for param in param_str.split("-")]
+            parameters = [
+                int(param.strip().upper(), 16) for param in param_str.split("-")
+            ]
         except ValueError:
             raise LMS_TagInvalidFormatError(
-                f"Malformed parameters in tag '{tag}'. Ensure all the parameters are integers.")
+                f"Malformed parameters in tag '{tag}'. Ensure all the parameters are integers."
+            )
 
         if len(parameters) % 2 == 1:
             parameters.append(TAG_PADDING_VALUE)
@@ -127,10 +137,10 @@ class LMS_DecodedTag:
     PARAMETER_FORMAT = re.compile(r'(\w+)="([^"]*)"')
 
     def __init__(
-            self,
-            definition: TagDefinition,
-            parameters: LMS_FieldMap | None = None,
-            is_closing: bool = False,
+        self,
+        definition: TagDefinition,
+        parameters: LMS_FieldMap | None = None,
+        is_closing: bool = False,
     ):
         self._definition = definition
         self._parameters = parameters

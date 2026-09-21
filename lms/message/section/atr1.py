@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 
 from lms.common.field.io import read_field, write_field
-from lms.common.field.lms_field import (LMS_DataType, LMS_Field,
-                                        LMS_FieldMap)
+from lms.common.field.lms_field import LMS_DataType, LMS_Field, LMS_FieldMap
 from lms.fileio.io import FileReader, FileWriter
 from lms.titleconfig.definitions.attribute import AttributeConfig
 
@@ -15,7 +14,7 @@ class ATR1Data:
 
 
 def read_atr1(
-        reader: FileReader, config: AttributeConfig | None, section_size: int
+    reader: FileReader, config: AttributeConfig | None, section_size: int
 ) -> ATR1Data:
     if config is None:
         return read_encoded_atr1(reader, section_size)
@@ -71,10 +70,10 @@ def read_decoded_atr1(reader: FileReader, config: AttributeConfig) -> ATR1Data:
 
 
 def write_encoded_atr1(
-        writer: FileWriter,
-        attributes: list[bytes],
-        size_per_attribute: int,
-        string_table: bytes | None,
+    writer: FileWriter,
+    attributes: list[bytes],
+    size_per_attribute: int,
+    string_table: bytes | None,
 ) -> None:
     writer.write_uint32(len(attributes))
 
@@ -91,7 +90,7 @@ def write_encoded_atr1(
 
 
 def write_decoded_atr1(
-        writer: FileWriter, attributes: list[LMS_FieldMap], size_per_attribute: int
+    writer: FileWriter, attributes: list[LMS_FieldMap], size_per_attribute: int
 ) -> None:
     writer.write_uint32(len(attributes))
     writer.write_uint32(size_per_attribute)

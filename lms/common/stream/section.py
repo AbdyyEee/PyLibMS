@@ -2,12 +2,12 @@ from typing import Any, Callable, Generator
 
 from lms.fileio.io import FileReader, FileWriter
 
-SECTION_PADDING_BYTE = b"\xAB"
+SECTION_PADDING_BYTE = b"\xab"
 SECTION_ALIGNMENT = 16
 
 
 def read_section_data(
-        reader: FileReader, section_count: int
+    reader: FileReader, section_count: int
 ) -> Generator[tuple[str, int], Any, None]:
     reader.seek(0x20)
     for _ in range(section_count):
@@ -24,11 +24,11 @@ def read_section_data(
 
 
 def write_section(
-        writer: FileWriter,
-        magic: str,
-        section_call: Callable,
-        data: list[Any],
-        *write_arguments: Any,
+    writer: FileWriter,
+    magic: str,
+    section_call: Callable,
+    data: list[Any],
+    *write_arguments: Any,
 ) -> None:
     writer.write_string(magic)
     size_offset = writer.tell()

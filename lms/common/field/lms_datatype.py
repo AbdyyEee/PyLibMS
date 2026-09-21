@@ -119,9 +119,7 @@ class LMS_DataType(Enum):
         try:
             return sizes[self]
         except KeyError:
-            raise TypeError(
-                f"Stream size is not defined for '{self.to_string()}'."
-            )
+            raise TypeError(f"Stream size is not defined for '{self.to_string()}'.")
 
     @classmethod
     def from_string(cls, string: str):
@@ -138,8 +136,8 @@ class LMS_DataType(Enum):
 
 
 def verify_number_from_datatype(
-        value: int | float,
-        datatype: LMS_DataType,
+    value: int | float,
+    datatype: LMS_DataType,
 ):
     if datatype is LMS_DataType.FLOAT32:
         max_value = FLOAT32_MAX
@@ -150,7 +148,7 @@ def verify_number_from_datatype(
             max_value = 2 ** (bits - 1)
             min_value = -max_value
         else:
-            min_value, max_value = 0, (2 ** bits) - 1
+            min_value, max_value = 0, (2**bits) - 1
 
     if not min_value <= value <= max_value:
         raise ValueError(

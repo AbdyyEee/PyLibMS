@@ -19,6 +19,7 @@ class MSBT:
     =========
     https://nintendo-formats.com/libs/lms/msbt.html
     """
+
     MAGIC = "MsgStdBn"
 
     DEFAULT_SLOT_COUNT = 101
@@ -28,13 +29,13 @@ class MSBT:
     TSY1_INDEX = 3
 
     def __init__(
-            self,
-            info: LMS_FileInfo | None = None,
-            uses_nli1: bool = False,
-            section_list: list[str] | None = None,
-            unsupported_section_map: dict[str, bytes] | None = None,
-            attribute_config: AttributeConfig | None = None,
-            tag_config: TagConfig | None = None,
+        self,
+        info: LMS_FileInfo | None = None,
+        uses_nli1: bool = False,
+        section_list: list[str] | None = None,
+        unsupported_section_map: dict[str, bytes] | None = None,
+        attribute_config: AttributeConfig | None = None,
+        tag_config: TagConfig | None = None,
     ):
         self._info = info if info is not None else LMS_FileInfo()
 
@@ -51,20 +52,24 @@ class MSBT:
         self._unsupported_section_map = unsupported_section_map or {}
 
         # Store the section list so that the order of any and all sections is preserved when writing
-        self._section_list: list[str] = section_list or ["LBL1" if not uses_nli1 else "NLI1"]
+        self._section_list: list[str] = section_list or [
+            "LBL1" if not uses_nli1 else "NLI1"
+        ]
 
         self._attribute_config = attribute_config
         self._tag_config = tag_config
 
     @classmethod
-    def new(cls,
-            uses_nli1: bool = False,
-            attribute_config: AttributeConfig | None = None,
-            tag_config: TagConfig | None = None,
-            is_big_endian: bool = False,
-            encoding: FileEncoding = FileEncoding.UTF16,
-            version: int = 3,
-            section_count: int = 2):
+    def new(
+        cls,
+        uses_nli1: bool = False,
+        attribute_config: AttributeConfig | None = None,
+        tag_config: TagConfig | None = None,
+        is_big_endian: bool = False,
+        encoding: FileEncoding = FileEncoding.UTF16,
+        version: int = 3,
+        section_count: int = 2,
+    ):
         """
         Create a new MSBT instance.
 
@@ -81,8 +86,12 @@ class MSBT:
         ======
         See https://github.com/AbdyyEee/PylibMS/wiki/MSBT#creating-a-msbt
         """
-        return MSBT(LMS_FileInfo(is_big_endian, encoding, version, section_count),
-                    uses_nli1=uses_nli1, attribute_config=attribute_config, tag_config=tag_config)
+        return MSBT(
+            LMS_FileInfo(is_big_endian, encoding, version, section_count),
+            uses_nli1=uses_nli1,
+            attribute_config=attribute_config,
+            tag_config=tag_config,
+        )
 
     def __len__(self) -> int:
         return len(self._entries)

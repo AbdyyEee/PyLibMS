@@ -1,5 +1,10 @@
 from lms.common import lms_exceptions
-from lms.common.lms_constants import BIG_ENDIAN_BOM, SECTION_DATA_START, LITTLE_ENDIAN_BOM, SIZE_OFFSET
+from lms.common.lms_constants import (
+    BIG_ENDIAN_BOM,
+    SECTION_DATA_START,
+    LITTLE_ENDIAN_BOM,
+    SIZE_OFFSET,
+)
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
 from lms.fileio.io import FileReader, FileWriter
@@ -25,7 +30,9 @@ def read_file_info(reader: FileReader, expected_magic: str) -> LMS_FileInfo:
     version = reader.read_uint8()
 
     if version < 3:
-        raise lms_exceptions.LMS_UnsupportedFileVersionError("Only version 3+ files are supported!")
+        raise lms_exceptions.LMS_UnsupportedFileVersionError(
+            "Only version 3+ files are supported!"
+        )
 
     section_count = reader.read_uint16()
 
@@ -34,7 +41,9 @@ def read_file_info(reader: FileReader, expected_magic: str) -> LMS_FileInfo:
 
     reader.seek(0, 2)
     if file_size != (real_size := reader.tell()):
-        raise lms_exceptions.LMS_MisalignedSizeError(f"File size is misaligned!` Got {file_size} expected {real_size}.")
+        raise lms_exceptions.LMS_MisalignedSizeError(
+            f"File size is misaligned!` Got {file_size} expected {real_size}."
+        )
 
     reader.seek(SECTION_DATA_START)
 

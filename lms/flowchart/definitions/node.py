@@ -538,17 +538,13 @@ class LMS_JumpNode(LMS_BaseNode):
         :param next_entry_point: the next entry point.
         :param unknown_short0a: unknown short value. -1 if there is no value.
         """
-        node = cls(None, unknown_short0a, next_entry_point)
-        return node
+        return cls(None, unknown_short0a, next_entry_point)
 
     @property
     def next_flowchart_id(self) -> int | None:
         """The ID of the next flowchart."""
-        if self.next_flowchart is not None:
-            return self.next_flowchart.id
-
-        return self._stream_next_id
-
+        return None if self.next_flowchart is None else self.next_flowchart.id
+    
     def set_next_node(self, node: LMS_BaseNode | None) -> LMS_BaseNode | None:
         super().set_next_node(node)
         if isinstance(node, LMS_EntryNode) or node is None:

@@ -21,15 +21,15 @@ NO_NEXT_NODE = -1
 
 class LMS_BaseNode:
     """
-    Class that represents common structure and methods for a LMS_Node.
+    Class that represents common structure and methods for any LMS_Node.
     """
 
     def __init__(
-        self,
-        id: int | None,
-        node_type: LMS_NodeType,
-        parameter_type: LMS_NodeParameterType,
-        parameter_value: LMS_NodeParameter | None,
+            self,
+            id: int | None,
+            node_type: LMS_NodeType,
+            parameter_type: LMS_NodeParameterType,
+            parameter_value: LMS_NodeParameter | None,
     ):
         self.id = id
         self._node_type = node_type
@@ -100,9 +100,11 @@ class LMS_BaseNode:
         self._parameter_value = value
 
     def set_next_node(self, node: LMS_BaseNode | None) -> LMS_BaseNode | None:
-        """Set the next node for the instance.
+        """
+        Set the next node for the instance.
 
-        :param node: the node object, None for no next node."""
+        :param node: the node object, None for no next node.
+        """
         self._next_node = node
         return node
 
@@ -139,15 +141,15 @@ class LMS_BaseNode:
 
 class LMS_MessageNode(LMS_BaseNode):
     """
-    Class that represents a message node. Node utilized in juction with MSBT entries.
+    Class that represents a message node. Node utilized in junction with MSBT entries.
     """
 
     def __init__(
-        self,
-        id: int | None,
-        msbt_index: int,
-        label_index: int,
-        msbt: MSBT | None = None,
+            self,
+            id: int | None,
+            msbt_index: int,
+            label_index: int,
+            msbt: MSBT | None = None,
     ):
         super().__init__(
             id,
@@ -201,12 +203,12 @@ class LMS_BranchNode(LMS_BaseNode):
     """
 
     def __init__(
-        self,
-        id: int,
-        parameter_type: LMS_NodeParameterType,
-        parameter_value: LMS_NodeParameter,
-        condition_id: int,
-        definition: NodeDefinition | None = None,
+            self,
+            id: int,
+            parameter_type: LMS_NodeParameterType,
+            parameter_value: LMS_NodeParameter,
+            condition_id: int,
+            definition: NodeDefinition | None = None,
     ):
         super().__init__(
             id,
@@ -231,10 +233,10 @@ class LMS_BranchNode(LMS_BaseNode):
 
     @classmethod
     def new(
-        cls,
-        parameter_type: LMS_NodeParameterType,
-        parameter_value: LMS_NodeParameter,
-        condition_id: int,
+            cls,
+            parameter_type: LMS_NodeParameterType,
+            parameter_value: LMS_NodeParameter,
+            condition_id: int,
     ):
         """
         Instantiates a new branch node.
@@ -247,9 +249,9 @@ class LMS_BranchNode(LMS_BaseNode):
 
     @classmethod
     def new_from_definition(
-        cls,
-        definition: NodeDefinition,
-        **parameter_values: str | bool | float | bytes,
+            cls,
+            definition: NodeDefinition,
+            **parameter_values: str | bool | float | bytes,
     ):
         """
         Instantiates a new branch node from a definition.
@@ -295,7 +297,7 @@ class LMS_BranchNode(LMS_BaseNode):
         return MappingProxyType(self._branches)
 
     def get_case_options(
-        self, compress_shared_references: bool = False
+            self, compress_shared_references: bool = False
     ) -> list[tuple[tuple[int, ...], str, LMS_BaseNode | None]]:
         """
         Retrieves the cases from this node formatted with the proper messages.
@@ -430,12 +432,12 @@ class LMS_EventNode(LMS_BaseNode):
     """
 
     def __init__(
-        self,
-        id: int,
-        parameter_type: LMS_NodeParameterType,
-        parameter_value: LMS_FieldMap | int | str | tuple[int, ...],
-        event_id: int,
-        definition: NodeDefinition | None = None,
+            self,
+            id: int,
+            parameter_type: LMS_NodeParameterType,
+            parameter_value: LMS_FieldMap | int | str | tuple[int, ...],
+            event_id: int,
+            definition: NodeDefinition | None = None,
     ):
         super().__init__(id, LMS_NodeType.EVENT, parameter_type, parameter_value)
 
@@ -449,10 +451,10 @@ class LMS_EventNode(LMS_BaseNode):
 
     @classmethod
     def new(
-        cls,
-        parameter_type: LMS_NodeParameterType,
-        parameter_value: int | str | tuple[int, ...],
-        event_id: int,
+            cls,
+            parameter_type: LMS_NodeParameterType,
+            parameter_value: int | str | tuple[int, ...],
+            event_id: int,
     ):
         """
         Instantiates a new event node.
@@ -467,9 +469,9 @@ class LMS_EventNode(LMS_BaseNode):
 
     @classmethod
     def new_from_definition(
-        cls,
-        definition: NodeDefinition,
-        **parameter_values: str | int | str | tuple[int, ...],
+            cls,
+            definition: NodeDefinition,
+            **parameter_values: str | int | str | tuple[int, ...],
     ):
         """
         Instantiates a new event node from a definition.
@@ -508,8 +510,8 @@ class LMS_EntryNode(LMS_BaseNode):
     Class that represents an entry node. Node that is at the start of a flowchart.
     """
 
-    def __init__(self, id: int, flowchart_name: str = ""):
-        super().__init__(id, LMS_NodeType.ENTRY, LMS_NodeParameterType.NONE, None)
+    def __init__(self, node_id: int, flowchart_name: str = ""):
+        super().__init__(node_id, LMS_NodeType.ENTRY, LMS_NodeParameterType.NONE, None)
 
         self.flowchart_name = flowchart_name
 
@@ -519,8 +521,8 @@ class LMS_JumpNode(LMS_BaseNode):
     Class that represents a jump node. Node that jumps to another flowchart.
     """
 
-    def __init__(self, id: int, unknown_short0a: int):
-        super().__init__(id, LMS_NodeType.JUMP, LMS_NodeParameterType.NONE, None)
+    def __init__(self, node_id: int, unknown_short0a: int):
+        super().__init__(node_id, LMS_NodeType.JUMP, LMS_NodeParameterType.NONE, None)
 
         self.next_flowchart: LMS_EntryNode | None = None
 
@@ -536,12 +538,12 @@ class LMS_JumpNode(LMS_BaseNode):
         :param next_entry_point: the next entry point.
         :param unknown_short0a: unknown short value. -1 if there is no value.
         """
-        node = cls(None, unknown_short0a)
+        node = cls(next_entry_point, unknown_short0a)
         node.next_flowchart = next_entry_point
         return node
 
     @property
-    def next_flowchart_id(self) -> int:
+    def next_flowchart_id(self) -> int | None:
         """The ID of the next flowchart."""
         if self.next_flowchart is not None:
             return self.next_flowchart.id
@@ -556,7 +558,7 @@ class LMS_JumpNode(LMS_BaseNode):
 
 
 def verify_parameter_structure(
-    value: int | tuple[int, ...] | str, parameter_type: LMS_NodeParameterType
+        value: int | tuple[int, ...] | str, parameter_type: LMS_NodeParameterType
 ) -> None:
     if parameter_type is LMS_NodeParameterType.NONE:
         raise node_exceptions.LMS_NodeInvalidParameterTypeError(

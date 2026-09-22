@@ -521,10 +521,10 @@ class LMS_JumpNode(LMS_BaseNode):
     Class that represents a jump node. Node that jumps to another flowchart.
     """
 
-    def __init__(self, node_id: int, unknown_short0a: int):
+    def __init__(self, node_id: int, unknown_short0a: int, next_entry_point: LMS_EntryNode = None):
         super().__init__(node_id, LMS_NodeType.JUMP, LMS_NodeParameterType.NONE, None)
 
-        self.next_flowchart: LMS_EntryNode | None = None
+        self.next_flowchart = next_entry_point
 
         # TODO: Document this unknown value at 0xA in the node
         # This value is usually -1 in TL 3DS but is a set value in other games
@@ -538,8 +538,7 @@ class LMS_JumpNode(LMS_BaseNode):
         :param next_entry_point: the next entry point.
         :param unknown_short0a: unknown short value. -1 if there is no value.
         """
-        node = cls(next_entry_point, unknown_short0a)
-        node.next_flowchart = next_entry_point
+        node = cls(None, unknown_short0a, next_entry_point)
         return node
 
     @property

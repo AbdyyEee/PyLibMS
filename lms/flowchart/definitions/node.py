@@ -16,7 +16,7 @@ from lms.titleconfig.definitions.nodes import NodeDefinition
 
 type LMS_NodeParameter = LMS_FieldMap | int | str | tuple[int, ...]
 
-NO_NEXT_NODE = -1
+NO_VALUE = 0xFFFF
 
 
 class LMS_BaseNode:
@@ -531,7 +531,7 @@ class LMS_JumpNode(LMS_BaseNode):
         self.unknown_short0a = unknown_short0a
 
     @classmethod
-    def new(cls, next_entry_point: LMS_EntryNode, unknown_short0a: int):
+    def new(cls, next_entry_point: LMS_EntryNode | None = None, unknown_short0a: int = NO_VALUE):
         """
         Instantiates a new jump node.
 

@@ -68,7 +68,7 @@ class NodeDefinition:
     @classmethod
     def from_dict(cls, identifier: int, node_type: LMS_NodeType, data: dict) -> NodeDefinition | None:
 
-        description = data.get("description", "")
+        name, description = data["name"], data.get("description", "")
         converted_parameters: list[ValueDefinition] = []
         parameter_type = LMS_NodeParameterType.from_string(data["parameter_type"])
 
@@ -128,18 +128,14 @@ class NodeDefinition:
                 "There may only be one of case_format and options in the definition."
             )
 
-        if (
-                case_options := data.get("case_options", "")
-        ) is not None and node_type == LMS_NodeType.EVENT:
-            raise ValueError("There may only be options for branch nodes!")
+        if (case_options := data.get("case_options", "")) and node_type is LMS_NodeType.EVENT:
+            raise ValueError(f"There may only be options for branch nodes for definition '{name}'")
 
-        if (
-                case_format := data.get("case_format", "")
-        ) is not None and node_type == LMS_NodeType.EVENT:
-            raise ValueError("There may only be case_format for branch nodes!")
+        if (case_format := data.get("case_format", "")) and node_type == LMS_NodeType.EVENT:
+            raise ValueError(f"There may only be case_format for branch nodes, '{name}' is an event definition!")
 
         return NodeDefinition(
-            name=data["name"],
+            name=name,
             id=identifier,
             description=data.get("description", ""),
             type=node_type,

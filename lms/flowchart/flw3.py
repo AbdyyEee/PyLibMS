@@ -23,11 +23,7 @@ NODE_SIZE = 16
 VARIABLE_WIDTH_DATATYPES = (LMS_DataType.BOOL, LMS_DataType.LIST)
 
 
-def read_flw3(
-    reader: FileReader,
-    config: NodeConfig | None,
-    msbt: MSBT | None,
-) -> tuple[int, dict[int, LMS_EntryNode]]:
+def read_flw3(reader: FileReader, config: NodeConfig | None, msbt: MSBT | None, ) -> list[LMS_EntryNode]:
     section_start = reader.tell()
     node_count = reader.read_uint16()
     branch_table_id_count = reader.read_uint16()
@@ -129,7 +125,7 @@ def read_flw3(
             case_count, starting_index = branch_metadata[node]
 
             # Slice the portion of IDs linked to this branch node and add the node objects themselves
-            for branch_id in branch_ids[starting_index : starting_index + case_count]:
+            for branch_id in branch_ids[starting_index: starting_index + case_count]:
                 if branch_id is None:
                     node.add_branch(None)
                 else:
@@ -145,7 +141,7 @@ def read_flw3(
 
         node.set_next_node(node_map[next_node_id])
 
-    return node_count, entry_nodes
+    return entry_nodes
 
 
 def read_next_node_id(reader: FileReader) -> int | None:
@@ -153,10 +149,10 @@ def read_next_node_id(reader: FileReader) -> int | None:
 
 
 def get_config_definition(
-    config: NodeConfig,
-    node_type: LMS_NodeType.BRANCH | LMS_NodeType.EVENT,
-    parameter_type: LMS_NodeParameterType,
-    id: int,
+        config: NodeConfig,
+        node_type: LMS_NodeType.BRANCH | LMS_NodeType.EVENT,
+        parameter_type: LMS_NodeParameterType,
+        id: int,
 ) -> NodeDefinition:
     return (
         None if config is None else config.get_definition(id, node_type, parameter_type)
@@ -164,10 +160,10 @@ def get_config_definition(
 
 
 def evaluate_node_parameter(
-    reader: FileReader,
-    section_start: int,
-    parameter_type: LMS_NodeParameterType,
-    definition: NodeDefinition | None,
+        reader: FileReader,
+        section_start: int,
+        parameter_type: LMS_NodeParameterType,
+        definition: NodeDefinition | None,
 ) -> LMS_NodeParameter:
     # How functions may utilize node parameters vary, such that they may cast values as they wish.
     # By default, PyLibMS interprets the parameter types using signed integers for simplicity.
@@ -225,7 +221,7 @@ def evaluate_node_parameter(
 
 
 def write_flw3(
-    writer: FileWriter, nodes: list[LMS_BaseNode], stream_ids: dict[LMS_BaseNode, int]
+        writer: FileWriter, nodes: list[LMS_BaseNode], stream_ids: dict[LMS_BaseNode, int]
 ) -> None:
     node_count = len(nodes)
 
@@ -336,7 +332,7 @@ def write_flw3(
         writer.write_uint16(node_id)
 
     string_offset = (
-        FLW3_HEADER_SIZE + (NODE_SIZE * node_count) + (2 * len(branch_table))
+            FLW3_HEADER_SIZE + (NODE_SIZE * node_count) + (2 * len(branch_table))
     )
 
     for offset, string in zip(string_offsets, string_table):
@@ -359,7 +355,7 @@ def write_flw3(
 
 
 def write_node_parameter(
-    writer: FileWriter, value: LMS_NodeParameter, parameter_type: LMS_NodeParameterType
+        writer: FileWriter, value: LMS_NodeParameter, parameter_type: LMS_NodeParameterType
 ) -> None:
     if isinstance(value, LMS_FieldMap):
         for i, field in enumerate(value):

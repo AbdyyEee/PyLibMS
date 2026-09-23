@@ -69,34 +69,26 @@ class MSBF:
             {flowchart.name: flowchart for flowchart in self._flowcharts}
         )
 
-    def set_global_id_count(self, value: int) -> None:
-        self._global_node_id = value
-
-    def generate_next_id(self) -> int:
-        """
-        Lazy generation for the next ID of a node. IDs are normalized properly when the msbf file is being written.
-        """
-        next_id = self._global_node_id
-        self._global_node_id += 1
-        return next_id
-
     def add_flowchart(
-            self, flowchart_name: str, entry_point: LMS_EntryNode | None = None
+            self, flowchart_name: str, entry_point: LMS_EntryNode = None
     ) -> LMS_Flowchart:
         """
         Add a flowchart to the MSBF instance.
 
         :param flowchart_name: The name of the new flowchart.
+        :param entry_point: The entry point of the new flowchart. If not provided, the method creates one.
         """
         if flowchart_name in self.flowcharts:
             raise KeyError(f"Flowchart with name '{flowchart_name}' already exists!")
 
-        if entry_point is None:
-            entry_point = LMS_EntryNode(
-                self.generate_next_id(), flowchart_name=flowchart_name
-            )
+        # Node IDs may not be sequential after user additions/deletions, so we track the absolute max value of
+        # all nodes and store it so that _generate_next_id can set any IDs added via the flowchart correctly.
+        self._global_node_id = max((node.id for flowchart in self for node in flowchart), default=1) + 1
 
-        flowchart = LMS_Flowchart(entry_point, self.generate_next_id)
+        if entry_point is None:
+            entry_point = LMS_EntryNode(self._generate_next_id(), flowchart_name)
+
+        flowchart = LMS_Flowchart(entry_point, self._generate_next_id)
         self._flowcharts.append(flowchart)
         return flowchart
 
@@ -124,3 +116,11 @@ class MSBF:
 
                 if is_valid_jump(node):
                     node.next_flowchart = None
+
+    def _generate_next_id(self) -> int:
+        """
+        Lazy generation for the next ID of a node. IDs are normalized properly when the msbf file is being written.
+        """
+        next_id = self._global_node_id
+        self._global_node_id += 1
+        return next_id

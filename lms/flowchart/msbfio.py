@@ -19,9 +19,9 @@ __all__ = ("read_msbf", "read_msbf_path", "write_msbf", "write_msbf_path")
 
 
 def read_msbf_path(
-    file_path: str,
-    config: NodeConfig | None = None,
-    msbt: MSBT | None = None,
+        file_path: str,
+        config: NodeConfig | None = None,
+        msbt: MSBT | None = None,
 ) -> MSBF:
     """
     Reads a MSBF file from a path.
@@ -40,14 +40,15 @@ def read_msbf_path(
 
 
 def read_msbf(
-    stream: BinaryIO | bytes,
-    node_config: NodeConfig | None = None,
-    msbt: MSBT | None = None,
+        stream: BinaryIO | bytes,
+        config: NodeConfig | None = None,
+        msbt: MSBT | None = None,
 ) -> MSBF:
     """
     Reads a MSBF file from a stream.
 
     :param stream: Stream to read the file from.
+    :param config: the node configuration to use.
     :param msbt: MSBT object for decoding message nodes.
 
     =====
@@ -63,14 +64,12 @@ def read_msbf(
     for magic, size in read_section_data(reader, file_info.section_count):
         match magic:
             case "FLW3":
-                node_count, entry_nodes = read_flw3(reader, node_config, msbt)
+                entry_nodes = read_flw3(reader, config, msbt)
             case "FEN1":
                 labels, _ = read_labels(reader)
             case "REF1":
                 raise LMS_UnsupportedSectionError("""REF1 was found in the MSBF file! Please report this file as an issue
                                                   in the PyLibMS repository https://github.com/AbdyyEee/PylibMS""")
-
-    msbf.set_global_id_count(node_count)
 
     for i, label in enumerate(labels.values()):
         entry_nodes[i].flowchart_name = label
@@ -119,7 +118,7 @@ def write_msbf(file: MSBF) -> bytes:
         for node in flowchart.nodes.values():
             nodes.add(node)
 
-    nodes = sorted(list(nodes), key=lambda node: node.id)
+    nodes = sorted(list(nodes), key=lambda n: n.id)
 
     # Real IDs that must be sequential will be written to the stream
     # Saved here so ids aren't mutated in the current state

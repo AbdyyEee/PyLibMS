@@ -26,12 +26,12 @@ class LMS_BaseNode:
 
     def __init__(
             self,
-            id: int | None,
+            node_id: int,
             node_type: LMS_NodeType,
             parameter_type: LMS_NodeParameterType,
             parameter_value: LMS_NodeParameter | None,
     ):
-        self.id = id
+        self.id = node_id
         self._node_type = node_type
 
         self._parameter_type = parameter_type
@@ -146,13 +146,13 @@ class LMS_MessageNode(LMS_BaseNode):
 
     def __init__(
             self,
-            id: int | None,
+            node_id: int,
             msbt_index: int,
             label_index: int,
             msbt: MSBT | None = None,
     ):
         super().__init__(
-            id,
+            node_id,
             LMS_NodeType.MESSAGE,
             LMS_NodeParameterType.NONE,
             None,
@@ -204,14 +204,14 @@ class LMS_BranchNode(LMS_BaseNode):
 
     def __init__(
             self,
-            id: int,
+            node_id,
             parameter_type: LMS_NodeParameterType,
             parameter_value: LMS_NodeParameter,
             condition_id: int,
             definition: NodeDefinition | None = None,
     ):
         super().__init__(
-            id,
+            node_id,
             LMS_NodeType.BRANCH,
             parameter_type,
             parameter_value,
@@ -302,7 +302,7 @@ class LMS_BranchNode(LMS_BaseNode):
         """
         Retrieves the cases from this node formatted with the proper messages.
 
-        If a definition is provided, and either ``case_format`` or ``case_options`` are provied, the resulting
+        If a definition is provided, and either ``case_format`` or ``case_options`` are provided, the resulting
         message will utilize those values to format the message.
 
         :param compress_shared_references: whether to compress shared references into one case.
@@ -433,13 +433,13 @@ class LMS_EventNode(LMS_BaseNode):
 
     def __init__(
             self,
-            id: int,
+            node_id: int,
             parameter_type: LMS_NodeParameterType,
             parameter_value: LMS_FieldMap | int | str | tuple[int, ...],
             event_id: int,
             definition: NodeDefinition | None = None,
     ):
-        super().__init__(id, LMS_NodeType.EVENT, parameter_type, parameter_value)
+        super().__init__(node_id, LMS_NodeType.EVENT, parameter_type, parameter_value)
 
         self._event_id = event_id
         self._definition = definition
@@ -544,7 +544,7 @@ class LMS_JumpNode(LMS_BaseNode):
     def next_flowchart_id(self) -> int | None:
         """The ID of the next flowchart."""
         return None if self.next_flowchart is None else self.next_flowchart.id
-    
+
     def set_next_node(self, node: LMS_BaseNode | None) -> LMS_BaseNode | None:
         super().set_next_node(node)
         if isinstance(node, LMS_EntryNode) or node is None:

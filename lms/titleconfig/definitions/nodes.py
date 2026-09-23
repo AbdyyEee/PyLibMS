@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Literal
 
 from lms.common.field.lms_datatype import LMS_DataType
 from lms.flowchart.definitions.node_type import LMS_NodeType, LMS_NodeParameterType
@@ -18,20 +19,20 @@ class NodeConfig:
 
     def get_definition(
             self,
-            id: int,
-            node_type: LMS_NodeType.BRANCH | LMS_NodeType.EVENT,
+            identifier: int,
+            node_type: Literal[LMS_NodeType.BRANCH] | Literal[LMS_NodeType.EVENT],
             parameter_type: LMS_NodeParameterType,
     ) -> NodeDefinition:
         """Gets a node definition by its ID and the type."""
         match node_type:
             case LMS_NodeType.BRANCH:
-                if id not in self.branch_definitions:
+                if identifier not in self.branch_definitions:
                     return None
-                definition = self.branch_definitions[id]
+                definition = self.branch_definitions[identifier]
             case LMS_NodeType.EVENT:
-                if id not in self.event_definitions:
+                if identifier not in self.event_definitions:
                     return None
-                definition = self.event_definitions[id]
+                definition = self.event_definitions[identifier]
             case _:
                 raise TypeError(
                     f"You may not use '{node_type}' with a node configuration."
@@ -60,7 +61,7 @@ class NodeDefinition:
     type: LMS_NodeType.BRANCH | LMS_NodeType.EVENT
     parameter_type: LMS_NodeParameterType
     parameter_definitions: tuple[ValueDefinition, ...]
-    case_format: str | None
+    case_format: str
     case_options: dict[int, str]
     next_node_dependency: bool = False
 
@@ -128,12 +129,12 @@ class NodeDefinition:
             )
 
         if (
-                case_options := data.get("case_options", None)
+                case_options := data.get("case_options", "")
         ) is not None and node_type == LMS_NodeType.EVENT:
             raise ValueError("There may only be options for branch nodes!")
 
         if (
-                case_format := data.get("case_format", None)
+                case_format := data.get("case_format", "")
         ) is not None and node_type == LMS_NodeType.EVENT:
             raise ValueError("There may only be case_format for branch nodes!")
 

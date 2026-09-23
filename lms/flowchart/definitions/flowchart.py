@@ -8,7 +8,7 @@ class LMS_Flowchart:
     """Class that represents a flowchart in a MSBF file."""
 
     def __init__(
-        self, entry_point: LMS_EntryNode, id_generator: Callable[[], int]
+            self, entry_point: LMS_EntryNode, id_generator: Callable[[], int]
     ) -> None:
         self._entry_node = entry_point
         self._nodes: dict[int, LMS_BaseNode] = {}
@@ -42,7 +42,7 @@ class LMS_Flowchart:
         return self._entry_node
 
     @property
-    def nodes(self) -> MappingProxyType[LMS_BaseNode]:
+    def nodes(self) -> MappingProxyType[int, LMS_BaseNode]:
         """All nodes in the flowchart instance."""
         return MappingProxyType(self._nodes)
 

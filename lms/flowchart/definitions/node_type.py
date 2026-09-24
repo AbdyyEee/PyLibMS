@@ -21,11 +21,11 @@ class LMS_NodeType(IntEnum):
     See https://nintendo-formats.com/libs/lms/msbf.html#node-types for more information.
     """
 
-    MESSAGE = 1
-    BRANCH = 2
-    EVENT = 3
-    ENTRY = 4
-    JUMP = 5
+    MESSAGE = 0x1
+    BRANCH = 0x2
+    EVENT = 0x3
+    ENTRY = 0x4
+    JUMP = 0x5
 
     @classmethod
     def from_string(cls, string: str):
@@ -44,14 +44,14 @@ class LMS_NodeParameterType(IntEnum):
     See https://nintendo-formats.com/libs/lms/msbf.html#parameter-types for more information.
     """
 
-    PARAM_32_0 = 0
-    PARAM_16_16 = 1
-    PARAM_16_8_8 = 2
-    PARAM_8_8_16 = 3
-    PARAM_8_8_8_8 = 4
-    STRING = 5
-    PARAM_32_1 = 6
-    NONE = -1
+    PARAM_32_0 = 0x0
+    PARAM_16_16 = 0x1
+    PARAM_16_8_8 = 0x2
+    PARAM_8_8_16 = 0x3
+    PARAM_8_8_8_8 = 0x4
+    STRING = 0x5
+    PARAM_32_1 = 0x6
+    NONE = 0xFFF
 
     @property
     def sliced_datatype(self) -> tuple[LMS_DataType, ...]:

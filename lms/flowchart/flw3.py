@@ -1,3 +1,5 @@
+from typing import Literal
+
 from lms.common.field.io import read_field, write_field
 from lms.common.field.lms_datatype import LMS_DataType
 from lms.common.field.lms_field import LMS_FieldMap, LMS_Field
@@ -35,12 +37,13 @@ def read_flw3(reader: FileReader, config: NodeConfig | None, msbt: MSBT | None, 
     entry_nodes: list[LMS_EntryNode] = []
 
     next_id_map: dict[LMS_BaseNode, int | None] = {}
-    branch_metadata: dict[LMS_BranchNode, dict] = {}
+    branch_metadata: dict[LMS_BranchNode, tuple] = {}
 
+    stream_next_id = None
     for i in range(node_count):
         node_data = reader.tell() + 8
         node_type = LMS_NodeType(reader.read_uint8())
-        parameter_type = LMS_NodeParameterType(reader.read_int8())
+        parameter_type = LMS_NodeParameterType(reader.read_uint8())
 
         reader.skip(2)
 
@@ -115,7 +118,7 @@ def read_flw3(reader: FileReader, config: NodeConfig | None, msbt: MSBT | None, 
         next_id_map[node] = stream_next_id
         nodes.append(node)
 
-    node_map: dict[int, LMS_BaseNode] = {node.id: node for node in nodes}
+    node_map: dict[int, LMS_BaseNode | None] = {node.id: node for node in nodes}
     branch_ids = [read_next_node_id(reader) for _ in range(branch_table_id_count)]
 
     for node in nodes:
@@ -145,17 +148,17 @@ def read_flw3(reader: FileReader, config: NodeConfig | None, msbt: MSBT | None, 
 
 
 def read_next_node_id(reader: FileReader) -> int | None:
-    return None if (id := reader.read_uint16()) == NO_NEXT_NODE else id
+    return None if (node_id := reader.read_uint16()) == NO_NEXT_NODE else node_id
 
 
 def get_config_definition(
-        config: NodeConfig,
-        node_type: LMS_NodeType.BRANCH | LMS_NodeType.EVENT,
+        config: NodeConfig | None,
+        node_type: Literal[LMS_NodeType.BRANCH, LMS_NodeType.EVENT],
         parameter_type: LMS_NodeParameterType,
-        id: int,
+        identifier: int,
 ) -> NodeDefinition:
     return (
-        None if config is None else config.get_definition(id, node_type, parameter_type)
+        None if config is None else config.get_definition(identifier, node_type, parameter_type)
     )
 
 
@@ -182,7 +185,7 @@ def evaluate_node_parameter(
             )
 
         for i, param_definition in enumerate(definition.parameter_definitions):
-            # By default VARIABLE_WIDTH_DATATYPES are allocated a single byte for its index.
+            # By default, VARIABLE_WIDTH_DATATYPES are allocated a single byte for its index.
             # Some games may utilize a whole 4 byte stack as an index and/or 2 bytes depending on the parameter type.
             stream_map = {
                 1: reader.read_uint8,
@@ -237,8 +240,8 @@ def write_flw3(
 
     writer.write_bytes(b"\x00" * 12)
     for node in nodes:
-        writer.write_int8(node.type)
-        writer.write_int8(node.parameter_type)
+        writer.write_uint8(node.type)
+        writer.write_uint8(node.parameter_type)
 
         match node:
             case LMS_MessageNode():
@@ -260,8 +263,9 @@ def write_flw3(
                 if node.parameter_type is LMS_NodeParameterType.STRING:
                     string_offsets.append(writer.tell())
 
-                    if node.definition is not None:
-                        parameter_definition = node.definition.parameter_definitions[0]
+                    definition = node.definition
+                    if definition is not None:
+                        parameter_definition = definition.parameter_definitions[0]
                         field = node.parameter_value[parameter_definition.name]
                         string_table.append(field.value)
                     else:
@@ -359,7 +363,6 @@ def write_node_parameter(
 ) -> None:
     if isinstance(value, LMS_FieldMap):
         for i, field in enumerate(value):
-            # In MSBF files there could be a case where naturally one bit datatypes take up 2/4 bits.
             if field.datatype in VARIABLE_WIDTH_DATATYPES:
                 stream_map = {
                     1: writer.write_uint8,
@@ -396,5 +399,5 @@ def write_node_parameter(
             writer.write_uint8(value[3])
 
 
-def write_next_node_id(writer: FileWriter, id: int | None) -> None:
-    writer.write_uint16(NO_NEXT_NODE if id is None else id)
+def write_next_node_id(writer: FileWriter, node_id: int | None) -> None:
+    writer.write_uint16(NO_NEXT_NODE if node_id is None else node_id)

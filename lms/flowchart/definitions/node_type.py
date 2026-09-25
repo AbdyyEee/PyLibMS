@@ -51,7 +51,7 @@ class LMS_NodeParameterType(IntEnum):
     PARAM_8_8_8_8 = 0x4
     STRING = 0x5
     PARAM_32_1 = 0x6
-    NONE = 0xFFF
+    NONE = 0xFFFF
 
     @property
     def sliced_datatype(self) -> tuple[LMS_DataType, ...]:

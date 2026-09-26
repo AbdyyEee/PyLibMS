@@ -3,7 +3,7 @@ from types import MappingProxyType
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
 from lms.flowchart.definitions.flowchart import LMS_Flowchart
-from lms.flowchart.definitions.node import LMS_EntryNode, LMS_JumpNode, LMS_BranchNode
+from lms.flowchart.definitions.node import LMS_EntryNode, LMS_JumpNode, LMS_BranchNode, LMS_BaseNode
 
 
 class MSBF:
@@ -29,7 +29,9 @@ class MSBF:
             self, info: LMS_FileInfo | None = None, flowcharts: list[LMS_Flowchart] = None
     ):
         self._info = info if info is not None else LMS_FileInfo()
+        self._shared_references: dict[int, LMS_BaseNode] = {}
         self._flowcharts = flowcharts or []
+        self._nodes: dict[int, LMS_BaseNode] = {}
         self._global_node_id = 0
 
     def __iter__(self):
@@ -63,11 +65,64 @@ class MSBF:
         return self._info
 
     @property
+    def nodes(self) -> MappingProxyType[int, LMS_BaseNode]:
+        """Global node map for the file."""
+        return MappingProxyType(self._nodes)
+
+    @property
+    def shared_references(self) -> MappingProxyType[int, LMS_BaseNode]:
+        """Shared references of nodes between flowcharts."""
+        return self._shared_references
+
+    @property
     def flowcharts(self) -> MappingProxyType[str, LMS_Flowchart]:
         """The flowcharts of the MSBF instance."""
         return MappingProxyType(
             {flowchart.name: flowchart for flowchart in self._flowcharts}
         )
+
+    def register_node(self, node: LMS_BaseNode, flowchart: LMS_Flowchart = None) -> None:
+        """
+        Registers a node to the MSBF instance.
+
+        :param node: The node to register.
+        :param flowchart: optional argument that registers the node to that flowchart.
+        """
+        if not isinstance(node, LMS_BaseNode):
+            raise TypeError(
+                f"Node type '{type(node).__name__}' is not a child of LMS_BaseNode!"
+            )
+
+        if node.id in self._nodes:
+            raise ValueError(
+                f"Node of ID '{node.id}' is already registered to this flowchart!"
+            )
+
+        node.id = self._id_generator()
+        self._nodes[node.id] = node
+
+        if flowchart is not None:
+            flowchart.register_node(node)
+
+    def destroy_node(self, node_id: int) -> None:
+        """
+        Destroys a node and all its references in every flowchart.
+
+        :param node_id: the id of the node to delete.
+        """
+        if node_id not in self._nodes:
+            raise KeyError(f"Node id '{node_id}' does not exist in this flowchart!")
+
+        deleted_node = self._nodes[node_id]
+
+        if isinstance(deleted_node, LMS_EntryNode):
+            raise ValueError("Entry nodes cannot be deleted!")
+
+        for flowchart in self._flowcharts:
+            if node_id in flowchart.nodes:
+                flowchart.deregister_node(node_id)
+
+        del self._nodes[node_id]
 
     def add_flowchart(
             self, flowchart_name: str, entry_point: LMS_EntryNode = None
@@ -90,6 +145,13 @@ class MSBF:
 
         flowchart = LMS_Flowchart(entry_point, self._generate_next_id)
         self._flowcharts.append(flowchart)
+
+        for flowchart in self._flowcharts:
+            for node_id, node in flowchart.nodes.items():
+                self._shared_references.setdefault(node.id, set()).add(flowchart)
+                self._nodes[node_id] = node
+
+        self._nodes = dict(sorted(self._nodes.items()))
         return flowchart
 
     def delete_flowchart(self, name: str):

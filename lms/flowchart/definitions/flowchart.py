@@ -52,20 +52,12 @@ class LMS_Flowchart:
 
         :param node: the node to add.
         """
-        if not isinstance(node, LMS_BaseNode):
-            raise TypeError(
-                f"Node type '{type(node).__name__}' is not a child of LMS_BaseNode!"
-            )
+        if node.id is None:
+            raise ValueError("Node must be registered to an MSBF file before a flowchart!")
 
-        if node in self._nodes.values():
-            raise ValueError(
-                f"Node of ID '{node.id}' is already registered to this flowchart!"
-            )
-
-        node.id = self._id_generator()
         self._nodes[node.id] = node
 
-    def delete_node(self, node_id: int) -> None:
+    def deregister_node(self, node_id: int) -> None:
         """
         Deletes a node from the flowchart.
 

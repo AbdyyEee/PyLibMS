@@ -9,7 +9,6 @@ from lms.common.stream.fileinfo import read_file_info, write_file_info, write_fi
 from lms.common.stream.hashtable import read_labels, write_labels
 from lms.common.stream.section import read_section_data, write_section
 from lms.fileio.io import FileReader, FileWriter
-from lms.flowchart.definitions.node import LMS_BaseNode
 from lms.flowchart.flw3 import read_flw3, write_flw3
 from lms.flowchart.msbf import MSBF
 from lms.message.msbt import MSBT
@@ -112,17 +111,9 @@ def write_msbf(file: MSBF) -> bytes:
     writer = FileWriter(file.info.encoding)
     write_file_info(writer, MSBF.MAGIC, file.info)
 
-    nodes: set[LMS_BaseNode] = set()
-
-    for flowchart in file:
-        for node in flowchart.nodes.values():
-            nodes.add(node)
-
-    nodes = sorted(list(nodes), key=lambda n: n.id)
-
     # Real IDs that must be sequential will be written to the stream
     # Saved here so ids aren't mutated in the current state
-    stream_ids = {node: stream_id for stream_id, node in enumerate(nodes)}
+    stream_ids = {node: stream_id for stream_id, node in enumerate(file.nodes.values())}
 
     for chart in file:
         if amount := len(chart.get_dangling_nodes()):
@@ -134,7 +125,7 @@ def write_msbf(file: MSBF) -> bytes:
         flowchart.name: stream_ids[flowchart.entry_point] for flowchart in file
     }
 
-    write_section(writer, "FLW3", write_flw3, nodes, stream_ids)
+    write_section(writer, "FLW3", write_flw3, list(file.nodes.values()), stream_ids)
     write_section(
         writer,
         "FEN1",

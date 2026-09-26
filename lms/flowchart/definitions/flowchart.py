@@ -1,5 +1,5 @@
 from types import MappingProxyType
-from typing import Callable, Iterator
+from typing import Iterator
 
 from lms.flowchart.definitions.node import LMS_EntryNode, LMS_BranchNode, LMS_BaseNode
 
@@ -7,12 +7,9 @@ from lms.flowchart.definitions.node import LMS_EntryNode, LMS_BranchNode, LMS_Ba
 class LMS_Flowchart:
     """Class that represents a flowchart in a MSBF file."""
 
-    def __init__(
-            self, entry_point: LMS_EntryNode, id_generator: Callable[[], int]
-    ) -> None:
+    def __init__(self, entry_point: LMS_EntryNode) -> None:
         self._entry_node = entry_point
         self._nodes: dict[int, LMS_BaseNode] = {}
-        self._id_generator = id_generator
 
         if entry_point is not None:
             for node in entry_point.get_descendents():

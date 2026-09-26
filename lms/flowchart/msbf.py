@@ -70,11 +70,6 @@ class MSBF:
         return MappingProxyType(self._nodes)
 
     @property
-    def shared_references(self) -> MappingProxyType[int, LMS_BaseNode]:
-        """Shared references of nodes between flowcharts."""
-        return self._shared_references
-
-    @property
     def flowcharts(self) -> MappingProxyType[str, LMS_Flowchart]:
         """The flowcharts of the MSBF instance."""
         return MappingProxyType(
@@ -98,7 +93,7 @@ class MSBF:
                 f"Node of ID '{node.id}' is already registered to this flowchart!"
             )
 
-        node.id = self._id_generator()
+        node.id = self._generate_next_id()
         self._nodes[node.id] = node
 
         if flowchart is not None:
@@ -143,12 +138,11 @@ class MSBF:
         if entry_point is None:
             entry_point = LMS_EntryNode(self._generate_next_id(), flowchart_name)
 
-        flowchart = LMS_Flowchart(entry_point, self._generate_next_id)
+        flowchart = LMS_Flowchart(entry_point)
         self._flowcharts.append(flowchart)
 
         for flowchart in self._flowcharts:
             for node_id, node in flowchart.nodes.items():
-                self._shared_references.setdefault(node.id, set()).add(flowchart)
                 self._nodes[node_id] = node
 
         self._nodes = dict(sorted(self._nodes.items()))

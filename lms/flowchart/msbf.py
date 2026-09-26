@@ -76,6 +76,10 @@ class MSBF:
             {flowchart.name: flowchart for flowchart in self._flowcharts}
         )
 
+    def get_flowchart_references(self, node_id: int) -> set[LMS_Flowchart]:
+        """References of nodes between flowcharts."""
+        return {flowchart for flowchart in self._flowcharts if node_id in flowchart.nodes}
+
     def register_node(self, node: LMS_BaseNode, flowchart: LMS_Flowchart = None) -> None:
         """
         Registers a node to the MSBF instance.

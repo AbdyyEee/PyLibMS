@@ -2,18 +2,17 @@
 
 [![Python Versions](https://img.shields.io/pypi/pyversions/PyLibMS)](https://pypi.org/project/PyLibMS/)
 ![LICENSE](https://img.shields.io/badge/license-MIT-blue)
-[![PyPI version](https://badge.fury.io/py/PyLibMS.svg)](https://badge.fury.io/py/PyLibMS)
+[![PyPI version](https://badge.fury.io/py/PyLibMS.svg)](lhttps://badge.fury.io/py/PyLibMS)
 
 PyLibMS is a library built in Python 3.10 and above for reading and writing of libMessageStudio (LMS) proprietary file
 formats from Nintendo.
 
-The following is supported
-| Format | Read | Write | Configuration Support                                                                     |
-|-------------|------|-------|-------------------------------------------------------------------------------------------|
-| `MSBT`        | ✅    | ✅     | Support for full attribute (`ATR1`) decoding. Tag decoding 1:1 with the official Nintendo `.mstxt` file format. |
-| `MSBF`        | ✅    | ✅     | Support for custom node definitions, attaching names and descriptions to nodes. Altering parameter datatypes for flexibility between games.  |
-| `MSBP`        | ✅    | ❌     | Generating configuration files for use with `MSBT` files.                                                                                       |
-
+The following is supported | Format | Read | Write | Configuration
+Support | |-------------|------|-------|-------------------------------------------------------------------------------------------| |
+`MSBT`        | ✅ | ✅ | Support for full attribute (`ATR1`) decoding. Tag decoding 1:1 with the official Nintendo
+`.mstxt` file format. | | `MSBF`        | ✅ | ✅ | Support for custom node definitions, attaching names and descriptions
+to nodes. Altering parameter datatypes for flexibility between games. | | `MSBP`        | ✅ | ❌ | Generating
+configuration files for use with `MSBT` files. |
 
 This library is designed to support LMS revision >=3.0. These include files generated for late **Wii** titles,
 **Nintendo 3DS**, **Wii U**, **Mobile**, **Nintendo Switch** and **Nintendo Switch 2** games.
@@ -80,6 +79,14 @@ pip install PyLibMS
 ```
 
 [Pip Page](https://pypi.org/project/PyLibMS/)
+
+# Contributing
+
+Contributions are always welcome, whether it be bug fixes or features.
+
+To start follow, [Build Instructions](#build-instructions) to locally clone the repository and make edits.
+
+Afterward, submit a [Pull Request](https://github.com/AbdyyEee/PyLibMS/pulls).
 
 # Build Instructions
 

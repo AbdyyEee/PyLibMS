@@ -29,24 +29,39 @@ class TitleConfig:
     NODE_KEY = "node_definitions"
 
     GAME_PRESET = Literal[
-        "Badge Arcade",
+        "Animal Crossing: City Folk",
+        "Animal Crossing: New Horizons",
+        "Animal Crossing: New Leaf",
+        "The Legend of Zelda: Echoes of Wisdom"
+        "Metroid Prime 4: Beyond"
+        "Mario vs. Donkey Kong"
+        "Paper Mario: Color Splash"
+        "Paper Mario: Sticker Star"
+        "Paper Mario: The Origami King"
+        "Paper Mario: The Thousand-Year Door (Nintendo Switch)"
+        "Super Mario 3D Land"
+        "Super Mario 3D World + Bowser's Fury"
+        "Super Mario Odyssey"
+        "Splatoon 3"
+        "The Legend of Zelda: Link's Awakening (Nintendo Switch)"
+        "The Legend of Zelda a Link Between Worlds",
+        "The Legend of Zelda: Tri Force Heroes"
+        "Tomodachi Life (NA-EU)",
+        "Tomodachi Life (JP)",
+        "Tomodachi Life: Living the Dream",
+        "The Legend of Zelda: Tears of the Kingdom"
+        "Wii Sports Club"
         "Brain Age Concentration Training",
         "Kirby Planet Robobot",
         "Super Mario Odyssey",
-        "Super Mario 3D Land",
-        "Super Mario 3D World + Bowsers Fury",
-        "The Legend of Zelda a Link Between Worlds",
-        "The Legend of Zelda Echos of Wisdom",
-        "Tomodachi Life Living The Dream",
-        "Tomodachi Life NA-EU",
     ]
 
     def __init__(
-        self,
-        game: str | None,
-        attribute_config_map: dict[str, AttributeConfig] | None = None,
-        tag_config: TagConfig | None = None,
-        node_config: NodeConfig | None = None,
+            self,
+            game: str | None,
+            attribute_config_map: dict[str, AttributeConfig] | None = None,
+            tag_config: TagConfig | None = None,
+            node_config: NodeConfig | None = None,
     ):
         self._game = game
         self._attribute_config_map = attribute_config_map
@@ -203,7 +218,7 @@ class TitleConfig:
         game = parsed_content.get("game")
 
         attribute_configs = {}
-        for config in parsed_content[cls.ATTR_KEY]:
+        for config in parsed_content.get(cls.ATTR_KEY, []):
             definitions = [
                 ValueDefinition.from_dict(value_def)
                 for value_def in config["definitions"]
@@ -212,21 +227,28 @@ class TitleConfig:
                 config["name"], config.get("description", ""), definitions
             )
 
+        tag_config = None
         tag_definitions: dict[int, list[TagDefinition]] = {}
-        group_map = parsed_content[cls.TAG_KEY]["groups"]
+        tag_content = parsed_content.get(cls.TAG_KEY, None)
 
-        for tag_def in parsed_content[cls.TAG_KEY]["tags"]:
-            definition = TagDefinition.from_dict(tag_def, group_map)
-            if definition.group_id not in tag_definitions:
-                tag_definitions[definition.group_id] = []
-            tag_definitions[definition.group_id].append(definition)
+        if tag_content is not None:
+            group_map = tag_content["groups"]
 
-        tag_config = TagConfig(group_map, tag_definitions)
+            for tag_def in tag_content["tags"]:
+                definition = TagDefinition.from_dict(tag_def, group_map)
+                if definition.group_id not in tag_definitions:
+                    tag_definitions[definition.group_id] = []
+                tag_definitions[definition.group_id].append(definition)
+
+            tag_config = TagConfig(group_map, tag_definitions)
 
         branch_nodes: dict[int, NodeDefinition | tuple[NodeDefinition, ...]] = {}
         event_nodes: dict[int, tuple[NodeDefinition, ...]] = {}
 
-        for definition in parsed_content[cls.NODE_KEY]["branch"]:
+        node_data = parsed_content.get(cls.NODE_KEY, [])
+        branch_data, event_data = node_data.get("branch", []), node_data.get("event", [])
+
+        for definition in branch_data:
             node_id = definition["id"]
 
             node_definition = NodeDefinition.from_dict(
@@ -244,7 +266,7 @@ class TitleConfig:
             else:
                 branch_nodes[node_id] = (existing, node_definition)
 
-        for definition in parsed_content[cls.NODE_KEY]["event"]:
+        for definition in event_data:
             node_id = definition["id"]
 
             node_definition = NodeDefinition.from_dict(

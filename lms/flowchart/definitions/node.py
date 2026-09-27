@@ -317,11 +317,16 @@ class LMS_BranchNode(LMS_BaseNode):
 
             if definition.case_options:
                 for case, branch in self._branches.items():
-                    case_message = definition.case_options.get(
-                        case, f"Case {case}"
+                    case_format = definition.case_options.get(
+                        case, None,
                     )
 
-                    result.append(((case,), case_message, branch))
+                    if case_format is None:
+                        formatted_message = f"Case {case}"
+                    else:
+                        formatted_message = self._format_case_message(case, case_format)
+
+                    result.append(((case,), formatted_message, branch))
 
                 return result
 
@@ -329,12 +334,12 @@ class LMS_BranchNode(LMS_BaseNode):
                 if compress_shared_references:
                     for branch, cases in case_map.items():
                         case_message = self._format_case_message(
-                            merge_shared_cases(cases)
+                            merge_shared_cases(cases), definition.case_format
                         )
                         result.append((tuple(cases), case_message, branch))
                 else:
                     for case, branch in self._branches.items():
-                        case_message = self._format_case_message(case)
+                        case_message = self._format_case_message(case, definition.case_format)
                         result.append(((case,), case_message, branch))
 
                 return result
@@ -354,8 +359,8 @@ class LMS_BranchNode(LMS_BaseNode):
 
         return result
 
-    def _format_case_message(self, case_prefix: str):
-        prefix = string.Template(self._definition.case_format)
+    def _format_case_message(self, case_prefix: str, case_format: str):
+        prefix = string.Template(case_format)
 
         # Unpack dict for formatting $case and $param formats
         # Allows inserting parameter values dynamically into the case message

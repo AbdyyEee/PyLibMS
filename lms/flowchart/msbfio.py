@@ -115,12 +115,6 @@ def write_msbf(file: MSBF) -> bytes:
     # Saved here so ids aren't mutated in the current state
     stream_ids = {node: stream_id for stream_id, node in enumerate(file.nodes.values())}
 
-    for chart in file:
-        if amount := len(chart.get_dangling_nodes()):
-            raise LMS_Error(
-                f"Unable to write the flowchart '{chart.name}'! There are {amount} dangling nodes."
-            )
-
     index_map = {
         flowchart.name: stream_ids[flowchart.entry_point] for flowchart in file
     }

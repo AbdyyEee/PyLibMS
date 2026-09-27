@@ -59,13 +59,12 @@ def read_msbf(
     file_info = read_file_info(reader, MSBF.MAGIC)
 
     msbf = MSBF(file_info)
-
     for magic, size in read_section_data(reader, file_info.section_count):
         match magic:
             case "FLW3":
                 entry_nodes = read_flw3(reader, config, msbt)
             case "FEN1":
-                labels, _ = read_labels(reader)
+                labels, slot_count = read_labels(reader)
             case "REF1":
                 raise LMS_UnsupportedSectionError("""REF1 was found in the MSBF file! Please report this file as an issue
                                                   in the PyLibMS repository https://github.com/AbdyyEee/PylibMS""")
@@ -74,6 +73,7 @@ def read_msbf(
         entry_nodes[i].flowchart_name = label
         msbf.add_flowchart(label, entry_nodes[i])
 
+    msbf.slot_count = slot_count
     return msbf
 
 
@@ -125,7 +125,7 @@ def write_msbf(file: MSBF) -> bytes:
         "FEN1",
         write_labels,
         list(file.flowcharts.keys()),
-        MSBF.DEFAULT_SLOT_COUNT,
+        file.slot_count,
         index_map,
     )
     write_file_size(writer)

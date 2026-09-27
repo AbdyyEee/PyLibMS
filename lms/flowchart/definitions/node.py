@@ -185,7 +185,7 @@ class LMS_MessageNode(LMS_BaseNode):
 
     @property
     def msbt(self) -> MSBT | None:
-        """MSBT instance the node references. Optional, and must be set with `set_msbt` or by  providing a MSBT file on reading."""
+        """MSBT instance the node references. Optional, is set by providing a MSBT file on reading."""
         return self._msbt
 
     @property
@@ -313,9 +313,11 @@ class LMS_BranchNode(LMS_BaseNode):
             case_map.setdefault(branch, []).append(case)
 
         if self.definition is not None:
-            if self.definition.case_options:
+            definition: NodeDefinition = self.definition
+
+            if definition.case_options:
                 for case, branch in self._branches.items():
-                    case_message = self.definition.case_options.get(
+                    case_message = definition.case_options.get(
                         case, f"Case {case}"
                     )
 
@@ -323,7 +325,7 @@ class LMS_BranchNode(LMS_BaseNode):
 
                 return result
 
-            if self.definition.case_format is not None:
+            if definition.case_format is not None:
                 if compress_shared_references:
                     for branch, cases in case_map.items():
                         case_message = self._format_case_message(

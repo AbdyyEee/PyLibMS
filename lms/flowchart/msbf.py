@@ -22,14 +22,17 @@ class MSBF:
     """
 
     MAGIC = "MsgFlwBn"
-
     DEFAULT_SLOT_COUNT = 59
 
     def __init__(
             self, info: LMS_FileInfo | None = None, flowcharts: list[LMS_Flowchart] = None
     ):
         self._info = info if info is not None else LMS_FileInfo()
-        self._shared_references: dict[int, LMS_BaseNode] = {}
+
+        # While unlikely to vary, and have yet to find a file that changes the slot count (unlike MSBT)
+        # it is wiser to store an editable attribute just in case a game decides to vary the amount.
+        self.slot_count = MSBF.DEFAULT_SLOT_COUNT
+
         self._flowcharts = flowcharts or []
         self._nodes: dict[int, LMS_BaseNode] = {}
         self._global_node_id = 0
@@ -77,7 +80,11 @@ class MSBF:
         )
 
     def get_flowchart_references(self, node_id: int) -> set[LMS_Flowchart]:
-        """References of nodes between flowcharts."""
+        """
+        Determines which flowcharts contain this node.
+
+        :param node_id: The node to find references for.
+        """
         return {flowchart for flowchart in self._flowcharts if node_id in flowchart.nodes}
 
     def register_node(self, node: LMS_BaseNode, flowchart: LMS_Flowchart = None) -> None:
@@ -85,7 +92,7 @@ class MSBF:
         Registers a node to the MSBF instance.
 
         :param node: The node to register.
-        :param flowchart: optional argument that registers the node to that flowchart.
+        :param flowchart: Optional argument that registers the node to that flowchart.
         """
         if not isinstance(node, LMS_BaseNode):
             raise TypeError(

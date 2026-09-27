@@ -3,7 +3,7 @@ from lms.common.lms_constants import (
     BIG_ENDIAN_BOM,
     SECTION_DATA_START,
     LITTLE_ENDIAN_BOM,
-    SIZE_OFFSET,
+    SIZE_OFFSET, LMS_MINIMUM_VERSION,
 )
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
@@ -29,7 +29,7 @@ def read_file_info(reader: FileReader, expected_magic: str) -> LMS_FileInfo:
 
     version = reader.read_uint8()
 
-    if version < 3:
+    if version < LMS_MINIMUM_VERSION:
         raise lms_exceptions.LMS_UnsupportedFileVersionError(
             "Only version 3+ files are supported!"
         )

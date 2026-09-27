@@ -1,4 +1,6 @@
 # Common constant definitions between files
+LMS_MINIMUM_VERSION = 3
+
 PADDING_BYTE = b"\x00"
 
 SIZE_OFFSET = 0x12

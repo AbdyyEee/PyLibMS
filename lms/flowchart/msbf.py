@@ -142,10 +142,6 @@ class MSBF:
         if flowchart_name in self.flowcharts:
             raise KeyError(f"Flowchart with name '{flowchart_name}' already exists!")
 
-        # Node IDs may not be sequential after user additions/deletions, so we track the absolute max value of
-        # all nodes and store it so that _generate_next_id can set any IDs added via the flowchart correctly.
-        self._global_node_id = max((node.id for flowchart in self for node in flowchart), default=1) + 1
-
         if entry_point is None:
             entry_point = LMS_EntryNode(self._generate_next_id(), flowchart_name)
 
@@ -157,6 +153,11 @@ class MSBF:
                 self._nodes[node_id] = node
 
         self._nodes = dict(sorted(self._nodes.items()))
+
+        # Node IDs may not be sequential after user additions/deletions, so we track the absolute max value of
+        # all nodes and store it so that _generate_next_id can set any IDs added via the flowchart correctly.
+        self._global_node_id = max(self._nodes, default=-1) + 1
+
         return flowchart
 
     def delete_flowchart(self, name: str):

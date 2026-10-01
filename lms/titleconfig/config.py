@@ -29,31 +29,16 @@ class TitleConfig:
     NODE_KEY = "node_definitions"
 
     GAME_PRESET = Literal[
-        "Animal Crossing: City Folk",
-        "Animal Crossing: New Horizons",
-        "Animal Crossing: New Leaf",
-        "The Legend of Zelda: Echoes of Wisdom"
-        "Metroid Prime 4: Beyond"
-        "Mario vs. Donkey Kong"
-        "Paper Mario: Color Splash"
-        "Paper Mario: Sticker Star"
-        "Paper Mario: The Origami King"
-        "Paper Mario: The Thousand-Year Door (Nintendo Switch)"
-        "Super Mario 3D Land"
-        "Super Mario 3D World + Bowser's Fury"
-        "Super Mario Odyssey"
-        "Splatoon 3"
-        "The Legend of Zelda: Link's Awakening (Nintendo Switch)"
-        "The Legend of Zelda a Link Between Worlds",
-        "The Legend of Zelda: Tri Force Heroes"
-        "Tomodachi Life (NA-EU)",
-        "Tomodachi Life (JP)",
-        "Tomodachi Life: Living the Dream",
-        "The Legend of Zelda: Tears of the Kingdom"
-        "Wii Sports Club"
+        "Badge Arcade",
         "Brain Age Concentration Training",
         "Kirby Planet Robobot",
         "Super Mario Odyssey",
+        "Super Mario 3D Land",
+        "Super Mario 3D World + Bowsers Fury",
+        "The Legend of Zelda a Link Between Worlds",
+        "The Legend of Zelda Echos of Wisdom",
+        "Tomodachi Life Living The Dream",
+        "Tomodachi Life NA-EU",
     ]
 
     def __init__(

@@ -6,7 +6,8 @@ from lms.project.definitions.tag import LMS_TagParamDefinition
 def read_tgp2(reader: FileReader) -> list[LMS_TagParamDefinition]:
     parameter_info = []
 
-    count = reader.read_uint32()
+    count = reader.read_uint16()
+    reader.skip(2)
     for offset in reader.read_offset_array(count):
         reader.seek(offset)
 
@@ -24,5 +25,6 @@ def read_tgp2(reader: FileReader) -> list[LMS_TagParamDefinition]:
         parameter_info.append(
             LMS_TagParamDefinition(name, LMS_DataType.LIST, list_indexes)
         )
+        reader.align(4)
 
     return parameter_info

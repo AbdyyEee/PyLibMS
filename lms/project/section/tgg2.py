@@ -5,7 +5,8 @@ from lms.project.definitions.tag import LMS_TagGroup
 def read_tgg2(reader: FileReader, version: int) -> list[LMS_TagGroup]:
     group_list = []
 
-    count = reader.read_uint32()
+    count = reader.read_uint16()
+    reader.skip(2)
     for i, offset in enumerate(reader.read_offset_array(count)):
         reader.seek(offset)
 
@@ -18,5 +19,6 @@ def read_tgg2(reader: FileReader, version: int) -> list[LMS_TagGroup]:
 
         name = reader.read_encoded_string()
         group_list.append(LMS_TagGroup(name, group_id, tag_indexes))
+        reader.align(4)
 
     return group_list

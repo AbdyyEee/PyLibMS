@@ -1,0 +1,4152 @@
+game: Pikmin 3
+# Definitions from https://pikmintkb.com/wiki/MSBF_file_(Pikmin_3)
+node_definitions:
+  branch:
+    - id: 1
+      name: checkEnergyTank
+      parameter_type: p32_0
+      case_options:
+        0: "juice 0"
+        1: "juice 1"
+      parameters:
+        - name: amount
+    - id: 2
+      name: checkStoryProgress
+      parameter_type: p32_0
+      case_options:
+        0: "progress > $value"
+        1: "progress <= $value"
+      parameters:
+        - name: value
+    - id: 4
+      name: checkGamemode
+      parameter_type: p32_1
+      case_options:
+        0: "Story"
+        1: "Mission/Side Stories"
+        2: "Bingo Battle"
+      parameters:
+        - name: param
+  event:
+    - id: 0
+      name: playDemo
+      parameter_type: str
+      parameters:
+        - name: param
+tag_definitions:
+  groups:
+    0: System
+    1: CommonVariable
+    2: OnyonWindowVariable
+    3: HudVariable
+    4: HudVS1PVariable
+    5: HudVS2PVariable
+    6: RadarFukidashiVariable
+    7: PictureFont
+    8: DayEndResultVariable
+    9: MissionResultVariable
+    10: CountableNoun
+    11: MessageVariable
+    12: Name
+    13: Pointer1PVariable
+    14: Pointer2PVariable
+    15: IncomingCallVariable
+    16: PlayerDownVariable
+    17: SystemWindowVariable
+    18: JuiceDemoVariable
+    19: MissionSelectVariable
+    20: VSSelectVariable
+    21: WorldMap
+    22: PadMenuVariable
+    23: Other
+    24: FruitsListVariable
+    25: FinalResultVariable
+    26: WorldRankingVariable
+  tags:
+    - name: Ruby
+      group_id: 0
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: rt
+          description: ''
+          datatype: string
+    - name: Font
+      group_id: 0
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: face
+          description: ''
+          datatype: string
+    - name: Size
+      group_id: 0
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: percent
+          description: ''
+          datatype: uint16
+    - name: Color
+      group_id: 0
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: r
+          description: ''
+          datatype: uint8
+        - name: g
+          description: ''
+          datatype: uint8
+        - name: b
+          description: ''
+          datatype: uint8
+        - name: a
+          description: ''
+          datatype: uint8
+    - name: PageBreak
+      group_id: 0
+      tag_index: 4
+      description: ''
+    - name: CurrentDay
+      group_id: 1
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: PikminNum
+      group_id: 1
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Color
+          description: ''
+          datatype: list
+          list_items:
+            - All
+            - Black
+            - Blue
+            - Red
+            - White
+            - Yellow
+            - Pink
+            - Rock
+        - name: Growth
+          description: ''
+          datatype: list
+          list_items:
+            - All
+            - Leaf
+            - Bud
+            - Flower
+        - name: Place
+          description: ''
+          datatype: list
+          list_items:
+            - All
+            - Ground
+            - UnderGround
+            - Formation
+            - Onyon
+            - Working
+            - Free
+            - FormationAll
+        - name: Team
+          description: ''
+          datatype: list
+          list_items:
+            - All
+            - 'No'
+            - Player1
+            - Player2
+    - name: FruitsMaxInArea
+      group_id: 1
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: FruitsNumInArea
+      group_id: 1
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: FruitsMax
+      group_id: 1
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: FruitsNum
+      group_id: 1
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: FruitsRest
+      group_id: 1
+      tag_index: 6
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: FruitsTypeNum
+      group_id: 1
+      tag_index: 7
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MapName
+      group_id: 1
+      tag_index: 8
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+    - name: Energy
+      group_id: 1
+      tag_index: 9
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MinuteOfRestTimer
+      group_id: 1
+      tag_index: 10
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: Minute10DigitOfRestTimer
+      group_id: 1
+      tag_index: 11
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: Minute1DigitOfRestTimer
+      group_id: 1
+      tag_index: 12
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: SecondOfRestTimer
+      group_id: 1
+      tag_index: 13
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: Second10DigitOfRestTimer
+      group_id: 1
+      tag_index: 14
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: Second1DigitOfRestTimer
+      group_id: 1
+      tag_index: 15
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MinuteOfTimer
+      group_id: 1
+      tag_index: 16
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: SecondOfTimer
+      group_id: 1
+      tag_index: 17
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: FormationSum
+      group_id: 1
+      tag_index: 18
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: DeadPikminByDayEnd
+      group_id: 1
+      tag_index: 19
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Color
+          description: ''
+          datatype: list
+          list_items:
+            - All
+            - Black
+            - Blue
+            - Red
+            - White
+            - Yellow
+            - Pink
+            - Rock
+    - name: StolenEnergy
+      group_id: 1
+      tag_index: 20
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: PikminNumInFormation
+      group_id: 2
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Index
+          description: ''
+          datatype: list
+          list_items:
+            - Button1
+            - Button2
+            - Button3
+            - Button4
+            - Button5
+    - name: PikminNumInOnyon
+      group_id: 2
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Index
+          description: ''
+          datatype: list
+          list_items:
+            - Button1
+            - Button2
+            - Button3
+            - Button4
+            - Button5
+    - name: PikminAllInFormation
+      group_id: 2
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: PikminAllInGround
+      group_id: 2
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: GrabbedPikminNum
+      group_id: 3
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Index
+          description: ''
+          datatype: uint8
+    - name: TargetName
+      group_id: 3
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+    - name: MissionScore
+      group_id: 3
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MissionRestEnemy
+      group_id: 3
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: DopingNum
+      group_id: 3
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: FruitsNum
+      group_id: 3
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Index
+          description: ''
+          datatype: uint8
+    - name: GrabbedPikminNum
+      group_id: 4
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Index
+          description: ''
+          datatype: uint8
+    - name: TargetName
+      group_id: 4
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+    - name: MissionScore
+      group_id: 4
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: DopingNum
+      group_id: 4
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: GrabbedPikminNum
+      group_id: 5
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Index
+          description: ''
+          datatype: uint8
+    - name: TargetName
+      group_id: 5
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+    - name: MissionScore
+      group_id: 5
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: DopingNum
+      group_id: 5
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: WorkObjName
+      group_id: 6
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+    - name: WorkPercentage
+      group_id: 6
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: OnyonName
+      group_id: 6
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+    - name: LeafPikminNumInOnyon
+      group_id: 6
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: BudPikminNumInOnyon
+      group_id: 6
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: FlowerPikminNumInOnyon
+      group_id: 6
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: SumPikminNumInOnyon
+      group_id: 6
+      tag_index: 6
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: NendoNum
+      group_id: 6
+      tag_index: 7
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: NendoMax
+      group_id: 6
+      tag_index: 8
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: Pikmin
+      group_id: 7
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: Color
+          description: ''
+          datatype: list
+          list_items:
+            - Red
+            - Blue
+            - Yellow
+            - White
+            - Black
+            - Pink
+            - Rock
+        - name: Growth
+          description: ''
+          datatype: list
+          list_items:
+            - Leaf
+            - Bud
+            - Flower
+    - name: Controller
+      group_id: 7
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: Type
+          description: ''
+          datatype: list
+          list_items:
+            - WiiRemote_A
+            - WiiRemote_B
+            - WiiRemote_C
+            - WiiRemote_Z
+            - WiiRemote_1
+            - WiiRemote_2
+            - GamePad_A
+            - GamePad_B
+            - GamePad_X
+            - GamePad_Y
+            - GamePad_ZL
+            - GamePad_ZR
+            - GamePad_L
+            - GamePad_R
+            - Plus
+            - Minus
+            - Home
+            - CrossKey
+            - Stick
+            - CrossKeyUp
+            - CrossKeyRight
+            - CrossKeyDown
+            - CrossKeyLeft
+            - LeftStick
+            - Decide
+            - Move
+            - Toss
+            - Whistle
+            - Dismiss
+            - ChangePikmin
+            - BehindPlayer
+            - Attention
+            - Charge
+            - ChangeLeaders
+            - Doping
+            - Pause
+            - StepOut
+            - RotateCamera
+            - UseRoulette
+            - OpenRadar
+            - ChangeStyle
+            - CrewTalk
+            - NextMessage
+            - UICancel
+            - Pull
+            - PullCancel
+            - SelectAllColor
+            - Escape
+    - name: Other
+      group_id: 7
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: Type
+          description: ''
+          datatype: list
+          list_items:
+            - Coin
+            - Ghost
+            - ChanceDama
+            - TapCameraMoveArrow
+            - GamePad
+    - name: DeadPikminNum
+      group_id: 8
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: PikminNum
+      group_id: 8
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Color
+          description: ''
+          datatype: list
+          list_items:
+            - All
+            - Black
+            - Blue
+            - Red
+            - White
+            - Yellow
+            - Pink
+            - Rock
+    - name: EnergyNum
+      group_id: 8
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: DeadPikminNumToday
+      group_id: 8
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: DeadPikminNumTotal
+      group_id: 8
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: FruitsNum
+      group_id: 8
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: Score
+      group_id: 9
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: DeadPikmin
+      group_id: 9
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MinuteOfTime
+      group_id: 9
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: SecondOfTime
+      group_id: 9
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: Grade
+      group_id: 9
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: ItemCount
+      group_id: 9
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: ItemIndex
+          description: ''
+          datatype: uint8
+    - name: TotalItemCount
+      group_id: 9
+      tag_index: 6
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: ItemIndex
+          description: ''
+          datatype: uint8
+    - name: ItemScore
+      group_id: 9
+      tag_index: 7
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: ItemIndex
+          description: ''
+          datatype: uint8
+    - name: TotalItemScore
+      group_id: 9
+      tag_index: 8
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: ItemIndex
+          description: ''
+          datatype: uint8
+    - name: BossName
+      group_id: 9
+      tag_index: 9
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+    - name: Poko
+      group_id: 10
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: RefFileName
+          description: ''
+          datatype: string
+        - name: RefLabel
+          description: ''
+          datatype: string
+        - name: NounFileName
+          description: ''
+          datatype: string
+        - name: Zero
+          description: ''
+          datatype: string
+        - name: One
+          description: ''
+          datatype: string
+        - name: Two
+          description: ''
+          datatype: string
+        - name: Three
+          description: ''
+          datatype: string
+        - name: Four
+          description: ''
+          datatype: string
+        - name: Five
+          description: ''
+          datatype: string
+        - name: Six
+          description: ''
+          datatype: string
+        - name: Seven
+          description: ''
+          datatype: string
+        - name: Eight
+          description: ''
+          datatype: string
+        - name: Nine
+          description: ''
+          datatype: string
+        - name: Ten
+          description: ''
+          datatype: string
+        - name: Singular
+          description: ''
+          datatype: string
+        - name: Plural
+          description: ''
+          datatype: string
+        - name: Other
+          description: ''
+          datatype: string
+    - name: General
+      group_id: 10
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: RefFileName
+          description: ''
+          datatype: string
+        - name: RefLabel
+          description: ''
+          datatype: string
+        - name: NounFileName
+          description: ''
+          datatype: string
+        - name: Zero
+          description: ''
+          datatype: string
+        - name: One
+          description: ''
+          datatype: string
+        - name: Two
+          description: ''
+          datatype: string
+        - name: Three
+          description: ''
+          datatype: string
+        - name: Four
+          description: ''
+          datatype: string
+        - name: Five
+          description: ''
+          datatype: string
+        - name: Six
+          description: ''
+          datatype: string
+        - name: Seven
+          description: ''
+          datatype: string
+        - name: Eight
+          description: ''
+          datatype: string
+        - name: Nine
+          description: ''
+          datatype: string
+        - name: Ten
+          description: ''
+          datatype: string
+        - name: Singular
+          description: ''
+          datatype: string
+        - name: Plural
+          description: ''
+          datatype: string
+        - name: Other
+          description: ''
+          datatype: string
+    - name: Energy
+      group_id: 11
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: PlayerName
+      group_id: 12
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: Type
+          description: ''
+          datatype: list
+          list_items:
+            - PlayerA
+            - PlayerB
+            - PlayerC
+            - PlayerD
+            - PlayerE
+    - name: MapName
+      group_id: 12
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: Type
+          description: ''
+          datatype: list
+          list_items:
+            - MapA
+            - MapB
+            - MapC
+            - MapD
+            - MapE
+    - name: PikminNum
+      group_id: 13
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: PikminNum
+      group_id: 14
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: PlayerName
+      group_id: 15
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+    - name: PlayerName
+      group_id: 16
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Type
+          description: ''
+          datatype: list
+          list_items:
+            - 1P
+            - 2P
+    - name: PastDay
+      group_id: 17
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: DeadPikminByDayEnd
+      group_id: 17
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: int32
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: RestJuice
+      group_id: 18
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: FruitsCount
+      group_id: 18
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: RevealedItemName
+      group_id: 18
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+    - name: MissionIndex
+      group_id: 19
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: AreaName
+      group_id: 19
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - UInt
+            - Int
+            - Float
+            - String
+    - name: HighScore
+      group_id: 19
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: NextHighScore
+      group_id: 19
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: HighScoreMinute
+      group_id: 19
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: HighScoreSecond
+      group_id: 19
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: NextHighScoreMinute
+      group_id: 19
+      tag_index: 6
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: NextHighScoreSecond
+      group_id: 19
+      tag_index: 7
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: Minute
+      group_id: 19
+      tag_index: 8
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: Second
+      group_id: 19
+      tag_index: 9
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: PikminNum
+      group_id: 19
+      tag_index: 10
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Index
+          description: ''
+          datatype: uint8
+    - name: HighScore2P
+      group_id: 19
+      tag_index: 11
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: HighScore2PMinute
+      group_id: 19
+      tag_index: 12
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: HighScore2PSecond
+      group_id: 19
+      tag_index: 13
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: AreaName
+      group_id: 20
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - UInt
+            - Int
+            - Float
+            - String
+    - name: WinNum
+      group_id: 20
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Index
+          description: ''
+          datatype: uint8
+    - name: PikminNum
+      group_id: 20
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Index
+          description: ''
+          datatype: uint8
+    - name: Motion
+      group_id: 21
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: Character
+          description: ''
+          datatype: list
+          list_items:
+            - PlayerA
+            - PlayerB
+            - PlayerC
+            - PlayerD
+        - name: Type
+          description: ''
+          datatype: list
+          list_items:
+            - Default
+            - Speak
+            - Nod
+            - PiPad
+    - name: Face
+      group_id: 21
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: Character
+          description: ''
+          datatype: list
+          list_items:
+            - PlayerA
+            - PlayerB
+            - PlayerC
+            - PlayerD
+        - name: Target
+          description: ''
+          datatype: list
+          list_items:
+            - Default
+            - PlayerA
+            - PlayerB
+            - PlayerC
+            - PlayerD
+    - name: AreaName
+      group_id: 22
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+    - name: Reference
+      group_id: 23
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: FileName
+          description: ''
+          datatype: string
+        - name: Label
+          description: ''
+          datatype: string
+    - name: Wait
+      group_id: 23
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: Time
+          description: ''
+          datatype: uint8
+    - name: Speaker
+      group_id: 23
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: Character
+          description: ''
+          datatype: list
+          list_items:
+            - PlayerA
+            - PlayerB
+            - PlayerC
+            - PlayerD
+            - PlayerE
+            - PlayerF
+        - name: Icon
+          description: ''
+          datatype: list
+          list_items:
+            - PlayerA_Default
+            - PlayerB_Default
+            - PlayerC_Default
+            - PlayerD_Default
+            - PlayerE_Default
+            - PlayerA_Shock
+            - PlayerB_Shock
+            - PlayerC_Shock
+            - PlayerD_Shock
+            - PlayerE_Shock
+            - PlayerA_Smile
+            - PlayerB_Smile
+            - PlayerC_Smile
+            - PlayerD_Smile
+            - PlayerE_Smile
+            - PlayerA_Sad
+            - PlayerB_Sad
+            - PlayerC_Sad
+            - PlayerD_Sad
+            - PlayerE_Sad
+            - PlayerA_Angry
+            - PlayerB_Angry
+            - PlayerC_Angry
+            - PlayerD_Angry
+            - PlayerE_Angry
+            - None
+            - PlayerF_Default
+    - name: AutoPageBreak
+      group_id: 23
+      tag_index: 3
+      description: ''
+    - name: Sound
+      group_id: 23
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: Name
+          description: ''
+          datatype: string
+        - name: Type
+          description: ''
+          datatype: list
+          list_items:
+            - VoiceOff
+            - VoiceOn
+            - SePlay
+    - name: GetNum
+      group_id: 24
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: Weight
+      group_id: 24
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: Juice
+      group_id: 24
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MaxNum
+      group_id: 24
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: JuiceSeisu
+      group_id: 24
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: JuiceShosu
+      group_id: 24
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: FruitNum
+      group_id: 25
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Index
+          description: ''
+          datatype: uint8
+    - name: FruitTotalNum
+      group_id: 25
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: FruitMaxNum
+      group_id: 25
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: ClearDay
+      group_id: 25
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: ClearHour
+      group_id: 25
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: ClearMinute
+      group_id: 25
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: AlivePikminTotalNum
+      group_id: 25
+      tag_index: 6
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: DeadPikminTotalNum
+      group_id: 25
+      tag_index: 7
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: AlivePikminNum
+      group_id: 25
+      tag_index: 8
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - Zero
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Index
+          description: ''
+          datatype: uint8
+    - name: DeadPikminNum
+      group_id: 25
+      tag_index: 9
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+        - name: Index
+          description: ''
+          datatype: uint8
+    - name: AreaName
+      group_id: 26
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - UInt
+            - Float
+            - String
+    - name: MinScore
+      group_id: 26
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MinScoreMinute
+      group_id: 26
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MinScoreSecond
+      group_id: 26
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MaxScore
+      group_id: 26
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MaxScoreMinute
+      group_id: 26
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MaxScoreSecond
+      group_id: 26
+      tag_index: 6
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MyScore
+      group_id: 26
+      tag_index: 7
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MyScoreMinute
+      group_id: 26
+      tag_index: 8
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MyScoreSecond
+      group_id: 26
+      tag_index: 9
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MyPastScore
+      group_id: 26
+      tag_index: 10
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MyPastScoreMinute
+      group_id: 26
+      tag_index: 11
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+    - name: MyPastScoreSecond
+      group_id: 26
+      tag_index: 12
+      description: ''
+      parameters:
+        - name: VarName
+          description: ''
+          datatype: string
+        - name: VarType
+          description: ''
+          datatype: list
+          list_items:
+            - Int
+            - Uint
+            - Float
+            - String
+        - name: Length
+          description: ''
+          datatype: uint8
+        - name: Filling
+          description: ''
+          datatype: list
+          list_items:
+            - Space
+            - Zero
+        - name: Zenkaku
+          description: ''
+          datatype: list
+          list_items:
+            - 'Off'
+            - 'On'
+attribute_definitions:
+  - name: ''
+    description: ''
+    definitions:
+      - name: Param0
+        description: ''
+        datatype: int8
+      - name: Param1
+        description: ''
+        datatype: int8

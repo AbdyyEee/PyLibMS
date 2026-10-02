@@ -1,3 +1,5 @@
+from typing import overload
+
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
 from lms.message.msbtentry import MSBTEntry
@@ -29,13 +31,13 @@ class MSBT:
     TSY1_INDEX = 3
 
     def __init__(
-        self,
-        info: LMS_FileInfo | None = None,
-        uses_nli1: bool = False,
-        section_list: list[str] | None = None,
-        unsupported_section_map: dict[str, bytes] | None = None,
-        attribute_config: AttributeConfig | None = None,
-        tag_config: TagConfig | None = None,
+            self,
+            info: LMS_FileInfo | None = None,
+            uses_nli1: bool = False,
+            section_list: list[str] | None = None,
+            unsupported_section_map: dict[str, bytes] | None = None,
+            attribute_config: AttributeConfig | None = None,
+            tag_config: TagConfig | None = None,
     ):
         self._info = info if info is not None else LMS_FileInfo()
 
@@ -59,16 +61,36 @@ class MSBT:
         self._attribute_config = attribute_config
         self._tag_config = tag_config
 
+    @overload
+    def __getitem__(self, index: int) -> MSBTEntry:
+        ...
+
+    @overload
+    def __getitem__(self, label: str) -> MSBTEntry:
+        ...
+
+    def __getitem__(self, value: int | str) -> MSBTEntry:
+        if isinstance(value, str):
+            return self._label_map[value]
+
+        return self._entries[value]
+
+    def __len__(self) -> int:
+        return len(self._entries)
+
+    def __iter__(self):
+        return iter(self._entries)
+
     @classmethod
     def new(
-        cls,
-        uses_nli1: bool = False,
-        attribute_config: AttributeConfig | None = None,
-        tag_config: TagConfig | None = None,
-        is_big_endian: bool = False,
-        encoding: FileEncoding = FileEncoding.UTF16,
-        version: int = 3,
-        section_count: int = 2,
+            cls,
+            uses_nli1: bool = False,
+            attribute_config: AttributeConfig | None = None,
+            tag_config: TagConfig | None = None,
+            is_big_endian: bool = False,
+            encoding: FileEncoding = FileEncoding.UTF16,
+            version: int = 3,
+            section_count: int = 2,
     ):
         """
         Create a new MSBT instance.
@@ -92,12 +114,6 @@ class MSBT:
             attribute_config=attribute_config,
             tag_config=tag_config,
         )
-
-    def __len__(self) -> int:
-        return len(self._entries)
-
-    def __iter__(self):
-        return iter(self._entries)
 
     @property
     def info(self) -> LMS_FileInfo:

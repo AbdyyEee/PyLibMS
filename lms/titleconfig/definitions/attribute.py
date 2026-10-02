@@ -1,4 +1,4 @@
-from lms.titleconfig.definitions.value import FieldDefinition
+from lms.titleconfig.definitions.field import FieldDefinition
 
 
 class AttributeConfig:

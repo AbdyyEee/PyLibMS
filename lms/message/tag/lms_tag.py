@@ -50,9 +50,9 @@ class LMS_EncodedTag:
         return self._tag_index
 
     @property
-    def parameters(self) -> list[int] | None:
+    def parameters(self) -> tuple[int, ...] | None:
         """The list of parameters."""
-        return self._parameters
+        return tuple(self._parameters)
 
     @property
     def is_fallback(self) -> bool:

@@ -5,7 +5,7 @@ node_definitions:
     - id: 1
       name: checkEnergyTank
       parameter_type: p32_0
-      case_options:
+      enum_options:
         0: "juice 0"
         1: "juice 1"
       parameters:
@@ -13,7 +13,7 @@ node_definitions:
     - id: 2
       name: checkStoryProgress
       parameter_type: p32_0
-      case_options:
+      enum_options:
         0: "progress > $value"
         1: "progress <= $value"
       parameters:
@@ -21,7 +21,7 @@ node_definitions:
     - id: 4
       name: checkGamemode
       parameter_type: p32_1
-      case_options:
+      enum_options:
         0: "Story"
         1: "Mission/Side Stories"
         2: "Bingo Battle"
@@ -104,6 +104,9 @@ tag_definitions:
         - name: a
           description: ''
           datatype: uint8
+        - name: name
+          description: ''
+          datatype: string
     - name: PageBreak
       group_id: 0
       tag_index: 4
@@ -118,27 +121,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: PikminNum
       group_id: 1
       tag_index: 1
@@ -149,67 +152,67 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Color
           description: ''
-          datatype: list
-          list_items:
-            - All
-            - Black
-            - Blue
-            - Red
-            - White
-            - Yellow
-            - Pink
-            - Rock
+          datatype: enum
+          enum_members:
+            0: All
+            1: Black
+            2: Blue
+            3: Red
+            4: White
+            5: Yellow
+            6: Pink
+            7: Rock
         - name: Growth
           description: ''
-          datatype: list
-          list_items:
-            - All
-            - Leaf
-            - Bud
-            - Flower
+          datatype: enum
+          enum_members:
+            0: All
+            1: Leaf
+            2: Bud
+            3: Flower
         - name: Place
           description: ''
-          datatype: list
-          list_items:
-            - All
-            - Ground
-            - UnderGround
-            - Formation
-            - Onyon
-            - Working
-            - Free
-            - FormationAll
+          datatype: enum
+          enum_members:
+            0: All
+            1: Ground
+            2: UnderGround
+            3: Formation
+            4: Onyon
+            5: Working
+            6: Free
+            7: FormationAll
         - name: Team
           description: ''
-          datatype: list
-          list_items:
-            - All
-            - 'No'
-            - Player1
-            - Player2
+          datatype: enum
+          enum_members:
+            0: All
+            1: 'No'
+            2: Player1
+            3: Player2
     - name: FruitsMaxInArea
       group_id: 1
       tag_index: 2
@@ -220,27 +223,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: FruitsNumInArea
       group_id: 1
       tag_index: 3
@@ -251,27 +254,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: FruitsMax
       group_id: 1
       tag_index: 4
@@ -282,27 +285,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: FruitsNum
       group_id: 1
       tag_index: 5
@@ -313,27 +316,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: FruitsRest
       group_id: 1
       tag_index: 6
@@ -344,27 +347,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: FruitsTypeNum
       group_id: 1
       tag_index: 7
@@ -375,27 +378,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MapName
       group_id: 1
       tag_index: 8
@@ -406,12 +409,12 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
     - name: Energy
       group_id: 1
       tag_index: 9
@@ -422,27 +425,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MinuteOfRestTimer
       group_id: 1
       tag_index: 10
@@ -453,27 +456,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: Minute10DigitOfRestTimer
       group_id: 1
       tag_index: 11
@@ -484,27 +487,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: Minute1DigitOfRestTimer
       group_id: 1
       tag_index: 12
@@ -515,27 +518,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: SecondOfRestTimer
       group_id: 1
       tag_index: 13
@@ -546,27 +549,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: Second10DigitOfRestTimer
       group_id: 1
       tag_index: 14
@@ -577,27 +580,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: Second1DigitOfRestTimer
       group_id: 1
       tag_index: 15
@@ -608,27 +611,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MinuteOfTimer
       group_id: 1
       tag_index: 16
@@ -639,27 +642,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: SecondOfTimer
       group_id: 1
       tag_index: 17
@@ -670,27 +673,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: FormationSum
       group_id: 1
       tag_index: 18
@@ -701,27 +704,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: DeadPikminByDayEnd
       group_id: 1
       tag_index: 19
@@ -732,39 +735,39 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Color
           description: ''
-          datatype: list
-          list_items:
-            - All
-            - Black
-            - Blue
-            - Red
-            - White
-            - Yellow
-            - Pink
-            - Rock
+          datatype: enum
+          enum_members:
+            0: All
+            1: Black
+            2: Blue
+            3: Red
+            4: White
+            5: Yellow
+            6: Pink
+            7: Rock
     - name: StolenEnergy
       group_id: 1
       tag_index: 20
@@ -775,27 +778,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: PikminNumInFormation
       group_id: 2
       tag_index: 0
@@ -806,36 +809,36 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Index
           description: ''
-          datatype: list
-          list_items:
-            - Button1
-            - Button2
-            - Button3
-            - Button4
-            - Button5
+          datatype: enum
+          enum_members:
+            0: Button1
+            1: Button2
+            2: Button3
+            3: Button4
+            4: Button5
     - name: PikminNumInOnyon
       group_id: 2
       tag_index: 1
@@ -846,36 +849,36 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Index
           description: ''
-          datatype: list
-          list_items:
-            - Button1
-            - Button2
-            - Button3
-            - Button4
-            - Button5
+          datatype: enum
+          enum_members:
+            0: Button1
+            1: Button2
+            2: Button3
+            3: Button4
+            4: Button5
     - name: PikminAllInFormation
       group_id: 2
       tag_index: 2
@@ -886,27 +889,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: PikminAllInGround
       group_id: 2
       tag_index: 3
@@ -917,27 +920,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: GrabbedPikminNum
       group_id: 3
       tag_index: 0
@@ -948,27 +951,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Index
           description: ''
           datatype: uint8
@@ -982,12 +985,12 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
     - name: MissionScore
       group_id: 3
       tag_index: 2
@@ -998,27 +1001,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MissionRestEnemy
       group_id: 3
       tag_index: 3
@@ -1029,27 +1032,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: DopingNum
       group_id: 3
       tag_index: 4
@@ -1060,27 +1063,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: FruitsNum
       group_id: 3
       tag_index: 5
@@ -1091,27 +1094,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Index
           description: ''
           datatype: uint8
@@ -1125,27 +1128,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Index
           description: ''
           datatype: uint8
@@ -1159,12 +1162,12 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
     - name: MissionScore
       group_id: 4
       tag_index: 2
@@ -1175,27 +1178,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: DopingNum
       group_id: 4
       tag_index: 3
@@ -1206,27 +1209,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: GrabbedPikminNum
       group_id: 5
       tag_index: 0
@@ -1237,27 +1240,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Index
           description: ''
           datatype: uint8
@@ -1271,12 +1274,12 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
     - name: MissionScore
       group_id: 5
       tag_index: 2
@@ -1287,27 +1290,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: DopingNum
       group_id: 5
       tag_index: 3
@@ -1318,27 +1321,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: WorkObjName
       group_id: 6
       tag_index: 0
@@ -1349,12 +1352,12 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
     - name: WorkPercentage
       group_id: 6
       tag_index: 1
@@ -1365,27 +1368,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: OnyonName
       group_id: 6
       tag_index: 2
@@ -1396,12 +1399,12 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
     - name: LeafPikminNumInOnyon
       group_id: 6
       tag_index: 3
@@ -1412,27 +1415,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: BudPikminNumInOnyon
       group_id: 6
       tag_index: 4
@@ -1443,27 +1446,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: FlowerPikminNumInOnyon
       group_id: 6
       tag_index: 5
@@ -1474,27 +1477,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: SumPikminNumInOnyon
       group_id: 6
       tag_index: 6
@@ -1505,27 +1508,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: NendoNum
       group_id: 6
       tag_index: 7
@@ -1536,27 +1539,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: NendoMax
       group_id: 6
       tag_index: 8
@@ -1567,27 +1570,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: Pikmin
       group_id: 7
       tag_index: 0
@@ -1595,22 +1598,22 @@ tag_definitions:
       parameters:
         - name: Color
           description: ''
-          datatype: list
-          list_items:
-            - Red
-            - Blue
-            - Yellow
-            - White
-            - Black
-            - Pink
-            - Rock
+          datatype: enum
+          enum_members:
+            0: Red
+            1: Blue
+            2: Yellow
+            3: White
+            4: Black
+            5: Pink
+            6: Rock
         - name: Growth
           description: ''
-          datatype: list
-          list_items:
-            - Leaf
-            - Bud
-            - Flower
+          datatype: enum
+          enum_members:
+            0: Leaf
+            1: Bud
+            2: Flower
     - name: Controller
       group_id: 7
       tag_index: 1
@@ -1618,56 +1621,56 @@ tag_definitions:
       parameters:
         - name: Type
           description: ''
-          datatype: list
-          list_items:
-            - WiiRemote_A
-            - WiiRemote_B
-            - WiiRemote_C
-            - WiiRemote_Z
-            - WiiRemote_1
-            - WiiRemote_2
-            - GamePad_A
-            - GamePad_B
-            - GamePad_X
-            - GamePad_Y
-            - GamePad_ZL
-            - GamePad_ZR
-            - GamePad_L
-            - GamePad_R
-            - Plus
-            - Minus
-            - Home
-            - CrossKey
-            - Stick
-            - CrossKeyUp
-            - CrossKeyRight
-            - CrossKeyDown
-            - CrossKeyLeft
-            - LeftStick
-            - Decide
-            - Move
-            - Toss
-            - Whistle
-            - Dismiss
-            - ChangePikmin
-            - BehindPlayer
-            - Attention
-            - Charge
-            - ChangeLeaders
-            - Doping
-            - Pause
-            - StepOut
-            - RotateCamera
-            - UseRoulette
-            - OpenRadar
-            - ChangeStyle
-            - CrewTalk
-            - NextMessage
-            - UICancel
-            - Pull
-            - PullCancel
-            - SelectAllColor
-            - Escape
+          datatype: enum
+          enum_members:
+            0: WiiRemote_A
+            1: WiiRemote_B
+            2: WiiRemote_C
+            3: WiiRemote_Z
+            4: WiiRemote_1
+            5: WiiRemote_2
+            6: GamePad_A
+            7: GamePad_B
+            8: GamePad_X
+            9: GamePad_Y
+            10: GamePad_ZL
+            11: GamePad_ZR
+            12: GamePad_L
+            13: GamePad_R
+            14: Plus
+            15: Minus
+            16: Home
+            17: CrossKey
+            18: Stick
+            19: CrossKeyUp
+            20: CrossKeyRight
+            21: CrossKeyDown
+            22: CrossKeyLeft
+            23: LeftStick
+            24: Decide
+            25: Move
+            26: Toss
+            27: Whistle
+            28: Dismiss
+            29: ChangePikmin
+            30: BehindPlayer
+            31: Attention
+            32: Charge
+            33: ChangeLeaders
+            34: Doping
+            35: Pause
+            36: StepOut
+            37: RotateCamera
+            38: UseRoulette
+            39: OpenRadar
+            40: ChangeStyle
+            41: CrewTalk
+            42: NextMessage
+            43: UICancel
+            44: Pull
+            45: PullCancel
+            46: SelectAllColor
+            47: Escape
     - name: Other
       group_id: 7
       tag_index: 2
@@ -1675,13 +1678,13 @@ tag_definitions:
       parameters:
         - name: Type
           description: ''
-          datatype: list
-          list_items:
-            - Coin
-            - Ghost
-            - ChanceDama
-            - TapCameraMoveArrow
-            - GamePad
+          datatype: enum
+          enum_members:
+            0: Coin
+            1: Ghost
+            2: ChanceDama
+            3: TapCameraMoveArrow
+            4: GamePad
     - name: DeadPikminNum
       group_id: 8
       tag_index: 0
@@ -1692,27 +1695,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: PikminNum
       group_id: 8
       tag_index: 1
@@ -1723,39 +1726,39 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Color
           description: ''
-          datatype: list
-          list_items:
-            - All
-            - Black
-            - Blue
-            - Red
-            - White
-            - Yellow
-            - Pink
-            - Rock
+          datatype: enum
+          enum_members:
+            0: All
+            1: Black
+            2: Blue
+            3: Red
+            4: White
+            5: Yellow
+            6: Pink
+            7: Rock
     - name: EnergyNum
       group_id: 8
       tag_index: 2
@@ -1766,27 +1769,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: DeadPikminNumToday
       group_id: 8
       tag_index: 3
@@ -1797,27 +1800,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: DeadPikminNumTotal
       group_id: 8
       tag_index: 4
@@ -1828,27 +1831,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: FruitsNum
       group_id: 8
       tag_index: 5
@@ -1859,27 +1862,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: Score
       group_id: 9
       tag_index: 0
@@ -1890,27 +1893,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: DeadPikmin
       group_id: 9
       tag_index: 1
@@ -1921,27 +1924,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MinuteOfTime
       group_id: 9
       tag_index: 2
@@ -1952,27 +1955,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: SecondOfTime
       group_id: 9
       tag_index: 3
@@ -1983,27 +1986,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: Grade
       group_id: 9
       tag_index: 4
@@ -2014,27 +2017,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: ItemCount
       group_id: 9
       tag_index: 5
@@ -2045,27 +2048,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: ItemIndex
           description: ''
           datatype: uint8
@@ -2079,27 +2082,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: ItemIndex
           description: ''
           datatype: uint8
@@ -2113,27 +2116,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: ItemIndex
           description: ''
           datatype: uint8
@@ -2147,27 +2150,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: ItemIndex
           description: ''
           datatype: uint8
@@ -2181,12 +2184,12 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
     - name: Poko
       group_id: 10
       tag_index: 0
@@ -2309,27 +2312,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: PlayerName
       group_id: 12
       tag_index: 0
@@ -2337,13 +2340,13 @@ tag_definitions:
       parameters:
         - name: Type
           description: ''
-          datatype: list
-          list_items:
-            - PlayerA
-            - PlayerB
-            - PlayerC
-            - PlayerD
-            - PlayerE
+          datatype: enum
+          enum_members:
+            0: PlayerA
+            1: PlayerB
+            2: PlayerC
+            3: PlayerD
+            4: PlayerE
     - name: MapName
       group_id: 12
       tag_index: 1
@@ -2351,13 +2354,13 @@ tag_definitions:
       parameters:
         - name: Type
           description: ''
-          datatype: list
-          list_items:
-            - MapA
-            - MapB
-            - MapC
-            - MapD
-            - MapE
+          datatype: enum
+          enum_members:
+            0: MapA
+            1: MapB
+            2: MapC
+            3: MapD
+            4: MapE
     - name: PikminNum
       group_id: 13
       tag_index: 0
@@ -2368,27 +2371,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: PikminNum
       group_id: 14
       tag_index: 0
@@ -2399,27 +2402,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: PlayerName
       group_id: 15
       tag_index: 0
@@ -2430,12 +2433,12 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
     - name: PlayerName
       group_id: 16
       tag_index: 0
@@ -2446,18 +2449,18 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Type
           description: ''
-          datatype: list
-          list_items:
-            - 1P
-            - 2P
+          datatype: enum
+          enum_members:
+            0: 1P
+            1: 2P
     - name: PastDay
       group_id: 17
       tag_index: 0
@@ -2468,27 +2471,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: DeadPikminByDayEnd
       group_id: 17
       tag_index: 1
@@ -2499,27 +2502,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: int32
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: RestJuice
       group_id: 18
       tag_index: 0
@@ -2530,27 +2533,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: FruitsCount
       group_id: 18
       tag_index: 1
@@ -2561,27 +2564,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: RevealedItemName
       group_id: 18
       tag_index: 2
@@ -2592,12 +2595,12 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
     - name: MissionIndex
       group_id: 19
       tag_index: 0
@@ -2608,27 +2611,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: AreaName
       group_id: 19
       tag_index: 1
@@ -2639,12 +2642,12 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - UInt
-            - Int
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: UInt
+            1: Int
+            2: Float
+            3: String
     - name: HighScore
       group_id: 19
       tag_index: 2
@@ -2655,27 +2658,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: NextHighScore
       group_id: 19
       tag_index: 3
@@ -2686,27 +2689,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: HighScoreMinute
       group_id: 19
       tag_index: 4
@@ -2717,27 +2720,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: HighScoreSecond
       group_id: 19
       tag_index: 5
@@ -2748,27 +2751,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: NextHighScoreMinute
       group_id: 19
       tag_index: 6
@@ -2779,27 +2782,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: NextHighScoreSecond
       group_id: 19
       tag_index: 7
@@ -2810,27 +2813,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: Minute
       group_id: 19
       tag_index: 8
@@ -2841,27 +2844,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: Second
       group_id: 19
       tag_index: 9
@@ -2872,27 +2875,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: PikminNum
       group_id: 19
       tag_index: 10
@@ -2903,27 +2906,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Index
           description: ''
           datatype: uint8
@@ -2937,27 +2940,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: HighScore2PMinute
       group_id: 19
       tag_index: 12
@@ -2968,27 +2971,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: HighScore2PSecond
       group_id: 19
       tag_index: 13
@@ -2999,27 +3002,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: AreaName
       group_id: 20
       tag_index: 0
@@ -3030,12 +3033,12 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - UInt
-            - Int
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: UInt
+            1: Int
+            2: Float
+            3: String
     - name: WinNum
       group_id: 20
       tag_index: 1
@@ -3046,27 +3049,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Index
           description: ''
           datatype: uint8
@@ -3080,27 +3083,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Index
           description: ''
           datatype: uint8
@@ -3111,20 +3114,20 @@ tag_definitions:
       parameters:
         - name: Character
           description: ''
-          datatype: list
-          list_items:
-            - PlayerA
-            - PlayerB
-            - PlayerC
-            - PlayerD
+          datatype: enum
+          enum_members:
+            0: PlayerA
+            1: PlayerB
+            2: PlayerC
+            3: PlayerD
         - name: Type
           description: ''
-          datatype: list
-          list_items:
-            - Default
-            - Speak
-            - Nod
-            - PiPad
+          datatype: enum
+          enum_members:
+            0: Default
+            1: Speak
+            2: Nod
+            3: PiPad
     - name: Face
       group_id: 21
       tag_index: 1
@@ -3132,21 +3135,21 @@ tag_definitions:
       parameters:
         - name: Character
           description: ''
-          datatype: list
-          list_items:
-            - PlayerA
-            - PlayerB
-            - PlayerC
-            - PlayerD
+          datatype: enum
+          enum_members:
+            0: PlayerA
+            1: PlayerB
+            2: PlayerC
+            3: PlayerD
         - name: Target
           description: ''
-          datatype: list
-          list_items:
-            - Default
-            - PlayerA
-            - PlayerB
-            - PlayerC
-            - PlayerD
+          datatype: enum
+          enum_members:
+            0: Default
+            1: PlayerA
+            2: PlayerB
+            3: PlayerC
+            4: PlayerD
     - name: AreaName
       group_id: 22
       tag_index: 0
@@ -3157,12 +3160,12 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
     - name: Reference
       group_id: 23
       tag_index: 0
@@ -3189,45 +3192,45 @@ tag_definitions:
       parameters:
         - name: Character
           description: ''
-          datatype: list
-          list_items:
-            - PlayerA
-            - PlayerB
-            - PlayerC
-            - PlayerD
-            - PlayerE
-            - PlayerF
+          datatype: enum
+          enum_members:
+            0: PlayerA
+            1: PlayerB
+            2: PlayerC
+            3: PlayerD
+            4: PlayerE
+            5: PlayerF
         - name: Icon
           description: ''
-          datatype: list
-          list_items:
-            - PlayerA_Default
-            - PlayerB_Default
-            - PlayerC_Default
-            - PlayerD_Default
-            - PlayerE_Default
-            - PlayerA_Shock
-            - PlayerB_Shock
-            - PlayerC_Shock
-            - PlayerD_Shock
-            - PlayerE_Shock
-            - PlayerA_Smile
-            - PlayerB_Smile
-            - PlayerC_Smile
-            - PlayerD_Smile
-            - PlayerE_Smile
-            - PlayerA_Sad
-            - PlayerB_Sad
-            - PlayerC_Sad
-            - PlayerD_Sad
-            - PlayerE_Sad
-            - PlayerA_Angry
-            - PlayerB_Angry
-            - PlayerC_Angry
-            - PlayerD_Angry
-            - PlayerE_Angry
-            - None
-            - PlayerF_Default
+          datatype: enum
+          enum_members:
+            0: PlayerA_Default
+            1: PlayerB_Default
+            2: PlayerC_Default
+            3: PlayerD_Default
+            4: PlayerE_Default
+            5: PlayerA_Shock
+            6: PlayerB_Shock
+            7: PlayerC_Shock
+            8: PlayerD_Shock
+            9: PlayerE_Shock
+            10: PlayerA_Smile
+            11: PlayerB_Smile
+            12: PlayerC_Smile
+            13: PlayerD_Smile
+            14: PlayerE_Smile
+            15: PlayerA_Sad
+            16: PlayerB_Sad
+            17: PlayerC_Sad
+            18: PlayerD_Sad
+            19: PlayerE_Sad
+            20: PlayerA_Angry
+            21: PlayerB_Angry
+            22: PlayerC_Angry
+            23: PlayerD_Angry
+            24: PlayerE_Angry
+            25: None
+            26: PlayerF_Default
     - name: AutoPageBreak
       group_id: 23
       tag_index: 3
@@ -3242,11 +3245,11 @@ tag_definitions:
           datatype: string
         - name: Type
           description: ''
-          datatype: list
-          list_items:
-            - VoiceOff
-            - VoiceOn
-            - SePlay
+          datatype: enum
+          enum_members:
+            0: VoiceOff
+            1: VoiceOn
+            2: SePlay
     - name: GetNum
       group_id: 24
       tag_index: 0
@@ -3257,27 +3260,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: Weight
       group_id: 24
       tag_index: 1
@@ -3288,27 +3291,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: Juice
       group_id: 24
       tag_index: 2
@@ -3319,27 +3322,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MaxNum
       group_id: 24
       tag_index: 3
@@ -3350,27 +3353,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: JuiceSeisu
       group_id: 24
       tag_index: 4
@@ -3381,27 +3384,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: JuiceShosu
       group_id: 24
       tag_index: 5
@@ -3412,27 +3415,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: FruitNum
       group_id: 25
       tag_index: 0
@@ -3443,27 +3446,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Index
           description: ''
           datatype: uint8
@@ -3477,27 +3480,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: FruitMaxNum
       group_id: 25
       tag_index: 2
@@ -3508,27 +3511,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: ClearDay
       group_id: 25
       tag_index: 3
@@ -3539,27 +3542,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: ClearHour
       group_id: 25
       tag_index: 4
@@ -3570,27 +3573,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: ClearMinute
       group_id: 25
       tag_index: 5
@@ -3601,27 +3604,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: AlivePikminTotalNum
       group_id: 25
       tag_index: 6
@@ -3632,27 +3635,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: DeadPikminTotalNum
       group_id: 25
       tag_index: 7
@@ -3663,27 +3666,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: AlivePikminNum
       group_id: 25
       tag_index: 8
@@ -3694,27 +3697,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: Zero
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Index
           description: ''
           datatype: uint8
@@ -3728,27 +3731,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
         - name: Index
           description: ''
           datatype: uint8
@@ -3762,12 +3765,12 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - UInt
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: UInt
+            2: Float
+            3: String
     - name: MinScore
       group_id: 26
       tag_index: 1
@@ -3778,27 +3781,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MinScoreMinute
       group_id: 26
       tag_index: 2
@@ -3809,27 +3812,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MinScoreSecond
       group_id: 26
       tag_index: 3
@@ -3840,27 +3843,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MaxScore
       group_id: 26
       tag_index: 4
@@ -3871,27 +3874,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MaxScoreMinute
       group_id: 26
       tag_index: 5
@@ -3902,27 +3905,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MaxScoreSecond
       group_id: 26
       tag_index: 6
@@ -3933,27 +3936,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MyScore
       group_id: 26
       tag_index: 7
@@ -3964,27 +3967,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MyScoreMinute
       group_id: 26
       tag_index: 8
@@ -3995,27 +3998,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MyScoreSecond
       group_id: 26
       tag_index: 9
@@ -4026,27 +4029,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MyPastScore
       group_id: 26
       tag_index: 10
@@ -4057,27 +4060,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MyPastScoreMinute
       group_id: 26
       tag_index: 11
@@ -4088,27 +4091,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
     - name: MyPastScoreSecond
       group_id: 26
       tag_index: 12
@@ -4119,27 +4122,27 @@ tag_definitions:
           datatype: string
         - name: VarType
           description: ''
-          datatype: list
-          list_items:
-            - Int
-            - Uint
-            - Float
-            - String
+          datatype: enum
+          enum_members:
+            0: Int
+            1: Uint
+            2: Float
+            3: String
         - name: Length
           description: ''
           datatype: uint8
         - name: Filling
           description: ''
-          datatype: list
-          list_items:
-            - Space
-            - Zero
+          datatype: enum
+          enum_members:
+            0: Space
+            1: Zero
         - name: Zenkaku
           description: ''
-          datatype: list
-          list_items:
-            - 'Off'
-            - 'On'
+          datatype: enum
+          enum_members:
+            0: 'Off'
+            1: 'On'
 attribute_definitions:
   - name: ''
     description: ''

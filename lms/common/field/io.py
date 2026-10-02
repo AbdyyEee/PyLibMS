@@ -4,18 +4,18 @@ from lms.common.field.lms_datatype import (
     LMS_DataType,
     is_bool_datatype,
     is_bytes_datatype,
-    is_list_datatype,
+    is_enum_datatype,
     is_number_datatype,
 )
 from lms.common.field.lms_field import LMS_Field
 from lms.fileio.io import FileReader, FileWriter
-from lms.titleconfig.definitions.value import ValueDefinition
+from lms.titleconfig.definitions.field import FieldDefinition
 
 
 def read_field(
-    reader: FileReader,
-    definition: ValueDefinition,
-    read_variable_width_value: Callable | None = None,
+        reader: FileReader,
+        definition: FieldDefinition,
+        read_variable_width_value: Callable | None = None,
 ) -> LMS_Field:
     # String is excluded as their reading varies between MSBT/MSBF
     match definition.datatype:
@@ -33,27 +33,25 @@ def read_field(
             value = reader.read_int32()
         case LMS_DataType.FLOAT32:
             value = reader.read_float32()
-        case LMS_DataType.LIST:
+        case LMS_DataType.ENUM:
             if read_variable_width_value is not None:
                 index = read_variable_width_value()
             else:
                 index = reader.read_uint8()
-            value = definition.list_items[index]
+            value = definition.enum_members[index]
         case LMS_DataType.BOOL:
             if read_variable_width_value is not None:
                 value = bool(read_variable_width_value())
             else:
                 value = bool(reader.read_uint8())
-        case LMS_DataType.BYTES:
-            value = reader.read_bytes(1)
 
-    return LMS_Field(value, definition)  # type: ignore
+    return LMS_Field(value, definition)
 
 
 def write_field(
-    writer: FileWriter,
-    field: LMS_Field,
-    write_variable_width_value: Callable | None = None,
+        writer: FileWriter,
+        field: LMS_Field,
+        write_variable_width_value: Callable | None = None,
 ) -> None:
     if is_number_datatype(field.value, field.datatype):
         write_functions: dict[LMS_DataType, Callable] = {
@@ -68,8 +66,8 @@ def write_field(
         write_functions[field.datatype](field.value)
         return
 
-    if is_list_datatype(field.value, field.datatype):
-        value = field.list_items.index(field.value)
+    if is_enum_datatype(field.value, field.datatype):
+        value = list(field.enum_members.values()).index(field.value)
         if write_variable_width_value is not None:
             write_variable_width_value(value)
         else:

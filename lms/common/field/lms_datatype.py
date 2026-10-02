@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from enum import Enum
+from enum import IntEnum, auto
 from typing import Type, TypeGuard
 
 FLOAT32_MIN = -3.4028235e38
@@ -15,8 +15,9 @@ ALIAS_MAP = {
     "i32": "INT32",
     "f32": "FLOAT32",
     "str": "STRING",
+    # LIST fallback for ENUM datatype
+    "list": "ENUM",
     "bool": "BOOL",
-    "byte": "BYTES",
 }
 
 
@@ -32,7 +33,7 @@ def is_number_datatype(value: object, datatype: LMS_DataType) -> TypeGuard[int |
     ) and isinstance(value, int)
 
 
-def is_list_datatype(value: object, datatype: LMS_DataType) -> TypeGuard[str]:
+def is_enum_datatype(value: object, datatype: LMS_DataType) -> TypeGuard[str]:
     return datatype is LMS_DataType.ENUM and isinstance(value, str)
 
 
@@ -48,7 +49,7 @@ def is_string_datatype(value: object, datatype: LMS_DataType) -> TypeGuard[str]:
     return datatype is LMS_DataType.STRING and isinstance(value, str)
 
 
-class LMS_DataType(Enum):
+class LMS_DataType(IntEnum):
     """Enum that represents a datatype for a value entry in a MSBT/MSBP file."""
 
     UINT8 = 0
@@ -64,62 +65,54 @@ class LMS_DataType(Enum):
     STRING = 8
     ENUM = 9
 
-    # - Interface types -
-    # These types act as an abstraction for a real LMS_Datatype
-    # The actual value isn't important since they are not real types, but are instantiated from a config
-    BOOL = "bool"
-    BYTES = "byte"
-
-    def to_string(self) -> str:
-        return self._name_.lower()
+    # Interface type for UINT8
+    BOOL = auto()
 
     @property
     def signed(self) -> bool:
         """Property for if the type is signed or not."""
         if self not in [
-            LMS_DataType.STRING,
-            LMS_DataType.ENUM,
-            LMS_DataType.BOOL,
-            LMS_DataType.BYTES,
+            self.STRING,
+            self.ENUM,
+            self.BOOL,
         ]:
-            return self in [LMS_DataType.INT8, LMS_DataType.INT16, LMS_DataType.INT32]
+            return self in [self.INT8, self.INT16, self.INT32]
 
-        raise TypeError(f"Signed is not a valid property for '{self.to_string()}'!")
+        raise TypeError(f"Signed is not a valid property for '{self.name.lower()}'!")
 
     @property
     def builtin_type(self) -> Type[int | float | str | bool | bytes]:
         """The enum as the builtin python type."""
         return {
-            LMS_DataType.UINT8: int,
-            LMS_DataType.UINT16: int,
-            LMS_DataType.UINT32: int,
-            LMS_DataType.INT8: int,
-            LMS_DataType.INT16: int,
-            LMS_DataType.INT32: int,
-            LMS_DataType.FLOAT32: float,
-            LMS_DataType.STRING: str,
-            LMS_DataType.ENUM: str,
-            LMS_DataType.BOOL: bool,
-            LMS_DataType.BYTES: bytes,
+            self.UINT8: int,
+            self.UINT16: int,
+            self.UINT32: int,
+            self.INT8: int,
+            self.INT16: int,
+            self.INT32: int,
+            self.FLOAT32: float,
+            self.STRING: str,
+            self.ENUM: str,
+            self.BOOL: bool,
         }[self]
 
     @property
     def stream_size(self) -> int:
         """Size of the datatype, only for fixed integers."""
         sizes = {
-            LMS_DataType.UINT8: 1,
-            LMS_DataType.UINT16: 2,
-            LMS_DataType.UINT32: 4,
-            LMS_DataType.INT8: 1,
-            LMS_DataType.INT16: 2,
-            LMS_DataType.INT32: 4,
-            LMS_DataType.FLOAT32: 4,
+            self.UINT8: 1,
+            self.UINT16: 2,
+            self.UINT32: 4,
+            self.INT8: 1,
+            self.INT16: 2,
+            self.INT32: 4,
+            self.FLOAT32: 4,
         }
 
         try:
             return sizes[self]
         except KeyError:
-            raise TypeError(f"Stream size is not defined for '{self.to_string()}'.")
+            raise TypeError(f"Stream size is not defined for '{self.name.lower()}'.")
 
     @classmethod
     def from_string(cls, string: str):

@@ -177,7 +177,7 @@ class FileWriter:
     def write_float32(self, value: float) -> None:
         self.data.write(struct.pack(self.datatypes.FLOAT32, value))
 
-    def write_utf8_string(self, string: str) -> None:
+    def write_string(self, string: str) -> None:
         self.write_bytes(string.encode("UTF-8"))
 
     def write_len_encoded_string(self, string: str) -> None:

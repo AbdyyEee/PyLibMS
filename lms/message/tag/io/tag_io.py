@@ -24,10 +24,10 @@ def get_tag_indicator(encoding: FileEncoding, is_big_endian: bool):
 
 
 def read_tag(
-    reader: FileReader,
-    tag_config: TagConfig | None,
-    is_closing: bool,
-    suppress_tag_errors: bool,
+        reader: FileReader,
+        tag_config: TagConfig | None,
+        is_closing: bool,
+        suppress_tag_errors: bool,
 ) -> LMS_ControlTag:
     group_id = reader.read_uint16()
     tag_index = reader.read_uint16()
@@ -36,8 +36,8 @@ def read_tag(
     if tag_config is None:
         return _read_encoded_tag(reader, group_id, tag_index, is_closing)
 
-    definition = tag_config.get_definition_by_indices(group_id, tag_index)
-
+    definition = tag_config[group_id][tag_index]
+    
     # Tags not defined in the config are not considered fallback tags
     # Not all configs will define every tag, so this is simply a measure to still read tags that aren't defined
     if definition is None:
@@ -60,11 +60,11 @@ def read_tag(
 
 
 def _read_encoded_tag(
-    reader: FileReader,
-    group_id: int,
-    tag_index: int,
-    is_closing: bool = False,
-    is_fallback: bool = False,
+        reader: FileReader,
+        group_id: int,
+        tag_index: int,
+        is_closing: bool = False,
+        is_fallback: bool = False,
 ) -> LMS_EncodedTag:
     if is_closing:
         return LMS_EncodedTag(group_id, tag_index, is_closing=True)
@@ -77,7 +77,7 @@ def _read_encoded_tag(
 
 
 def _read_decoded_tag(
-    reader: FileReader, definition: TagDefinition, is_closing: bool = False
+        reader: FileReader, definition: TagDefinition, is_closing: bool = False
 ) -> LMS_DecodedTag:
     parameter_size = reader.read_uint16()
     end = reader.tell() + parameter_size

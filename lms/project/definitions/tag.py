@@ -123,6 +123,7 @@ class LMS_TagParamDefinition:
         """Datatype of the parameter."""
         return self._datatype
 
+    @property
     def enum_members(self) -> Mapping[int, str]:
         """Mapping of enum members."""
         return self._enum_members

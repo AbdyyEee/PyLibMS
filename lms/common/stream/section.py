@@ -26,7 +26,7 @@ def write_section(
         data: Sequence[Any],
         *write_arguments: Any,
 ) -> None:
-    writer.write_utf8_string(magic)
+    writer.write_string(magic)
     size_offset = writer.tell()
 
     writer.write_uint32(0)
@@ -39,7 +39,7 @@ def write_section(
 
 
 def write_unsupported_section(writer: FileWriter, magic: str, data: bytes) -> None:
-    writer.write_utf8_string(magic)
+    writer.write_string(magic)
     size_offset = writer.tell()
     writer.write_uint32(0)
     writer.write_bytes(b"\x00" * 8)

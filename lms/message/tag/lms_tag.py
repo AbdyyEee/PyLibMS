@@ -1,5 +1,5 @@
 import re
-from typing import TypeGuard
+from typing import TypeGuard, TypeAlias
 
 from lms.common.field.lms_field import LMS_FieldMap
 from lms.message.tag.lms_tagexceptions import (
@@ -9,6 +9,7 @@ from lms.message.tag.lms_tagexceptions import (
 from lms.titleconfig.definitions.tags import TagConfig, TagDefinition
 
 TAG_PADDING_VALUE = 0xCD
+LMS_ControlTag: TypeAlias = LMS_EncodedTag | LMS_DecodedTag
 
 
 class LMS_EncodedTag:
@@ -20,12 +21,12 @@ class LMS_EncodedTag:
     PARAMETER_FORMAT = re.compile(r"^\s*([0-9A-Fa-f]{2})(\s*-\s*[0-9A-Fa-f]{2})*\s*$")
 
     def __init__(
-        self,
-        group_id: int,
-        tag_index: int,
-        parameters: list[int] | None = None,
-        is_fallback: bool = False,
-        is_closing: bool = False,
+            self,
+            group_id: int,
+            tag_index: int,
+            parameters: list[int] | None = None,
+            is_fallback: bool = False,
+            is_closing: bool = False,
     ):
         self._group_id = group_id
         self._tag_index = tag_index
@@ -93,7 +94,7 @@ class LMS_EncodedTag:
             )
 
         group_id, tag_index = int(group_id), int(tag_index)
-        param_str = tag[match.end(3) :].strip().removesuffix("]").strip()
+        param_str = tag[match.end(3):].strip().removesuffix("]").strip()
 
         if is_closing:
             if param_str:
@@ -137,10 +138,10 @@ class LMS_DecodedTag:
     PARAMETER_FORMAT = re.compile(r'(\w+)="([^"]*)"')
 
     def __init__(
-        self,
-        definition: TagDefinition,
-        parameters: LMS_FieldMap | None = None,
-        is_closing: bool = False,
+            self,
+            definition: TagDefinition,
+            parameters: LMS_FieldMap | None = None,
+            is_closing: bool = False,
     ):
         self._definition = definition
         self._parameters = parameters
@@ -194,10 +195,7 @@ class LMS_DecodedTag:
 
         parameters = []
         for param in self._parameters:
-            if isinstance(param.value, bytes):
-                parameters.append(f'{param.name}="{param.value.hex()}"')
-            else:
-                parameters.append(f'{param.name}="{param.value}"')
+            parameters.append(f'{param.name}="{param.value}"')
 
         parameters = " ".join(parameters)
         return (
@@ -213,7 +211,7 @@ class LMS_DecodedTag:
 
         is_closing = match.group(1) is not None
         group_name, tag_name = match.group(2), match.group(3)
-        tag_definition = config.get_definition_by_names(group_name, tag_name)
+        tag_definition = config[group_name][tag_name]
 
         if is_closing:
             return cls(tag_definition, is_closing=True)
@@ -223,9 +221,6 @@ class LMS_DecodedTag:
             parameters, tag_definition.parameters
         )
         return cls(tag_definition, parameter_map)
-
-
-type LMS_ControlTag = LMS_EncodedTag | LMS_DecodedTag
 
 
 def is_tag(obj: object) -> TypeGuard[LMS_ControlTag]:

@@ -3,7 +3,7 @@ from __future__ import annotations
 import string
 from collections import deque
 from types import MappingProxyType
-from typing import Generator
+from typing import Generator, TypeAlias
 
 import lms.flowchart.definitions.lms_nodeexceptions as node_exceptions
 from lms.common.field.lms_datatype import LMS_DataType
@@ -14,7 +14,7 @@ from lms.message.msbt import MSBT
 from lms.message.msbtentry import MSBTEntry
 from lms.titleconfig.definitions.nodes import NodeDefinition
 
-type LMS_NodeParameter = LMS_FieldMap | int | str | tuple[int, ...]
+LMS_NodeParameter: TypeAlias = LMS_FieldMap | int | str | tuple[int, ...]
 
 NO_VALUE = 0xFFFF
 
@@ -315,9 +315,9 @@ class LMS_BranchNode(LMS_BaseNode):
         if self.definition is not None:
             definition: NodeDefinition = self.definition
 
-            if definition.case_options:
+            if definition.enum_options:
                 for case, branch in self._branches.items():
-                    case_format = definition.case_options.get(
+                    case_format = definition.enum_options.get(
                         case, None,
                     )
 

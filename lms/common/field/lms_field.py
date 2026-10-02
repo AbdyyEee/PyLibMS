@@ -1,21 +1,32 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
-from dataclasses import dataclass
+from types import MappingProxyType
+from typing import Mapping, TypeAlias
 
 from lms.common.field.lms_datatype import LMS_DataType, verify_number_from_datatype
-from lms.titleconfig.definitions.value import ValueDefinition
+from lms.titleconfig.definitions.field import FieldDefinition
 
-type FieldValue = int | str | float | bool | bytes
+FieldValue: TypeAlias = int | str | float | bool | bytes
 
 
-@dataclass(frozen=True)
 class LMS_FieldMap:
     """
-    A wrapper for a basic ``dict[str, LMS_Field]``. Difference is validation upon modification of a field.
+    An immutable wrapper for a basic ``Mapping[str, LMS_Field]``.
+
+    Fields are validated by their datatype upon modification.
     """
 
-    fields: dict[str, LMS_Field]
+    def __init__(self, fields: Mapping[str, LMS_Field]) -> None:
+        self._fields = MappingProxyType(fields)
+
+    @property
+    def fields(self) -> Mapping[str, LMS_Field]:
+        """The fields associated to this LMS_FieldMap."""
+        return self._fields
+
+    def __len__(self) -> int:
+        return len(self.fields)
 
     def __iter__(self) -> Iterator[LMS_Field]:
         return iter(self.fields.values())
@@ -38,15 +49,15 @@ class LMS_FieldMap:
 
     @staticmethod
     def create_default_dict_map(
-        definitions: list[ValueDefinition],
+            definitions: list[FieldDefinition],
     ) -> dict[str, FieldValue]:
         map = {}
         for definition in definitions:
             match definition.datatype:
                 case LMS_DataType.STRING:
                     map[definition.name] = ""
-                case LMS_DataType.LIST:
-                    map[definition.name] = definition.list_items[0]
+                case LMS_DataType.ENUM:
+                    map[definition.name] = definition.enum_members[0]
                 case LMS_DataType.BOOL:
                     map[definition.name] = False
                 case LMS_DataType.FLOAT32:
@@ -56,11 +67,11 @@ class LMS_FieldMap:
         return map
 
     @classmethod
-    def create_default_map(cls, definitions: list[ValueDefinition]):
+    def create_default_map(cls, definitions: list[FieldDefinition]):
         return cls.from_dict(LMS_FieldMap.create_default_map(definitions), definitions)
 
     @classmethod
-    def from_dict(cls, data: dict[str, FieldValue], definitions: list[ValueDefinition]):
+    def from_dict(cls, data: dict[str, FieldValue], definitions: list[FieldDefinition]):
         return cls(
             {
                 definition.name: LMS_Field(data[definition.name], definition)
@@ -69,20 +80,18 @@ class LMS_FieldMap:
         )
 
     @classmethod
-    def from_string_dict(cls, data: dict[str, str], definitions: list[ValueDefinition]):
+    def from_string_dict(cls, data: dict[str, str], definitions: list[FieldDefinition]):
         fields = {}
         casted_value = None
 
         for definition in definitions:
             # These datatypes do not require any casting
-            if definition.datatype in (LMS_DataType.STRING, LMS_DataType.LIST):
+            if definition.datatype in (LMS_DataType.STRING, LMS_DataType.ENUM):
                 fields[definition.name] = LMS_Field(data[definition.name], definition)
                 continue
 
             value = data[definition.name]
             match definition.datatype:
-                case LMS_DataType.BYTES:
-                    casted_value = bytes.fromhex(value)
                 case LMS_DataType.BOOL:
                     if value not in ("false", "true"):
                         raise ValueError("Invalid boolean value!")
@@ -103,9 +112,9 @@ class LMS_Field:
     """
 
     def __init__(
-        self,
-        value: int | str | float | bytes | bool,
-        definition: ValueDefinition,
+            self,
+            value: int | str | float | bytes | bool,
+            definition: FieldDefinition,
     ):
         _verify_value_from_definition(value, definition)
         self._definition = definition
@@ -113,7 +122,7 @@ class LMS_Field:
 
     def __repr__(self):
         if self.datatype is LMS_DataType.LIST:
-            return f"LMS_Field(value={self._value!r}, list_items={self.list_items!r})"
+            return f"LMS_Field(value={self._value!r}, list_items={self.enum_members!r})"
 
         return f"LMS_Field(value={self._value!r}, type={self.datatype!r})"
 
@@ -138,9 +147,9 @@ class LMS_Field:
         return self._definition.datatype
 
     @property
-    def list_items(self) -> list[str]:
+    def enum_members(self) -> list[str]:
         """The list items bound to the field instance. Only is valid for ``LMS_Datatype.LIST`` values."""
-        return self._definition.list_items
+        return self._definition.enum_members
 
     @value.setter
     def value(self, new_value: int | str | float | bytes | bool):
@@ -149,7 +158,7 @@ class LMS_Field:
 
 
 def _verify_value_from_definition(
-    value: int | str | float | bytes | bool, definition: ValueDefinition
+        value: int | str | float | bytes | bool, definition: FieldDefinition
 ) -> None:
     datatype = definition.datatype
 
@@ -157,16 +166,11 @@ def _verify_value_from_definition(
         return
 
     match datatype:
-        case LMS_DataType.BYTES if isinstance(value, bytes):
-            if len(value) != 1:
-                raise ValueError("Byte types only work for values of length 1!")
-            else:
-                return
-        case LMS_DataType.LIST if isinstance(value, str):
-            if value not in definition.list_items:
+        case LMS_DataType.ENUM if isinstance(value, str):
+            if value not in definition.enum_members.values():
                 raise ValueError(
                     f"""The value of '{value}' provided for field '{definition.name}' is not a 
-                    valid item in the list {definition.list_items}."""
+                    valid item in the list {definition.enum_members}."""
                 )
             else:
                 return

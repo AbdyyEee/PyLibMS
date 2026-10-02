@@ -22,7 +22,7 @@ NO_NEXT_NODE = 0xFFFF
 FLW3_HEADER_SIZE = 16
 NODE_SIZE = 16
 
-VARIABLE_WIDTH_DATATYPES = (LMS_DataType.BOOL, LMS_DataType.LIST)
+VARIABLE_WIDTH_DATATYPES = (LMS_DataType.BOOL, LMS_DataType.ENUM)
 
 
 def read_flw3(reader: FileReader, config: NodeConfig | None, msbt: MSBT | None, ) -> list[LMS_EntryNode]:
@@ -362,12 +362,18 @@ def write_node_parameter(
         writer: FileWriter, value: LMS_NodeParameter, parameter_type: LMS_NodeParameterType
 ) -> None:
     if isinstance(value, LMS_FieldMap):
+
+        # Ensure full stream is taken up if there are no parameters
+        if not len(value):
+            writer.write_uint32(0)
+            return
+
         for i, field in enumerate(value):
             if field.datatype in VARIABLE_WIDTH_DATATYPES:
                 stream_map = {
                     1: writer.write_uint8,
                     2: writer.write_uint16,
-                    3: writer.write_uint32,
+                    4: writer.write_uint32,
                 }
                 write_field(
                     writer,

@@ -25,11 +25,11 @@ class MSBP:
     def __init__(
             self,
             info: LMS_FileInfo,
-            colors: tuple[LMS_Color] | None,
-            config: tuple[LMS_AttributeDefinition] | None,
-            tag_groups: tuple[LMS_TagGroup] | None,
-            styles: tuple[LMS_Style] | None,
-            source_files: tuple[str] | None,
+            colors: tuple[LMS_Color],
+            config: tuple[LMS_AttributeDefinition],
+            tag_groups: tuple[LMS_TagGroup],
+            styles: tuple[LMS_Style],
+            source_files: tuple[str],
     ):
         self.name = ""
 

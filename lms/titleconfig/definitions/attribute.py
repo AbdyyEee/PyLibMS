@@ -1,12 +1,27 @@
-from dataclasses import dataclass
-
-from lms.titleconfig.definitions.value import ValueDefinition
+from lms.titleconfig.definitions.value import FieldDefinition
 
 
-@dataclass(frozen=True)
 class AttributeConfig:
     """Class that represents an attribute config definition."""
 
-    name: str
-    description: str
-    definitions: list[ValueDefinition]
+    def __init__(self, name: str, description: str, definitions: list[FieldDefinition]) -> None:
+        self._name = name
+        self._description = description
+        self._definitions = definitions
+
+    @property
+    def name(self) -> str:
+        """Name of the configuration."""
+        return self._name
+
+    @property
+    def description(self) -> str:
+        """Description of the configuration."""
+        return self._description
+
+    def definitions(self) -> tuple[FieldDefinition, ...]:
+        """Definitions associated with the configuration."""
+        return self._definitions
+
+    def add_definition(self, definition: FieldDefinition) -> None:
+        self._definitions.append(definition)

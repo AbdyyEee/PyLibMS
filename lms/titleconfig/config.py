@@ -1,7 +1,8 @@
 import hashlib
 import os.path
 import pathlib
-from typing import Literal, get_args
+from types import MappingProxyType
+from typing import Literal, get_args, Mapping
 
 import requests
 import yaml
@@ -10,9 +11,9 @@ from lms.common.field.lms_datatype import LMS_DataType
 from lms.flowchart.definitions.node_type import LMS_NodeType
 from lms.project.msbp import MSBP
 from lms.titleconfig.definitions.attribute import AttributeConfig
-from lms.titleconfig.definitions.nodes import NodeConfig, NodeDefinition
+from lms.titleconfig.definitions.field import FieldDefinition
+from lms.titleconfig.definitions.nodes import NodeConfig
 from lms.titleconfig.definitions.tags import TagConfig, TagDefinition
-from lms.titleconfig.definitions.value import ValueDefinition
 
 PRESETS_URL = (
     "https://api.github.com/repos/AbdyyEee/PyLibMS/contents/lms/titleconfig/presets"
@@ -91,7 +92,7 @@ class TitleConfig:
         return result
 
     @classmethod
-    def download_preset(cls, game: GAME_PRESET):
+    def download_preset(cls, game: GAME_PRESET) -> None:
         """
         Fetches a preset from the repository and loads it to ./presets
 
@@ -145,32 +146,16 @@ class TitleConfig:
         return raw_response
 
     @property
-    def tag_config(self) -> TagConfig | None:
+    def tag_config(self) -> TagConfig:
         """The loaded tag config instance."""
         return self._tag_config
 
     @property
-    def attribute_configs(self) -> tuple[AttributeConfig, ...]:
-        """Returns a tuple of all attribute configurations in read-only form."""
+    def attribute_configs(self) -> Mapping[str, AttributeConfig]:
+        """Returns a mapping of all attribute configurations in the configuration."""
         if self._attribute_config_map is None:
-            return ()
-        return tuple(self._attribute_config_map.values())
-
-    def get_attribute_config(self, name: str) -> AttributeConfig:
-        """
-        Returns the attribute configuration given the name.
-
-        :param name: the name of the attribute config.
-        """
-        if self._attribute_config_map is None:
-            raise ValueError(f"There are no attribute configs!")
-
-        if name not in self._attribute_config_map:
-            raise KeyError(
-                f"The attribute config '{name}' does not exist in the TitleConfig!"
-            )
-
-        return self._attribute_config_map[name]
+            return MappingProxyType({})
+        return MappingProxyType(self._attribute_config_map)
 
     @property
     def node_config(self) -> NodeConfig:
@@ -204,72 +189,28 @@ class TitleConfig:
 
         attribute_configs = {}
         for config in parsed_content.get(cls.ATTR_KEY, []):
-            definitions = [
-                ValueDefinition.from_dict(value_def)
-                for value_def in config["definitions"]
-            ]
-            attribute_configs[config["name"]] = AttributeConfig(
-                config["name"], config.get("description", ""), definitions
-            )
+            config = AttributeConfig(config["name"], config.get("description", ""))
+            for value_def in config["definitions"]:
+                config.add_definition(FieldDefinition.from_dict(value_def))
 
-        tag_config = None
-        tag_definitions: dict[int, list[TagDefinition]] = {}
-        tag_content = parsed_content.get(cls.TAG_KEY, None)
+        tag_content = parsed_content.get(cls.TAG_KEY, {})
+        group_map = tag_content["groups"]
+        tag_config = TagConfig(group_map)
 
-        if tag_content is not None:
-            group_map = tag_content["groups"]
+        for tag_def in tag_content.get("tags", ()):
+            tag_config.add_definition(TagDefinition.from_dict(tag_def, group_map))
 
-            for tag_def in tag_content["tags"]:
-                definition = TagDefinition.from_dict(tag_def, group_map)
-                if definition.group_id not in tag_definitions:
-                    tag_definitions[definition.group_id] = []
-                tag_definitions[definition.group_id].append(definition)
+        node_config = NodeConfig()
 
-            tag_config = TagConfig(group_map, tag_definitions)
-
-        branch_nodes: dict[int, NodeDefinition | tuple[NodeDefinition, ...]] = {}
-        event_nodes: dict[int, tuple[NodeDefinition, ...]] = {}
-
-        node_data = parsed_content.get(cls.NODE_KEY, [])
+        node_data = parsed_content.get(cls.NODE_KEY, {})
         branch_data, event_data = node_data.get("branch", []), node_data.get("event", [])
 
         for definition in branch_data:
-            node_id = definition["id"]
-
-            node_definition = NodeDefinition.from_dict(
-                node_id, LMS_NodeType.BRANCH, definition
-            )
-
-            if node_id not in branch_nodes:
-                branch_nodes[node_id] = node_definition
-                continue
-
-            existing = branch_nodes[node_id]
-
-            if isinstance(existing, tuple):
-                branch_nodes[node_id] = existing + (node_definition,)
-            else:
-                branch_nodes[node_id] = (existing, node_definition)
+            node_config.add_definition(LMS_NodeType.BRANCH, definition)
 
         for definition in event_data:
-            node_id = definition["id"]
+            node_config.add_definition(LMS_NodeType.EVENT, definition)
 
-            node_definition = NodeDefinition.from_dict(
-                node_id, LMS_NodeType.EVENT, definition
-            )
-
-            if node_id not in event_nodes:
-                event_nodes[node_id] = node_definition
-                continue
-
-            existing = event_nodes[node_id]
-
-            if isinstance(existing, tuple):
-                event_nodes[node_id] = existing + (node_definition,)
-            else:
-                event_nodes[node_id] = (existing, node_definition)
-
-        node_config = NodeConfig(branch_nodes, event_nodes)
         return cls(game, attribute_configs, tag_config, node_config)
 
     @staticmethod
@@ -277,7 +218,7 @@ class TitleConfig:
         """
         Generates a title config file for a specific game.
 
-        :param file_path: the path to the yaml file.
+        :param file_path: the path to the YAML file.
         :param game: the name of the game to create the config for.
         :param project: a MSBP object.
         """
@@ -319,14 +260,14 @@ class TitleConfig:
                         definition["parameters"] = []
 
                     for param_def in tag_def.parameter_definitions:
-                        param_definition: dict[str, str | list] = {
+                        param_definition = {
                             "name": param_def.name,
                             "description": "",
-                            "datatype": param_def.datatype.to_string(),
+                            "datatype": param_def.datatype.name.lower(),
                         }
 
-                        if param_def.datatype is LMS_DataType.LIST:
-                            param_definition["list_items"] = param_def.list_items
+                        if param_def.datatype is LMS_DataType.ENUM:
+                            param_definition["enum_members"] = dict(param_def.enum_members)
 
                         definition["parameters"].append(param_definition)
 
@@ -339,10 +280,10 @@ class TitleConfig:
                 definition = {
                     "name": attr_def.name,
                     "description": "",
-                    "datatype": attr_def.datatype.to_string(),
+                    "datatype": attr_def.datatype.name.lower(),
                 }
-                if attr_def.datatype is LMS_DataType.LIST:
-                    definition["list_items"] = attr_def.list_items
+                if attr_def.datatype is LMS_DataType.ENUM:
+                    definition["enum_members"] = dict(attr_def.enum_members)
 
                 attr_definitions.append(definition)
 

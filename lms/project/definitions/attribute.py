@@ -28,5 +28,5 @@ class LMS_AttributeDefinition:
         """Enum members of the attribute."""
         return self._enum_members
 
-    def set_enum_members(self, attr_enums: list[Mapping[int, str]]) -> None:
+    def set_enum_members(self, attr_enums: list[dict[int, str]]) -> None:
         self._enum_members = attr_enums[self._enum_index]

@@ -1,29 +1,65 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Literal
+from types import MappingProxyType
+from typing import Literal, Mapping, Any
 
 from lms.common.field.lms_datatype import LMS_DataType
 from lms.flowchart.definitions.node_type import LMS_NodeType, LMS_NodeParameterType
-from lms.titleconfig.definitions.value import ValueDefinition
+from lms.titleconfig.definitions.field import FieldDefinition
 
 
-@dataclass(frozen=True)
 class NodeConfig:
     """
     Class that represents a node configuration.
     """
 
-    branch_definitions: dict[int, NodeDefinition | tuple[NodeDefinition, ...]]
-    event_definitions: dict[int, NodeDefinition | tuple[NodeDefinition, ...]]
+    def __init__(self, branch_definitions: dict[int, tuple[NodeDefinition, ...]] = None,
+                 event_definitions: dict[int, tuple[NodeDefinition, ...]] = None):
+
+        self._branch_definitions = branch_definitions or {}
+        self._event_definitions = event_definitions or {}
+
+    @property
+    def branch_definitions(self) -> Mapping[str, tuple[NodeDefinition, ...]]:
+        """Mapping of branch definitions for this configuration."""
+        return MappingProxyType(self._branch_definitions)
+
+    @property
+    def event_definitions(self) -> Mapping[str, tuple[NodeDefinition, ...]]:
+        """Mapping of branch definitions for this configuration."""
+        return self._event_definitions
+
+    def add_definition(self, node_type: LMS_NodeType.BRANCH | LMS_NodeType.EVENT, data: Mapping[str, Any]) -> None:
+        """
+        Adds a ``NodeDefinition`` object to the configuration.
+
+        :param node_type: The type of the definition.
+        :param data: The node definition data.
+        """
+        node_id = data["id"]
+        definition = NodeDefinition.from_dict(node_id, node_type, data)
+        attr = getattr(self, "_branch_definitions" if node_type is LMS_NodeType.BRANCH else "_event_definitions")
+        attr[node_id] = (definition,)
+
+        if node_id in attr:
+            attr[node_id] = attr[node_id] + (definition,)
+        else:
+            attr[node_id] = (definition,)
 
     def get_definition(
             self,
             identifier: int,
             node_type: Literal[LMS_NodeType.BRANCH] | Literal[LMS_NodeType.EVENT],
-            parameter_type: LMS_NodeParameterType,
+            parameter_type: LMS_NodeParameterType = None,
     ) -> NodeDefinition:
-        """Gets a node definition by its ID and the type."""
+        """
+        Retrieves a node definition by its ID and the type.
+
+        :param identifier: The condition/event identifier of the node.
+        :param node_type: The type of the node.
+        :param parameter_type: The parameter of the node.
+        """
         match node_type:
             case LMS_NodeType.BRANCH:
                 if identifier not in self.branch_definitions:
@@ -37,16 +73,9 @@ class NodeConfig:
                 raise TypeError(
                     f"You may not use '{node_type}' with a node configuration."
                 )
-
-        if isinstance(definition, tuple):
-            for variant in definition:
-                if variant.parameter_type is parameter_type:
-                    return variant
-
-            return None
-
-        if definition.parameter_type is parameter_type:
-            return definition
+        for variant in definition:
+            if variant.parameter_type is parameter_type:
+                return variant
 
         return None
 
@@ -60,75 +89,50 @@ class NodeDefinition:
     description: str
     type: LMS_NodeType.BRANCH | LMS_NodeType.EVENT
     parameter_type: LMS_NodeParameterType
-    parameter_definitions: tuple[ValueDefinition, ...]
+    parameter_definitions: tuple[FieldDefinition, ...]
     case_format: str
-    case_options: dict[int, str]
+    enum_options: Mapping[int, str]
     next_node_dependency: bool = False
 
     @classmethod
     def from_dict(cls, identifier: int, node_type: LMS_NodeType, data: dict) -> NodeDefinition | None:
 
         name, description = data["name"], data.get("description", "")
-        converted_parameters: list[ValueDefinition] = []
-        parameter_type = LMS_NodeParameterType.from_string(data["parameter_type"])
+        converted_parameters: list[FieldDefinition] = []
 
-        for i, parameter in enumerate(data["parameters"]):
+        parameter_type = data.get("parameter_type")
+
+        if parameter_type is not None:
+            parameter_type = LMS_NodeParameterType.from_string(parameter_type)
+
+        for i, parameter in enumerate(data.get("parameters", ())):
             datatype_from_dict = parameter.get("datatype", None)
 
-            list_items = parameter.get("list_items", [])
+            enum_members = MappingProxyType(parameter.get("enum_members", {}))
 
             if datatype_from_dict is None:
-                match parameter_type:
-                    case (
-                    LMS_NodeParameterType.PARAM_32_0
-                    | LMS_NodeParameterType.PARAM_32_1
-                    ):
-                        datatype_from_dict = LMS_DataType.UINT32
-                    case LMS_NodeParameterType.PARAM_16_16:
-                        datatype_from_dict = (LMS_DataType.UINT16, LMS_DataType.UINT16)[
-                            i
-                        ]
-                    case LMS_NodeParameterType.PARAM_16_8_8:
-                        datatype_from_dict = (
-                            LMS_DataType.UINT16,
-                            LMS_DataType.UINT8,
-                            LMS_DataType.UINT8,
-                        )[i]
-                    case LMS_NodeParameterType.PARAM_8_8_16:
-                        datatype_from_dict = (
-                            LMS_DataType.UINT8,
-                            LMS_DataType.UINT8,
-                            LMS_DataType.UINT16,
-                        )[i]
-                    case LMS_NodeParameterType.PARAM_8_8_8_8:
-                        datatype_from_dict = (
-                            LMS_DataType.UINT8,
-                            LMS_DataType.UINT8,
-                            LMS_DataType.UINT8,
-                            LMS_DataType.UINT8,
-                        )[i]
-                    case LMS_NodeParameterType.STRING:
-                        datatype_from_dict = LMS_DataType.STRING
-                definition = ValueDefinition(
-                    parameter["name"], description, datatype_from_dict, list_items
-                )
+                if parameter_type is LMS_NodeParameterType.STRING:
+                    datatype_from_dict = LMS_DataType.STRING
+                else:
+                    datatype_from_dict = parameter_type.sliced_datatype[i]
+                definition = FieldDefinition(parameter["name"], description, datatype_from_dict, enum_members)
             else:
-                definition = ValueDefinition(
+                definition = FieldDefinition(
                     parameter["name"],
                     description,
                     LMS_DataType.from_string(datatype_from_dict),
-                    list_items,
+                    enum_members,
                 )
 
             converted_parameters.append(definition)
 
-        # case_format is only for branch nodes
-        if "case_format" in data and "case_options" in data:
+        # case_format/enum_options is only for branch nodes
+        if "case_format" in data and "enum_options" in data:
             raise ValueError(
-                "There may only be one of case_format and options in the definition."
+                "There may only be one of enum_options and options in the definition."
             )
 
-        if (case_options := data.get("case_options", "")) and node_type is LMS_NodeType.EVENT:
+        if (enum_options := data.get("enum_options", "")) and node_type is LMS_NodeType.EVENT:
             raise ValueError(f"There may only be options for branch nodes for definition '{name}'")
 
         if (case_format := data.get("case_format", "")) and node_type == LMS_NodeType.EVENT:
@@ -142,6 +146,6 @@ class NodeDefinition:
             parameter_type=parameter_type,
             parameter_definitions=converted_parameters,
             case_format=case_format,
-            case_options=case_options,
+            enum_options=enum_options,
             next_node_dependency=data.get("next_node_dependency", False),
         )

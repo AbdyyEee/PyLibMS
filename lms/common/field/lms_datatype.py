@@ -33,7 +33,7 @@ def is_number_datatype(value: object, datatype: LMS_DataType) -> TypeGuard[int |
 
 
 def is_list_datatype(value: object, datatype: LMS_DataType) -> TypeGuard[str]:
-    return datatype is LMS_DataType.LIST and isinstance(value, str)
+    return datatype is LMS_DataType.ENUM and isinstance(value, str)
 
 
 def is_bool_datatype(value: object, datatype: LMS_DataType) -> TypeGuard[bool]:
@@ -62,7 +62,7 @@ class LMS_DataType(Enum):
     FLOAT32 = 6
 
     STRING = 8
-    LIST = 9
+    ENUM = 9
 
     # - Interface types -
     # These types act as an abstraction for a real LMS_Datatype
@@ -78,7 +78,7 @@ class LMS_DataType(Enum):
         """Property for if the type is signed or not."""
         if self not in [
             LMS_DataType.STRING,
-            LMS_DataType.LIST,
+            LMS_DataType.ENUM,
             LMS_DataType.BOOL,
             LMS_DataType.BYTES,
         ]:
@@ -98,7 +98,7 @@ class LMS_DataType(Enum):
             LMS_DataType.INT32: int,
             LMS_DataType.FLOAT32: float,
             LMS_DataType.STRING: str,
-            LMS_DataType.LIST: str,
+            LMS_DataType.ENUM: str,
             LMS_DataType.BOOL: bool,
             LMS_DataType.BYTES: bytes,
         }[self]
@@ -136,8 +136,8 @@ class LMS_DataType(Enum):
 
 
 def verify_number_from_datatype(
-    value: int | float,
-    datatype: LMS_DataType,
+        value: int | float,
+        datatype: LMS_DataType,
 ):
     if datatype is LMS_DataType.FLOAT32:
         max_value = FLOAT32_MAX
@@ -148,7 +148,7 @@ def verify_number_from_datatype(
             max_value = 2 ** (bits - 1)
             min_value = -max_value
         else:
-            min_value, max_value = 0, (2**bits) - 1
+            min_value, max_value = 0, (2 ** bits) - 1
 
     if not min_value <= value <= max_value:
         raise ValueError(

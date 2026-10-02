@@ -3,7 +3,7 @@ Read interface for ``MSBP`` files.
 """
 
 import os
-from typing import BinaryIO
+from typing import BinaryIO, Any
 
 from lms.common.field.lms_datatype import LMS_DataType
 from lms.common.stream.fileinfo import read_file_info
@@ -52,32 +52,32 @@ def read_msbp(stream: BinaryIO | bytes) -> MSBP:
     reader = FileReader(stream)
     file_info = read_file_info(reader, MSBP.MAGIC)
 
-    colors = None
-    attr_definitions = None
-    attribute_list_items = None
-    tag_groups = None
-    tag_definitions = None
-    tag_param_definitions = None
-    tag_list_items = None
-    styles = None
-    source_list = None
+    colors = ()
+    attr_definitions = ()
+    attribute_enums = ()
+    tag_groups = ()
+    tag_definitions = ()
+    tag_param_definitions = ()
+    tag_enums = ()
+    styles = ()
+    source_list = ()
 
-    items = []
+    last_read: tuple[Any] = ()
     for magic, _ in read_section_data(reader, file_info.section_count):
         match magic:
             case "CLB1" | "ALB1" | "SLB1":
                 # Set the name attribute of last read item
                 labels, _ = read_labels(reader)
                 for i in labels:
-                    items[i].name = labels[i]
+                    last_read[i].name = labels[i]
             case "CLR1":
                 colors = read_clr1(reader)
-                items = colors
+                last_read = colors
             case "ATI2":
                 attr_definitions = read_ati2(reader)
-                items = attr_definitions
+                last_read = attr_definitions
             case "ALI2":
-                attribute_list_items = read_ali2(reader)
+                attribute_enums = read_ali2(reader)
             case "TGG2":
                 tag_groups = read_tgg2(reader, file_info.version)
             case "TAG2":
@@ -85,25 +85,23 @@ def read_msbp(stream: BinaryIO | bytes) -> MSBP:
             case "TGP2":
                 tag_param_definitions = read_tgp2(reader)
             case "TGL2":
-                tag_list_items = read_strings(reader, False)
+                tag_enums = read_strings(reader, False)
             case "SYL3":
                 styles = read_styles(reader)
-                items = styles
+                last_read = styles
             case "CTI1":
                 source_list = read_strings(reader, True)
             case _:
                 raise ValueError(f"Unknown section magic '{magic}' in MSBP file.")
 
-    if attr_definitions is not None:
-        for definition in attr_definitions:
-            if definition.datatype is LMS_DataType.LIST:
-                definition.list_items = attribute_list_items[definition.list_index]
+    for definition in attr_definitions:
+        if definition.datatype is not LMS_DataType.ENUM:
+            continue
 
-    if tag_groups is not None:
-        for group in tag_groups:
-            group.set_all_definitions(
-                tag_definitions, tag_param_definitions, tag_list_items
-            )
+        definition.set_enum_members(attribute_enums)
+
+    for group in tag_groups:
+        group.set_all_definitions(tag_definitions, tag_param_definitions, tag_enums)
 
     file = MSBP(file_info, colors, attr_definitions, tag_groups, styles, source_list)
 

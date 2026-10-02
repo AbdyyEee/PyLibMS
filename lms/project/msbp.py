@@ -23,13 +23,13 @@ class MSBP:
     MAGIC = "MsgPrjBn"
 
     def __init__(
-        self,
-        info: LMS_FileInfo,
-        colors: list[LMS_Color] | None,
-        config: list[LMS_AttributeDefinition] | None,
-        tag_groups: list[LMS_TagGroup] | None,
-        styles: list[LMS_Style] | None,
-        source_files: list[str] | None,
+            self,
+            info: LMS_FileInfo,
+            colors: tuple[LMS_Color] | None,
+            config: tuple[LMS_AttributeDefinition] | None,
+            tag_groups: tuple[LMS_TagGroup] | None,
+            styles: tuple[LMS_Style] | None,
+            source_files: tuple[str] | None,
     ):
         self.name = ""
 
@@ -46,26 +46,26 @@ class MSBP:
         return self._info
 
     @property
-    def colors(self) -> list[LMS_Color] | None:
+    def colors(self) -> tuple[LMS_Color, ...]:
         """The color definitions for the project."""
         return self._colors
 
     @property
-    def attribute_definitions(self) -> list[LMS_AttributeDefinition] | None:
+    def attribute_definitions(self) -> tuple[LMS_AttributeDefinition, ...]:
         """The attribute definitions for the project instance."""
         return self._attribute_definitions
 
     @property
-    def tag_groups(self) -> list[LMS_TagGroup] | None:
+    def tag_groups(self) -> tuple[LMS_TagGroup, ...]:
         """The tag group definitions for the project instance."""
         return self._tag_groups
 
     @property
-    def style_list(self) -> list[LMS_Style] | None:
+    def style_list(self) -> tuple[LMS_Style, ...]:
         """The style definitions for the project instance."""
         return self._styles
 
     @property
-    def source_files(self) -> list[str] | None:
+    def source_files(self) -> tuple[str, ...]:
         """The source file definitions for the project instance."""
         return self._source_files

@@ -3,8 +3,8 @@ from lms.fileio.io import FileReader
 from lms.project.definitions.tag import LMS_TagParamDefinition
 
 
-def read_tgp2(reader: FileReader) -> list[LMS_TagParamDefinition]:
-    parameter_info = []
+def read_tgp2(reader: FileReader) -> tuple[LMS_TagParamDefinition, ...]:
+    param_definitions = []
 
     count = reader.read_uint16()
     reader.skip(2)
@@ -13,18 +13,18 @@ def read_tgp2(reader: FileReader) -> list[LMS_TagParamDefinition]:
 
         datatype = LMS_DataType(reader.read_uint8())
 
-        if datatype is not LMS_DataType.LIST:
+        if datatype is not LMS_DataType.ENUM:
             name = reader.read_encoded_string()
-            parameter_info.append(LMS_TagParamDefinition(name, datatype))
+            param_definitions.append(LMS_TagParamDefinition(name, datatype))
             continue
 
         reader.skip(1)
         list_count = reader.read_uint16()
         list_indexes = reader.read_uint16_array(list_count)
         name = reader.read_encoded_string()
-        parameter_info.append(
-            LMS_TagParamDefinition(name, LMS_DataType.LIST, list_indexes)
+        param_definitions.append(
+            LMS_TagParamDefinition(name, LMS_DataType.ENUM, list_indexes)
         )
         reader.align(4)
 
-    return parameter_info
+    return tuple(param_definitions)

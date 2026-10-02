@@ -1,18 +1,16 @@
 from lms.fileio.io import FileReader
 
 
-def read_strings(reader: FileReader, four_byte_count: bool) -> list[str]:
+def read_strings(reader: FileReader, four_byte_count: bool) -> tuple[str]:
     string_list = []
 
-    if four_byte_count:
-        count = reader.read_uint32()
-    else:
-        count = reader.read_uint16()
-        reader.skip(2)
+    start = reader.tell() + 4
+    count = reader.read_uint32() if four_byte_count else reader.read_uint16()
+    reader.seek(start)
 
     for offset in reader.read_offset_array(count):
         reader.seek(offset)
         string = reader.read_encoded_string()
         string_list.append(string)
 
-    return string_list
+    return tuple(string_list)

@@ -2,7 +2,7 @@ from lms.fileio.io import FileReader
 from lms.project.definitions.color import LMS_Color
 
 
-def read_clr1(reader: FileReader) -> list[LMS_Color]:
+def read_clr1(reader: FileReader) -> tuple[LMS_Color, ...]:
     count = reader.read_uint32()
     return [
         LMS_Color(

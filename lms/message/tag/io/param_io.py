@@ -9,18 +9,18 @@ TAG_PADDING_BYTE = b"\xcd"
 
 
 def read_encoded_parameters(
-    reader: FileReader, parameter_size: int
+        reader: FileReader, parameter_size: int
 ) -> list[int] | None:
     hex_parameters = reader.read_bytes(parameter_size).hex().upper()
     encoded_parameters = [
-        int(f"{hex_parameters[i : i + 2]}", 16)
+        int(f"{hex_parameters[i: i + 2]}", 16)
         for i in range(0, len(hex_parameters), 2)
     ]
     return encoded_parameters
 
 
 def read_decoded_parameters(
-    reader: FileReader, definition: TagDefinition
+        reader: FileReader, definition: TagDefinition
 ) -> LMS_FieldMap | None:
     parameters = {}
     for param in definition.parameters:
@@ -49,15 +49,18 @@ def write_encoded_parameters(writer: FileWriter, parameters: list[int]) -> None:
 
 
 def write_decoded_parameters(
-    writer: FileWriter, parameters: LMS_FieldMap, group_name: str, tag_name: str
+        writer: FileWriter, parameters: LMS_FieldMap, group_name: str, tag_name: str
 ) -> None:
     param_size = 0
 
     for field in parameters:
-        if is_string_datatype(field.value, field.datatype):
-            param_size += 2 + len(field.value) * writer.encoding.width
-        else:
-            param_size += field.datatype.stream_size
+        match field.datatype:
+            case LMS_DataType.STRING:
+                param_size += 2 + len(field.value) * writer.encoding.width
+            case LMS_DataType.ENUM:
+                param_size += 1
+            case _:
+                param_size += field.datatype.stream_size
 
     if needs_padding := (param_size % writer.encoding.width != 0):
         param_size += 1

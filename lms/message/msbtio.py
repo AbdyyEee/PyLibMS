@@ -2,7 +2,7 @@
 IO interface for ``MSBT`` files.
 """
 
-from typing import BinaryIO, overload
+from typing import BinaryIO
 
 from lms.common import lms_exceptions
 from lms.common.stream.fileinfo import read_file_info, write_file_info, write_file_size
@@ -24,16 +24,12 @@ from lms.titleconfig.config import AttributeConfig, TagConfig
 __all__ = ("read_msbt", "read_msbt_path", "write_msbt", "write_msbt_path")
 
 
-@overload
-def read_msbt_path(file_path: str, attribute_config: AttributeConfig) -> MSBT: ...
-
-
 def read_msbt_path(
-    file_path: str,
-    *,
-    attribute_config: AttributeConfig | None = None,
-    tag_config: TagConfig | None = None,
-    suppress_tag_errors: bool = False,
+        file_path: str,
+        *,
+        attribute_config: AttributeConfig | None = None,
+        tag_config: TagConfig | None = None,
+        suppress_tag_errors: bool = False,
 ) -> MSBT:
     """
     Reads and retrieves a MSBT file from a given path.
@@ -58,11 +54,11 @@ def read_msbt_path(
 
 
 def read_msbt(
-    stream: BinaryIO | bytes,
-    *,
-    attribute_config: AttributeConfig | None = None,
-    tag_config: TagConfig | None = None,
-    suppress_tag_errors: bool = False,
+        stream: BinaryIO | bytes,
+        *,
+        attribute_config: AttributeConfig | None = None,
+        tag_config: TagConfig | None = None,
+        suppress_tag_errors: bool = False,
 ) -> MSBT:
     """
     Reads and retrieves a MSBT file from a specified stream.

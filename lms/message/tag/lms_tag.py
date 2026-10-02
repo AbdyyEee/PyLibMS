@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import re
 from typing import TypeGuard, TypeAlias
 
@@ -9,7 +11,6 @@ from lms.message.tag.lms_tagexceptions import (
 from lms.titleconfig.definitions.tags import TagConfig, TagDefinition
 
 TAG_PADDING_VALUE = 0xCD
-LMS_ControlTag: TypeAlias = LMS_EncodedTag | LMS_DecodedTag
 
 
 class LMS_EncodedTag:
@@ -221,6 +222,9 @@ class LMS_DecodedTag:
             parameters, tag_definition.parameters
         )
         return cls(tag_definition, parameter_map)
+
+
+LMS_ControlTag: TypeAlias = LMS_EncodedTag | LMS_DecodedTag
 
 
 def is_tag(obj: object) -> TypeGuard[LMS_ControlTag]:

@@ -1,7 +1,7 @@
 """
 IO interface for ``MSBT`` files.
 """
-
+import os
 from typing import BinaryIO
 
 from lms.common import lms_exceptions
@@ -21,7 +21,7 @@ from lms.message.section.tsy1 import read_tsy1, write_tsy1
 from lms.message.section.txt2 import read_txt2, write_txt2
 from lms.titleconfig.config import AttributeConfig, TagConfig
 
-__all__ = ("read_msbt", "read_msbt_path", "write_msbt", "write_msbt_path")
+__all__ = ("read_msbt_path", "read_msbt_directory", "read_msbt", "write_msbt", "write_msbt_path")
 
 
 def read_msbt_path(
@@ -51,6 +51,38 @@ def read_msbt_path(
             tag_config=tag_config,
             suppress_tag_errors=suppress_tag_errors,
         )
+
+
+def read_msbt_directory(directory: str, *,
+                        attribute_config: AttributeConfig | None = None,
+                        tag_config: TagConfig | None = None,
+                        suppress_tag_errors: bool = False,
+                        ignore_extensions: bool = False) -> tuple[MSBT, ...]:
+    """
+    Reads and retrieves MSBT all MSBT files from a given directory.
+
+    :param directory: directory of MSBT files. All files must have the `.msbt` extension.
+    :param attribute_config: the attribute config to use for decoding attributes.
+    :param tag_config: the tag config to use for decoding tags.
+    :param suppress_tag_errors: when a tag config is used, suppress any errors while reading decoded tags.
+    :param ignore_extensions: ignore the extensions in the directory.
+
+    =====
+    Usage
+    =====
+    >>> msbt = read_msbt_directory("path/to/directory")
+    """
+    files: list[MSBT] = []
+
+    for file in os.listdir(directory):
+        if not file.endswith(".msbt") and not ignore_extensions:
+            raise ValueError("This directory contains a non-MSBT file. Only directories with MSBT files can be used!")
+
+        files.append(read_msbt_path(f"{directory}/{file}",
+                                    attribute_config=attribute_config,
+                                    tag_config=tag_config, suppress_tag_errors=suppress_tag_errors))
+
+    return tuple(files)
 
 
 def read_msbt(

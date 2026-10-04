@@ -61,6 +61,8 @@ class MSBT:
         self._attribute_config = attribute_config
         self._tag_config = tag_config
 
+        self.filename: str = ""
+
     @overload
     def __getitem__(self, index: int) -> MSBTEntry:
         ...

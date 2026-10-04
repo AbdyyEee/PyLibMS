@@ -45,12 +45,15 @@ def read_msbt_path(
     >>> msbt = read_msbt_path("path/to/file.msbt")
     """
     with open(file_path, "rb") as stream:
-        return read_msbt(
+        msbt = read_msbt(
             stream,
             attribute_config=attribute_config,
             tag_config=tag_config,
             suppress_tag_errors=suppress_tag_errors,
         )
+        msbt.filename = os.path.basename(file_path)
+
+    return msbt
 
 
 def read_msbt_directory(directory: str | os.PathLike[str], *,
@@ -78,9 +81,11 @@ def read_msbt_directory(directory: str | os.PathLike[str], *,
         if not file.endswith(".msbt") and not ignore_extensions:
             raise ValueError("This directory contains a non-MSBT file. Only directories with MSBT files can be used!")
 
-        files.append(read_msbt_path(os.path.join(directory, file),
-                                    attribute_config=attribute_config,
-                                    tag_config=tag_config, suppress_tag_errors=suppress_tag_errors))
+        files.append(msbt := read_msbt_path(file_path := os.path.join(directory, file),
+                                            attribute_config=attribute_config,
+                                            tag_config=tag_config, suppress_tag_errors=suppress_tag_errors))
+
+        msbt.filename = os.path.basename(file_path)
 
     return tuple(files)
 

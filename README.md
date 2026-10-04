@@ -85,7 +85,7 @@ Code in this library was written by me. AI was utilized occasionally when fit an
 
 `MSBP`: AI was not utilized anywhere.
 
-`MSBF`: AI was only utilized for the `LMS_BaseNode.get_descendents` function and for consulted for ways to improve the API.
+`MSBF`: AI was only utilized for the `LMS_BaseNode.get_descendents` function and for consultation for ways to improve the API.
 
 # Credits & Sources
 * [SS-Decomp](https://github.com/zeldaret/ss): Referenced some parts of their MSBF decomp when adding the format

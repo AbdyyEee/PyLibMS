@@ -136,7 +136,7 @@ def read_flw3(reader: FileReader, config: NodeConfig | None, msbt: MSBT | None, 
 
             continue
         elif isinstance(node, LMS_JumpNode):
-            node.next_flowchart = node_map[next_node_id]
+            node.next_entry = node_map[next_node_id]
             continue
 
         if next_node_id is None:
@@ -328,7 +328,7 @@ def write_flw3(
                 writer.write_bytes(b"\x00" * 2)
                 writer.write_bytes(b"\x00" * 4)
 
-                write_next_node_id(writer, stream_ids[node.next_flowchart])
+                write_next_node_id(writer, stream_ids[node.next_entry])
                 writer.write_uint16(node.unknown_short0a)
                 writer.skip(4)
 

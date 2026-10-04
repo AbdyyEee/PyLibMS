@@ -3,7 +3,7 @@ from __future__ import annotations
 import string
 from collections import deque
 from types import MappingProxyType
-from typing import Generator, TypeAlias
+from typing import Generator, TypeAlias, Mapping
 
 import lms.flowchart.definitions.lms_nodeexceptions as node_exceptions
 from lms.common.field.lms_datatype import LMS_DataType
@@ -302,7 +302,7 @@ class LMS_BranchNode(LMS_BaseNode):
         return len(self._branches)
 
     @property
-    def branches(self) -> MappingProxyType[int, LMS_BaseNode | None]:
+    def branches(self) -> Mapping[int, LMS_BaseNode | None]:
         """The node branches."""
         return MappingProxyType(self._branches)
 
@@ -541,7 +541,7 @@ class LMS_JumpNode(LMS_BaseNode):
     def __init__(self, node_id: int, unknown_short0a: int, next: LMS_EntryNode = None):
         super().__init__(node_id, LMS_NodeType.JUMP, LMS_NodeParameterType.NONE, None)
 
-        self.next = next
+        self._next_entry = next
 
         # TODO: Document this unknown value at 0xA in the node
         # This value is usually -1 in TL 3DS but is a set value in other games
@@ -558,15 +558,17 @@ class LMS_JumpNode(LMS_BaseNode):
         return cls(None, unknown_short0a, next_entry_point)
 
     @property
-    def next_flowchart_id(self) -> int | None:
-        """The ID of the next flowchart."""
-        return None if self.next is None else self.next.id
+    def next_entry(self) -> LMS_EntryNode | None:
+        """The pointing entry node."""
+        return self._next_entry
 
-    def set_next_node(self, node: LMS_BaseNode | None) -> LMS_BaseNode | None:
-        super().set_next_node(node)
+    @next_entry.setter
+    def next_entry(self, node: LMS_EntryNode | None) -> None:
         if isinstance(node, LMS_EntryNode) or node is None:
-            self.next = node
-        return node
+            super().set_next_node(node)
+            self._next_entry = node
+        else:
+            raise TypeError("The next pointing entry node must be a LMS_EntryNode or None")
 
 
 def verify_parameter_structure(

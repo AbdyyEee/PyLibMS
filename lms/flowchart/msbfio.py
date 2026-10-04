@@ -70,7 +70,7 @@ def read_msbf(
                                                   in the PyLibMS repository https://github.com/AbdyyEee/PylibMS""")
 
     for i, label in enumerate(labels.values()):
-        entry_nodes[i].flowchart_name = label
+        entry_nodes[i].name = label
         msbf.add_flowchart(label, entry_nodes[i])
 
     msbf.slot_count = slot_count
@@ -113,11 +113,8 @@ def write_msbf(file: MSBF) -> bytes:
 
     # Real IDs that must be sequential will be written to the stream
     # Saved here so ids aren't mutated in the current state
-    stream_ids = {node: stream_id for stream_id, node in enumerate(file.nodes.values())}
-
-    index_map = {
-        flowchart.name: stream_ids[flowchart.entry_point] for flowchart in file
-    }
+    stream_ids = {node: stream_id for stream_id, node in enumerate(file)}
+    index_map = {entry.name: stream_ids[entry] for entry in file.entry_nodes}
 
     write_section(writer, "FLW3", write_flw3, list(file.nodes.values()), stream_ids)
     write_section(

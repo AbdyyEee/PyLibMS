@@ -1,4 +1,5 @@
 from types import MappingProxyType
+from typing import Mapping, Iterator
 
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
@@ -33,15 +34,21 @@ class MSBF:
         # it is wiser to store an editable attribute just in case a game decides to vary the amount.
         self.slot_count = MSBF.DEFAULT_SLOT_COUNT
 
-        self._flowcharts = flowcharts or []
+        self._flowcharts: dict[int, LMS_EntryNode] = flowcharts or {}
         self._nodes: dict[int, LMS_BaseNode] = {}
         self._global_node_id = 0
 
-    def __iter__(self):
-        return iter(self._flowcharts)
+    def __contains__(self, node: LMS_BaseNode) -> bool:
+        return node.id in self._nodes
 
-    def __len__(self):
+    def __getitem__(self, node_id: int) -> LMS_BaseNode:
+        return self._nodes[node_id]
+
+    def __len__(self) -> int:
         return len(self._flowcharts)
+
+    def __iter__(self) -> Iterator[LMS_EntryNode]:
+        return iter(self._nodes.values())
 
     @classmethod
     def new(
@@ -68,31 +75,37 @@ class MSBF:
         return self._info
 
     @property
-    def nodes(self) -> MappingProxyType[int, LMS_BaseNode]:
+    def nodes(self) -> Mapping[int, LMS_BaseNode]:
         """Global node map for the file."""
         return MappingProxyType(self._nodes)
 
     @property
-    def flowcharts(self) -> MappingProxyType[str, LMS_Flowchart]:
+    def flowcharts(self) -> Mapping[str, LMS_EntryNode]:
         """The flowcharts of the MSBF instance."""
-        return MappingProxyType(
-            {flowchart.name: flowchart for flowchart in self._flowcharts}
-        )
+        return MappingProxyType(self._flowcharts)
 
-    def get_flowchart_references(self, node_id: int) -> set[LMS_Flowchart]:
+    @property
+    def entry_nodes(self) -> tuple[LMS_EntryNode, ...]:
+        """The entry nodes of the MSBF instance."""
+        return tuple(self._flowcharts.values())
+
+    def get_flowchart_references(self, node: LMS_BaseNode) -> tuple[LMS_EntryNode, ...]:
         """
         Determines which flowcharts contain this node.
 
-        :param node_id: The node to find references for.
+        :param node: The node to find references for.
         """
-        return {flowchart for flowchart in self._flowcharts if node_id in flowchart.nodes}
+        references = []
+        for entry_node in self:
+            if node in entry_node:
+                references.append(entry_node)
+        return references
 
-    def register_node(self, node: LMS_BaseNode, flowchart: LMS_Flowchart = None) -> None:
+    def register_node(self, node: LMS_BaseNode) -> None:
         """
         Registers a node to the MSBF instance.
 
         :param node: The node to register.
-        :param flowchart: Optional argument that registers the node to that flowchart.
         """
         if not isinstance(node, LMS_BaseNode):
             raise TypeError(
@@ -107,58 +120,63 @@ class MSBF:
         node.id = self._generate_next_id()
         self._nodes[node.id] = node
 
-        if flowchart is not None:
-            flowchart.register_node(node)
-
-    def destroy_node(self, node_id: int) -> None:
+    def destroy_node(self, to_delete: LMS_BaseNode) -> None:
         """
-        Destroys a node and all its references in every flowchart.
+        Destroys a node and all its references.
 
-        :param node_id: the id of the node to delete.
+        :param to_delete: The node to delete.
         """
-        if node_id not in self._nodes:
-            raise KeyError(f"Node id '{node_id}' does not exist in this flowchart!")
+        if to_delete not in self._nodes:
+            raise KeyError(f"Node id '{to_delete.id}' does not exist in this flowchart!")
 
-        deleted_node = self._nodes[node_id]
-
-        if isinstance(deleted_node, LMS_EntryNode):
+        if isinstance(to_delete, LMS_EntryNode):
             raise ValueError("Entry nodes cannot be deleted!")
 
-        for flowchart in self._flowcharts:
-            if node_id in flowchart.nodes:
-                flowchart.deregister_node(node_id)
+        # Check each node and all nested branches for the node, and destroy it
+        # If in a branch, the node is set to NONE/END
+        # Otherwise the next node of to_delete is the new next node of the child
+        new_next = to_delete.next_node
+        for node in self:
+            if isinstance(node, LMS_BranchNode):
+                for case, branch in node.branches:
+                    if branch is None or branch != to_delete:
+                        continue
+                    node.set_branch_case(case, None)
+                continue
 
-        del self._nodes[node_id]
+            if node.next_node == to_delete:
+                node.set_next_node(new_next)
+
+        del self._nodes[to_delete.id]
 
     def add_flowchart(
-            self, flowchart_name: str, entry_point: LMS_EntryNode = None
-    ) -> LMS_Flowchart:
+            self, name: str, entry_point: LMS_EntryNode = None
+    ) -> LMS_EntryNode:
         """
         Add a flowchart to the MSBF instance.
 
-        :param flowchart_name: The name of the new flowchart.
+        :param name: The name of the new flowchart.
         :param entry_point: The entry point of the new flowchart. If not provided, the method creates one.
         """
-        if flowchart_name in self.flowcharts:
-            raise KeyError(f"Flowchart with name '{flowchart_name}' already exists!")
+        if name in self.flowcharts:
+            raise KeyError(f"Flowchart with name '{name}' already exists!")
 
         if entry_point is None:
-            entry_point = LMS_EntryNode(self._generate_next_id(), flowchart_name)
+            entry_point = LMS_EntryNode(self._generate_next_id(), name)
 
-        flowchart = LMS_Flowchart(entry_point)
-        self._flowcharts.append(flowchart)
+        for node in entry_point.get_descendents():
+            if node.id in self._nodes:
+                continue
+            self._nodes[node.id] = node
 
-        for flowchart in self._flowcharts:
-            for node_id, node in flowchart.nodes.items():
-                self._nodes[node_id] = node
-
+        self._flowcharts[name] = entry_point
         self._nodes = dict(sorted(self._nodes.items()))
 
         # Node IDs may not be sequential after user additions/deletions, so we track the absolute max value of
         # all nodes and store it so that _generate_next_id can set any IDs added via the flowchart correctly.
         self._global_node_id = max(self._nodes, default=-1) + 1
 
-        return flowchart
+        return entry_point
 
     def delete_flowchart(self, name: str):
         """
@@ -172,7 +190,7 @@ class MSBF:
 
         entry_point = self.flowcharts[name].entry_point
 
-        is_valid_jump = lambda n: isinstance(n, LMS_JumpNode) and n.next_flowchart == entry_point
+        is_valid_jump = lambda n: isinstance(n, LMS_JumpNode) and n.next_entry == entry_point
 
         for flowchart in self:
             for node in flowchart.nodes.copy().values():
@@ -183,12 +201,9 @@ class MSBF:
                     continue
 
                 if is_valid_jump(node):
-                    node.next_flowchart = None
+                    node.next_entry = None
 
     def _generate_next_id(self) -> int:
-        """
-        Lazy generation for the next ID of a node. IDs are normalized properly when the msbf file is being written.
-        """
         next_id = self._global_node_id
         self._global_node_id += 1
         return next_id

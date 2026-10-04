@@ -27,11 +27,11 @@ class LMS_Flowchart:
     @property
     def name(self) -> str:
         """The name of the flowchart."""
-        return self._entry_node.flowchart_name
+        return self._entry_node.name
 
     @name.setter
     def name(self, name: str) -> None:
-        self._entry_node.flowchart_name = name
+        self._entry_node.name = name
 
     @property
     def entry_point(self) -> LMS_EntryNode:

@@ -149,33 +149,33 @@ class MSBF:
         del self._nodes[to_delete.id]
 
     def add_flowchart(
-            self, name: str, entry_point: LMS_EntryNode = None
+            self, name: str, entry_node: LMS_EntryNode = None
     ) -> LMS_EntryNode:
         """
         Add a flowchart to the MSBF instance.
 
         :param name: The name of the new flowchart.
-        :param entry_point: The entry point of the new flowchart. If not provided, the method creates one.
+        :param entry_node: The entry point of the new flowchart. If not provided, the method creates one.
         """
         if name in self.flowcharts:
             raise KeyError(f"Flowchart with name '{name}' already exists!")
 
-        if entry_point is None:
-            entry_point = LMS_EntryNode(self._generate_next_id(), name)
+        if entry_node is None:
+            entry_node = LMS_EntryNode(self._generate_next_id(), name)
 
-        for node in entry_point.get_descendents():
+        for node in entry_node.get_descendents():
             if node.id in self._nodes:
                 continue
             self._nodes[node.id] = node
 
-        self._flowcharts[name] = entry_point
+        self._flowcharts[name] = entry_node
         self._nodes = dict(sorted(self._nodes.items()))
 
         # Node IDs may not be sequential after user additions/deletions, so we track the absolute max value of
         # all nodes and store it so that _generate_next_id can set any IDs added via the flowchart correctly.
         self._global_node_id = max(self._nodes, default=-1) + 1
 
-        return entry_point
+        return entry_node
 
     def delete_flowchart(self, name: str):
         """

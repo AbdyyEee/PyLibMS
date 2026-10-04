@@ -40,6 +40,16 @@ class LMS_BaseNode:
         self._stream_next_id: int | None = None
         self._next_node: LMS_BaseNode | None = None
 
+    def __contains__(self, node: LMS_BaseNode) -> bool:
+        if self is node:
+            return True
+
+        for descendent in self.get_descendents():
+            if descendent is node:
+                return True
+
+        return False
+
     @property
     def type(self) -> LMS_NodeType:
         """The type of the node."""
@@ -364,6 +374,7 @@ class LMS_BranchNode(LMS_BaseNode):
 
         # Unpack dict for formatting $case and $param formats
         # Allows inserting parameter values dynamically into the case message
+        # This will run normally even without any valid formatting
         string_map = {}
         for param_definition in self.definition.parameter_definitions:
             string_map[param_definition.name] = self.parameter_value[
@@ -517,10 +528,9 @@ class LMS_EntryNode(LMS_BaseNode):
     Class that represents an entry node. Node that is at the start of a flowchart.
     """
 
-    def __init__(self, node_id: int, flowchart_name: str = ""):
+    def __init__(self, node_id: int, name: str = ""):
         super().__init__(node_id, LMS_NodeType.ENTRY, LMS_NodeParameterType.NONE, None)
-
-        self.flowchart_name = flowchart_name
+        self.name = name
 
 
 class LMS_JumpNode(LMS_BaseNode):
@@ -528,10 +538,10 @@ class LMS_JumpNode(LMS_BaseNode):
     Class that represents a jump node. Node that jumps to another flowchart.
     """
 
-    def __init__(self, node_id: int, unknown_short0a: int, next_entry_point: LMS_EntryNode = None):
+    def __init__(self, node_id: int, unknown_short0a: int, next: LMS_EntryNode = None):
         super().__init__(node_id, LMS_NodeType.JUMP, LMS_NodeParameterType.NONE, None)
 
-        self.next_flowchart = next_entry_point
+        self.next = next
 
         # TODO: Document this unknown value at 0xA in the node
         # This value is usually -1 in TL 3DS but is a set value in other games
@@ -550,12 +560,12 @@ class LMS_JumpNode(LMS_BaseNode):
     @property
     def next_flowchart_id(self) -> int | None:
         """The ID of the next flowchart."""
-        return None if self.next_flowchart is None else self.next_flowchart.id
+        return None if self.next is None else self.next.id
 
     def set_next_node(self, node: LMS_BaseNode | None) -> LMS_BaseNode | None:
         super().set_next_node(node)
         if isinstance(node, LMS_EntryNode) or node is None:
-            self.next_flowchart = node
+            self.next = node
         return node
 
 

@@ -189,9 +189,11 @@ class TitleConfig:
 
         attribute_configs = {}
         for config in parsed_content.get(cls.ATTR_KEY, []):
-            config = AttributeConfig(config["name"], config.get("description", ""))
+            config_obj = AttributeConfig(config["name"], config.get("description", ""))
             for value_def in config["definitions"]:
-                config.add_definition(FieldDefinition.from_dict(value_def))
+                config_obj.add_definition(FieldDefinition.from_dict(value_def))
+
+            attribute_configs[config_obj.name] = config_obj
 
         tag_content = parsed_content.get(cls.TAG_KEY, {})
         group_map = tag_content["groups"]

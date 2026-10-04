@@ -3,7 +3,6 @@ from typing import Mapping, Iterator
 
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
-from lms.flowchart.definitions.flowchart import LMS_Flowchart
 from lms.flowchart.definitions.node import LMS_EntryNode, LMS_JumpNode, LMS_BranchNode, LMS_BaseNode
 
 
@@ -26,7 +25,7 @@ class MSBF:
     DEFAULT_SLOT_COUNT = 59
 
     def __init__(
-            self, info: LMS_FileInfo | None = None, flowcharts: list[LMS_Flowchart] = None
+            self, info: LMS_FileInfo | None = None, flowcharts: dict[int, LMS_EntryNode] = None
     ):
         self._info = info if info is not None else LMS_FileInfo()
 

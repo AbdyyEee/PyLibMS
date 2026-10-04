@@ -4,16 +4,16 @@
 ![LICENSE](https://img.shields.io/badge/license-MIT-blue)
 [![PyPI version](https://badge.fury.io/py/PyLibMS.svg)](https://badge.fury.io/py/PyLibMS)
 
-PyLibMS is a library built in Python 3.10 and above for reading and writing of libMessageStudio (LMS) proprietary file
+PyLibMS is a library built in Python 3.11 and above for reading and writing of libMessageStudio (LMS) proprietary file
 formats from Nintendo.
 
 The following is supported:
 
-| Format | Read | Write | Support                                                                                                                                     |
-|--------|------|-------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| `MSBT` | ✅   | ✅    | 1:1 Reading and writing Support for majority of sections. Full attribute (`ATR1`) decoding with configurations. Tag decoding 1:1 with the official Nintendo `.mstxt` file format. |
+| Format | Read | Write | Support                                                                                                                                                                                  |
+|--------|------|-------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `MSBT` | ✅   | ✅    | 1:1 Reading and writing Support for majority of sections. Full attribute (`ATR1`) decoding with configurations. Tag decoding 1:1 with the official Nintendo `.mstxt` file format.        |
 | `MSBF` | ✅   | ✅    | 1:1 Reading and writing flowcharts (`FLW3`). Support for custom node definitions, attaching names and descriptions to nodes. Altering parameter datatypes for flexibility between games. |
-| `MSBP` | ✅   | ❌    | Viewing all MSBP relevant metadata and generating configuration files for use with `MSBT` files. |
+| `MSBP` | ✅   | ❌    | Viewing all MSBP relevant metadata and generating configuration files for use with `MSBT` files.                                                                                         |
 
 This library is designed to support LMS revision >=3.0. These include files generated for late **Wii** titles,
 **Nintendo 3DS**, **Wii U**, **Mobile**, **Nintendo Switch** and **Nintendo Switch 2** games.
@@ -24,6 +24,7 @@ Simple preview of the library is below. See [the wiki](https://github.com/AbdyyE
 and examples.
 
 ## Reading
+
 ```py
 # MSBT
 from lms.message.msbtio import read_msbt_path
@@ -42,6 +43,7 @@ msbf = read_msbf_path("Flowchart.msbf")
 ```
 
 ## Writing
+
 ```py
 # MSBT
 from lms.message.msbtio import write_msbt_path
@@ -79,15 +81,19 @@ pip install -e .
 ```
 
 # AI Disclaimer
+
 Code in this library was written by me. AI was utilized occasionally when fit and always reviewed by me.
 
-`MSBT`: Only usage of AI was for control tag regex formats and for understanding implementing string importing with `re`.
+`MSBT`: Only usage of AI was for control tag regex formats and for understanding implementing string importing with
+`re`.
 
 `MSBP`: AI was not utilized anywhere.
 
-`MSBF`: AI was only utilized for the `LMS_BaseNode.get_descendents` function and for consultation for ways to improve the API.
+`MSBF`: AI was only utilized for the `LMS_BaseNode.get_descendents` function and for consultation for ways to improve
+the API.
 
 # Credits & Sources
+
 * [SS-Decomp](https://github.com/zeldaret/ss): Referenced some parts of their MSBF decomp when adding the format
   to [Nintendo-File-Formats](https://nintendo-formats.com) and this library.
 * [Nintendo-File-Formats](https://nintendo-formats.com) by Kinnay: For existing information on the MSBT and MSBP file

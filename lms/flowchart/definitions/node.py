@@ -10,6 +10,7 @@ from lms.common.field.lms_datatype import LMS_DataType
 from lms.common.field.lms_field import LMS_FieldMap, verify_number_from_datatype
 from lms.common.lms_exceptions import LMS_Error
 from lms.flowchart.definitions.node_type import LMS_NodeType, LMS_NodeParameterType
+from lms.message.lms_messagetext import LMS_MessageText
 from lms.message.msbt import MSBT
 from lms.message.msbtentry import MSBTEntry
 from lms.titleconfig.definitions.nodes import NodeDefinition
@@ -195,16 +196,35 @@ class LMS_MessageNode(LMS_BaseNode):
 
     @property
     def msbt(self) -> MSBT | None:
-        """MSBT instance the node references. Optional, is set by providing a MSBT file on reading."""
+        """MSBT instance the node references. Optional, is set by providing a ``MSBT`` file on reading."""
         return self._msbt
 
     @property
-    def msbt_entry(self) -> MSBTEntry:
-        """The MSBTEntry instance tied to the message node."""
+    def message_entry(self) -> MSBTEntry:
+        """The MSBTEntry instance tied to the node."""
         if self._msbt is None:
             raise LMS_Error("There is no MSBTEntry associated with this node!")
 
-        return self._msbt.get_entry_by_index(self.label_index)
+        return self._msbt[self.label_index]
+
+    @message_entry.setter
+    def message_entry(self, entry: MSBTEntry) -> None:
+        if self.msbt is None:
+            raise LMS_Error("There is no MSBT associated with this node!")
+
+        self.label_index = self._msbt.entries.index(entry)
+
+    @property
+    def message_text(self) -> LMS_MessageText:
+        """Message text tied to this node."""
+        if self._msbt is None:
+            raise LMS_Error("There is no MSBT associated with this node!")
+
+        return self.message_entry.message
+
+    @message_text.setter
+    def message_text(self, text: str) -> None:
+        self.message_entry.message.text = text
 
 
 class LMS_BranchNode(LMS_BaseNode):

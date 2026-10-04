@@ -1,8 +1,7 @@
 """
 IO interface for ``MSBF`` files.
 """
-
-from typing import BinaryIO
+from typing import BinaryIO, Sequence
 
 from lms.common.lms_exceptions import LMS_Error, LMS_UnsupportedSectionError
 from lms.common.stream.fileinfo import read_file_info, write_file_info, write_file_size
@@ -19,15 +18,19 @@ __all__ = ("read_msbf", "read_msbf_path", "write_msbf", "write_msbf_path")
 
 def read_msbf_path(
         file_path: str,
+        *,
         config: NodeConfig | None = None,
         msbt: MSBT | None = None,
+        msbt_files: Sequence[MSBT] | None = None
 ) -> MSBF:
     """
     Reads a MSBF file from a path.
 
     :param file_path: path to the MSBF file.
     :param config: the node configuration to use.
-    :param msbt: MSBT object for decoding message nodes.
+    :param msbt_files: sequence of MSBT files utilized for converting ``LMS_MessageNode.msbt_index`` into a real objects.
+    :param msbt: Override for decoding message nodes to force all ``LMS_MessageNode`` nodes to utilize this MSBT. Best when
+    you know a file utilizes only one MSBT.
 
     =====
     Usage
@@ -35,21 +38,24 @@ def read_msbf_path(
     >>> msbf = read_msbf_path("path/to/file.msbf")
     """
     with open(file_path, "rb") as stream:
-        return read_msbf(stream, config, msbt)
+        return read_msbf(stream, config=config, msbt=msbt, msbt_files=msbt_files)
 
 
 def read_msbf(
         stream: BinaryIO | bytes,
+        *,
         config: NodeConfig | None = None,
         msbt: MSBT | None = None,
+        msbt_files: Sequence[MSBT] | None = None
 ) -> MSBF:
     """
     Reads a MSBF file from a stream.
 
-    :param stream: Stream to read the file from.
+    :param stream: stream to read the file from.
     :param config: the node configuration to use.
-    :param msbt: MSBT object for decoding message nodes.
-
+    :param msbt_directory: the directory of MSBT files, use for LMS_MessageNodes to auto determine the MSBT per node.
+    :param msbt: Override for decoding message nodes to force all LMS_MessageNodes to utilize this MSBT. Best when
+    you know a file utilizes only one MSBT.
     =====
     Usage
     =====
@@ -58,11 +64,14 @@ def read_msbf(
     reader = FileReader(stream)
     file_info = read_file_info(reader, MSBF.MAGIC)
 
+    if msbt is not None and msbt_files:
+        raise ValueError("There may only be one of a directory or MSBT provided.")
+
     msbf = MSBF(file_info)
     for magic, size in read_section_data(reader, file_info.section_count):
         match magic:
             case "FLW3":
-                entry_nodes = read_flw3(reader, config, msbt)
+                entry_nodes = read_flw3(reader, config, msbt, msbt_files)
             case "FEN1":
                 labels, slot_count = read_labels(reader)
             case "REF1":

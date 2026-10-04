@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Sequence
 
 from lms.common.field.io import read_field, write_field
 from lms.common.field.lms_datatype import LMS_DataType
@@ -25,7 +25,10 @@ NODE_SIZE = 16
 VARIABLE_WIDTH_DATATYPES = (LMS_DataType.BOOL, LMS_DataType.ENUM)
 
 
-def read_flw3(reader: FileReader, config: NodeConfig | None, msbt: MSBT | None, ) -> list[LMS_EntryNode]:
+def read_flw3(reader: FileReader,
+              config: NodeConfig | None,
+              msbt: MSBT | None = None,
+              msbt_files: Sequence[MSBT] | None = None) -> list[LMS_EntryNode]:
     section_start = reader.tell()
     node_count = reader.read_uint16()
     branch_table_id_count = reader.read_uint16()
@@ -54,8 +57,17 @@ def read_flw3(reader: FileReader, config: NodeConfig | None, msbt: MSBT | None, 
 
                 stream_next_id = read_next_node_id(reader)
                 file_index = reader.read_uint16()
-                message_index = reader.read_uint16()
-                node = LMS_MessageNode(i, file_index, message_index, msbt)
+                label_index = reader.read_uint16()
+
+                if msbt_files is not None:
+                    try:
+                        msbt = msbt_files[file_index]
+                    except IndexError:
+                        # Since we can't guarantee the user supplies the right directory or the indexing is always right
+                        # we swallow the exception and revert to no MSBT
+                        msbt = None
+
+                node = LMS_MessageNode(i, file_index, label_index, msbt)
                 reader.skip(2)
             case LMS_NodeType.BRANCH:
                 # There is no next node id as the next node is determined by the branches

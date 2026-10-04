@@ -79,13 +79,13 @@ pip install -e .
 ```
 
 # AI Disclaimer
-Code in this library was written by me. LLMs were utilized occasionally when fit and always reviewed by me.
+Code in this library was written by me. AI was utilized occasionally when fit and always reviewed by me.
 
-`MSBT`: LLMs was utilized for control tag regex formats and for understanding implementing string importing with `re`.
+`MSBT`: Only usage of AI was for control tag regex formats and for understanding implementing string importing with `re`.
 
-`MSBP`: no LLMs were utilized anywhere.
+`MSBP`: AI was not utilized anywhere.
 
-`MSBF`: LLMs were utilized sparingly for select functions (`get_descendents`) and for advice on improving the API.
+`MSBF`: AI was only utilized for the `LMS_BaseNode.get_descendents` function and for consulted for ways to improve the API.
 
 # Credits & Sources
 * [SS-Decomp](https://github.com/zeldaret/ss): Referenced some parts of their MSBF decomp when adding the format

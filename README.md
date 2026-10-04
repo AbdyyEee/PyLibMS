@@ -24,46 +24,31 @@ Simple preview of the library is below. See [the wiki](https://github.com/AbdyyE
 and examples.
 
 ## Reading
-
-### MSBT
-
 ```py
+# MSBT
 from lms.message.msbtio import read_msbt_path
 
 msbt = read_msbt_path("Text.msbt")
-```
 
-### MSBP
-
-```py
+# MSBP
 from lms.project.msbpread import read_msbp_path
 
 msbp = read_msbp_path("Project.msbp")
-```
 
-### MSBF
-
-```py
+# MSBF
 from lms.flowchart.msbfio import read_msbf_path
 
 msbf = read_msbf_path("Flowchart.msbf")
 ```
 
 ## Writing
-
-There is no writing for `MSBP` files as most of the time it acts as leftover metadata and not actually loaded by games.
-
-### MSBT
-
 ```py
+# MSBT
 from lms.message.msbtio import write_msbt_path
 
 write_msbt_path("Out_text.msbt")
-```
 
-### MSBF
-
-```py
+# MSBF
 from lms.flowchart.msbfio import write_msbf_path
 
 write_msbf_path("Out_Flowchart.msbf")

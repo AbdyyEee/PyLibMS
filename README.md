@@ -70,7 +70,7 @@ pip install PyLibMS
 
 # Build Instructions
 
-Python version must be `3.10` or higher.
+Python version must be `3.11` or higher.
 
 Clone the repository, then run `pip install` (venv recommended)
 

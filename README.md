@@ -11,8 +11,8 @@ The following is supported:
 
 | Format | Read | Write | Support                                                                                                                                     |
 |--------|------|-------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| `MSBT` | ✅   | ✅    | Reading and writing Support for majority of sections. Full attribute (`ATR1`) decoding with configurations. Tag decoding 1:1 with the official Nintendo `.mstxt` file format. |
-| `MSBF` | ✅   | ✅    | Reading and writing flowcharts `FLW3`. Support for custom node definitions, attaching names and descriptions to nodes. Altering parameter datatypes for flexibility between games. |
+| `MSBT` | ✅   | ✅    | 1:1 Reading and writing Support for majority of sections. Full attribute (`ATR1`) decoding with configurations. Tag decoding 1:1 with the official Nintendo `.mstxt` file format. |
+| `MSBF` | ✅   | ✅    | 1:1 Reading and writing flowcharts (`FLW3`). Support for custom node definitions, attaching names and descriptions to nodes. Altering parameter datatypes for flexibility between games. |
 | `MSBP` | ✅   | ❌    | Viewing all MSBP relevant metadata and generating configuration files for use with `MSBT` files. |
 
 This library is designed to support LMS revision >=3.0. These include files generated for late **Wii** titles,

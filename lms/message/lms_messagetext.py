@@ -1,4 +1,6 @@
 import re
+from types import MappingProxyType
+from typing import Sequence, Mapping
 
 from lms.common.field.lms_field import LMS_FieldMap, FieldValue
 from lms.message.tag.lms_tag import (
@@ -17,9 +19,9 @@ class LMS_MessageText:
     TAG_FORMAT = re.compile(r"(\[[^]]+])")
 
     def __init__(
-        self,
-        message: str | list[str | LMS_ControlTag],
-        tag_config: TagConfig | None = None,
+            self,
+            message: str | Sequence[str | LMS_ControlTag],
+            tag_config: TagConfig | None = None,
     ):
         self._tag_config = tag_config
 
@@ -47,12 +49,12 @@ class LMS_MessageText:
         self._set_segments(string)
 
     @property
-    def tags(self) -> list[LMS_ControlTag]:
+    def tags(self) -> tuple[LMS_ControlTag, ...]:
         """The list of control tags in the message."""
-        return [part for part in self._segments if is_tag(part)]
+        return tuple([part for part in self._segments if is_tag(part)])
 
     @property
-    def tag_positions(self) -> dict[LMS_ControlTag, tuple[int, int]]:
+    def tag_positions(self) -> Mapping[LMS_ControlTag, tuple[int, int]]:
         """Dict of tag objects to their start and end positions in text."""
         positions = {}
         pos = 0
@@ -61,10 +63,10 @@ class LMS_MessageText:
             if is_tag(part):
                 positions[part] = (pos, pos + text_len)
             pos += text_len
-        return positions
+        return MappingProxyType(positions)
 
     def append_encoded_tag(
-        self, group_id: int, tag_index: int, *parameters: int, is_closing: bool = False
+            self, group_id: int, tag_index: int, *parameters: int, is_closing: bool = False
     ) -> LMS_EncodedTag:
         """
         Appends an encoded tag to the current message and returns that tag.
@@ -96,11 +98,11 @@ class LMS_MessageText:
         return tag
 
     def append_decoded_tag(
-        self,
-        group_name: str,
-        tag_name: str,
-        is_closing: bool = False,
-        **parameters: FieldValue,
+            self,
+            group_name: str,
+            tag_name: str,
+            is_closing: bool = False,
+            **parameters: FieldValue,
     ) -> LMS_DecodedTag:
         """
         Appends a decoded tag to the current message and returns that tag.

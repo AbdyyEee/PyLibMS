@@ -1,38 +1,4 @@
 game: Pikmin 3
-# Definitions from https://pikmintkb.com/wiki/MSBF_file_(Pikmin_3)
-node_definitions:
-  branch:
-    - id: 1
-      name: checkEnergyTank
-      parameter_type: p32_0
-      enum_options:
-        0: "juice 0"
-        1: "juice 1"
-      parameters:
-        - name: amount
-    - id: 2
-      name: checkStoryProgress
-      parameter_type: p32_0
-      enum_options:
-        0: "progress > $value"
-        1: "progress <= $value"
-      parameters:
-        - name: value
-    - id: 4
-      name: checkGamemode
-      parameter_type: p32_1
-      enum_options:
-        0: "Story"
-        1: "Mission/Side Stories"
-        2: "Bingo Battle"
-      parameters:
-        - name: param
-  event:
-    - id: 0
-      name: playDemo
-      parameter_type: str
-      parameters:
-        - name: param
 tag_definitions:
   groups:
     0: System
@@ -104,9 +70,6 @@ tag_definitions:
         - name: a
           description: ''
           datatype: uint8
-        - name: name
-          description: ''
-          datatype: string
     - name: PageBreak
       group_id: 0
       tag_index: 4

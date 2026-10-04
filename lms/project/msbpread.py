@@ -23,7 +23,7 @@ from lms.project.section.tgp2 import read_tgp2
 __all__ = ("read_msbp", "read_msbp_path")
 
 
-def read_msbp_path(file_path: str) -> MSBP:
+def read_msbp_path(file_path: str | os.PathLike[str]) -> MSBP:
     """
     Reads and retrieves a MSBP file from a given path.
 

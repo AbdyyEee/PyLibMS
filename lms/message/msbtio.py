@@ -25,7 +25,7 @@ __all__ = ("read_msbt_path", "read_msbt_directory", "read_msbt", "write_msbt", "
 
 
 def read_msbt_path(
-        file_path: str,
+        file_path: str | os.PathLike[str],
         *,
         attribute_config: AttributeConfig | None = None,
         tag_config: TagConfig | None = None,
@@ -53,7 +53,7 @@ def read_msbt_path(
         )
 
 
-def read_msbt_directory(directory: str, *,
+def read_msbt_directory(directory: str | os.PathLike[str], *,
                         attribute_config: AttributeConfig | None = None,
                         tag_config: TagConfig | None = None,
                         suppress_tag_errors: bool = False,
@@ -78,7 +78,7 @@ def read_msbt_directory(directory: str, *,
         if not file.endswith(".msbt") and not ignore_extensions:
             raise ValueError("This directory contains a non-MSBT file. Only directories with MSBT files can be used!")
 
-        files.append(read_msbt_path(f"{directory}/{file}",
+        files.append(read_msbt_path(os.path.join(directory, file),
                                     attribute_config=attribute_config,
                                     tag_config=tag_config, suppress_tag_errors=suppress_tag_errors))
 

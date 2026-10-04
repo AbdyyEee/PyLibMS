@@ -1,6 +1,7 @@
 """
 IO interface for ``MSBF`` files.
 """
+import os
 from typing import BinaryIO, Sequence
 
 from lms.common.lms_exceptions import LMS_Error, LMS_UnsupportedSectionError
@@ -17,7 +18,7 @@ __all__ = ("read_msbf", "read_msbf_path", "write_msbf", "write_msbf_path")
 
 
 def read_msbf_path(
-        file_path: str,
+        file_path: str | os.PathLike[str],
         *,
         config: NodeConfig | None = None,
         msbt: MSBT | None = None,

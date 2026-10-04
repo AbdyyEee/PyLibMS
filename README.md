@@ -78,8 +78,16 @@ cd PyLibMS
 pip install -e .
 ```
 
-# Credits & Sources
+# AI Disclaimer
+Code in this library was written by me. LLMs were utilized occasionally when fit and always reviewed by me.
 
+`MSBT`: LLMs was utilized for control tag regex formats and for understanding implementing string importing with `re`.
+
+`MSBP`: no LLMs were utilized anywhere.
+
+`MSBF`: LLMs were utilized sparingly for select functions (`get_descendents`) and for advice on improving the API.
+
+# Credits & Sources
 * [SS-Decomp](https://github.com/zeldaret/ss): Referenced some parts of their MSBF decomp when adding the format
   to [Nintendo-File-Formats](https://nintendo-formats.com) and this library.
 * [Nintendo-File-Formats](https://nintendo-formats.com) by Kinnay: For existing information on the MSBT and MSBP file

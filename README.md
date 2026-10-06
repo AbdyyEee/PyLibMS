@@ -3,6 +3,7 @@
 [![Python Versions](https://img.shields.io/pypi/pyversions/PyLibMS)](https://pypi.org/project/PyLibMS/)
 ![LICENSE](https://img.shields.io/badge/license-MIT-blue)
 [![PyPI version](https://badge.fury.io/py/PyLibMS.svg)](https://badge.fury.io/py/PyLibMS)
+![Tests](https://github.com/YOUR_USERNAME/PyLibMS/actions/workflows/tests.yml/badge.svg?branch=main)
 
 PyLibMS is a library built in Python 3.11 and above for reading and writing of libMessageStudio (LMS) proprietary file
 formats from Nintendo.
@@ -82,15 +83,7 @@ pip install -e .
 
 # AI Disclaimer
 
-Code in this library was written by me. AI was utilized occasionally when fit and always reviewed by me.
-
-`MSBT`: Only usage of AI was for control tag regex formats and for understanding implementing string importing with
-`re`.
-
-`MSBP`: AI was not utilized anywhere.
-
-`MSBF`: AI was only utilized for the `LMS_BaseNode.get_descendents` function and for consultation for ways to improve
-the API.
+Code in this library was written by me. AI was utilized occasionally when developing MSBT (specifically tag string importing) , MSBF and assisting in creating unit tests. 
 
 # Credits & Sources
 

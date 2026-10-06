@@ -7,7 +7,7 @@ include = ["lms*"]
 
 [project]
 name = "PyLibMS"
-version = "5.0.2"
+version = "5.0.3"
 requires-python = ">=3.11"
 description = "Python library built for the libMessageStudio (LMS) proprietary file formats from Nintendo. Supports MSBT, MSBP, and MSBF."
 readme = "README.md"
@@ -30,6 +30,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
 ]
 dependencies = [
     "PyYAML>=6.0.1",

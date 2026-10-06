@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import re
-from typing import TypeGuard, TypeAlias
+from typing import TypeGuard, TypeAlias, Sequence
 
 from lms.common.field.lms_field import LMS_FieldMap
 from lms.message.tag.lms_tagexceptions import (
@@ -29,44 +29,48 @@ class LMS_EncodedTag:
             is_fallback: bool = False,
             is_closing: bool = False,
     ):
-        self._group_id = group_id
-        self._tag_index = tag_index
+        self.group_id = group_id
+        self.tag_index = tag_index
+        self.is_closing = is_closing
+
         self._parameters = parameters
 
         self._is_fallback = is_fallback
-        self._is_closing = is_closing
 
     def __len__(self) -> int:
         return len(self.to_text())
 
     @property
-    def group_id(self) -> int:
-        """The group id for the tag."""
-        return self._group_id
-
-    @property
-    def tag_index(self) -> int:
-        """The tag index in the tags group."""
-        return self._tag_index
-
-    @property
-    def parameters(self) -> tuple[int, ...] | None:
+    def parameters(self) -> tuple[int, ...]:
         """The list of parameters."""
-        return tuple(self._parameters)
+        return () if self._parameters is None else tuple(self._parameters)
+
+    @parameters.setter
+    def parameters(self, parameters: Sequence[int] | None) -> None:
+        if parameters is None:
+            self._parameters = None
+            return
+
+        for value in parameters:
+            if type(value) is not int:
+                raise TypeError("Each parameter must be an integer.")
+            if not 0 <= value <= 0xFF:
+                raise ValueError("Each parameter must be between 0 and 255.")
+
+        new = list(parameters)
+        if len(new) % 2 == 1:
+            new.append(TAG_PADDING_VALUE)
+
+        self._parameters = tuple(new)
 
     @property
     def is_fallback(self) -> bool:
         """Determines if the tag is a fallback tag. Fallback tags have a '!' prefix before the group index."""
         return self._is_fallback
 
-    @property
-    def is_closing(self) -> bool:
-        """Determines if the tag is a closing tag."""
-        return self._is_closing
-
     def to_text(self) -> str:
-        if self._is_closing:
-            return f"[/{self._group_id}:{self._tag_index}]"
+        if self.is_closing:
+            return f"[/{self.group_id}:{self.tag_index}]"
 
         fallback_prefix = "!" if self._is_fallback else ""
 
@@ -134,7 +138,7 @@ class LMS_DecodedTag:
     """
 
     TAG_FORMAT = re.compile(
-        r"\[\s*(/)?\s*([A-Za-z]\w*)\s*:\s*([A-Za-z]+)(?:\s+[^]]*)?\s*]"
+        r"\[\s*(/)?\s*([A-Za-z]\w*)\s*:\s*([A-Za-z]\w*)(?:\s+[^]]*)?\s*]"
     )
     PARAMETER_FORMAT = re.compile(r'(\w+)="([^"]*)"')
 

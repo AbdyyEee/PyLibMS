@@ -37,7 +37,7 @@ def read_tag(
         return _read_encoded_tag(reader, group_id, tag_index, is_closing)
 
     definition = tag_config[group_id][tag_index]
-    
+
     # Tags not defined in the config are not considered fallback tags
     # Not all configs will define every tag, so this is simply a measure to still read tags that aren't defined
     if definition is None:
@@ -79,14 +79,14 @@ def _read_encoded_tag(
 def _read_decoded_tag(
         reader: FileReader, definition: TagDefinition, is_closing: bool = False
 ) -> LMS_DecodedTag:
+    if is_closing:
+        return LMS_DecodedTag(definition, is_closing=True)
+
     parameter_size = reader.read_uint16()
     end = reader.tell() + parameter_size
 
     if not parameter_size:
         return LMS_DecodedTag(definition)
-
-    if is_closing:
-        return LMS_DecodedTag(definition, is_closing=True)
 
     parameters = read_decoded_parameters(reader, definition)
     reader.seek(end)

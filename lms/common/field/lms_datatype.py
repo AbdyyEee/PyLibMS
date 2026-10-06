@@ -140,8 +140,8 @@ def verify_number_from_datatype(
     else:
         bits = datatype.stream_size * 8
         if datatype.signed:
-            max_value = 2 ** (bits - 1)
-            min_value = -max_value
+            min_value = -(2 ** (bits - 1))
+            max_value = (2 ** (bits - 1)) - 1
         else:
             min_value, max_value = 0, (2 ** bits) - 1
 

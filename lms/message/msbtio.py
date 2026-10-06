@@ -169,7 +169,7 @@ def read_msbt(
     return file
 
 
-def write_msbt_path(file_path: str, file: MSBT) -> None:
+def write_msbt_path(file_path: str | os.PathLike[str], file: MSBT) -> None:
     """
     Writes a MSBT file to a given file path. If the target path does not exist, it will be created.
 

@@ -87,7 +87,7 @@ def read_msbf(
     return msbf
 
 
-def write_msbf_path(file_path: str, file: MSBF) -> None:
+def write_msbf_path(file_path: str | os.PathLike[str], file: MSBF) -> None:
     """
     Writes a MSBF file to a given file path. If the target path does not exist, it will be created.
 

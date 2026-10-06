@@ -7,7 +7,7 @@ from lms.message.tag.lms_tag import (
     LMS_ControlTag,
     LMS_DecodedTag,
     LMS_EncodedTag,
-    is_tag,
+    is_tag, TAG_PADDING_VALUE,
 )
 from lms.message.tag.lms_tagexceptions import LMS_TagForbiddenParametersError
 from lms.titleconfig.config import TagConfig
@@ -90,8 +90,12 @@ class LMS_MessageText:
 
             tag = LMS_EncodedTag(group_id, tag_index, is_closing=True)
         else:
+            list_parameters = list(parameters)
+            if len(list_parameters) % 2 == 1:
+                list_parameters.append(TAG_PADDING_VALUE)
+
             tag = LMS_EncodedTag(
-                group_id, tag_index, None if not parameters else list(parameters)
+                group_id, tag_index, None if not parameters else list_parameters
             )
 
         self._segments.append(tag)
@@ -121,7 +125,7 @@ class LMS_MessageText:
         if self._tag_config is None:
             raise ValueError("A TitleConfig is required to append decoded tags.")
 
-        definition = self._tag_config.get_definition_by_names(group_name, tag_name)
+        definition = self._tag_config[group_name][tag_name]
 
         if is_closing:
             if parameters:

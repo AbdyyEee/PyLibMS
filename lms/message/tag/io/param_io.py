@@ -59,6 +59,8 @@ def write_decoded_parameters(
                 param_size += 2 + len(field.value) * writer.encoding.width
             case LMS_DataType.ENUM:
                 param_size += 1
+            case LMS_DataType.BOOL:
+                param_size += 1
             case _:
                 param_size += field.datatype.stream_size
 

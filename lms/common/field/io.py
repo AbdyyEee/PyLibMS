@@ -3,7 +3,6 @@ from typing import Callable
 from lms.common.field.lms_datatype import (
     LMS_DataType,
     is_bool_datatype,
-    is_bytes_datatype,
     is_enum_datatype,
     is_number_datatype,
 )
@@ -72,8 +71,6 @@ def write_field(
             write_variable_width_value(value)
         else:
             writer.write_uint8(value)
-    elif is_bytes_datatype(field.value, field.datatype):
-        writer.write_bytes(field.value)
     elif is_bool_datatype(field.value, field.datatype):
         if write_variable_width_value is not None:
             write_variable_width_value(bool(field.value))

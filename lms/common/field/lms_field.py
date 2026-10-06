@@ -93,7 +93,7 @@ class LMS_FieldMap:
             value = data[definition.name]
             match definition.datatype:
                 case LMS_DataType.BOOL:
-                    if value not in ("false", "true"):
+                    if value.lower() not in ("false", "true"):
                         raise ValueError("Invalid boolean value!")
                     casted_value = value.strip().lower() == "true"
                 case LMS_DataType.FLOAT32:
@@ -174,7 +174,7 @@ def _verify_value_from_definition(
                 )
             else:
                 return
-        case _ if isinstance(value, int):
+        case _ if isinstance(value, (int, float)):
             verify_number_from_datatype(value, definition.datatype)
             return
 

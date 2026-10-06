@@ -22,6 +22,9 @@ ALIAS_MAP = {
 
 
 def is_number_datatype(value: object, datatype: LMS_DataType) -> TypeGuard[int | float]:
+    if isinstance(value, float) and datatype is LMS_DataType.FLOAT32:
+        return True
+
     return datatype in (
         LMS_DataType.UINT8,
         LMS_DataType.UINT16,
@@ -29,7 +32,6 @@ def is_number_datatype(value: object, datatype: LMS_DataType) -> TypeGuard[int |
         LMS_DataType.INT8,
         LMS_DataType.INT16,
         LMS_DataType.INT32,
-        LMS_DataType.FLOAT32,
     ) and isinstance(value, int)
 
 

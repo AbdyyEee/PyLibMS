@@ -1,7 +1,9 @@
 from typing import overload
 
+from lms.common.field.lms_field import LMS_FieldMap
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
+from lms.message.lms_messagetext import LMS_MessageText
 from lms.message.msbtentry import MSBTEntry
 from lms.titleconfig.definitions.attribute import AttributeConfig
 from lms.titleconfig.definitions.tags import TagConfig
@@ -218,6 +220,24 @@ class MSBT:
 
         self._entries.append(entry)
         self._label_map[entry.name] = entry
+
+    def create_entry(self, name: str,
+                     message: str = None,
+                     attribute: LMS_FieldMap | bytes | None = None,
+                     style_index: int = None) -> MSBTEntry:
+        """
+        Creates an MSBT Entry and adds it to the file.
+
+        param name: the name of the entry.
+        param message: the message of the entry.
+        param attribute: the attribute of the entry.
+        param style_index: the style of the entry.
+        """
+        self.add_entry(entry := MSBTEntry(name,
+                                          message=LMS_MessageText(message, self._tag_config),
+                                          attribute=attribute,
+                                          style_index=style_index))
+        return entry
 
     def delete_entry(self, entry: MSBTEntry) -> None:
         """

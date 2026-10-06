@@ -79,7 +79,7 @@ class MSBTEncodedTagTests(MSBTTestUtil):
             ),
         }
 
-        written_little, written_big = self.write_little_big_endian(msbt, tag_config=TAG_CONFIG)
+        written_little, written_big = self.write_little_big_endian(msbt)
 
         with self.subTest(is_big_endian=False):
             self.assert_messages(written_little, expected)

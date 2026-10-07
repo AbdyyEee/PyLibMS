@@ -177,6 +177,7 @@ class LMS_MessageText:
 
     def _set_segments(self, text: str) -> None:
         self._segments = []
+
         for part in self.TAG_FORMAT.split(text):
             if bool(re.match(self.TAG_FORMAT, part)):
                 self.append_tag_string(part)

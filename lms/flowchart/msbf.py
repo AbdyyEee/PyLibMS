@@ -3,6 +3,7 @@ from typing import Mapping, Iterator
 
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
+from lms.fileio.endian import FileEndian
 from lms.flowchart.definitions.node import LMS_EntryNode, LMS_JumpNode, LMS_BranchNode, LMS_BaseNode
 
 
@@ -52,7 +53,7 @@ class MSBF:
     @classmethod
     def new(
             cls,
-            is_big_endian: bool = False,
+            endian: FileEndian = FileEndian.LITTLE,
             encoding: FileEncoding = FileEncoding.UTF16,
             version: int = 3,
             section_count: int = 2,
@@ -60,13 +61,13 @@ class MSBF:
         """
         Create a new MSBF instance.
 
-        :param is_big_endian: if the file is big endian.
+        :param endian: the endian of the file.
         :param encoding: the file encoding.
         :param version: the file version.
         :param section_count: the number of sections.
 
         """
-        return MSBF(LMS_FileInfo(is_big_endian, encoding, version, section_count))
+        return MSBF(LMS_FileInfo(endian, encoding, version, section_count))
 
     @property
     def info(self) -> LMS_FileInfo:

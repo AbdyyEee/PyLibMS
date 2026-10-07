@@ -8,12 +8,12 @@ class MSBTEntry:
     """A class that represents an entry in a MSBT file."""
 
     def __init__(
-        self,
-        name: str,
-        *,
-        message: LMS_MessageText | str | None = "",
-        attribute: LMS_FieldMap | bytes | None = None,
-        style_index: int | None = None,
+            self,
+            name: str,
+            *,
+            message: LMS_MessageText | str | None = "",
+            attribute: LMS_FieldMap | bytes | None = None,
+            style_index: int | None = None,
     ):
         self.name = name
 
@@ -37,7 +37,7 @@ class MSBTEntry:
         self.style_index = style_index
 
     @property
-    def message(self) -> LMS_MessageText | None:
+    def message(self) -> LMS_MessageText:
         """The message object for the instance."""
         return self._message
 
@@ -64,10 +64,10 @@ class MSBTEntry:
 
     @classmethod
     def from_dict(
-        cls,
-        data: dict,
-        attribute_config: AttributeConfig | None = None,
-        tag_config: TagConfig | None = None,
+            cls,
+            data: dict,
+            attribute_config: AttributeConfig | None = None,
+            tag_config: TagConfig | None = None,
     ):
         """
         Creates a MSBTEntry from a dictionary object.

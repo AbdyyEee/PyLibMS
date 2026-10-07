@@ -1,4 +1,5 @@
 from lms.fileio.encoding import FileEncoding
+from lms.fileio.endian import FileEndian
 from lms.fileio.io import FileReader, FileWriter
 from lms.message.tag.io.param_io import (
     read_decoded_parameters,
@@ -13,12 +14,12 @@ from lms.titleconfig.definitions.tags import TagConfig, TagDefinition
 TAG_PADDING_BYTE = b"\xcd"
 
 
-def get_tag_indicator(encoding: FileEncoding, is_big_endian: bool):
+def get_tag_indicator(encoding: FileEncoding, endian: FileEndian):
     start_indicator = int.to_bytes(
-        0x0E, encoding.width, "little" if not is_big_endian else "big"
+        0x0E, encoding.width, endian.string_name
     )
     closing_indicator = int.to_bytes(
-        0x0F, encoding.width, "little" if not is_big_endian else "big"
+        0x0F, encoding.width, endian.string_name
     )
     return start_indicator, closing_indicator
 
@@ -95,7 +96,7 @@ def _read_decoded_tag(
 
 def write_tag(writer: FileWriter, tag: LMS_ControlTag) -> None:
     start_indicator, close_indicator = get_tag_indicator(
-        writer.encoding, writer.is_big_endian
+        writer.encoding, writer.endian
     )
     writer.write_bytes(start_indicator if not tag.is_closing else close_indicator)
 

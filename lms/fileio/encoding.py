@@ -1,6 +1,8 @@
 from enum import IntEnum
 from typing import Literal
 
+from lms.fileio.endian import FileEndian
+
 
 class FileEncoding(IntEnum):
     """An enum that represents a file encoding."""
@@ -10,20 +12,16 @@ class FileEncoding(IntEnum):
     UTF32 = 0x02
 
     def to_string_format(
-        self, is_big_endian: bool = False
+            self, endian: FileEndian = FileEndian.LITTLE
     ) -> Literal["UTF-8", "UTF-16-BE", "UTF-16-LE", "UTF-32-BE", "UTF-32-LE"]:
         """Converts the FileEncoding to string format."""
         match self:
             case FileEncoding.UTF8:
                 return "UTF-8"
             case FileEncoding.UTF16:
-                if is_big_endian:
-                    return "UTF-16-BE"
-                return "UTF-16-LE"
+                return "UTF-16-BE" if endian is FileEndian.BIG else "UTF-16-LE"
             case FileEncoding.UTF32:
-                if is_big_endian:
-                    return "UTF-32-BE"
-                return "UTF-32-LE"
+                return "UTF-32-BE" if endian is FileEndian.BIG else "UTF-32-LE"
 
     @property
     def width(self) -> Literal[1, 2, 4]:

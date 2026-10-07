@@ -50,6 +50,7 @@ def read_msbp(stream: BinaryIO | bytes) -> MSBP:
     >>> msbp = read_msbp(stream)
     """
     reader = FileReader(stream)
+
     file_info = read_file_info(reader, MSBP.MAGIC)
 
     colors = ()

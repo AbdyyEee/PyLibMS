@@ -4,6 +4,7 @@ from typing import overload, Mapping
 from lms.common.field.lms_field import LMS_FieldMap
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
+from lms.fileio.endian import FileEndian
 from lms.message.lms_messagetext import LMS_MessageText
 from lms.message.msbtentry import MSBTEntry
 from lms.titleconfig.definitions.attribute import AttributeConfig
@@ -90,7 +91,7 @@ class MSBT:
             uses_nli1: bool = False,
             attribute_config: AttributeConfig | None = None,
             tag_config: TagConfig | None = None,
-            is_big_endian: bool = False,
+            endian: FileEndian = FileEndian.LITTLE,
             encoding: FileEncoding = FileEncoding.UTF16,
             version: int = 3,
             section_count: int = 2,
@@ -101,7 +102,7 @@ class MSBT:
         :param uses_nli1: flag to determine if to use nli1 section for labels.
         :param attribute_config: the attribute config object
         :param tag_config: the tag config object
-        :param is_big_endian: if the file is big endian.
+        :param endian: if the file is big endian.
         :param encoding: the file encoding.
         :param version: the file version.
         :param section_count: the number of sections.
@@ -112,7 +113,7 @@ class MSBT:
         See https://github.com/AbdyyEee/PylibMS/wiki/MSBT#creating-a-msbt
         """
         return MSBT(
-            LMS_FileInfo(is_big_endian, encoding, version, section_count),
+            LMS_FileInfo(endian, encoding, version, section_count),
             section_list=["LBL1" if not uses_nli1 else "NLI1", "TXT2"],
             uses_nli1=uses_nli1,
             attribute_config=attribute_config,
@@ -214,6 +215,9 @@ class MSBT:
                     f"Entry '{entry.name}' can't be added with no attributes when attributes already exist!"
                 )
         elif entry.attribute is not None:
+            if self._entries:
+                raise ValueError("All entries must have attributes tied to them!")
+
             self._section_list.insert(self.ATR1_INDEX, "ATR1")
             self._info.section_count += 1
 

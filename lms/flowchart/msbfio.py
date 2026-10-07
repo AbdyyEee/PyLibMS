@@ -63,6 +63,7 @@ def read_msbf(
     >>> msbf = read_msbf(stream)
     """
     reader = FileReader(stream)
+
     file_info = read_file_info(reader, MSBF.MAGIC)
 
     if msbt is not None and msbt_files:

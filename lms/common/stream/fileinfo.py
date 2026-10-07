@@ -1,12 +1,12 @@
 from lms.common import lms_exceptions
 from lms.common.lms_constants import (
-    BIG_ENDIAN_BOM,
     SECTION_DATA_START,
-    LITTLE_ENDIAN_BOM,
     SIZE_OFFSET, LMS_MINIMUM_VERSION,
+    LITTLE_ENDIAN_BOM, BIG_ENDIAN_BOM,
 )
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
+from lms.fileio.endian import FileEndian
 from lms.fileio.io import FileReader, FileWriter
 
 
@@ -19,9 +19,16 @@ def read_file_info(reader: FileReader, expected_magic: str) -> LMS_FileInfo:
             This file may not a valid LMS format or the wrong reading function was utilized."""
         )
 
-    is_big_endian = reader.read_bytes(2) == BIG_ENDIAN_BOM
-    reader.is_big_endian = is_big_endian
+    bom = reader.read_bytes(2)
 
+    if bom == LITTLE_ENDIAN_BOM:
+        endian = FileEndian.LITTLE
+    elif bom == BIG_ENDIAN_BOM:
+        endian = FileEndian.BIG
+    else:
+        raise ValueError(f"Invalid bom found in file '{bom}'!")
+
+    reader.endian = endian
     reader.skip(2)
 
     encoding = FileEncoding(reader.read_uint8())
@@ -48,7 +55,7 @@ def read_file_info(reader: FileReader, expected_magic: str) -> LMS_FileInfo:
     reader.seek(SECTION_DATA_START)
 
     return LMS_FileInfo(
-        is_big_endian,
+        endian,
         encoding,
         version,
         section_count,
@@ -56,13 +63,11 @@ def read_file_info(reader: FileReader, expected_magic: str) -> LMS_FileInfo:
 
 
 def write_file_info(writer: FileWriter, magic: str, file_info: LMS_FileInfo) -> None:
-    writer.is_big_endian = file_info.is_big_endian
+    writer.endian = file_info.endian
     writer.encoding = file_info.encoding
 
     writer.write_string(magic)
-    writer.write_bytes(
-        LITTLE_ENDIAN_BOM if not file_info.is_big_endian else BIG_ENDIAN_BOM
-    )
+    writer.write_bytes(file_info.endian.byte_order_mark)
     writer.write_bytes(b"\x00\x00")
 
     writer.write_uint8(file_info.encoding.value)

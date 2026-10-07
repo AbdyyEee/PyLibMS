@@ -6,6 +6,7 @@ from typing import BinaryIO, Generator, Type
 
 from io import BytesIO, IOBase, TextIOBase
 from lms.fileio.encoding import FileEncoding
+from lms.fileio.endian import FileEndian
 
 PADDING_BYTE = b"\x00"
 
@@ -31,7 +32,7 @@ class StructBETypes(StrEnum):
 
 
 class FileReader:
-    def __init__(self, data: BinaryIO | bytes | bytearray | memoryview, big_endian: bool = False):
+    def __init__(self, data: BinaryIO | bytes | bytearray | memoryview, endian: FileEndian = FileEndian.LITTLE) -> None:
         self._stream: BinaryIO = None
 
         match data:
@@ -43,11 +44,11 @@ class FileReader:
                 raise TypeError("The stream provided is not valid!")
 
         self.encoding = FileEncoding.UTF8
-        self.is_big_endian = big_endian
+        self.endian = endian
 
     @property
     def datatypes(self) -> Type[StructLETypes | StructBETypes]:
-        return StructLETypes if not self.is_big_endian else StructBETypes
+        return StructLETypes if self.endian == FileEndian.LITTLE else StructBETypes
 
     def tell(self) -> int:
         return self._stream.tell()
@@ -110,25 +111,25 @@ class FileReader:
         string = b""
         while (raw_char := self.read_bytes(self.encoding.width)) != self.encoding.terminator:
             string += raw_char
-        return string.decode(self.encoding.to_string_format(self.is_big_endian))
+        return string.decode(self.encoding.to_string_format(self.endian))
 
     def read_len_string_encoded(self):
         self.align(self.encoding.width)
         length = self.read_uint16()
         return self.read_bytes(length).decode(
-            self.encoding.to_string_format(self.is_big_endian)
+            self.encoding.to_string_format(self.endian)
         )
 
 
 class FileWriter:
-    def __init__(self, encoding: FileEncoding):
+    def __init__(self, encoding: FileEncoding = FileEncoding.UTF8, endian: FileEndian = FileEndian.LITTLE) -> None:
         self.data = BytesIO(b"")
         self.encoding = encoding
-        self.is_big_endian = False
+        self.endian = endian
 
     @property
     def datatypes(self) -> Type[StructLETypes | StructBETypes]:
-        return StructLETypes if not self.is_big_endian else StructBETypes
+        return StructLETypes if self.endian == FileEndian.LITTLE else StructBETypes
 
     def skip(self, length: int) -> None:
         self.data.seek(length, 1)
@@ -186,7 +187,7 @@ class FileWriter:
 
     def write_encoded_string(self, string: str, terminate: bool = True) -> None:
         self.write_bytes(
-            string.encode(self.encoding.to_string_format(self.is_big_endian))
+            string.encode(self.encoding.to_string_format(self.endian))
         )
         if terminate:
             self.write_bytes(b"\x00" * self.encoding.width)

@@ -6,15 +6,15 @@ from lms.titleconfig.definitions.tags import TagConfig
 
 
 def read_txt2(
-    reader: FileReader, config: TagConfig | None, suppress_tag_errors: bool
+        reader: FileReader, config: TagConfig | None, suppress_tag_errors: bool
 ) -> list[LMS_MessageText]:
     encoding = reader.encoding
 
     messages = []
     message_count = reader.read_uint32()
 
-    encoding_format = encoding.to_string_format(reader.is_big_endian)
-    tag_start, tag_close = get_tag_indicator(encoding, reader.is_big_endian)
+    encoding_format = encoding.to_string_format(reader.endian)
+    tag_start, tag_close = get_tag_indicator(encoding, reader.endian)
 
     for offset in reader.read_offset_array(message_count):
         reader.seek(offset)

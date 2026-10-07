@@ -1,5 +1,5 @@
 """
-IO interface for ``MSBT`` files.
+IO interface for ``UMSBT`` files.
 """
 import os
 from typing import Mapping, BinaryIO
@@ -81,6 +81,7 @@ def read_umsbt_directory(directory: str | os.PathLike[str], *,
         files[os.path.basename(file)] = umsbt
 
     return files
+
 
 def read_umsbt(
         stream: BinaryIO | bytes, *,

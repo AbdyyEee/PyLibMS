@@ -57,9 +57,7 @@ class MSBT:
         self._unsupported_section_map = unsupported_section_map or {}
 
         # Store the section list so that the order of any and all sections is preserved when writing
-        self._section_list: list[str] = section_list or [
-            "LBL1" if not uses_nli1 else "NLI1"
-        ]
+        self._section_list: list[str] = section_list
 
         self._attribute_config = attribute_config
         self._tag_config = tag_config
@@ -115,6 +113,7 @@ class MSBT:
         """
         return MSBT(
             LMS_FileInfo(is_big_endian, encoding, version, section_count),
+            section_list=["LBL1" if not uses_nli1 else "NLI1", "TXT2"],
             uses_nli1=uses_nli1,
             attribute_config=attribute_config,
             tag_config=tag_config,
@@ -166,9 +165,13 @@ class MSBT:
         :param label: the label to check."""
         return label in self._label_map
 
+    # Backwards compatibility just in case
+    # Recommended to use accessors MSBT[index] or MSBT[label]
     def get_entry_by_index(self, index: int) -> MSBTEntry:
         """
         Retrieves an entry given its index. Supports negative indexing.
+
+        Recommended to use ``MSBT[index]`` over this function.
 
         :param index: the index of the entry.
         """
@@ -180,6 +183,8 @@ class MSBT:
     def get_entry_by_name(self, label: str) -> MSBTEntry:
         """
         Retrieves an entry given its name.
+
+        Recommended to use ``MSBT[label]`` over this function.
 
         :param label: the label name for the entry.
         """

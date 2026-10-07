@@ -1,4 +1,5 @@
-from typing import overload
+from types import MappingProxyType
+from typing import overload, Mapping
 
 from lms.common.field.lms_field import LMS_FieldMap
 from lms.common.lms_fileinfo import LMS_FileInfo
@@ -128,6 +129,11 @@ class MSBT:
     def entries(self) -> tuple[MSBTEntry, ...]:
         """Tuple of all the MSBT entries."""
         return tuple(self._entries)
+
+    @property
+    def label_map(self) -> Mapping[str, MSBTEntry]:
+        """Mapping of all labels to MSBT entries."""
+        return MappingProxyType(self._label_map)
 
     @property
     def section_list(self) -> tuple[str, ...]:

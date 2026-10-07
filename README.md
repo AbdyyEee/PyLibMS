@@ -12,7 +12,8 @@ The following is supported:
 
 | Format | Read | Write | Support                                                                                                                                                                                  |
 |--------|------|-------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `MSBT` | ✅   | ✅    | 1:1 Reading and writing Support for majority of sections. Full attribute (`ATR1`) decoding with configurations. Tag decoding 1:1 with the official Nintendo `.mstxt` file format.        |
+| `MSBT` | ✅   | ✅    | 1:1 Reading and writing. Support for majority of sections. Full attribute (`ATR1`) decoding with configurations. Tag decoding 1:1 with the official Nintendo `.mstxt` file format.        |
+| `UMSBT` | ✅   | ✅   | 1:1 Reading and writing. Accessing, adding, inserting and deleting `MSBT` files within `UMSBT` archives. |
 | `MSBF` | ✅   | ✅    | 1:1 Reading and writing flowcharts (`FLW3`). Support for custom node definitions, attaching names and descriptions to nodes. Altering parameter datatypes for flexibility between games. |
 | `MSBP` | ✅   | ❌    | Viewing all MSBP relevant metadata and generating configuration files for use with `MSBT` files.                                                                                         |
 
@@ -32,6 +33,11 @@ from lms.message.msbtio import read_msbt_path
 
 msbt = read_msbt_path("Text.msbt")
 
+# UMSBT
+from lms.message.umsbtio import read_umsbt_path
+
+umsbt = read_umsbt_path("TextU.umsbt")
+
 # MSBP
 from lms.project.msbpread import read_msbp_path
 
@@ -50,6 +56,11 @@ msbf = read_msbf_path("Flowchart.msbf")
 from lms.message.msbtio import write_msbt_path
 
 write_msbt_path("Out_text.msbt")
+
+# UMSBT
+from lms.message.umsbtio import write_umsbt_path
+
+write_umsbt_path("Out_textu.umsbt")
 
 # MSBF
 from lms.flowchart.msbfio import write_msbf_path

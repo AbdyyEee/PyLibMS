@@ -9,12 +9,13 @@ include = ["lms*"]
 name = "PyLibMS"
 version = "5.0.5"
 requires-python = ">=3.11"
-description = "Python library built for the libMessageStudio (LMS) proprietary file formats from Nintendo. Supports MSBT, MSBP, and MSBF."
+description = "Python library built for the libMessageStudio (LMS) proprietary file formats from Nintendo. Supports MSBT, UMSBT, MSBP, and MSBF."
 readme = "README.md"
 authors = [{ name = "AbdyyEee" }]
 keywords = [
     "nintendo",
     "msbt",
+    "umsbt",
     "message text",
     "msbp",
     "message project",

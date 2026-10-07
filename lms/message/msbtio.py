@@ -2,7 +2,8 @@
 IO interface for ``MSBT`` files.
 """
 import os
-from typing import BinaryIO
+from types import MappingProxyType
+from typing import BinaryIO, Mapping
 
 from lms.common import lms_exceptions
 from lms.common.stream.fileinfo import read_file_info, write_file_info, write_file_size
@@ -22,6 +23,8 @@ from lms.message.section.txt2 import read_txt2, write_txt2
 from lms.titleconfig.config import AttributeConfig, TagConfig
 
 __all__ = ("read_msbt_path", "read_msbt_directory", "read_msbt", "write_msbt", "write_msbt_path")
+
+MSBT_EXTENSION = ".msbt"
 
 
 def read_msbt_path(
@@ -60,11 +63,12 @@ def read_msbt_directory(directory: str | os.PathLike[str], *,
                         attribute_config: AttributeConfig | None = None,
                         tag_config: TagConfig | None = None,
                         suppress_tag_errors: bool = False,
-                        ignore_extensions: bool = False) -> tuple[MSBT, ...]:
+                        ignore_extensions: bool = False) -> Mapping[str, MSBT]:
     """
-    Reads and retrieves MSBT all MSBT files from a given directory.
+    Reads and retrieves all MSBT files from a given directory.
 
-    :param directory: directory of MSBT files. All files must have the `.msbt` extension.
+    :param directory: directory of MSBT files. All files must have the `.msbt` extension (unless ``ignore_extensions``
+    is True)
     :param attribute_config: the attribute config to use for decoding attributes.
     :param tag_config: the tag config to use for decoding tags.
     :param suppress_tag_errors: when a tag config is used, suppress any errors while reading decoded tags.
@@ -75,19 +79,21 @@ def read_msbt_directory(directory: str | os.PathLike[str], *,
     =====
     >>> msbt = read_msbt_directory("path/to/directory")
     """
-    files: list[MSBT] = []
+    files: dict[str, MSBT] = {}
 
     for file in os.listdir(directory):
-        if not file.endswith(".msbt") and not ignore_extensions:
-            raise ValueError("This directory contains a non-MSBT file. Only directories with MSBT files can be used!")
+        if not file.endswith(MSBT_EXTENSION) and not ignore_extensions:
+            raise ValueError("This directory contains a non-MSBT file. "
+                             "Only directories with MSBT files can be used! Set ignore_extensions to True to ignore"
+                             "this error.")
 
-        files.append(msbt := read_msbt_path(file_path := os.path.join(directory, file),
-                                            attribute_config=attribute_config,
-                                            tag_config=tag_config, suppress_tag_errors=suppress_tag_errors))
+        msbt = read_msbt_path(os.path.join(directory, file),
+                              attribute_config=attribute_config,
+                              tag_config=tag_config, suppress_tag_errors=suppress_tag_errors)
+        msbt.filename = file
+        files[file] = msbt
 
-        msbt.filename = os.path.basename(file_path)
-
-    return tuple(files)
+    return MappingProxyType(files)
 
 
 def read_msbt(

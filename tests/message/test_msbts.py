@@ -4,13 +4,13 @@ from typing import Mapping
 from lms.fileio.encoding import FileEncoding
 from lms.message.msbtentry import MSBTEntry
 from lms.message.msbtio import read_msbt_path, read_msbt_directory
-from tests.msbts import MSBT_DIRECTORY
-from tests.msbts.msbt_test_util import MSBTTestUtil
+from tests.message import MSBT_DIRECTORY
+from tests.message.msbt_test_util import MSBTTestUtil
 
 
 class TestMSBTCases(MSBTTestUtil):
 
-    def test_read_simple(self) -> None:
+    def test_read_simple_msbt(self) -> None:
         msbt = read_msbt_path(MSBT_DIRECTORY / "simple.msbt")
         self.assertEqual(len(msbt), 4)
         self.assertEqual(msbt.info.encoding, FileEncoding.UTF16)

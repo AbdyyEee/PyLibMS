@@ -1,10 +1,9 @@
-from tests.msbts import MSBT_DIRECTORY
-from tests.msbts.msbt_test_util import MSBTTestUtil
-
 from lms.message.msbtio import read_msbt_path
 from lms.message.tag.lms_tag import LMS_DecodedTag
 from lms.message.tag.lms_tagexceptions import LMS_TagInvalidFormatError
 from lms.titleconfig.config import TitleConfig
+from tests.message import MSBT_DIRECTORY
+from tests.message.msbt_test_util import MSBTTestUtil
 
 TAG_CONFIG = TitleConfig.load_config({
     "tag_definitions": {

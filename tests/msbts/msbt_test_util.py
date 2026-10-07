@@ -5,7 +5,6 @@ from collections.abc import Mapping
 from typing import Any
 
 from lms.message.msbt import MSBT
-from lms.message.msbtentry import MSBTEntry
 from lms.message.msbtio import read_msbt, write_msbt
 
 
@@ -15,12 +14,6 @@ class MSBTTestUtil(unittest.TestCase):
         for label, text in expected.items():
             with self.subTest(label=label):
                 self.assertEqual(msbt[label].message.text, text)
-
-    def create_msbt(self, messages: Mapping[str, str], **options: Any) -> MSBT:
-        msbt = MSBT.new(**options)
-        for label, text in messages.items():
-            msbt.add_entry(MSBTEntry(label, message=text))
-        return msbt
 
     def write_little_big_endian(self, msbt: MSBT, **read_options: Any) -> tuple[MSBT, MSBT]:
         original_endian = msbt.info.is_big_endian

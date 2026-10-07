@@ -1,8 +1,8 @@
+from lms.fileio.encoding import FileEncoding
+from lms.message.msbtentry import MSBTEntry
+from lms.message.msbtio import read_msbt_path
 from tests.msbts import MSBT_DIRECTORY
 from tests.msbts.msbt_test_util import MSBTTestUtil
-
-from lms.fileio.encoding import FileEncoding
-from lms.message.msbtio import read_msbt_path
 
 
 class TestMSBTCases(MSBTTestUtil):
@@ -73,6 +73,35 @@ class TestMSBTCases(MSBTTestUtil):
 
         self.assertEqual(len(written_little), len(msbt))
         self.assertEqual(len(written_big), len(msbt))
+
+        with self.subTest(is_big_endian=False):
+            self.assert_messages(written_little, expected)
+
+        with self.subTest(is_big_endian=True):
+            self.assert_messages(written_big, expected)
+
+    def test_add_msbt_entry_messages(self) -> None:
+        msbt = read_msbt_path(MSBT_DIRECTORY / "simple.msbt")
+
+        expected = {
+            "Test00": "Test Message 00",
+            "Test01": "Test Message 01",
+            "Test02": "Test Message 02",
+            "Test03": "Test Message 03",
+            "Test04": "Test Message 04",
+            "Test05": "Test Message 05",
+        }
+
+        entry_04 = msbt.create_entry("Test04", "Test Message 04")
+        entry_05 = msbt.create_entry("Test05", "Test Message 05")
+
+        self.assertIsInstance(entry_04, MSBTEntry)
+        self.assertIsInstance(entry_05, MSBTEntry)
+
+        written_little, written_big = self.write_little_big_endian(msbt)
+
+        self.assertEqual(len(written_little), 6)
+        self.assertEqual(len(written_big), 6)
 
         with self.subTest(is_big_endian=False):
             self.assert_messages(written_little, expected)

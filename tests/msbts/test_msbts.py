@@ -1,6 +1,9 @@
+import os
+from typing import Mapping
+
 from lms.fileio.encoding import FileEncoding
 from lms.message.msbtentry import MSBTEntry
-from lms.message.msbtio import read_msbt_path
+from lms.message.msbtio import read_msbt_path, read_msbt_directory
 from tests.msbts import MSBT_DIRECTORY
 from tests.msbts.msbt_test_util import MSBTTestUtil
 
@@ -55,6 +58,25 @@ class TestMSBTCases(MSBTTestUtil):
         self.assertEqual(len(written_little), len(msbt))
         self.assertEqual(len(written_big), len(msbt))
         self.assert_messages(written_little, expected)
+
+    def test_read_directory(self) -> None:
+        files = read_msbt_directory(MSBT_DIRECTORY)
+
+        self.assertIsInstance(files, Mapping)
+
+        self.assertEqual(list(files.keys()), os.listdir(MSBT_DIRECTORY))
+
+        for name in files:
+            with self.subTest(filename=name):
+                real = files[name]
+                expected = read_msbt_path(MSBT_DIRECTORY / name)
+
+                self.assertEqual(real.filename, name)
+                self.assertEqual(real.info, expected.info)
+                self.assertEqual(
+                    [entry.to_dict() for entry in real],
+                    [entry.to_dict() for entry in expected],
+                )
 
     def test_simple_msbt_edits(self) -> None:
         msbt = read_msbt_path(MSBT_DIRECTORY / "simple.msbt")

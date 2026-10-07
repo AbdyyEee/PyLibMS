@@ -23,6 +23,7 @@ class TestMSBTCases(MSBTTestUtil):
         }
 
         self.assert_messages(msbt, expected)
+        self.assert_file_one_to_one(msbt, (MSBT_DIRECTORY / "simple.msbt").read_bytes())
 
     def test_read_example_utf8(self) -> None:
         msbt = read_msbt_path(MSBT_DIRECTORY / "example_utf8.msbt")
@@ -37,6 +38,7 @@ class TestMSBTCases(MSBTTestUtil):
         }
 
         self.assert_messages(msbt, expected)
+        self.assert_file_one_to_one(msbt, (MSBT_DIRECTORY / "example_utf8.msbt").read_bytes())
 
     def test_read_example_utf16(self) -> None:
         msbt = read_msbt_path(MSBT_DIRECTORY / "example_utf16.msbt")
@@ -57,13 +59,19 @@ class TestMSBTCases(MSBTTestUtil):
 
         self.assertEqual(len(written_little), len(msbt))
         self.assertEqual(len(written_big), len(msbt))
-        self.assert_messages(written_little, expected)
+
+        with self.subTest(is_big_endian=False):
+            self.assert_messages(written_little, expected)
+
+        with self.subTest(is_big_endian=True):
+            self.assert_messages(written_big, expected)
+
+        self.assert_file_one_to_one(msbt, (MSBT_DIRECTORY / "example_utf16.msbt").read_bytes())
 
     def test_read_directory(self) -> None:
         files = read_msbt_directory(MSBT_DIRECTORY)
 
         self.assertIsInstance(files, Mapping)
-
         self.assertEqual(list(files.keys()), os.listdir(MSBT_DIRECTORY))
 
         for name in files:
@@ -77,6 +85,7 @@ class TestMSBTCases(MSBTTestUtil):
                     [entry.to_dict() for entry in real],
                     [entry.to_dict() for entry in expected],
                 )
+                self.assert_file_one_to_one(real, (MSBT_DIRECTORY / name).read_bytes())
 
     def test_simple_msbt_edits(self) -> None:
         msbt = read_msbt_path(MSBT_DIRECTORY / "simple.msbt")
@@ -131,7 +140,7 @@ class TestMSBTCases(MSBTTestUtil):
         with self.subTest(is_big_endian=True):
             self.assert_messages(written_big, expected)
 
-    def test_nl1(self) -> None:
+    def test_nli1(self) -> None:
         msbt = read_msbt_path(MSBT_DIRECTORY / "nli1.msbt")
         self.assertEqual(len(msbt), 4)
 
@@ -149,3 +158,5 @@ class TestMSBTCases(MSBTTestUtil):
 
         with self.subTest(is_big_endian=True):
             self.assert_messages(written_big, expected)
+
+        self.assert_file_one_to_one(msbt, (MSBT_DIRECTORY / "nli1.msbt").read_bytes())

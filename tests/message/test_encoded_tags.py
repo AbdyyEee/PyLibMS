@@ -45,6 +45,7 @@ class MSBTEncodedTagTests(MSBTTestUtil):
         }
 
         self.assert_messages(msbt, expected)
+        self.assert_file_one_to_one(msbt, (MSBT_DIRECTORY / "encoded_tag.msbt").read_bytes())
 
     def test_edit_encoded_tags(self) -> None:
         msbt = read_msbt_path(MSBT_DIRECTORY / "encoded_tag.msbt")

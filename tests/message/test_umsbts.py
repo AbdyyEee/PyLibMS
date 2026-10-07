@@ -18,8 +18,8 @@ class TestUMSBTCases(MSBTTestUtil):
         ]
 
         self.assertEqual(len(umsbt), len(expected))
-
         self.assert_archive_messages(umsbt, expected)
+        self.assert_file_one_to_one(umsbt, (UMSBT_DIRECTORY / "simple.umsbt").read_bytes())
 
     def test_new_umsbt(self) -> None:
         msbt_0 = MSBT.new()
@@ -52,7 +52,11 @@ class TestUMSBTCases(MSBTTestUtil):
         self.assertEqual(list(umsbt), [msbt_0, msbt_1, msbt_2, msbt_3])
 
         self.assert_archive_messages(UMSBT(), [])
-        self.assert_archive_messages(read_umsbt(write_umsbt(umsbt)), expected)
+
+        written = read_umsbt(write_umsbt(umsbt))
+
+        self.assert_archive_messages(written, expected)
+        self.assert_file_one_to_one(written, (UMSBT_DIRECTORY / "simple.umsbt").read_bytes())
 
     def test_add_msbt(self) -> None:
         umsbt = read_umsbt_path(UMSBT_DIRECTORY / "simple.umsbt")

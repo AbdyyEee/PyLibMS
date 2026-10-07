@@ -105,6 +105,7 @@ class MSBTDecodedTagTests(MSBTTestUtil):
         }
 
         self.assert_messages(msbt, expected)
+        self.assert_file_one_to_one(msbt, (MSBT_DIRECTORY / "decoded_tag.msbt").read_bytes())
 
     def test_import_decoded_tags(self) -> None:
         msbt = read_msbt_path(MSBT_DIRECTORY / "decoded_tag.msbt", tag_config=TAG_CONFIG)

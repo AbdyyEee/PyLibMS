@@ -6,6 +6,7 @@ from lms.fileio.endian import FileEndian
 from lms.message.msbt import MSBT
 from lms.message.msbtio import read_msbt, write_msbt
 from lms.message.umsbt import UMSBT
+from lms.message.umsbtio import write_umsbt
 
 
 class MSBTTestUtil(unittest.TestCase):
@@ -23,6 +24,10 @@ class MSBTTestUtil(unittest.TestCase):
                 self.assertEqual(msbt.filename, f"{i}.msbt")
                 self.assertEqual(len(msbt), len(expected[i]))
                 self.assert_messages(msbt, expected[i])
+
+    def assert_file_one_to_one(self, file: MSBT | UMSBT, original: bytes) -> None:
+        written = write_umsbt(file) if isinstance(file, UMSBT) else write_msbt(file)
+        self.assertEqual(written, original)
 
     def write_little_big_endian(self, msbt: MSBT, **read_options: Any) -> tuple[MSBT, MSBT]:
         original_endian = msbt.info.endian

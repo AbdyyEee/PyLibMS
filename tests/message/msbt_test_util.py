@@ -19,7 +19,7 @@ class MSBTTestUtil(unittest.TestCase):
         self.assertEqual(len(umsbt), len(expected))
 
         for i, msbt in enumerate(umsbt):
-            with self.subTest(index=i):
+            with self.subTest(filename=msbt.filename):
                 self.assertEqual(msbt.filename, f"{i}.msbt")
                 self.assertEqual(len(msbt), len(expected[i]))
                 self.assert_messages(msbt, expected[i])

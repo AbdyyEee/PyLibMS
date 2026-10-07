@@ -46,7 +46,7 @@ class MSBF:
     def __len__(self) -> int:
         return len(self._flowcharts)
 
-    def __iter__(self) -> Iterator[LMS_EntryNode]:
+    def __iter__(self) -> Iterator[LMS_BaseNode]:
         return iter(self._nodes.values())
 
     @classmethod
@@ -100,6 +100,35 @@ class MSBF:
                 references.append(entry_node)
         return references
 
+    def add_flowchart(
+            self, name: str, entry_node: LMS_EntryNode = None
+    ) -> LMS_EntryNode:
+        """
+        Add a flowchart to the MSBF instance.
+
+        :param name: The name of the new flowchart.
+        :param entry_node: The entry point of the new flowchart. If not provided, the method creates one.
+        """
+        if name in self.flowcharts:
+            raise KeyError(f"Flowchart with name '{name}' already exists!")
+
+        if entry_node is None:
+            entry_node = LMS_EntryNode(self._generate_next_id(), name)
+
+        for node in entry_node.get_descendents():
+            if node.id in self._nodes:
+                continue
+            self._nodes[node.id] = node
+
+        self._flowcharts[name] = entry_node
+        self._nodes = dict(sorted(self._nodes.items()))
+
+        # Node IDs may not be sequential after user additions/deletions, so we track the absolute max value of
+        # all nodes and store it so that _generate_next_id can set any IDs added via the flowchart correctly.
+        self._global_node_id = max(self._nodes, default=-1) + 1
+
+        return entry_node
+
     def register_node(self, node: LMS_BaseNode) -> None:
         """
         Registers a node to the MSBF instance.
@@ -137,45 +166,19 @@ class MSBF:
         new_next = to_delete.next_node
         for node in self:
             if isinstance(node, LMS_BranchNode):
-                for case, branch in node.branches:
-                    if branch is None or branch != to_delete:
+                for case, branch in node.branches.items():
+                    if branch is None:
                         continue
-                    node.set_branch_case(case, None)
+
+                    if branch is to_delete:
+                        node.set_branch_case(case, branch.next_node)
+
                 continue
 
             if node.next_node == to_delete:
                 node.set_next_node(new_next)
 
         del self._nodes[to_delete.id]
-
-    def add_flowchart(
-            self, name: str, entry_node: LMS_EntryNode = None
-    ) -> LMS_EntryNode:
-        """
-        Add a flowchart to the MSBF instance.
-
-        :param name: The name of the new flowchart.
-        :param entry_node: The entry point of the new flowchart. If not provided, the method creates one.
-        """
-        if name in self.flowcharts:
-            raise KeyError(f"Flowchart with name '{name}' already exists!")
-
-        if entry_node is None:
-            entry_node = LMS_EntryNode(self._generate_next_id(), name)
-
-        for node in entry_node.get_descendents():
-            if node.id in self._nodes:
-                continue
-            self._nodes[node.id] = node
-
-        self._flowcharts[name] = entry_node
-        self._nodes = dict(sorted(self._nodes.items()))
-
-        # Node IDs may not be sequential after user additions/deletions, so we track the absolute max value of
-        # all nodes and store it so that _generate_next_id can set any IDs added via the flowchart correctly.
-        self._global_node_id = max(self._nodes, default=-1) + 1
-
-        return entry_node
 
     def delete_flowchart(self, name: str):
         """
@@ -187,20 +190,17 @@ class MSBF:
         if name not in self.flowcharts:
             raise KeyError(f"Flowchart with name {name} does not exist!")
 
-        entry_point = self.flowcharts[name].entry_point
+        entry_node = self._flowcharts[name]
 
-        is_valid_jump = lambda n: isinstance(n, LMS_JumpNode) and n.next_entry == entry_point
+        for node in self:
+            if isinstance(node, LMS_BranchNode):
+                for case, branch in node.branches.items():
+                    if isinstance(node, LMS_JumpNode) and node.next_entry == entry_node:
+                        node.set_branch_case(case, None)
+                continue
 
-        for flowchart in self:
-            for node in flowchart.nodes.copy().values():
-                if isinstance(node, LMS_BranchNode):
-                    for case, branch in node.branches.items():
-                        if is_valid_jump(branch):
-                            branch.next_flowchart = None
-                    continue
-
-                if is_valid_jump(node):
-                    node.next_entry = None
+            if isinstance(node, LMS_JumpNode) and node.next_entry == entry_node:
+                node.next_entry = None
 
     def _generate_next_id(self) -> int:
         next_id = self._global_node_id

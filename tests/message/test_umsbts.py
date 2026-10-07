@@ -22,7 +22,37 @@ class TestUMSBTCases(MSBTTestUtil):
         self.assert_archive_messages(umsbt, expected)
 
     def test_new_umsbt(self) -> None:
-        umsbt = UMSBT()
+        msbt_0 = MSBT.new()
+
+        msbt_0.create_entry("UMsbtFile00Label00", message="UMSBT Message 00")
+        msbt_0.create_entry("UMsbtFile00Label01", message="UMSBT Message 01")
+
+        msbt_1 = MSBT.new()
+
+        msbt_1.create_entry("UMsbtFile01Label00", message="UMSBT Message 02")
+        msbt_1.create_entry("UMsbtFile01Label01", message="UMSBT Message 03")
+
+        msbt_2 = MSBT.new()
+        msbt_2.create_entry("UMsbtFile02Label00", message="UMSBT Message 04")
+        msbt_2.create_entry("UMsbtFile02Label01", message="UMSBT Message 05")
+
+        msbt_3 = MSBT.new()
+        msbt_3.create_entry("UMsbtFile03Label00", message="UMSBT Message 06")
+        msbt_3.create_entry("UMsbtFile03Label01", message="UMSBT Message 07")
+
+        umsbt = UMSBT([msbt_0, msbt_1, msbt_2, msbt_3])
+
+        expected = [
+            {"UMsbtFile00Label00": "UMSBT Message 00", "UMsbtFile00Label01": "UMSBT Message 01"},
+            {"UMsbtFile01Label00": "UMSBT Message 02", "UMsbtFile01Label01": "UMSBT Message 03"},
+            {"UMsbtFile02Label00": "UMSBT Message 04", "UMsbtFile02Label01": "UMSBT Message 05"},
+            {"UMsbtFile03Label00": "UMSBT Message 06", "UMsbtFile03Label01": "UMSBT Message 07"}
+        ]
+
+        self.assertEqual(list(umsbt), [msbt_0, msbt_1, msbt_2, msbt_3])
+
+        self.assert_archive_messages(UMSBT(), [])
+        self.assert_archive_messages(read_umsbt(write_umsbt(umsbt)), expected)
 
     def test_add_msbt(self) -> None:
         umsbt = read_umsbt_path(UMSBT_DIRECTORY / "simple.umsbt")

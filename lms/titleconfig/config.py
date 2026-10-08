@@ -196,7 +196,7 @@ class TitleConfig:
             attribute_configs[config_obj.name] = config_obj
 
         tag_content = parsed_content.get(cls.TAG_KEY, {})
-        group_map = tag_content["groups"]
+        group_map = tag_content.get("groups", {})
         tag_config = TagConfig(group_map)
 
         for tag_def in tag_content.get("tags", ()):

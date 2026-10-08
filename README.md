@@ -104,5 +104,4 @@ Code in this library was written by me. AI was utilized occasionally when develo
   formats.
 * [Trippixyz](https://github.com/Trippixyz): For helping me get started general decompilation of the formats and general
   help.
-* [AeonSake](https://github.com/AeonSake): Inspiration for some the implementation of the library and a bit of general
-  help.
+* [AeonSake](https://github.com/AeonSake): Inspiration for UMSBT implementation and other bits of the library. 

@@ -103,3 +103,7407 @@ node_definitions:
       parameter_type: string
       parameters:
         - name: layout,visibility
+tag_definitions:
+  groups:
+    0: System
+    1: Mii
+    2: MiiTalk
+    3: Date
+    4: Reference
+    5: Song
+    6: Fixed
+    7: Article
+    8: Gender
+    9: SingularPlural
+    10: GenderSingularPlural
+    11: Format
+    12: Nuance
+  tags:
+    - name: Ruby
+      group_id: 0
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: rt
+          description: ''
+          datatype: string
+    - name: Font
+      group_id: 0
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: face
+          description: ''
+          datatype: string
+    - name: Size
+      group_id: 0
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: percent
+          description: ''
+          datatype: uint16
+    - name: Color
+      group_id: 0
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: r
+          description: ''
+          datatype: uint8
+        - name: g
+          description: ''
+          datatype: uint8
+        - name: b
+          description: ''
+          datatype: uint8
+        - name: a
+          description: ''
+          datatype: uint8
+        - name: name
+          description: ''
+          datatype: string
+    - name: PageBreak
+      group_id: 0
+      tag_index: 4
+      description: ''
+    - name: Nickname
+      group_id: 1
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: Lastname
+      group_id: 1
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: Firstname
+      group_id: 1
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: Creator
+      group_id: 1
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: Character
+      group_id: 1
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: suffix
+          description: ''
+          datatype: enum
+          enum_members:
+            0: 'true'
+            1: 'false'
+    - name: Character16
+      group_id: 1
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: suffix
+          description: ''
+          datatype: enum
+          enum_members:
+            0: 'true'
+            1: 'false'
+    - name: LongPhrase
+      group_id: 1
+      tag_index: 6
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+    - name: ShortPhrase
+      group_id: 1
+      tag_index: 7
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: situation
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Good
+            1: Nerves
+            2: Despond
+            3: Worry
+    - name: FirstPerson
+      group_id: 1
+      tag_index: 8
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+    - name: FirstPersonW
+      group_id: 1
+      tag_index: 9
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+    - name: MyNickname
+      group_id: 1
+      tag_index: 10
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: BloodType
+      group_id: 1
+      tag_index: 11
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+    - name: FavoriteColor
+      group_id: 1
+      tag_index: 12
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+    - name: Speaker
+      group_id: 2
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: FriendA
+      group_id: 2
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: FriendB
+      group_id: 2
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: FriendC
+      group_id: 2
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: FriendD
+      group_id: 2
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: Lovers
+      group_id: 2
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: Couple
+      group_id: 2
+      tag_index: 6
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: BestFriend
+      group_id: 2
+      tag_index: 7
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: Child
+      group_id: 2
+      tag_index: 8
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: ChildApart
+      group_id: 2
+      tag_index: 9
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: Father
+      group_id: 2
+      tag_index: 10
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: Mother
+      group_id: 2
+      tag_index: 11
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: ExLovers
+      group_id: 2
+      tag_index: 12
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: Divorce
+      group_id: 2
+      tag_index: 13
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: BrotherSister
+      group_id: 2
+      tag_index: 14
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: conversion
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: Kana
+    - name: N_Year
+      group_id: 3
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: zero
+          description: ''
+          datatype: enum
+          enum_members:
+            0: 'False'
+            1: 'True'
+        - name: format
+          description: ''
+          datatype: enum
+          enum_members:
+            0: YYYY
+            1: YY
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+    - name: N_Month
+      group_id: 3
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: zero
+          description: ''
+          datatype: enum
+          enum_members:
+            0: 'False'
+            1: 'True'
+    - name: N_Day
+      group_id: 3
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: zero
+          description: ''
+          datatype: enum
+          enum_members:
+            0: 'False'
+            1: 'True'
+    - name: N_Hour
+      group_id: 3
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: zero
+          description: ''
+          datatype: enum
+          enum_members:
+            0: 'False'
+            1: 'True'
+        - name: format
+          description: ''
+          datatype: enum
+          enum_members:
+            0: 12-hour
+            1: 24-hour
+    - name: N_Minute
+      group_id: 3
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: zero
+          description: ''
+          datatype: enum
+          enum_members:
+            0: 'False'
+            1: 'True'
+    - name: N_Second
+      group_id: 3
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: zero
+          description: ''
+          datatype: enum
+          enum_members:
+            0: 'False'
+            1: 'True'
+    - name: S_Month
+      group_id: 3
+      tag_index: 6
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+    - name: S_MonthSh
+      group_id: 3
+      tag_index: 7
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+    - name: S_Day
+      group_id: 3
+      tag_index: 8
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+    - name: S_Hour
+      group_id: 3
+      tag_index: 9
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+        - name: format
+          description: ''
+          datatype: enum
+          enum_members:
+            0: 12-hour
+            1: 24-hour
+    - name: S_Week
+      group_id: 3
+      tag_index: 10
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+    - name: S_WeekSh
+      group_id: 3
+      tag_index: 11
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+    - name: S_Season
+      group_id: 3
+      tag_index: 12
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+    - name: S_AMPM
+      group_id: 3
+      tag_index: 13
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Text
+            1: Voice
+    - name: Body
+      group_id: 4
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Name
+            1: Voice
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: set
+          description: ''
+          datatype: enum
+          enum_members:
+            0: 'False'
+            1: 'True'
+    - name: Headwear
+      group_id: 4
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Name
+            1: Voice
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+    - name: Room
+      group_id: 4
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Name
+            1: Voice
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+    - name: Food
+      group_id: 4
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Name
+            1: Voice
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+    - name: Tool
+      group_id: 4
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Name
+            1: Voice
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+    - name: Treasure
+      group_id: 4
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Name
+            1: Voice
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+    - name: Equip
+      group_id: 4
+      tag_index: 6
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Name
+            1: Voice
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+    - name: SpecialProduct
+      group_id: 4
+      tag_index: 7
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Name
+            1: Voice
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+    - name: Item
+      group_id: 4
+      tag_index: 8
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Name
+            1: Voice
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+    - name: Number
+      group_id: 4
+      tag_index: 9
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: info
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Num
+            1: Price
+            2: NoMark
+        - name: zero
+          description: ''
+          datatype: uint8
+    - name: News
+      group_id: 4
+      tag_index: 10
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: info
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Month
+            1: Day
+            2: Hour
+            3: DateDiff
+    - name: Island
+      group_id: 4
+      tag_index: 11
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Name
+            1: Voice
+        - name: info
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Mine
+            1: Others
+    - name: Player
+      group_id: 4
+      tag_index: 12
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: int32
+        - name: info
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Country
+    - name: Age
+      group_id: 4
+      tag_index: 13
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+    - name: SongGenre
+      group_id: 4
+      tag_index: 14
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+    - name: Counter(JP)
+      group_id: 4
+      tag_index: 15
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Name
+            1: Voice
+        - name: counter
+          description: ''
+          datatype: enum
+          enum_members:
+            0: None
+            1: D_ConsonantEuphony
+            2: Normal
+    - name: IslandAddress
+      group_id: 4
+      tag_index: 16
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Name
+            1: Voice
+        - name: info
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Mine
+            1: Others
+        - name: kind
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Sea
+            1: Islands
+            2: Num0
+            3: Num1
+    - name: IslandSub
+      group_id: 4
+      tag_index: 17
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Name
+            1: Voice
+        - name: info
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Mine
+            1: Others
+    - name: Currency
+      group_id: 4
+      tag_index: 18
+      description: ''
+    - name: Note
+      group_id: 5
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: pitch
+          description: ''
+          datatype: enum
+          enum_members:
+            0: G1
+            1: G#1
+            2: A1
+            3: A#1
+            4: B1
+            5: C2
+            6: C#2
+            7: D2
+            8: D#2
+            9: E2
+            10: F2
+            11: F#2
+            12: G2
+            13: G#2
+            14: A2
+            15: A#2
+            16: B2
+            17: C3
+            18: C#3
+            19: D3
+            20: D#3
+            21: E3
+            22: F3
+            23: F#3
+            24: G3
+            25: G#3
+            26: A3
+            27: A#3
+            28: B3
+            29: C4
+            30: C#4
+            31: D4
+            32: D#4
+            33: E4
+            34: F4
+            35: F#4
+            36: G4
+            37: G#4
+            38: A4
+            39: A#4
+            40: B4
+            41: C5
+            42: C#5
+            43: D5
+            44: D#5
+            45: E5
+            46: F5
+            47: F#5
+            48: G5
+            49: G#5
+            50: A5
+            51: A#5
+            52: B5
+            53: C6
+        - name: length
+          description: ''
+          datatype: uint8
+    - name: Rest
+      group_id: 5
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: length
+          description: ''
+          datatype: uint8
+    - name: Text
+      group_id: 5
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+    - name: Pitch
+      group_id: 5
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: pitch
+          description: ''
+          datatype: enum
+          enum_members:
+            0: G1
+            1: G#1
+            2: A1
+            3: A#1
+            4: B1
+            5: C2
+            6: C#2
+            7: D2
+            8: D#2
+            9: E2
+            10: F2
+            11: F#2
+            12: G2
+            13: G#2
+            14: A2
+            15: A#2
+            16: B2
+            17: C3
+            18: C#3
+            19: D3
+            20: D#3
+            21: E3
+            22: F3
+            23: F#3
+            24: G3
+            25: G#3
+            26: A3
+            27: A#3
+            28: B3
+            29: C4
+            30: C#4
+            31: D4
+            32: D#4
+            33: E4
+            34: F4
+            35: F#4
+            36: G4
+            37: G#4
+            38: A4
+            39: A#4
+            40: B4
+            41: C5
+            42: C#5
+            43: D5
+            44: D#5
+            45: E5
+            46: F5
+            47: F#5
+            48: G5
+            49: G#5
+            50: A5
+            51: A#5
+            52: B5
+            53: C6
+    - name: Width
+      group_id: 6
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: pixel
+          description: ''
+          datatype: uint16
+    - name: Def
+      group_id: 7
+      tag_index: 0
+      description: ''
+    - name: Indef
+      group_id: 7
+      tag_index: 1
+      description: ''
+    - name: DefGE
+      group_id: 7
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: case
+          description: ''
+          datatype: uint8
+    - name: IndefGE
+      group_id: 7
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: case
+          description: ''
+          datatype: uint8
+    - name: Mii
+      group_id: 8
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: male
+          description: ''
+          datatype: string
+        - name: female
+          description: ''
+          datatype: string
+    - name: MyMii
+      group_id: 8
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: male
+          description: ''
+          datatype: string
+        - name: female
+          description: ''
+          datatype: string
+    - name: MiiTalk
+      group_id: 8
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Speaker
+            1: FriendA
+            2: FriendB
+            3: FriendC
+            4: FriendD
+            5: Lovers
+            6: Couple
+            7: BestFriend
+            8: Child
+            9: ChildApart
+            10: ExLovers
+            11: Divorce
+            12: BrotherSister
+        - name: male
+          description: ''
+          datatype: string
+        - name: female
+          description: ''
+          datatype: string
+    - name: MiiSpeaker
+      group_id: 8
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: male
+          description: ''
+          datatype: string
+        - name: female
+          description: ''
+          datatype: string
+    - name: Body
+      group_id: 8
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: masculine
+          description: ''
+          datatype: string
+        - name: feminine
+          description: ''
+          datatype: string
+        - name: neuter
+          description: ''
+          datatype: string
+    - name: Headwear
+      group_id: 8
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: masculine
+          description: ''
+          datatype: string
+        - name: feminine
+          description: ''
+          datatype: string
+        - name: neuter
+          description: ''
+          datatype: string
+    - name: Room
+      group_id: 8
+      tag_index: 6
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: masculine
+          description: ''
+          datatype: string
+        - name: feminine
+          description: ''
+          datatype: string
+        - name: neuter
+          description: ''
+          datatype: string
+    - name: Food
+      group_id: 8
+      tag_index: 7
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: masculine
+          description: ''
+          datatype: string
+        - name: feminine
+          description: ''
+          datatype: string
+        - name: neuter
+          description: ''
+          datatype: string
+    - name: Tool
+      group_id: 8
+      tag_index: 8
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: masculine
+          description: ''
+          datatype: string
+        - name: feminine
+          description: ''
+          datatype: string
+        - name: neuter
+          description: ''
+          datatype: string
+    - name: Treasure
+      group_id: 8
+      tag_index: 9
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: masculine
+          description: ''
+          datatype: string
+        - name: feminine
+          description: ''
+          datatype: string
+        - name: neuter
+          description: ''
+          datatype: string
+    - name: Equip
+      group_id: 8
+      tag_index: 10
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: masculine
+          description: ''
+          datatype: string
+        - name: feminine
+          description: ''
+          datatype: string
+        - name: neuter
+          description: ''
+          datatype: string
+    - name: SpecialProduct
+      group_id: 8
+      tag_index: 11
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: masculine
+          description: ''
+          datatype: string
+        - name: feminine
+          description: ''
+          datatype: string
+        - name: neuter
+          description: ''
+          datatype: string
+    - name: Item
+      group_id: 8
+      tag_index: 12
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: masculine
+          description: ''
+          datatype: string
+        - name: feminine
+          description: ''
+          datatype: string
+        - name: neuter
+          description: ''
+          datatype: string
+    - name: Body
+      group_id: 9
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: singular
+          description: ''
+          datatype: string
+        - name: plural
+          description: ''
+          datatype: string
+    - name: Headwear
+      group_id: 9
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: singular
+          description: ''
+          datatype: string
+        - name: plural
+          description: ''
+          datatype: string
+    - name: Room
+      group_id: 9
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: singular
+          description: ''
+          datatype: string
+        - name: plural
+          description: ''
+          datatype: string
+    - name: Food
+      group_id: 9
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: singular
+          description: ''
+          datatype: string
+        - name: plural
+          description: ''
+          datatype: string
+    - name: Tool
+      group_id: 9
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: singular
+          description: ''
+          datatype: string
+        - name: plural
+          description: ''
+          datatype: string
+    - name: Treasure
+      group_id: 9
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: singular
+          description: ''
+          datatype: string
+        - name: plural
+          description: ''
+          datatype: string
+    - name: Equip
+      group_id: 9
+      tag_index: 6
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: singular
+          description: ''
+          datatype: string
+        - name: plural
+          description: ''
+          datatype: string
+    - name: SpecialProduct
+      group_id: 9
+      tag_index: 7
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: singular
+          description: ''
+          datatype: string
+        - name: plural
+          description: ''
+          datatype: string
+    - name: Item
+      group_id: 9
+      tag_index: 8
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: singular
+          description: ''
+          datatype: string
+        - name: plural
+          description: ''
+          datatype: string
+    - name: Number
+      group_id: 9
+      tag_index: 9
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: singular
+          description: ''
+          datatype: string
+        - name: plural
+          description: ''
+          datatype: string
+    - name: Hour
+      group_id: 9
+      tag_index: 10
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: singular
+          description: ''
+          datatype: string
+        - name: plural
+          description: ''
+          datatype: string
+    - name: Body
+      group_id: 10
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: masculineSingular
+          description: ''
+          datatype: string
+        - name: masculinePlural
+          description: ''
+          datatype: string
+        - name: feminineSingular
+          description: ''
+          datatype: string
+        - name: femininePlural
+          description: ''
+          datatype: string
+        - name: neuterSingular
+          description: ''
+          datatype: string
+        - name: neuterPlural
+          description: ''
+          datatype: string
+    - name: Headwear
+      group_id: 10
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: masculineSingular
+          description: ''
+          datatype: string
+        - name: masculinePlural
+          description: ''
+          datatype: string
+        - name: feminineSingular
+          description: ''
+          datatype: string
+        - name: femininePlural
+          description: ''
+          datatype: string
+        - name: neuterSingular
+          description: ''
+          datatype: string
+        - name: neuterPlural
+          description: ''
+          datatype: string
+    - name: Room
+      group_id: 10
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: masculineSingular
+          description: ''
+          datatype: string
+        - name: masculinePlural
+          description: ''
+          datatype: string
+        - name: feminineSingular
+          description: ''
+          datatype: string
+        - name: femininePlural
+          description: ''
+          datatype: string
+        - name: neuterSingular
+          description: ''
+          datatype: string
+        - name: neuterPlural
+          description: ''
+          datatype: string
+    - name: Food
+      group_id: 10
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: masculineSingular
+          description: ''
+          datatype: string
+        - name: masculinePlural
+          description: ''
+          datatype: string
+        - name: feminineSingular
+          description: ''
+          datatype: string
+        - name: femininePlural
+          description: ''
+          datatype: string
+        - name: neuterSingular
+          description: ''
+          datatype: string
+        - name: neuterPlural
+          description: ''
+          datatype: string
+    - name: Tool
+      group_id: 10
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: masculineSingular
+          description: ''
+          datatype: string
+        - name: masculinePlural
+          description: ''
+          datatype: string
+        - name: feminineSingular
+          description: ''
+          datatype: string
+        - name: femininePlural
+          description: ''
+          datatype: string
+        - name: neuterSingular
+          description: ''
+          datatype: string
+        - name: neuterPlural
+          description: ''
+          datatype: string
+    - name: Treasure
+      group_id: 10
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: masculineSingular
+          description: ''
+          datatype: string
+        - name: masculinePlural
+          description: ''
+          datatype: string
+        - name: feminineSingular
+          description: ''
+          datatype: string
+        - name: femininePlural
+          description: ''
+          datatype: string
+        - name: neuterSingular
+          description: ''
+          datatype: string
+        - name: neuterPlural
+          description: ''
+          datatype: string
+    - name: Equip
+      group_id: 10
+      tag_index: 6
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: masculineSingular
+          description: ''
+          datatype: string
+        - name: masculinePlural
+          description: ''
+          datatype: string
+        - name: feminineSingular
+          description: ''
+          datatype: string
+        - name: femininePlural
+          description: ''
+          datatype: string
+        - name: neuterSingular
+          description: ''
+          datatype: string
+        - name: neuterPlural
+          description: ''
+          datatype: string
+    - name: SpecialProduct
+      group_id: 10
+      tag_index: 7
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: masculineSingular
+          description: ''
+          datatype: string
+        - name: masculinePlural
+          description: ''
+          datatype: string
+        - name: feminineSingular
+          description: ''
+          datatype: string
+        - name: femininePlural
+          description: ''
+          datatype: string
+        - name: neuterSingular
+          description: ''
+          datatype: string
+        - name: neuterPlural
+          description: ''
+          datatype: string
+    - name: Item
+      group_id: 10
+      tag_index: 8
+      description: ''
+      parameters:
+        - name: buffer
+          description: ''
+          datatype: uint8
+        - name: sp
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: masculineSingular
+          description: ''
+          datatype: string
+        - name: masculinePlural
+          description: ''
+          datatype: string
+        - name: feminineSingular
+          description: ''
+          datatype: string
+        - name: femininePlural
+          description: ''
+          datatype: string
+        - name: neuterSingular
+          description: ''
+          datatype: string
+        - name: neuterPlural
+          description: ''
+          datatype: string
+    - name: InitialCap
+      group_id: 11
+      tag_index: 0
+      description: ''
+    - name: InitialCapSP
+      group_id: 11
+      tag_index: 1
+      description: ''
+    - name: Elision
+      group_id: 11
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: normal
+          description: ''
+          datatype: string
+        - name: elision
+          description: ''
+          datatype: string
+    - name: Particle
+      group_id: 11
+      tag_index: 3
+      description: ''
+      parameters:
+        - name: char
+          description: ''
+          datatype: enum
+          enum_members:
+            0: none
+            1: ha
+            2: wo
+            3: ga
+            4: to
+            5: ni
+            6: ya
+            7: san
+    - name: Patchim
+      group_id: 11
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: patchim
+          description: ''
+          datatype: string
+        - name: nopatchim
+          description: ''
+          datatype: string
+    - name: AndSP
+      group_id: 11
+      tag_index: 5
+      description: ''
+    - name: CS_Rate
+      group_id: 12
+      tag_index: 0
+      description: ''
+      parameters:
+        - name: rate
+          description: ''
+          datatype: uint16
+    - name: CS_Vol
+      group_id: 12
+      tag_index: 1
+      description: ''
+      parameters:
+        - name: Vol
+          description: ''
+          datatype: uint8
+    - name: CS_Pause
+      group_id: 12
+      tag_index: 2
+      description: ''
+      parameters:
+        - name: len
+          description: ''
+          datatype: uint16
+    - name: CS_Reset
+      group_id: 12
+      tag_index: 3
+      description: ''
+    - name: Echo
+      group_id: 12
+      tag_index: 4
+      description: ''
+      parameters:
+        - name: gain
+          description: ''
+          datatype: uint8
+        - name: delay
+          description: ''
+          datatype: uint16
+    - name: Preset
+      group_id: 12
+      tag_index: 5
+      description: ''
+      parameters:
+        - name: param
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Default
+            1: Idol
+            2: Scream
+            3: No_Intonation
+            4: Subdued_Voice
+    - name: Song_Chorus
+      group_id: 12
+      tag_index: 6
+      description: ''
+      parameters:
+        - name: target
+          description: ''
+          datatype: enum
+          enum_members:
+            0: '0'
+            1: '1'
+            2: '2'
+        - name: ratio
+          description: ''
+          datatype: int32
+    - name: CS_Toi
+      group_id: 12
+      tag_index: 7
+      description: ''
+      parameters:
+        - name: type
+          description: ''
+          datatype: enum
+          enum_members:
+            0: orth
+            1: lhp
+            2: nts
+            3: pyt
+            4: diacritized
+        - name: orth_text
+          description: ''
+          datatype: string
+    - name: CS_Mw
+      group_id: 12
+      tag_index: 8
+      description: ''
+    - name: CS_Tn
+      group_id: 12
+      tag_index: 9
+      description: ''
+      parameters:
+        - name: tn
+          description: ''
+          datatype: enum
+          enum_members:
+            0: normal
+            1: spell
+            2: address
+            3: sms
+    - name: CS_Wait
+      group_id: 12
+      tag_index: 10
+      description: ''
+      parameters:
+        - name: time
+          description: ''
+          datatype: uint8
+    - name: CS_Spell
+      group_id: 12
+      tag_index: 11
+      description: ''
+      parameters:
+        - name: time
+          description: ''
+          datatype: uint16
+    - name: CS_Eos
+      group_id: 12
+      tag_index: 12
+      description: ''
+      parameters:
+        - name: eos
+          description: ''
+          datatype: enum
+          enum_members:
+            0: 'false'
+            1: 'true'
+    - name: CS_ReadMode
+      group_id: 12
+      tag_index: 13
+      description: ''
+      parameters:
+        - name: mode
+          description: ''
+          datatype: enum
+          enum_members:
+            0: sentence
+            1: character
+            2: word
+            3: line
+            4: explicit
+    - name: Song_WordStretch
+      group_id: 12
+      tag_index: 14
+      description: ''
+      parameters:
+        - name: mode
+          description: ''
+          datatype: enum
+          enum_members:
+            0: Only_Vowel
+            1: Only_Top
+            2: Only_Last
+            3: Whole_Word
+    - name: LenAdjust_First
+      group_id: 12
+      tag_index: 15
+      description: ''
+      parameters:
+        - name: val
+          description: ''
+          datatype: int8
+    - name: LenAdjust_Second
+      group_id: 12
+      tag_index: 16
+      description: ''
+      parameters:
+        - name: val
+          description: ''
+          datatype: int8
+    - name: LenAdjust_SecondLast
+      group_id: 12
+      tag_index: 17
+      description: ''
+      parameters:
+        - name: val
+          description: ''
+          datatype: int8
+    - name: LenAdjust_Last
+      group_id: 12
+      tag_index: 18
+      description: ''
+      parameters:
+        - name: val
+          description: ''
+          datatype: int8
+    - name: Pitch_Smooth
+      group_id: 12
+      tag_index: 19
+      description: ''
+      parameters:
+        - name: val
+          description: ''
+          datatype: uint8
+    - name: Pitch_Mod_Width
+      group_id: 12
+      tag_index: 20
+      description: ''
+      parameters:
+        - name: val
+          description: ''
+          datatype: uint8
+    - name: Pitch_Mod_Rate
+      group_id: 12
+      tag_index: 21
+      description: ''
+      parameters:
+        - name: val
+          description: ''
+          datatype: uint8
+attribute_definitions:
+  - name: ActivityCategory
+    description: ''
+    definitions:
+      - name: Limit
+        description: ''
+        datatype: uint16
+      - name: Rate00h
+        description: ''
+        datatype: uint8
+      - name: Rate01h
+        description: ''
+        datatype: uint8
+      - name: Rate02h
+        description: ''
+        datatype: uint8
+      - name: Rate03h
+        description: ''
+        datatype: uint8
+      - name: Rate04h
+        description: ''
+        datatype: uint8
+      - name: Rate05h
+        description: ''
+        datatype: uint8
+      - name: Rate06h
+        description: ''
+        datatype: uint8
+      - name: Rate07h
+        description: ''
+        datatype: uint8
+      - name: Rate08h
+        description: ''
+        datatype: uint8
+      - name: Rate09h
+        description: ''
+        datatype: uint8
+      - name: Rate10h
+        description: ''
+        datatype: uint8
+      - name: Rate11h
+        description: ''
+        datatype: uint8
+      - name: Rate12h
+        description: ''
+        datatype: uint8
+      - name: Rate13h
+        description: ''
+        datatype: uint8
+      - name: Rate14h
+        description: ''
+        datatype: uint8
+      - name: Rate15h
+        description: ''
+        datatype: uint8
+      - name: Rate16h
+        description: ''
+        datatype: uint8
+      - name: Rate17h
+        description: ''
+        datatype: uint8
+      - name: Rate18h
+        description: ''
+        datatype: uint8
+      - name: Rate19h
+        description: ''
+        datatype: uint8
+      - name: Rate20h
+        description: ''
+        datatype: uint8
+      - name: Rate21h
+        description: ''
+        datatype: uint8
+      - name: Rate22h
+        description: ''
+        datatype: uint8
+      - name: Rate23h
+        description: ''
+        datatype: uint8
+  - name: ActivityLong
+    description: ''
+    definitions:
+      - name: Rate
+        description: ''
+        datatype: uint8
+      - name: BeginH
+        description: ''
+        datatype: uint8
+      - name: BeginM
+        description: ''
+        datatype: uint8
+      - name: EndH
+        description: ''
+        datatype: uint8
+      - name: EndM
+        description: ''
+        datatype: uint8
+      - name: Limit
+        description: ''
+        datatype: uint16
+      - name: Priority
+        description: ''
+        datatype: uint8
+      - name: MiiNormal
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: MiiCouple
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: MiiChildCare
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: MiiWanderer
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: CharCool
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: CharDry
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: CharNagomi
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: CharNori
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelNormal
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelGood
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelNervous
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelDespond
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelWorry
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Number1
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Number2
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Number3
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Number4
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: ChildHold
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: ChildCrawl
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: ChildStand
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: ChildToddle
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: ChildWalk
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Item
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Phone
+          2: 3DS
+          3: Study
+          4: PC
+          5: CD
+          6: Book
+          7: WiiU
+          8: Yoga
+          9: Treadmill
+          10: Mirror
+          11: Guitar
+          12: Maracas
+          13: Cat
+          14: Cosmetics
+          15: Scales
+          16: Ballet
+          17: Hula
+          18: Soccer
+          19: Fishing
+          20: Bat
+          21: Bubble
+          22: Racket
+          23: Golf
+          24: Sandbag
+          25: Dog
+          26: Skateboard
+          27: Kite
+          28: MetalDetector
+      - name: ItemFlag
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Owner
+          2: All
+      - name: OnlyMyRoom
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FixedMember
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Extend
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: RelationOthers
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: RelationFriend
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: RelationLovers
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: RelationExLovers
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: RelationCouple
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: RelationChildCare
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: RelationDivorce
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: RelationParentChild
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: RelationBrotherSister
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: RelationFightFriend
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: RelationFightLovers
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: RelationFightCouple
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: RelationBestFriend
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: PositionType
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Apartment
+          1: House
+          2: Location
+          3: Shop
+      - name: PositionIndex
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Park
+          2: Seaside
+          3: Roof
+          4: Cafe
+          5: Fountain
+          6: Amusement
+          7: Observatory
+          8: LDK
+          9: Washroom
+          10: Bath
+          11: Bedroom
+          12: ShopFood
+          13: ShopBody
+          14: ShopHeadwear
+          15: ShopRoom
+          16: ShopTreasure
+          17: ShopImport
+      - name: PositionSpot
+        description: ''
+        datatype: uint8
+      - name: MarriedFlag
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: WandererFlag
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: WindowType
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Dark
+          2: Sleep
+          3: Minigame
+      - name: ShortLabel
+        description: ''
+        datatype: string
+      - name: ScriptLabel
+        description: ''
+        datatype: string
+      - name: ScriptLabelKR
+        description: ''
+        datatype: string
+      - name: HouseBgm
+        description: ''
+        datatype: uint8
+  - name: ActivityShort
+    description: ''
+    definitions:
+      - name: Limit
+        description: ''
+        datatype: uint16
+      - name: Sync
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: CharCool
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: CharDry
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: CharNagomi
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: CharNori
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelNormal
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelGood
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelNervous
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelDespond
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelWorry
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Next01_Name
+        description: ''
+        datatype: string
+      - name: Next01_Rate
+        description: ''
+        datatype: uint8
+      - name: Next02_Name
+        description: ''
+        datatype: string
+      - name: Next02_Rate
+        description: ''
+        datatype: uint8
+      - name: Next03_Name
+        description: ''
+        datatype: string
+      - name: Next03_Rate
+        description: ''
+        datatype: uint8
+      - name: Next04_Name
+        description: ''
+        datatype: string
+      - name: Next04_Rate
+        description: ''
+        datatype: uint8
+      - name: Next05_Name
+        description: ''
+        datatype: string
+      - name: Next05_Rate
+        description: ''
+        datatype: uint8
+      - name: Next06_Name
+        description: ''
+        datatype: string
+      - name: Next06_Rate
+        description: ''
+        datatype: uint8
+      - name: Next07_Name
+        description: ''
+        datatype: string
+      - name: Next07_Rate
+        description: ''
+        datatype: uint8
+      - name: Next08_Name
+        description: ''
+        datatype: string
+      - name: Next08_Rate
+        description: ''
+        datatype: uint8
+  - name: ActivityTalk
+    description: ''
+    definitions:
+      - name: ProbCharacter
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Normal
+          1: AssertionHigh
+          2: AssertionLow
+          3: EmotionHigh
+          4: EmotionLow
+      - name: ProbCompatibility
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Normal
+          1: High
+          2: Low
+      - name: CharCool
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: CharDry
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: CharNagomi
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: CharNori
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelNormal
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelGood
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelNervous
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelDespond
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: FeelWorry
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: TalkEnd
+        description: ''
+        datatype: int8
+      - name: TalkNormal
+        description: ''
+        datatype: int8
+      - name: TalkEnjoy
+        description: ''
+        datatype: int8
+      - name: TalkAngry
+        description: ''
+        datatype: int8
+      - name: TalkApology
+        description: ''
+        datatype: int8
+      - name: TalkTear
+        description: ''
+        datatype: int8
+      - name: TalkComfort
+        description: ''
+        datatype: int8
+      - name: TalkFlatter
+        description: ''
+        datatype: int8
+      - name: TalkSad
+        description: ''
+        datatype: int8
+      - name: TalkGuffaw
+        description: ''
+        datatype: int8
+      - name: TalkChuckle
+        description: ''
+        datatype: int8
+      - name: TalkDogeza
+        description: ''
+        datatype: int8
+  - name: Chat
+    description: ''
+    definitions:
+      - name: Item_A
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'Null'
+          1: Food
+          2: Treasure
+          3: Tool
+      - name: Item_B
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'Null'
+          1: Food
+          2: Treasure
+          3: Tool
+      - name: Item_C
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'Null'
+          1: Food
+          2: Treasure
+          3: Tool
+      - name: Clothes_A
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'Null'
+          1: Clothes
+          2: Headwear
+      - name: Clothes_B
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'Null'
+          1: Clothes
+          2: Headwear
+      - name: TalkAbout
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Common
+          1: Citizen
+          2: SameGender
+          3: OppositeGender
+          4: CheerupTarget
+          5: Friend
+          6: Friend_SameGender
+          7: Friend_OppositeGender
+          8: Couple
+          9: OthersLove
+          10: SelfLove
+      - name: Expression
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Normal
+          1: Smile
+          2: Anger
+          3: Sorrow
+          4: Surprise
+          5: Blink
+          6: Wink_L
+          7: Wink_R
+      - name: SpeakerNeck
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'Null'
+          1: TopicStarter
+      - name: Question
+        description: ''
+        datatype: bool
+      - name: Silent
+        description: ''
+        datatype: bool
+      - name: Interrupt
+        description: ''
+        datatype: bool
+      - name: Permutation
+        description: ''
+        datatype: bool
+      - name: SameTopicLabelID
+        description: ''
+        datatype: int16
+  - name: Clothes
+    description: ''
+    definitions:
+      - name: FileID
+        description: ''
+        datatype: int16
+      - name: RegionJP
+        description: 'Flag that determines if the item is enabled for Japanese regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: RegionUS
+        description: 'Flag that determines if the item is enabled for US regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: RegionEU
+        description: 'Flag that determines if the item is enabled for EU regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: RegionKR
+        description: 'Flag that determines if the item is enabled for Korean regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: Price
+        description: ''
+        datatype: uint32
+      - name: Type
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Type_Male
+          1: Type_Female
+          2: Type_Unisex
+          3: Type_Uniform
+          4: Type_Special
+      - name: HeadwearType
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Hat
+          1: Accessory
+          2: Mask
+      - name: Sex
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Common
+          1: Male
+          2: Female
+      - name: SexGap
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Shop
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Mii
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Find
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Taste_Cool
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '00'
+          1: '01'
+          2: '02'
+          3: '03'
+          4: '04'
+          5: '05'
+          6: '06'
+          7: '07'
+          8: 08
+          9: 09
+          10: '10'
+          11: '11'
+          12: '12'
+          13: '13'
+          14: '14'
+          15: '15'
+      - name: Taste_Dry
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '00'
+          1: '01'
+          2: '02'
+          3: '03'
+          4: '04'
+          5: '05'
+          6: '06'
+          7: '07'
+          8: 08
+          9: 09
+          10: '10'
+          11: '11'
+          12: '12'
+          13: '13'
+          14: '14'
+          15: '15'
+      - name: Taste_Nagomi
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '00'
+          1: '01'
+          2: '02'
+          3: '03'
+          4: '04'
+          5: '05'
+          6: '06'
+          7: '07'
+          8: 08
+          9: 09
+          10: '10'
+          11: '11'
+          12: '12'
+          13: '13'
+          14: '14'
+          15: '15'
+      - name: Taste_Nori
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '00'
+          1: '01'
+          2: '02'
+          3: '03'
+          4: '04'
+          5: '05'
+          6: '06'
+          7: '07'
+          8: 08
+          9: 09
+          10: '10'
+          11: '11'
+          12: '12'
+          13: '13'
+          14: '14'
+          15: '15'
+      - name: RatioA
+        description: ''
+        datatype: uint8
+      - name: RatioB
+        description: ''
+        datatype: uint8
+      - name: RatioC
+        description: ''
+        datatype: uint8
+      - name: RatioD
+        description: ''
+        datatype: uint8
+      - name: Season_Spring
+        description: ''
+        datatype: bool
+      - name: Season_Summer
+        description: ''
+        datatype: bool
+      - name: Season_Autumn
+        description: ''
+        datatype: bool
+      - name: Season_Winter
+        description: ''
+        datatype: bool
+      - name: Attr_Warm
+        description: ''
+        datatype: bool
+      - name: Attr_Cold
+        description: ''
+        datatype: bool
+      - name: Attr_Showy
+        description: ''
+        datatype: bool
+      - name: Attr_Quiet
+        description: ''
+        datatype: bool
+      - name: Attr_Formal
+        description: ''
+        datatype: bool
+      - name: Attr_Casual
+        description: ''
+        datatype: bool
+      - name: Attr_Cute
+        description: ''
+        datatype: bool
+      - name: Attr_Sexy
+        description: ''
+        datatype: bool
+      - name: Attr_Cool
+        description: ''
+        datatype: bool
+      - name: Attr_Frumpy
+        description: ''
+        datatype: bool
+      - name: Attr_Eccentric
+        description: ''
+        datatype: bool
+      - name: Attr_Safe
+        description: ''
+        datatype: bool
+      - name: Attr_Skirt
+        description: ''
+        datatype: bool
+      - name: Attr_Work
+        description: ''
+        datatype: bool
+      - name: Attr_Sports
+        description: ''
+        datatype: bool
+      - name: Color1
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '-'
+          1: Ivory
+          2: LemonChiffon
+          3: Khaki
+          4: Light_brilliant_amber_yellow
+          5: Yellow
+          6: Gold
+          7: PeachPuff
+          8: Salmon
+          9: Coral
+          10: Tomato
+          11: Orange
+          12: Light_brilliant_amber
+          13: Luminous_vivid_orange
+          14: PaleVioletRed
+          15: IndianRed
+          16: Red
+          17: OrangeRed
+          18: Moderate_red
+          19: DarkRed
+          20: MistyRose
+          21: Pink
+          22: LightCoral
+          23: Very_light_crimson
+          24: HotPink
+          25: Light_brilliant_crimson
+          26: DeepPink
+          27: Very_light_magenta
+          28: Fuchsia
+          29: MediumVioletRed
+          30: Lavender
+          31: Plum
+          32: MediumPurple
+          33: MediumSlateBlue
+          34: Light_brilliant_violet
+          35: DarkSlateBlue
+          36: Indigo
+          37: DarkMagenta
+          38: Deep_magenta
+          39: LightCyan
+          40: LightSkyBlue
+          41: DeepSkyBlue
+          42: Luminous_vivid_azure
+          43: RoyalBlue
+          44: Moderate_blue
+          45: Blue
+          46: DarkBlue
+          47: DarkBlue_2
+          48: Deep_blue
+          49: PaleTurquoise
+          50: Aquamarine
+          51: CadetBlue
+          52: SteelBlue
+          53: Cyan
+          54: DarkTurquoise
+          55: DarkCyan
+          56: Deep_cyan_2
+          57: PaleGreen
+          58: YellowGreen
+          59: Light_brilliant_yellow_lime
+          60: GreenYellow
+          61: Chartreuse
+          62: Lime
+          63: LimeGreen
+          64: MediumSeaGreen
+          65: OliveDrab
+          66: Olive
+          67: DarkOliveGreen
+          68: DarkGreen
+          69: Very_deep_green
+          70: RosyBrown
+          71: BurlyWood
+          72: Tan
+          73: Goldenrod
+          74: DarkGoldenrod
+          75: Moderate_amber
+          76: Dark_amber
+          77: Chocolate
+          78: Brown
+          79: SaddleBrown
+          80: Deep_reddish_brown
+          81: Deep_brown_red
+          82: Dark_gamboge
+          83: Very_dark_gamboge
+          84: White
+          85: LightGrey
+          86: DarkGray
+          87: Gray
+          88: Dark_gray
+          89: Very_dark_gray
+          90: Very_dark_gray_2
+          91: Black
+          92: mii_skin_0
+          93: mii_skin_1
+          94: mii_skin_2
+          95: mii_skin_3
+          96: mii_skin_4
+          97: mii_skin_5
+      - name: Color2
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '-'
+          1: Ivory
+          2: LemonChiffon
+          3: Khaki
+          4: Light_brilliant_amber_yellow
+          5: Yellow
+          6: Gold
+          7: PeachPuff
+          8: Salmon
+          9: Coral
+          10: Tomato
+          11: Orange
+          12: Light_brilliant_amber
+          13: Luminous_vivid_orange
+          14: PaleVioletRed
+          15: IndianRed
+          16: Red
+          17: OrangeRed
+          18: Moderate_red
+          19: DarkRed
+          20: MistyRose
+          21: Pink
+          22: LightCoral
+          23: Very_light_crimson
+          24: HotPink
+          25: Light_brilliant_crimson
+          26: DeepPink
+          27: Very_light_magenta
+          28: Fuchsia
+          29: MediumVioletRed
+          30: Lavender
+          31: Plum
+          32: MediumPurple
+          33: MediumSlateBlue
+          34: Light_brilliant_violet
+          35: DarkSlateBlue
+          36: Indigo
+          37: DarkMagenta
+          38: Deep_magenta
+          39: LightCyan
+          40: LightSkyBlue
+          41: DeepSkyBlue
+          42: Luminous_vivid_azure
+          43: RoyalBlue
+          44: Moderate_blue
+          45: Blue
+          46: DarkBlue
+          47: DarkBlue_2
+          48: Deep_blue
+          49: PaleTurquoise
+          50: Aquamarine
+          51: CadetBlue
+          52: SteelBlue
+          53: Cyan
+          54: DarkTurquoise
+          55: DarkCyan
+          56: Deep_cyan_2
+          57: PaleGreen
+          58: YellowGreen
+          59: Light_brilliant_yellow_lime
+          60: GreenYellow
+          61: Chartreuse
+          62: Lime
+          63: LimeGreen
+          64: MediumSeaGreen
+          65: OliveDrab
+          66: Olive
+          67: DarkOliveGreen
+          68: DarkGreen
+          69: Very_deep_green
+          70: RosyBrown
+          71: BurlyWood
+          72: Tan
+          73: Goldenrod
+          74: DarkGoldenrod
+          75: Moderate_amber
+          76: Dark_amber
+          77: Chocolate
+          78: Brown
+          79: SaddleBrown
+          80: Deep_reddish_brown
+          81: Deep_brown_red
+          82: Dark_gamboge
+          83: Very_dark_gamboge
+          84: White
+          85: LightGrey
+          86: DarkGray
+          87: Gray
+          88: Dark_gray
+          89: Very_dark_gray
+          90: Very_dark_gray_2
+          91: Black
+          92: mii_skin_0
+          93: mii_skin_1
+          94: mii_skin_2
+          95: mii_skin_3
+          96: mii_skin_4
+          97: mii_skin_5
+      - name: Color3
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '-'
+          1: Ivory
+          2: LemonChiffon
+          3: Khaki
+          4: Light_brilliant_amber_yellow
+          5: Yellow
+          6: Gold
+          7: PeachPuff
+          8: Salmon
+          9: Coral
+          10: Tomato
+          11: Orange
+          12: Light_brilliant_amber
+          13: Luminous_vivid_orange
+          14: PaleVioletRed
+          15: IndianRed
+          16: Red
+          17: OrangeRed
+          18: Moderate_red
+          19: DarkRed
+          20: MistyRose
+          21: Pink
+          22: LightCoral
+          23: Very_light_crimson
+          24: HotPink
+          25: Light_brilliant_crimson
+          26: DeepPink
+          27: Very_light_magenta
+          28: Fuchsia
+          29: MediumVioletRed
+          30: Lavender
+          31: Plum
+          32: MediumPurple
+          33: MediumSlateBlue
+          34: Light_brilliant_violet
+          35: DarkSlateBlue
+          36: Indigo
+          37: DarkMagenta
+          38: Deep_magenta
+          39: LightCyan
+          40: LightSkyBlue
+          41: DeepSkyBlue
+          42: Luminous_vivid_azure
+          43: RoyalBlue
+          44: Moderate_blue
+          45: Blue
+          46: DarkBlue
+          47: DarkBlue_2
+          48: Deep_blue
+          49: PaleTurquoise
+          50: Aquamarine
+          51: CadetBlue
+          52: SteelBlue
+          53: Cyan
+          54: DarkTurquoise
+          55: DarkCyan
+          56: Deep_cyan_2
+          57: PaleGreen
+          58: YellowGreen
+          59: Light_brilliant_yellow_lime
+          60: GreenYellow
+          61: Chartreuse
+          62: Lime
+          63: LimeGreen
+          64: MediumSeaGreen
+          65: OliveDrab
+          66: Olive
+          67: DarkOliveGreen
+          68: DarkGreen
+          69: Very_deep_green
+          70: RosyBrown
+          71: BurlyWood
+          72: Tan
+          73: Goldenrod
+          74: DarkGoldenrod
+          75: Moderate_amber
+          76: Dark_amber
+          77: Chocolate
+          78: Brown
+          79: SaddleBrown
+          80: Deep_reddish_brown
+          81: Deep_brown_red
+          82: Dark_gamboge
+          83: Very_dark_gamboge
+          84: White
+          85: LightGrey
+          86: DarkGray
+          87: Gray
+          88: Dark_gray
+          89: Very_dark_gray
+          90: Very_dark_gray_2
+          91: Black
+          92: mii_skin_0
+          93: mii_skin_1
+          94: mii_skin_2
+          95: mii_skin_3
+          96: mii_skin_4
+          97: mii_skin_5
+      - name: Color4
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '-'
+          1: Ivory
+          2: LemonChiffon
+          3: Khaki
+          4: Light_brilliant_amber_yellow
+          5: Yellow
+          6: Gold
+          7: PeachPuff
+          8: Salmon
+          9: Coral
+          10: Tomato
+          11: Orange
+          12: Light_brilliant_amber
+          13: Luminous_vivid_orange
+          14: PaleVioletRed
+          15: IndianRed
+          16: Red
+          17: OrangeRed
+          18: Moderate_red
+          19: DarkRed
+          20: MistyRose
+          21: Pink
+          22: LightCoral
+          23: Very_light_crimson
+          24: HotPink
+          25: Light_brilliant_crimson
+          26: DeepPink
+          27: Very_light_magenta
+          28: Fuchsia
+          29: MediumVioletRed
+          30: Lavender
+          31: Plum
+          32: MediumPurple
+          33: MediumSlateBlue
+          34: Light_brilliant_violet
+          35: DarkSlateBlue
+          36: Indigo
+          37: DarkMagenta
+          38: Deep_magenta
+          39: LightCyan
+          40: LightSkyBlue
+          41: DeepSkyBlue
+          42: Luminous_vivid_azure
+          43: RoyalBlue
+          44: Moderate_blue
+          45: Blue
+          46: DarkBlue
+          47: DarkBlue_2
+          48: Deep_blue
+          49: PaleTurquoise
+          50: Aquamarine
+          51: CadetBlue
+          52: SteelBlue
+          53: Cyan
+          54: DarkTurquoise
+          55: DarkCyan
+          56: Deep_cyan_2
+          57: PaleGreen
+          58: YellowGreen
+          59: Light_brilliant_yellow_lime
+          60: GreenYellow
+          61: Chartreuse
+          62: Lime
+          63: LimeGreen
+          64: MediumSeaGreen
+          65: OliveDrab
+          66: Olive
+          67: DarkOliveGreen
+          68: DarkGreen
+          69: Very_deep_green
+          70: RosyBrown
+          71: BurlyWood
+          72: Tan
+          73: Goldenrod
+          74: DarkGoldenrod
+          75: Moderate_amber
+          76: Dark_amber
+          77: Chocolate
+          78: Brown
+          79: SaddleBrown
+          80: Deep_reddish_brown
+          81: Deep_brown_red
+          82: Dark_gamboge
+          83: Very_dark_gamboge
+          84: White
+          85: LightGrey
+          86: DarkGray
+          87: Gray
+          88: Dark_gray
+          89: Very_dark_gray
+          90: Very_dark_gray_2
+          91: Black
+          92: mii_skin_0
+          93: mii_skin_1
+          94: mii_skin_2
+          95: mii_skin_3
+          96: mii_skin_4
+          97: mii_skin_5
+      - name: Color5
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '-'
+          1: Ivory
+          2: LemonChiffon
+          3: Khaki
+          4: Light_brilliant_amber_yellow
+          5: Yellow
+          6: Gold
+          7: PeachPuff
+          8: Salmon
+          9: Coral
+          10: Tomato
+          11: Orange
+          12: Light_brilliant_amber
+          13: Luminous_vivid_orange
+          14: PaleVioletRed
+          15: IndianRed
+          16: Red
+          17: OrangeRed
+          18: Moderate_red
+          19: DarkRed
+          20: MistyRose
+          21: Pink
+          22: LightCoral
+          23: Very_light_crimson
+          24: HotPink
+          25: Light_brilliant_crimson
+          26: DeepPink
+          27: Very_light_magenta
+          28: Fuchsia
+          29: MediumVioletRed
+          30: Lavender
+          31: Plum
+          32: MediumPurple
+          33: MediumSlateBlue
+          34: Light_brilliant_violet
+          35: DarkSlateBlue
+          36: Indigo
+          37: DarkMagenta
+          38: Deep_magenta
+          39: LightCyan
+          40: LightSkyBlue
+          41: DeepSkyBlue
+          42: Luminous_vivid_azure
+          43: RoyalBlue
+          44: Moderate_blue
+          45: Blue
+          46: DarkBlue
+          47: DarkBlue_2
+          48: Deep_blue
+          49: PaleTurquoise
+          50: Aquamarine
+          51: CadetBlue
+          52: SteelBlue
+          53: Cyan
+          54: DarkTurquoise
+          55: DarkCyan
+          56: Deep_cyan_2
+          57: PaleGreen
+          58: YellowGreen
+          59: Light_brilliant_yellow_lime
+          60: GreenYellow
+          61: Chartreuse
+          62: Lime
+          63: LimeGreen
+          64: MediumSeaGreen
+          65: OliveDrab
+          66: Olive
+          67: DarkOliveGreen
+          68: DarkGreen
+          69: Very_deep_green
+          70: RosyBrown
+          71: BurlyWood
+          72: Tan
+          73: Goldenrod
+          74: DarkGoldenrod
+          75: Moderate_amber
+          76: Dark_amber
+          77: Chocolate
+          78: Brown
+          79: SaddleBrown
+          80: Deep_reddish_brown
+          81: Deep_brown_red
+          82: Dark_gamboge
+          83: Very_dark_gamboge
+          84: White
+          85: LightGrey
+          86: DarkGray
+          87: Gray
+          88: Dark_gray
+          89: Very_dark_gray
+          90: Very_dark_gray_2
+          91: Black
+          92: mii_skin_0
+          93: mii_skin_1
+          94: mii_skin_2
+          95: mii_skin_3
+          96: mii_skin_4
+          97: mii_skin_5
+      - name: Color6
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '-'
+          1: Ivory
+          2: LemonChiffon
+          3: Khaki
+          4: Light_brilliant_amber_yellow
+          5: Yellow
+          6: Gold
+          7: PeachPuff
+          8: Salmon
+          9: Coral
+          10: Tomato
+          11: Orange
+          12: Light_brilliant_amber
+          13: Luminous_vivid_orange
+          14: PaleVioletRed
+          15: IndianRed
+          16: Red
+          17: OrangeRed
+          18: Moderate_red
+          19: DarkRed
+          20: MistyRose
+          21: Pink
+          22: LightCoral
+          23: Very_light_crimson
+          24: HotPink
+          25: Light_brilliant_crimson
+          26: DeepPink
+          27: Very_light_magenta
+          28: Fuchsia
+          29: MediumVioletRed
+          30: Lavender
+          31: Plum
+          32: MediumPurple
+          33: MediumSlateBlue
+          34: Light_brilliant_violet
+          35: DarkSlateBlue
+          36: Indigo
+          37: DarkMagenta
+          38: Deep_magenta
+          39: LightCyan
+          40: LightSkyBlue
+          41: DeepSkyBlue
+          42: Luminous_vivid_azure
+          43: RoyalBlue
+          44: Moderate_blue
+          45: Blue
+          46: DarkBlue
+          47: DarkBlue_2
+          48: Deep_blue
+          49: PaleTurquoise
+          50: Aquamarine
+          51: CadetBlue
+          52: SteelBlue
+          53: Cyan
+          54: DarkTurquoise
+          55: DarkCyan
+          56: Deep_cyan_2
+          57: PaleGreen
+          58: YellowGreen
+          59: Light_brilliant_yellow_lime
+          60: GreenYellow
+          61: Chartreuse
+          62: Lime
+          63: LimeGreen
+          64: MediumSeaGreen
+          65: OliveDrab
+          66: Olive
+          67: DarkOliveGreen
+          68: DarkGreen
+          69: Very_deep_green
+          70: RosyBrown
+          71: BurlyWood
+          72: Tan
+          73: Goldenrod
+          74: DarkGoldenrod
+          75: Moderate_amber
+          76: Dark_amber
+          77: Chocolate
+          78: Brown
+          79: SaddleBrown
+          80: Deep_reddish_brown
+          81: Deep_brown_red
+          82: Dark_gamboge
+          83: Very_dark_gamboge
+          84: White
+          85: LightGrey
+          86: DarkGray
+          87: Gray
+          88: Dark_gray
+          89: Very_dark_gray
+          90: Very_dark_gray_2
+          91: Black
+          92: mii_skin_0
+          93: mii_skin_1
+          94: mii_skin_2
+          95: mii_skin_3
+          96: mii_skin_4
+          97: mii_skin_5
+      - name: Color7
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '-'
+          1: Ivory
+          2: LemonChiffon
+          3: Khaki
+          4: Light_brilliant_amber_yellow
+          5: Yellow
+          6: Gold
+          7: PeachPuff
+          8: Salmon
+          9: Coral
+          10: Tomato
+          11: Orange
+          12: Light_brilliant_amber
+          13: Luminous_vivid_orange
+          14: PaleVioletRed
+          15: IndianRed
+          16: Red
+          17: OrangeRed
+          18: Moderate_red
+          19: DarkRed
+          20: MistyRose
+          21: Pink
+          22: LightCoral
+          23: Very_light_crimson
+          24: HotPink
+          25: Light_brilliant_crimson
+          26: DeepPink
+          27: Very_light_magenta
+          28: Fuchsia
+          29: MediumVioletRed
+          30: Lavender
+          31: Plum
+          32: MediumPurple
+          33: MediumSlateBlue
+          34: Light_brilliant_violet
+          35: DarkSlateBlue
+          36: Indigo
+          37: DarkMagenta
+          38: Deep_magenta
+          39: LightCyan
+          40: LightSkyBlue
+          41: DeepSkyBlue
+          42: Luminous_vivid_azure
+          43: RoyalBlue
+          44: Moderate_blue
+          45: Blue
+          46: DarkBlue
+          47: DarkBlue_2
+          48: Deep_blue
+          49: PaleTurquoise
+          50: Aquamarine
+          51: CadetBlue
+          52: SteelBlue
+          53: Cyan
+          54: DarkTurquoise
+          55: DarkCyan
+          56: Deep_cyan_2
+          57: PaleGreen
+          58: YellowGreen
+          59: Light_brilliant_yellow_lime
+          60: GreenYellow
+          61: Chartreuse
+          62: Lime
+          63: LimeGreen
+          64: MediumSeaGreen
+          65: OliveDrab
+          66: Olive
+          67: DarkOliveGreen
+          68: DarkGreen
+          69: Very_deep_green
+          70: RosyBrown
+          71: BurlyWood
+          72: Tan
+          73: Goldenrod
+          74: DarkGoldenrod
+          75: Moderate_amber
+          76: Dark_amber
+          77: Chocolate
+          78: Brown
+          79: SaddleBrown
+          80: Deep_reddish_brown
+          81: Deep_brown_red
+          82: Dark_gamboge
+          83: Very_dark_gamboge
+          84: White
+          85: LightGrey
+          86: DarkGray
+          87: Gray
+          88: Dark_gray
+          89: Very_dark_gray
+          90: Very_dark_gray_2
+          91: Black
+          92: mii_skin_0
+          93: mii_skin_1
+          94: mii_skin_2
+          95: mii_skin_3
+          96: mii_skin_4
+          97: mii_skin_5
+      - name: Color8
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '-'
+          1: Ivory
+          2: LemonChiffon
+          3: Khaki
+          4: Light_brilliant_amber_yellow
+          5: Yellow
+          6: Gold
+          7: PeachPuff
+          8: Salmon
+          9: Coral
+          10: Tomato
+          11: Orange
+          12: Light_brilliant_amber
+          13: Luminous_vivid_orange
+          14: PaleVioletRed
+          15: IndianRed
+          16: Red
+          17: OrangeRed
+          18: Moderate_red
+          19: DarkRed
+          20: MistyRose
+          21: Pink
+          22: LightCoral
+          23: Very_light_crimson
+          24: HotPink
+          25: Light_brilliant_crimson
+          26: DeepPink
+          27: Very_light_magenta
+          28: Fuchsia
+          29: MediumVioletRed
+          30: Lavender
+          31: Plum
+          32: MediumPurple
+          33: MediumSlateBlue
+          34: Light_brilliant_violet
+          35: DarkSlateBlue
+          36: Indigo
+          37: DarkMagenta
+          38: Deep_magenta
+          39: LightCyan
+          40: LightSkyBlue
+          41: DeepSkyBlue
+          42: Luminous_vivid_azure
+          43: RoyalBlue
+          44: Moderate_blue
+          45: Blue
+          46: DarkBlue
+          47: DarkBlue_2
+          48: Deep_blue
+          49: PaleTurquoise
+          50: Aquamarine
+          51: CadetBlue
+          52: SteelBlue
+          53: Cyan
+          54: DarkTurquoise
+          55: DarkCyan
+          56: Deep_cyan_2
+          57: PaleGreen
+          58: YellowGreen
+          59: Light_brilliant_yellow_lime
+          60: GreenYellow
+          61: Chartreuse
+          62: Lime
+          63: LimeGreen
+          64: MediumSeaGreen
+          65: OliveDrab
+          66: Olive
+          67: DarkOliveGreen
+          68: DarkGreen
+          69: Very_deep_green
+          70: RosyBrown
+          71: BurlyWood
+          72: Tan
+          73: Goldenrod
+          74: DarkGoldenrod
+          75: Moderate_amber
+          76: Dark_amber
+          77: Chocolate
+          78: Brown
+          79: SaddleBrown
+          80: Deep_reddish_brown
+          81: Deep_brown_red
+          82: Dark_gamboge
+          83: Very_dark_gamboge
+          84: White
+          85: LightGrey
+          86: DarkGray
+          87: Gray
+          88: Dark_gray
+          89: Very_dark_gray
+          90: Very_dark_gray_2
+          91: Black
+          92: mii_skin_0
+          93: mii_skin_1
+          94: mii_skin_2
+          95: mii_skin_3
+          96: mii_skin_4
+          97: mii_skin_5
+      - name: SpecialColorJP
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: CEC
+          2: BOSS
+      - name: SpecialColorUS
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: CEC
+          2: BOSS
+      - name: SpecialColorEU
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: CEC
+          2: BOSS
+      - name: SpecialColorKR
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: CEC
+          2: BOSS
+      - name: RGB
+        description: ''
+        datatype: uint32
+      - name: BodyLabel
+        description: ''
+        datatype: string
+      - name: HeadwearLabel
+        description: ''
+        datatype: string
+      - name: Catalog
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: ExportType1
+        description: ''
+        datatype: int8
+      - name: ExportType2
+        description: ''
+        datatype: int8
+  - name: Drama
+    description: ''
+    definitions:
+      - name: Folder
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Confession
+          1: Drama
+          2: Dream
+          3: External
+          4: SnapShot
+          5: StaffRoll
+          6: Tool
+          7: WandererWatch
+      - name: RequestedScene
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Drama
+          1: Dream
+          2: Tool
+          3: Propose
+          4: WandererWatch
+          5: SnapShot
+          6: StaffRoll
+          7: Ar
+          8: Etc
+      - name: bl_Label
+        description: ''
+        datatype: string
+      - name: bl_BinaryPass
+        description: ''
+        datatype: string
+      - name: bl_FileLabel
+        description: ''
+        datatype: string
+      - name: bl_DataName
+        description: ''
+        datatype: string
+      - name: bl_SceneLabel
+        description: ''
+        datatype: string
+      - name: bl_Screen
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Upper
+          1: Lower
+          2: None
+      - name: bl_LightSet
+        description: ''
+        datatype: string
+      - name: bl_SRTBone
+        description: ''
+        datatype: string
+      - name: bl_Pos
+        description: ''
+        datatype: string
+      - name: bl_Anim
+        description: ''
+        datatype: string
+      - name: bl_ExpFlag
+        description: ''
+        datatype: string
+      - name: bl_Body
+        description: ''
+        datatype: string
+      - name: bl_Headwear
+        description: ''
+        datatype: string
+      - name: bl_RoomID
+        description: ''
+        datatype: int8
+      - name: bl_ItemList
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Food
+          2: Treasure
+          3: Copy
+          4: Fix
+          5: CommonBuffer
+      - name: bl_Item
+        description: ''
+        datatype: string
+      - name: bl_LightParentCamera
+        description: ''
+        datatype: string
+      - name: bl_AnimController
+        description: ''
+        datatype: uint8
+      - name: bl_MiiResolution
+        description: ''
+        datatype: enum
+        enum_members:
+          0: CFL_RESOLUTION_64
+          1: CFL_RESOLUTION_128
+          2: CFL_RESOLUTION_256
+          3: CFL_RESOLUTION_64M
+          4: CFL_RESOLUTION_128M
+          5: CFL_RESOLUTION_256M
+      - name: bl_MiiNoMaskWhenHolding
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: bl_ItemEffect
+        description: ''
+        datatype: enum
+        enum_members:
+          0: EffectOff
+          1: EffectOn
+  - name: House
+    description: ''
+    definitions:
+      - name: bl_Label
+        description: ''
+        datatype: string
+      - name: bl_BinaryPass
+        description: ''
+        datatype: string
+      - name: bl_FileLabel
+        description: ''
+        datatype: string
+      - name: bl_DataName
+        description: ''
+        datatype: string
+      - name: bl_SceneLabel
+        description: ''
+        datatype: string
+      - name: bl_Screen
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Upper
+          1: Lower
+          2: None
+      - name: bl_LightSet
+        description: ''
+        datatype: string
+      - name: bl_SRTBone
+        description: ''
+        datatype: string
+      - name: bl_Pos
+        description: ''
+        datatype: string
+      - name: bl_Anim
+        description: ''
+        datatype: string
+      - name: bl_ExpFlag
+        description: ''
+        datatype: string
+      - name: bl_Body
+        description: ''
+        datatype: string
+      - name: bl_Headwear
+        description: ''
+        datatype: string
+      - name: bl_Item
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Food
+          2: Treasure
+          3: Copy
+      - name: bl_RoomID
+        description: ''
+        datatype: int8
+      - name: bl_LightParentCamera
+        description: ''
+        datatype: string
+      - name: bl_MiiResolution
+        description: ''
+        datatype: enum
+        enum_members:
+          0: CFL_RESOLUTION_64
+          1: CFL_RESOLUTION_128
+          2: CFL_RESOLUTION_256
+          3: CFL_RESOLUTION_64M
+          4: CFL_RESOLUTION_128M
+          5: CFL_RESOLUTION_256M
+      - name: bl_MiiNoMaskWhenHolding
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+  - name: Item
+    description: ''
+    definitions:
+      - name: FileID
+        description: 'The ID (located in the filename) of for the texture of the item.'
+        datatype: int16
+      - name: RegionJP
+        description: 'Flag that determines if the item is enabled for Japenese regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: RegionUS
+        description: 'Flag that determines if the item is enabled for US regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: RegionEU
+        description: 'Flag that determines if the item is enabled for EU regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: RegionKR
+        description: 'Flag that determines if the item is enabled for Korean regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: Price
+        description: 'The price of the item in the JP version.'
+        datatype: uint32
+      - name: PriceUS
+        description: 'The price of the item in the US version.'
+        datatype: uint32
+      - name: PriceEU
+        description: 'The price of the item in the EU version.'
+        datatype: uint32
+      - name: PriceKR
+        description: 'The price of the item in the KR version.'
+        datatype: uint32
+      - name: Shop
+        description: 'Determines if the item can be sold at the shop.'
+        datatype: bool
+      - name: Mii
+        description: ''
+        datatype: bool
+      - name: Food_FirstDaily
+        description: ''
+        datatype: uint8
+      - name: BoxSize
+        description: 'How large the the item texture will appear when displayed.'
+        datatype: enum
+        enum_members:
+          0: BoxSize_None
+          1: BoxSize_Nomral
+          2: BoxSize_Small
+          3: BoxSize_Big
+      - name: Effect
+        description: 'The steam effect of the item.'
+        datatype: enum
+        enum_members:
+          0: None
+          1: Steam00
+          2: Steam01
+          3: Steam02
+      - name: Food_Type_JP
+        description: 'The food type of the item for the JP version.'
+        datatype: enum
+        enum_members:
+          0: Japanese
+          1: Western
+          2: Alacarte
+          3: Dessert
+          4: Drink
+      - name: Food_Type_USEU
+        description: 'The food type of the item for both EU and US versions.'
+        datatype: enum
+        enum_members:
+          0: MainDishes
+          1: SmallDishes
+          2: Refreshments
+          3: Drinks
+      - name: Food_Type_KR
+        description: 'The food type of the item for the KR version.'
+        datatype: enum
+        enum_members:
+          0: Korean
+          1: Foreign
+          2: Refreshments
+          3: Drink
+      - name: Food_Quantity
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Quantity_None
+          1: Quantity_Low
+          2: Quantity_Mid
+          3: Quantity_High
+      - name: Food_Season
+        description: 'Determines which season the item falls into.'
+        datatype: enum
+        enum_members:
+          0: Season_None
+          1: Season_Spring
+          2: Season_Summer
+          3: Season_Autumn
+          4: Season_Winter
+      - name: Food_Attr_Sweet
+        description: 'Flag that determines if the food is considered sweet.'
+        datatype: bool
+      - name: Food_Attr_Spicy
+        description: 'Flag that determines if the food is considered spicy.'
+        datatype: bool
+      - name: Food_Attr_Salty
+        description: 'Flag that determines if the food is considered salty.'
+        datatype: bool
+      - name: Food_Attr_Sour
+        description: 'Flag that determines if the food is considered sour.'
+        datatype: bool
+      - name: Food_Attr_Oily
+        description: 'Flag that determines if the food is considered oily.'
+        datatype: bool
+      - name: Food_Attr_Cool
+        description: 'Flag that determines if the food is considered cool.'
+        datatype: bool
+      - name: Food_Attr_Hot
+        description: 'Flag that determines if the food is considered hot.'
+        datatype: bool
+      - name: Food_Attr_Awful
+        description: 'Flag that determines if the food is considered dog water.'
+        datatype: bool
+      - name: Food_Attr_Confectionery
+        description: 'Flag that determines if the food is considered a confectionery.'
+        datatype: bool
+      - name: Food_Attr_Fruit
+        description: 'Flag that determines if the food is a fruit or has fruits as a main ingredient..'
+        datatype: bool
+      - name: Food_Attr_Vegetable
+        description: 'Flag that determines if the food is a vegetable or has vegetables as a main ingredient.'
+        datatype: bool
+      - name: Food_Attr_Rice
+        description: 'Flag that determines if the food is rice or has rice as a main ingredient.'
+        datatype: bool
+      - name: Food_Attr_Bread
+        description: 'Flag that determines if the food is bread or has bread as a main ingredient.'
+        datatype: bool
+      - name: Food_Attr_Meat
+        description: 'Flag that determines if the food is meat or has meat as a main ingredient.'
+        datatype: bool
+      - name: Food_Attr_Fish
+        description: 'Flag that determines if the food is fish or has fish as a main ingredient.'
+        datatype: bool
+      - name: Food_Attr_Egg
+        description: 'Flag that determines if the food is egg or has egg as a main ingredient.'
+        datatype: bool
+      - name: Food_Attr_Japanese
+        description: 'Flag that determines if the food considered Japanese.'
+        datatype: bool
+      - name: Food_Attr_Western
+        description: 'Flag that determines if the food is considered western.'
+        datatype: bool
+      - name: Food_Attr_Chinese
+        description: 'Flag that determines if the food is considered Chinese.'
+        datatype: bool
+      - name: Food_Attr_Italian
+        description: 'Flag that determines if the food is considered Italian.'
+        datatype: bool
+      - name: Food_Attr_Noodle
+        description: 'Flag that determines if the food has noodles as a main ingredient.'
+        datatype: bool
+      - name: Food_Attr_Luxury
+        description: 'Flag that determines if the food is considered luxurious'
+        datatype: bool
+      - name: Food_Attr_American
+        description: 'Flag that determines if the food is considered American.'
+        datatype: bool
+      - name: Food_Attr_Asian
+        description: 'Flag that determines if the food is considered Asian.'
+        datatype: bool
+      - name: Food_Attr_British
+        description: 'Flag that determines if the food is considered British.'
+        datatype: bool
+      - name: Food_Attr_French
+        description: 'Flag that determines if the food is considered French.'
+        datatype: bool
+      - name: Food_Attr_German
+        description: 'Flag that determines if the food is considered German.'
+        datatype: bool
+      - name: Food_Attr_Spanish
+        description: 'Flag that determines if the food is considered Spanish.'
+        datatype: bool
+      - name: Food_Attr_Junk
+        description: 'Flag that determines if the food is considered as junk food.'
+        datatype: bool
+      - name: Food_Attr_Korean
+        description: 'Flag that determines if the food is considered Korean.'
+        datatype: bool
+      - name: Food_NTR_ID
+        description: ''
+        datatype: int16
+      - name: Food_Taste_A
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '00'
+          1: '01'
+          2: '02'
+          3: '03'
+          4: '04'
+          5: '05'
+          6: '06'
+          7: '07'
+          8: 08
+          9: 09
+          10: '10'
+          11: '11'
+          12: '12'
+          13: '13'
+          14: '14'
+          15: '15'
+      - name: Food_Taste_B
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '00'
+          1: '01'
+          2: '02'
+          3: '03'
+          4: '04'
+          5: '05'
+          6: '06'
+          7: '07'
+          8: 08
+          9: 09
+          10: '10'
+          11: '11'
+          12: '12'
+          13: '13'
+          14: '14'
+          15: '15'
+      - name: Food_Taste_C
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '00'
+          1: '01'
+          2: '02'
+          3: '03'
+          4: '04'
+          5: '05'
+          6: '06'
+          7: '07'
+          8: 08
+          9: 09
+          10: '10'
+          11: '11'
+          12: '12'
+          13: '13'
+          14: '14'
+          15: '15'
+      - name: Food_Taste_D
+        description: ''
+        datatype: enum
+        enum_members:
+          0: '00'
+          1: '01'
+          2: '02'
+          3: '03'
+          4: '04'
+          5: '05'
+          6: '06'
+          7: '07'
+          8: 08
+          9: 09
+          10: '10'
+          11: '11'
+          12: '12'
+          13: '13'
+          14: '14'
+          15: '15'
+      - name: Food_Se_Type
+        description: 'The sound effect played when the food is consumed.'
+        datatype: enum
+        enum_members:
+          0: SE_MII_DRINK
+          1: SE_MII_EAT_01
+          2: SE_MII_EAT_02
+          3: SE_MII_EAT_03
+          4: SE_MII_EAT_04
+          5: SE_MII_EAT_05
+          6: SE_MII_EAT_06
+          7: SE_MII_EAT_07
+      - name: RatioA
+        description: ''
+        datatype: uint8
+      - name: RatioB
+        description: ''
+        datatype: uint8
+      - name: RatioC
+        description: ''
+        datatype: uint8
+      - name: RatioD
+        description: ''
+        datatype: uint8
+      - name: Treasure_Type
+        description: 'The type the treasure falls into.'
+        datatype: enum
+        enum_members:
+          0: TreasureToken
+          1: TreasureSouvenir
+          2: TreasureDream
+          3: TreasureRare
+      - name: Catalog
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Food_Date_Month_JP
+        description: ''
+        datatype: uint8
+      - name: Food_Date_Day_JP
+        description: ''
+        datatype: uint8
+      - name: Food_Date_Month_US
+        description: ''
+        datatype: uint8
+      - name: Food_Date_Day_US
+        description: ''
+        datatype: uint8
+      - name: Food_Date_Month_EU
+        description: ''
+        datatype: uint8
+      - name: Food_Date_Day_EU
+        description: ''
+        datatype: int32
+      - name: Food_Date_Month_KR
+        description: ''
+        datatype: uint8
+      - name: Food_Date_Day_KR
+        description: ''
+        datatype: int32
+      - name: Food_FirstCatalog
+        description: 'Flag that determines if the food will be displayed on the first shop event played on a new save.'
+        datatype: bool
+      - name: ForIslanderOnly
+        description: ''
+        datatype: bool
+      - name: FPriceEU_UK
+        description: ''
+        datatype: uint32
+      - name: FPriceEU_AN
+        description: ''
+        datatype: uint32
+      - name: FPriceEU_Other
+        description: ''
+        datatype: uint32
+      - name: FPriceEU_FR
+        description: ''
+        datatype: uint32
+      - name: FPriceEU_IT
+        description: ''
+        datatype: uint32
+      - name: FPriceEU_GE
+        description: ''
+        datatype: uint32
+      - name: FPriceEU_SP
+        description: ''
+        datatype: uint32
+      - name: Food_FirstDaily_US_En
+        description: ''
+        datatype: bool
+      - name: Food_FirstDaily_EU_En
+        description: ''
+        datatype: bool
+      - name: Food_FirstDaily_EU_Fr
+        description: ''
+        datatype: bool
+      - name: Food_FirstDaily_EU_Ge
+        description: ''
+        datatype: bool
+      - name: Food_FirstDaily_EU_It
+        description: ''
+        datatype: bool
+      - name: Food_FirstDaily_EU_Sp
+        description: ''
+        datatype: bool
+      - name: Food_FirstDaily_KR_Kr
+        description: ''
+        datatype: bool
+      - name: Throw_US
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: Throw_EU
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: Throw_KR
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+  - name: Location
+    description: ''
+    definitions:
+      - name: BinaryNo
+        description: ''
+        datatype: int32
+      - name: bl_Label
+        description: ''
+        datatype: string
+      - name: bl_BinaryPass
+        description: ''
+        datatype: string
+      - name: bl_FileLabel
+        description: ''
+        datatype: string
+      - name: bl_DataName
+        description: ''
+        datatype: string
+      - name: bl_SceneLabel
+        description: ''
+        datatype: string
+      - name: bl_Screen
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Upper
+          1: Lower
+          2: None
+      - name: bl_LightSet
+        description: ''
+        datatype: string
+      - name: bl_SRTBone
+        description: ''
+        datatype: string
+      - name: bl_Pos
+        description: ''
+        datatype: string
+      - name: bl_Anim
+        description: ''
+        datatype: string
+      - name: bl_ExpFlag
+        description: ''
+        datatype: string
+      - name: bl_LightParentCamera
+        description: ''
+        datatype: string
+      - name: bl_AnimController
+        description: ''
+        datatype: uint8
+      - name: bl_MiiResolution
+        description: ''
+        datatype: enum
+        enum_members:
+          0: CFL_RESOLUTION_64
+          1: CFL_RESOLUTION_128
+          2: CFL_RESOLUTION_256
+          3: CFL_RESOLUTION_64M
+          4: CFL_RESOLUTION_128M
+          5: CFL_RESOLUTION_256M
+      - name: bl_Body
+        description: ''
+        datatype: string
+      - name: bl_Headwear
+        description: ''
+        datatype: string
+      - name: bl_MiiNoMaskWhenHolding
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+  - name: Material
+    description: ''
+    definitions:
+      - name: Filename
+        description: ''
+        datatype: string
+      - name: ShaderParameter
+        description: ''
+        datatype: uint8
+      - name: ShadingParameter
+        description: ''
+        datatype: uint8
+      - name: MaterialColor
+        description: ''
+        datatype: uint8
+      - name: Rasterization
+        description: ''
+        datatype: uint8
+      - name: TextureCoordinator
+        description: ''
+        datatype: uint8
+      - name: TextureMapper
+        description: ''
+        datatype: uint8
+      - name: FragmentLighting
+        description: ''
+        datatype: uint8
+      - name: FragmentLightingTable
+        description: ''
+        datatype: uint8
+      - name: TextureCombiner
+        description: ''
+        datatype: uint8
+      - name: AlphaTest
+        description: ''
+        datatype: uint8
+      - name: FragmentOperation
+        description: ''
+        datatype: uint8
+      - name: SceneEnvironment
+        description: ''
+        datatype: uint8
+      - name: ReplaceTexture
+        description: ''
+        datatype: int8
+  - name: News
+    description: ''
+    definitions:
+      - name: NewsType
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Normal
+          1: Sirious
+          2: BreakingNews
+          3: ProgramAssign
+      - name: Mii0_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiUnuse
+          1: MiiBody
+          2: MiiHead
+          3: MiiMsg
+      - name: Mii0_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiAll
+          1: MiiMale
+          2: MiiFemale
+          3: MiiSameMii0
+          4: MiiMyMii
+          5: MiiAssignProgram
+      - name: Mii0_Exp
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Cm_Normal
+          1: Cm_Smile
+          2: Cm_Anger
+          3: Cm_Sorrow
+          4: Cm_Surprise
+          5: Cm_Blink
+          6: Om_Normal
+          7: Om_Smile
+          8: Om_Anger
+          9: Om_Sorrow
+          10: Om_Surprise
+          11: Om_Blink
+          12: Cm_Wink_L
+          13: Cm_Wink_R
+          14: Om_Wink_L
+          15: Om_Wink_R
+      - name: Mii0_Material
+        description: ''
+        datatype: uint16
+      - name: Mii0_HeadWear
+        description: ''
+        datatype: enum
+        enum_members:
+          0: HeadWearUnuse
+          1: HeadWearAssign
+          2: HeadWearOwn
+          3: HeadWearRandom
+          4: HeadWearSameMii0
+          5: HeadWearAssignProgram
+      - name: Mii0_HeadWearAssign
+        description: ''
+        datatype: uint16
+      - name: Mii0_Clothes
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ClothesOwn
+          1: ClothesAssign
+          2: ClothesRandom
+          3: ClothesSameMii0
+          4: ClothesAssignProgram
+      - name: Mii0_ClothesAssign
+        description: ''
+        datatype: uint16
+      - name: Mii0_Build
+        description: ''
+        datatype: enum
+        enum_members:
+          0: BuildNoChange
+          1: BuildStandardType
+      - name: Mii0_Shadow
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ShadowOn
+          1: ShadowOff
+      - name: Mii1_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiUnuse
+          1: MiiBody
+          2: MiiHead
+          3: MiiMsg
+      - name: Mii1_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiAll
+          1: MiiMale
+          2: MiiFemale
+          3: MiiSameMii0
+          4: MiiMyMii
+          5: MiiAssignProgram
+      - name: Mii1_Exp
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Cm_Normal
+          1: Cm_Smile
+          2: Cm_Anger
+          3: Cm_Sorrow
+          4: Cm_Surprise
+          5: Cm_Blink
+          6: Om_Normal
+          7: Om_Smile
+          8: Om_Anger
+          9: Om_Sorrow
+          10: Om_Surprise
+          11: Om_Blink
+          12: Cm_Wink_L
+          13: Cm_Wink_R
+          14: Om_Wink_L
+          15: Om_Wink_R
+      - name: Mii1_Material
+        description: ''
+        datatype: uint16
+      - name: Mii1_HeadWear
+        description: ''
+        datatype: enum
+        enum_members:
+          0: HeadWearUnuse
+          1: HeadWearAssign
+          2: HeadWearOwn
+          3: HeadWearRandom
+          4: HeadWearSameMii0
+          5: HeadWearAssignProgram
+      - name: Mii1_HeadWearAssign
+        description: ''
+        datatype: uint16
+      - name: Mii1_Clothes
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ClothesOwn
+          1: ClothesAssign
+          2: ClothesRandom
+          3: ClothesSameMii0
+          4: ClothesAssignProgram
+      - name: Mii1_ClothesAssign
+        description: ''
+        datatype: uint16
+      - name: Mii1_Build
+        description: ''
+        datatype: enum
+        enum_members:
+          0: BuildNoChange
+          1: BuildStandardType
+      - name: Mii1_Shadow
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ShadowOn
+          1: ShadowOff
+      - name: Mii2_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiUnuse
+          1: MiiBody
+          2: MiiHead
+          3: MiiMsg
+      - name: Mii2_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiAll
+          1: MiiMale
+          2: MiiFemale
+          3: MiiSameMii0
+          4: MiiMyMii
+          5: MiiAssignProgram
+      - name: Mii2_Exp
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Cm_Normal
+          1: Cm_Smile
+          2: Cm_Anger
+          3: Cm_Sorrow
+          4: Cm_Surprise
+          5: Cm_Blink
+          6: Om_Normal
+          7: Om_Smile
+          8: Om_Anger
+          9: Om_Sorrow
+          10: Om_Surprise
+          11: Om_Blink
+          12: Cm_Wink_L
+          13: Cm_Wink_R
+          14: Om_Wink_L
+          15: Om_Wink_R
+      - name: Mii2_Material
+        description: ''
+        datatype: uint16
+      - name: Mii2_HeadWear
+        description: ''
+        datatype: enum
+        enum_members:
+          0: HeadWearUnuse
+          1: HeadWearAssign
+          2: HeadWearOwn
+          3: HeadWearRandom
+          4: HeadWearSameMii0
+          5: HeadWearAssignProgram
+      - name: Mii2_HeadWearAssign
+        description: ''
+        datatype: uint16
+      - name: Mii2_Clothes
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ClothesOwn
+          1: ClothesAssign
+          2: ClothesRandom
+          3: ClothesSameMii0
+          4: ClothesAssignProgram
+      - name: Mii2_ClothesAssign
+        description: ''
+        datatype: uint16
+      - name: Mii2_Build
+        description: ''
+        datatype: enum
+        enum_members:
+          0: BuildNoChange
+          1: BuildStandardType
+      - name: Mii2_Shadow
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ShadowOn
+          1: ShadowOff
+      - name: Mii3_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiUnuse
+          1: MiiBody
+          2: MiiHead
+          3: MiiMsg
+      - name: Mii3_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiAll
+          1: MiiMale
+          2: MiiFemale
+          3: MiiSameMii0
+          4: MiiMyMii
+          5: MiiAssignProgram
+      - name: Mii3_Exp
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Cm_Normal
+          1: Cm_Smile
+          2: Cm_Anger
+          3: Cm_Sorrow
+          4: Cm_Surprise
+          5: Cm_Blink
+          6: Om_Normal
+          7: Om_Smile
+          8: Om_Anger
+          9: Om_Sorrow
+          10: Om_Surprise
+          11: Om_Blink
+          12: Cm_Wink_L
+          13: Cm_Wink_R
+          14: Om_Wink_L
+          15: Om_Wink_R
+      - name: Mii3_Material
+        description: ''
+        datatype: uint16
+      - name: Mii3_HeadWear
+        description: ''
+        datatype: enum
+        enum_members:
+          0: HeadWearUnuse
+          1: HeadWearAssign
+          2: HeadWearOwn
+          3: HeadWearRandom
+          4: HeadWearSameMii0
+          5: HeadWearAssignProgram
+      - name: Mii3_HeadWearAssign
+        description: ''
+        datatype: uint16
+      - name: Mii3_Clothes
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ClothesOwn
+          1: ClothesAssign
+          2: ClothesRandom
+          3: ClothesSameMii0
+          4: ClothesAssignProgram
+      - name: Mii3_ClothesAssign
+        description: ''
+        datatype: uint16
+      - name: Mii3_Build
+        description: ''
+        datatype: enum
+        enum_members:
+          0: BuildNoChange
+          1: BuildStandardType
+      - name: Mii3_Shadow
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ShadowOn
+          1: ShadowOff
+      - name: Mii4_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiUnuse
+          1: MiiBody
+          2: MiiHead
+          3: MiiMsg
+      - name: Mii4_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiAll
+          1: MiiMale
+          2: MiiFemale
+          3: MiiSameMii0
+          4: MiiMyMii
+          5: MiiAssignProgram
+      - name: Mii4_Exp
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Cm_Normal
+          1: Cm_Smile
+          2: Cm_Anger
+          3: Cm_Sorrow
+          4: Cm_Surprise
+          5: Cm_Blink
+          6: Om_Normal
+          7: Om_Smile
+          8: Om_Anger
+          9: Om_Sorrow
+          10: Om_Surprise
+          11: Om_Blink
+          12: Cm_Wink_L
+          13: Cm_Wink_R
+          14: Om_Wink_L
+          15: Om_Wink_R
+      - name: Mii4_Material
+        description: ''
+        datatype: uint16
+      - name: Mii4_HeadWear
+        description: ''
+        datatype: enum
+        enum_members:
+          0: HeadWearUnuse
+          1: HeadWearAssign
+          2: HeadWearOwn
+          3: HeadWearRandom
+          4: HeadWearSameMii0
+          5: HeadWearAssignProgram
+      - name: Mii4_HeadWearAssign
+        description: ''
+        datatype: uint16
+      - name: Mii4_Clothes
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ClothesOwn
+          1: ClothesAssign
+          2: ClothesRandom
+          3: ClothesSameMii0
+          4: ClothesAssignProgram
+      - name: Mii4_ClothesAssign
+        description: ''
+        datatype: uint16
+      - name: Mii4_Build
+        description: ''
+        datatype: enum
+        enum_members:
+          0: BuildNoChange
+          1: BuildStandardType
+      - name: Mii4_Shadow
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ShadowOn
+          1: ShadowOff
+      - name: Mii5_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiUnuse
+          1: MiiBody
+          2: MiiHead
+          3: MiiMsg
+      - name: Mii5_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiAll
+          1: MiiMale
+          2: MiiFemale
+          3: MiiSameMii0
+          4: MiiMyMii
+          5: MiiAssignProgram
+      - name: Mii5_Exp
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Cm_Normal
+          1: Cm_Smile
+          2: Cm_Anger
+          3: Cm_Sorrow
+          4: Cm_Surprise
+          5: Cm_Blink
+          6: Om_Normal
+          7: Om_Smile
+          8: Om_Anger
+          9: Om_Sorrow
+          10: Om_Surprise
+          11: Om_Blink
+          12: Cm_Wink_L
+          13: Cm_Wink_R
+          14: Om_Wink_L
+          15: Om_Wink_R
+      - name: Mii5_Material
+        description: ''
+        datatype: uint16
+      - name: Mii5_HeadWear
+        description: ''
+        datatype: enum
+        enum_members:
+          0: HeadWearUnuse
+          1: HeadWearAssign
+          2: HeadWearOwn
+          3: HeadWearRandom
+          4: HeadWearSameMii0
+          5: HeadWearAssignProgram
+      - name: Mii5_HeadWearAssign
+        description: ''
+        datatype: uint16
+      - name: Mii5_Clothes
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ClothesOwn
+          1: ClothesAssign
+          2: ClothesRandom
+          3: ClothesSameMii0
+          4: ClothesAssignProgram
+      - name: Mii5_ClothesAssign
+        description: ''
+        datatype: uint16
+      - name: Mii5_Build
+        description: ''
+        datatype: enum
+        enum_members:
+          0: BuildNoChange
+          1: BuildStandardType
+      - name: Mii5_Shadow
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ShadowOn
+          1: ShadowOff
+      - name: Mii6_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiUnuse
+          1: MiiBody
+          2: MiiHead
+          3: MiiMsg
+      - name: Mii6_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiAll
+          1: MiiMale
+          2: MiiFemale
+          3: MiiSameMii0
+          4: MiiMyMii
+          5: MiiAssignProgram
+      - name: Mii6_Exp
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Cm_Normal
+          1: Cm_Smile
+          2: Cm_Anger
+          3: Cm_Sorrow
+          4: Cm_Surprise
+          5: Cm_Blink
+          6: Om_Normal
+          7: Om_Smile
+          8: Om_Anger
+          9: Om_Sorrow
+          10: Om_Surprise
+          11: Om_Blink
+          12: Cm_Wink_L
+          13: Cm_Wink_R
+          14: Om_Wink_L
+          15: Om_Wink_R
+      - name: Mii6_Material
+        description: ''
+        datatype: uint16
+      - name: Mii6_HeadWear
+        description: ''
+        datatype: enum
+        enum_members:
+          0: HeadWearUnuse
+          1: HeadWearAssign
+          2: HeadWearOwn
+          3: HeadWearRandom
+          4: HeadWearSameMii0
+          5: HeadWearAssignProgram
+      - name: Mii6_HeadWearAssign
+        description: ''
+        datatype: uint16
+      - name: Mii6_Clothes
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ClothesOwn
+          1: ClothesAssign
+          2: ClothesRandom
+          3: ClothesSameMii0
+          4: ClothesAssignProgram
+      - name: Mii6_ClothesAssign
+        description: ''
+        datatype: uint16
+      - name: Mii6_Build
+        description: ''
+        datatype: enum
+        enum_members:
+          0: BuildNoChange
+          1: BuildStandardType
+      - name: Mii6_Shadow
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ShadowOn
+          1: ShadowOff
+      - name: Mii7_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiUnuse
+          1: MiiBody
+          2: MiiHead
+          3: MiiMsg
+      - name: Mii7_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiAll
+          1: MiiMale
+          2: MiiFemale
+          3: MiiSameMii0
+          4: MiiMyMii
+          5: MiiAssignProgram
+      - name: Mii7_Exp
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Cm_Normal
+          1: Cm_Smile
+          2: Cm_Anger
+          3: Cm_Sorrow
+          4: Cm_Surprise
+          5: Cm_Blink
+          6: Om_Normal
+          7: Om_Smile
+          8: Om_Anger
+          9: Om_Sorrow
+          10: Om_Surprise
+          11: Om_Blink
+          12: Cm_Wink_L
+          13: Cm_Wink_R
+          14: Om_Wink_L
+          15: Om_Wink_R
+      - name: Mii7_Material
+        description: ''
+        datatype: uint16
+      - name: Mii7_HeadWear
+        description: ''
+        datatype: enum
+        enum_members:
+          0: HeadWearUnuse
+          1: HeadWearAssign
+          2: HeadWearOwn
+          3: HeadWearRandom
+          4: HeadWearSameMii0
+          5: HeadWearAssignProgram
+      - name: Mii7_HeadWearAssign
+        description: ''
+        datatype: uint16
+      - name: Mii7_Clothes
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ClothesOwn
+          1: ClothesAssign
+          2: ClothesRandom
+          3: ClothesSameMii0
+          4: ClothesAssignProgram
+      - name: Mii7_ClothesAssign
+        description: ''
+        datatype: uint16
+      - name: Mii7_Build
+        description: ''
+        datatype: enum
+        enum_members:
+          0: BuildNoChange
+          1: BuildStandardType
+      - name: Mii7_Shadow
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ShadowOn
+          1: ShadowOff
+      - name: Mii8_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiUnuse
+          1: MiiBody
+          2: MiiHead
+          3: MiiMsg
+      - name: Mii8_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiAll
+          1: MiiMale
+          2: MiiFemale
+          3: MiiSameMii0
+          4: MiiMyMii
+          5: MiiAssignProgram
+      - name: Mii8_Exp
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Cm_Normal
+          1: Cm_Smile
+          2: Cm_Anger
+          3: Cm_Sorrow
+          4: Cm_Surprise
+          5: Cm_Blink
+          6: Om_Normal
+          7: Om_Smile
+          8: Om_Anger
+          9: Om_Sorrow
+          10: Om_Surprise
+          11: Om_Blink
+          12: Cm_Wink_L
+          13: Cm_Wink_R
+          14: Om_Wink_L
+          15: Om_Wink_R
+      - name: Mii8_Material
+        description: ''
+        datatype: uint16
+      - name: Mii8_HeadWear
+        description: ''
+        datatype: enum
+        enum_members:
+          0: HeadWearUnuse
+          1: HeadWearAssign
+          2: HeadWearOwn
+          3: HeadWearRandom
+          4: HeadWearSameMii0
+          5: HeadWearAssignProgram
+      - name: Mii8_HeadWearAssign
+        description: ''
+        datatype: uint16
+      - name: Mii8_Clothes
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ClothesOwn
+          1: ClothesAssign
+          2: ClothesRandom
+          3: ClothesSameMii0
+          4: ClothesAssignProgram
+      - name: Mii8_ClothesAssign
+        description: ''
+        datatype: uint16
+      - name: Mii8_Build
+        description: ''
+        datatype: enum
+        enum_members:
+          0: BuildNoChange
+          1: BuildStandardType
+      - name: Mii8_Shadow
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ShadowOn
+          1: ShadowOff
+      - name: Mii9_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiUnuse
+          1: MiiBody
+          2: MiiHead
+          3: MiiMsg
+      - name: Mii9_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: MiiAll
+          1: MiiMale
+          2: MiiFemale
+          3: MiiSameMii0
+          4: MiiMyMii
+          5: MiiAssignProgram
+      - name: Mii9_Exp
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Cm_Normal
+          1: Cm_Smile
+          2: Cm_Anger
+          3: Cm_Sorrow
+          4: Cm_Surprise
+          5: Cm_Blink
+          6: Om_Normal
+          7: Om_Smile
+          8: Om_Anger
+          9: Om_Sorrow
+          10: Om_Surprise
+          11: Om_Blink
+          12: Cm_Wink_L
+          13: Cm_Wink_R
+          14: Om_Wink_L
+          15: Om_Wink_R
+      - name: Mii9_Material
+        description: ''
+        datatype: uint16
+      - name: Mii9_HeadWear
+        description: ''
+        datatype: enum
+        enum_members:
+          0: HeadWearUnuse
+          1: HeadWearAssign
+          2: HeadWearOwn
+          3: HeadWearRandom
+          4: HeadWearSameMii0
+          5: HeadWearAssignProgram
+      - name: Mii9_HeadWearAssign
+        description: ''
+        datatype: uint16
+      - name: Mii9_Clothes
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ClothesOwn
+          1: ClothesAssign
+          2: ClothesRandom
+          3: ClothesSameMii0
+          4: ClothesAssignProgram
+      - name: Mii9_ClothesAssign
+        description: ''
+        datatype: uint16
+      - name: Mii9_Build
+        description: ''
+        datatype: enum
+        enum_members:
+          0: BuildNoChange
+          1: BuildStandardType
+      - name: Mii9_Shadow
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ShadowOn
+          1: ShadowOff
+      - name: Item0_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemUnuse
+          1: ItemUse
+          2: ItemMsg
+      - name: Item0_Category
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemFood
+          1: ItemTreasure
+          2: ItemTool
+          3: ItemEquip
+      - name: Item0_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemRandom
+          1: ItemAssign
+          2: ItemSameItem0
+      - name: Item0_Assign
+        description: ''
+        datatype: uint16
+      - name: Item0_FoodCategory
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Food
+          2: Drink
+      - name: Item0_Material
+        description: ''
+        datatype: uint16
+      - name: Item0_ScaleNormalize
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ScaleNormalizeFalse
+          1: ScaleNormalizeTrue
+      - name: Item0_Centering
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemCenteringFalse
+          1: ItemCenteringTrue
+      - name: Item1_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemUnuse
+          1: ItemUse
+          2: ItemMsg
+      - name: Item1_Category
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemFood
+          1: ItemTreasure
+          2: ItemTool
+          3: ItemEquip
+      - name: Item1_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemRandom
+          1: ItemAssign
+          2: ItemSameItem0
+      - name: Item1_Assign
+        description: ''
+        datatype: uint16
+      - name: Item1_FoodCategory
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Food
+          2: Drink
+      - name: Item1_Material
+        description: ''
+        datatype: uint16
+      - name: Item1_ScaleNormalize
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ScaleNormalizeFalse
+          1: ScaleNormalizeTrue
+      - name: Item1_Centering
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemCenteringFalse
+          1: ItemCenteringTrue
+      - name: Item2_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemUnuse
+          1: ItemUse
+          2: ItemMsg
+      - name: Item2_Category
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemFood
+          1: ItemTreasure
+          2: ItemTool
+          3: ItemEquip
+      - name: Item2_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemRandom
+          1: ItemAssign
+          2: ItemSameItem0
+      - name: Item2_Assign
+        description: ''
+        datatype: uint16
+      - name: Item2_FoodCategory
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Food
+          2: Drink
+      - name: Item2_Material
+        description: ''
+        datatype: uint16
+      - name: Item2_ScaleNormalize
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ScaleNormalizeFalse
+          1: ScaleNormalizeTrue
+      - name: Item2_Centering
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemCenteringFalse
+          1: ItemCenteringTrue
+      - name: Item3_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemUnuse
+          1: ItemUse
+          2: ItemMsg
+      - name: Item3_Category
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemFood
+          1: ItemTreasure
+          2: ItemTool
+          3: ItemEquip
+      - name: Item3_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemRandom
+          1: ItemAssign
+          2: ItemSameItem0
+      - name: Item3_Assign
+        description: ''
+        datatype: uint16
+      - name: Item3_FoodCategory
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Food
+          2: Drink
+      - name: Item3_Material
+        description: ''
+        datatype: uint16
+      - name: Item3_ScaleNormalize
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ScaleNormalizeFalse
+          1: ScaleNormalizeTrue
+      - name: Item3_Centering
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemCenteringFalse
+          1: ItemCenteringTrue
+      - name: Item4_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemUnuse
+          1: ItemUse
+          2: ItemMsg
+      - name: Item4_Category
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemFood
+          1: ItemTreasure
+          2: ItemTool
+          3: ItemEquip
+      - name: Item4_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemRandom
+          1: ItemAssign
+          2: ItemSameItem0
+      - name: Item4_Assign
+        description: ''
+        datatype: uint16
+      - name: Item4_FoodCategory
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Food
+          2: Drink
+      - name: Item4_Material
+        description: ''
+        datatype: uint16
+      - name: Item4_ScaleNormalize
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ScaleNormalizeFalse
+          1: ScaleNormalizeTrue
+      - name: Item4_Centering
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemCenteringFalse
+          1: ItemCenteringTrue
+      - name: Item5_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemUnuse
+          1: ItemUse
+          2: ItemMsg
+      - name: Item5_Category
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemFood
+          1: ItemTreasure
+          2: ItemTool
+          3: ItemEquip
+      - name: Item5_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemRandom
+          1: ItemAssign
+          2: ItemSameItem0
+      - name: Item5_Assign
+        description: ''
+        datatype: uint16
+      - name: Item5_FoodCategory
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Food
+          2: Drink
+      - name: Item5_Material
+        description: ''
+        datatype: uint16
+      - name: Item5_ScaleNormalize
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ScaleNormalizeFalse
+          1: ScaleNormalizeTrue
+      - name: Item5_Centering
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemCenteringFalse
+          1: ItemCenteringTrue
+      - name: Item6_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemUnuse
+          1: ItemUse
+          2: ItemMsg
+      - name: Item6_Category
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemFood
+          1: ItemTreasure
+          2: ItemTool
+          3: ItemEquip
+      - name: Item6_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemRandom
+          1: ItemAssign
+          2: ItemSameItem0
+      - name: Item6_Assign
+        description: ''
+        datatype: uint16
+      - name: Item6_FoodCategory
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Food
+          2: Drink
+      - name: Item6_Material
+        description: ''
+        datatype: uint16
+      - name: Item6_ScaleNormalize
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ScaleNormalizeFalse
+          1: ScaleNormalizeTrue
+      - name: Item6_Centering
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemCenteringFalse
+          1: ItemCenteringTrue
+      - name: Item7_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemUnuse
+          1: ItemUse
+          2: ItemMsg
+      - name: Item7_Category
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemFood
+          1: ItemTreasure
+          2: ItemTool
+          3: ItemEquip
+      - name: Item7_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemRandom
+          1: ItemAssign
+          2: ItemSameItem0
+      - name: Item7_Assign
+        description: ''
+        datatype: uint16
+      - name: Item7_FoodCategory
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Food
+          2: Drink
+      - name: Item7_Material
+        description: ''
+        datatype: uint16
+      - name: Item7_ScaleNormalize
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ScaleNormalizeFalse
+          1: ScaleNormalizeTrue
+      - name: Item7_Centering
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemCenteringFalse
+          1: ItemCenteringTrue
+      - name: Item8_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemUnuse
+          1: ItemUse
+          2: ItemMsg
+      - name: Item8_Category
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemFood
+          1: ItemTreasure
+          2: ItemTool
+          3: ItemEquip
+      - name: Item8_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemRandom
+          1: ItemAssign
+          2: ItemSameItem0
+      - name: Item8_Assign
+        description: ''
+        datatype: uint16
+      - name: Item8_FoodCategory
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Food
+          2: Drink
+      - name: Item8_Material
+        description: ''
+        datatype: uint16
+      - name: Item8_ScaleNormalize
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ScaleNormalizeFalse
+          1: ScaleNormalizeTrue
+      - name: Item8_Centering
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemCenteringFalse
+          1: ItemCenteringTrue
+      - name: Item9_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemUnuse
+          1: ItemUse
+          2: ItemMsg
+      - name: Item9_Category
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemFood
+          1: ItemTreasure
+          2: ItemTool
+          3: ItemEquip
+      - name: Item9_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemRandom
+          1: ItemAssign
+          2: ItemSameItem0
+      - name: Item9_Assign
+        description: ''
+        datatype: uint16
+      - name: Item9_FoodCategory
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Food
+          2: Drink
+      - name: Item9_Material
+        description: ''
+        datatype: uint16
+      - name: Item9_ScaleNormalize
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ScaleNormalizeFalse
+          1: ScaleNormalizeTrue
+      - name: Item9_Centering
+        description: ''
+        datatype: enum
+        enum_members:
+          0: ItemCenteringFalse
+          1: ItemCenteringTrue
+      - name: Room_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: RoomUnuse
+          1: RoomUse
+          2: RoomMsg
+      - name: Room_Select
+        description: ''
+        datatype: enum
+        enum_members:
+          0: RoomAssign
+          1: RoomRandom
+          2: RoomMii0
+      - name: Room_Assign
+        description: ''
+        datatype: uint16
+      - name: Effect_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: EffectUnuse
+          1: EffectUse
+      - name: TexRender_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: TexRenderUnuse
+          1: TexRenderUseMii00
+          2: TexRenderUseMii01
+          3: TexRenderUseMii02
+          4: TexRenderUseMii03
+          5: TexRenderUseMii04
+          6: TexRenderUseMii05
+          7: TexRenderUseMii06
+          8: TexRenderUseMii07
+          9: TexRenderUseMii08
+          10: TexRenderUseMii09
+          11: TexRenderUseItem00
+          12: TexRenderUseItem01
+          13: TexRenderUseItem02
+          14: TexRenderUseItem03
+          15: TexRenderUseItem04
+          16: TexRenderUseItem05
+          17: TexRenderUseItem06
+          18: TexRenderUseItem07
+          19: TexRenderUseItem08
+          20: TexRenderUseItem09
+      - name: ImageMiiSpeak_Use
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_1
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_2
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_3
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_4
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_5
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_6
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_7
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_8
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_9
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_10
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_11
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_12
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: RegionJP
+        description: 'Flag that determines if the item is enabled for Japenese regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: RegionUS
+        description: 'Flag that determines if the item is enabled for US regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: RegionEU
+        description: 'Flag that determines if the item is enabled for EU regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: RegionKR
+        description: 'Flag that determines if the item is enabled for Korean regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+          2: Enable
+      - name: UseEUExtResources
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+  - name: PhotoStudio
+    description: ''
+    definitions:
+      - name: Hold
+        description: ''
+        datatype: uint8
+      - name: Crawl
+        description: ''
+        datatype: uint8
+      - name: Touch
+        description: ''
+        datatype: uint8
+      - name: Toddle
+        description: ''
+        datatype: uint8
+      - name: Walk
+        description: ''
+        datatype: uint8
+      - name: Parents
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'Null'
+          1: MotherHold
+          2: MotherPiggyback
+          3: FatherHold
+          4: FatherPiggyback
+      - name: Mii_00_On
+        description: ''
+        datatype: int16
+      - name: Mii_01_On
+        description: ''
+        datatype: int16
+      - name: Mii_02_On
+        description: ''
+        datatype: int16
+      - name: Mii_03_On
+        description: ''
+        datatype: int16
+      - name: Mii_04_On
+        description: ''
+        datatype: int16
+      - name: Mii_05_On
+        description: ''
+        datatype: int16
+      - name: Mii_06_On
+        description: ''
+        datatype: int16
+      - name: Mii_07_On
+        description: ''
+        datatype: int16
+      - name: Mii_08_On
+        description: ''
+        datatype: int16
+      - name: ZoomMax
+        description: ''
+        datatype: float32
+  - name: SnapShot
+    description: ''
+    definitions:
+      - name: ScriptType
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Location
+          1: House
+          2: Drama
+      - name: ScriptSpot
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Park
+          1: Beach
+          2: Roof
+          3: Cafe
+          4: Fountain
+          5: ThemePark
+          6: LDK
+          7: Washroom
+          8: Bath
+          9: BedRoom
+          10: Drama
+      - name: ScriptName
+        description: ''
+        datatype: string
+      - name: Mii00
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Islander
+          1: Oneself
+          2: Wanderer
+          3: Program
+          4: Islander_Male
+          5: Islander_Female
+          6: Wanderer_Male
+          7: Wanderer_Female
+      - name: Mii01Relation
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Anyone
+          2: Other
+          3: Friend
+          4: Friend_Fight
+          5: CloseFriend
+          6: Lover
+          7: Lover_Fight
+          8: ExLover
+          9: Partner
+          10: Partner_Fight
+          11: ExPartner
+          12: PartnerWithChild
+          13: Wanderer
+          14: Program
+      - name: Mii01Gender
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Random
+          1: Random_Male
+          2: Random_Female
+      - name: Mii02Relation
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Anyone
+          2: Other
+          3: Friend
+          4: ExLover
+          5: ExPartner
+          6: Child
+          7: Parent_Child
+          8: Wanderer
+          9: Program
+      - name: Mii02Gender
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Random
+          1: Random_Male
+          2: Random_Female
+      - name: Mii03Relation
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Anyone
+          2: Other
+          3: Friend
+          4: ExLover
+          5: ExPartner
+          6: Wanderer
+          7: Program
+      - name: Mii03Gender
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Random
+          1: Random_Male
+          2: Random_Female
+      - name: Mii04Relation
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Anyone
+          2: Other
+          3: Friend
+          4: ExLover
+          5: ExPartner
+          6: Wanderer
+          7: Program
+      - name: Mii04Gender
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Random
+          1: Random_Male
+          2: Random_Female
+      - name: Mii05Relation
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Anyone
+          2: Other
+          3: Friend
+          4: ExLover
+          5: ExPartner
+          6: Wanderer
+          7: Program
+      - name: Mii05Gender
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Random
+          1: Random_Male
+          2: Random_Female
+  - name: Song
+    description: ''
+    definitions:
+      - name: StartTick
+        description: ''
+        datatype: uint16
+      - name: OffsetTick
+        description: ''
+        datatype: int32
+      - name: Speed
+        description: ''
+        datatype: uint16
+      - name: WordNum
+        description: ''
+        datatype: uint8
+      - name: WordType0
+        description: ''
+        datatype: uint8
+      - name: WordType1
+        description: ''
+        datatype: uint8
+      - name: WordType2
+        description: ''
+        datatype: uint8
+      - name: WordType3
+        description: ''
+        datatype: uint8
+      - name: WordType4
+        description: ''
+        datatype: uint8
+      - name: WordType5
+        description: ''
+        datatype: uint8
+      - name: WordType6
+        description: ''
+        datatype: uint8
+      - name: WordType7
+        description: ''
+        datatype: uint8
+      - name: WordType8
+        description: ''
+        datatype: uint8
+      - name: WordType9
+        description: ''
+        datatype: uint8
+      - name: WordDefault0
+        description: ''
+        datatype: uint16
+      - name: WordDefault1
+        description: ''
+        datatype: uint16
+      - name: WordDefault2
+        description: ''
+        datatype: uint16
+      - name: WordDefault3
+        description: ''
+        datatype: uint16
+      - name: WordDefault4
+        description: ''
+        datatype: uint16
+      - name: WordDefault5
+        description: ''
+        datatype: uint16
+      - name: WordDefault6
+        description: ''
+        datatype: uint16
+      - name: WordDefault7
+        description: ''
+        datatype: uint16
+      - name: WordDefault8
+        description: ''
+        datatype: uint16
+      - name: WordDefault9
+        description: ''
+        datatype: uint16
+      - name: Line
+        description: ''
+        datatype: uint8
+      - name: Singer2
+        description: ''
+        datatype: string
+      - name: Singer3
+        description: ''
+        datatype: string
+      - name: Singer4
+        description: ''
+        datatype: string
+      - name: Singer5
+        description: ''
+        datatype: string
+      - name: Singer6
+        description: ''
+        datatype: string
+      - name: Singer7
+        description: ''
+        datatype: string
+      - name: PhraseLength
+        description: ''
+        datatype: uint16
+  - name: SongDance
+    description: ''
+    definitions:
+      - name: MusicGenre
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Metal
+          1: Jpop
+          2: Rock
+          3: Rap
+          4: Enka
+          5: Opera
+          6: Techno
+          7: Musical
+          8: Ballad
+      - name: UseTestMusic
+        description: ''
+        datatype: int8
+      - name: UseVJ
+        description: ''
+        datatype: int8
+      - name: bl_Label
+        description: ''
+        datatype: string
+      - name: bl_BinaryPass
+        description: ''
+        datatype: string
+      - name: bl_FileLabel
+        description: ''
+        datatype: string
+      - name: bl_DataName
+        description: ''
+        datatype: string
+      - name: bl_SceneLabel
+        description: ''
+        datatype: string
+      - name: bl_Screen
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Upper
+          1: Lower
+          2: None
+      - name: bl_LightSet
+        description: ''
+        datatype: string
+      - name: bl_SRTBone
+        description: ''
+        datatype: string
+      - name: bl_Pos
+        description: ''
+        datatype: string
+      - name: bl_Anim
+        description: ''
+        datatype: string
+      - name: bl_ExpFlag
+        description: ''
+        datatype: string
+      - name: bl_Body
+        description: ''
+        datatype: string
+      - name: bl_Headwear
+        description: ''
+        datatype: string
+      - name: bl_LightParentCamera
+        description: ''
+        datatype: string
+      - name: PerformanceType
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Solo
+          1: Group
+          2: Band
+      - name: AllMiiNum
+        description: ''
+        datatype: int8
+      - name: bl_AnimController
+        description: ''
+        datatype: int32
+      - name: bl_MiiResolution
+        description: ''
+        datatype: enum
+        enum_members:
+          0: CFL_RESOLUTION_64
+          1: CFL_RESOLUTION_128
+          2: CFL_RESOLUTION_256
+          3: CFL_RESOLUTION_64M
+          4: CFL_RESOLUTION_128M
+          5: CFL_RESOLUTION_256M
+  - name: Talk
+    description: ''
+    definitions:
+      - name: Sex
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Common
+          1: Male
+          2: Female
+      - name: Feel_Normal
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Feel_Good
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Feel_Nerves
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Feel_Despond
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Feel_Worry
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Gangan
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Kirakira
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Meramera
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Waiwai
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Bassari
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Sabasaba
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Baribari
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Tekipaki
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Fuwafuwa
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Nikoniko
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Honwaka
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Mattari
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Shiin
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Jikkuri
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Mojimoji
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Char_Kitchiri
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Time_05_11
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Time_11_18
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Time_18_00
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Time_00_05
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_01
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_02
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_03
+        description: ''
+        datatype: enum
+        enum_members:
+          0: fasle
+          1: 'true'
+      - name: Month_04
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_05
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_06
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_07
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_08
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_09
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_10
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_11
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Month_12
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Day
+        description: ''
+        datatype: uint8
+      - name: Week_Sun
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Week_Mon
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Week_Tue
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Week_Wed
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Week_Thu
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Week_Fri
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Week_Sat
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'false'
+          1: 'true'
+      - name: Topic_Relation
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Friend
+          2: Lover
+          3: Partner
+          4: BestFriend
+          5: Child
+          6: ChildApart
+          7: Father
+          8: Mother
+          9: BrotherSister
+          10: ExLover
+          11: Divorce
+      - name: Topic_Equip
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Phone
+          2: 3DS
+          3: Study
+          4: PC
+          5: CD
+          6: Book
+          7: WiiU
+          8: Yoga
+          9: Treadmill
+          10: Mirror
+          11: Guitar
+          12: Maracas
+          13: Cat
+          14: Cosmetics
+          15: Scales
+          16: Ballet
+          17: Hula
+          18: Soccer
+          19: Fishing
+          20: Bat
+          21: Bubble
+          22: Racket
+          23: Golf
+          24: Sandbag
+          25: Dog
+          26: Skateboard
+          27: Kite
+          28: MetalDetector
+      - name: Visitor_WndMale
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Visitor_WndFemale
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Past
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: day6
+          2: week1
+          3: week2
+          4: week3
+          5: month1
+          6: month2
+          7: month3
+          8: month4
+      - name: MiiNormal
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: MiiWanderer
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Wanderer_Location
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Wanderer_Tent
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Wanderer_Wharf
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Wanderer_Level1
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Wanderer_Level2
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Wanderer_Level3
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Wanderer_Level4
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Wanderer_Level5
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Wanderer_Pre
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Wanderer_Fix
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Wanderer_AM5
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Wanderer_Refered
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: A
+          2: AB
+      - name: Wanderer_GenderA
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Male
+          2: Female
+      - name: Wanderer_MarriedA
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Single
+          2: Married
+      - name: Wanderer_AdultA
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Children
+          2: Adult
+      - name: Wanderer_GenderB
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Male
+          2: Female
+      - name: Wanderer_MarriedB
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Single
+          2: Married
+      - name: Wanderer_AdultB
+        description: ''
+        datatype: enum
+        enum_members:
+          0: All
+          1: Children
+          2: Adult
+      - name: Wanderer_Type
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Other
+          1: MineStart
+          2: MineBack
+  - name: Touch
+    description: ''
+    definitions:
+      - name: Category
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Common
+          1: TbRelation
+          2: TbDepress
+          3: TbFood
+          4: TbBody
+          5: TbHeadwear
+          6: TbRoom
+          7: TbTool
+          8: TbContents
+          9: TbPhrase
+          10: TbQuestion
+          11: TbReport
+          12: TbWandererLow
+          13: TbWandererHigh
+          14: TbEtc
+      - name: SpAttr_TbQsPlayer
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Friend
+          2: Lover
+          3: Partner
+          4: BestFriend
+          5: Child
+          6: Father
+          7: Mother
+          8: ExLovers
+          9: Divorce
+  - name: Trouble
+    description: ''
+    definitions:
+      - name: RegionJP
+        description: 'Flag that determines if the item is enabled for Japenese regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: RegionUS
+        description: 'Flag that determines if the item is enabled for US regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: RegionEU
+        description: 'Flag that determines if the item is enabled for EU regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: RegionKR
+        description: 'Flag that determines if the item is enabled for Korean regions of the game.'
+        datatype: enum
+        enum_members:
+          0: Disable
+          1: Enable
+      - name: Category
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Relation
+          1: Depress
+          2: Food
+          3: Body
+          4: Headwear
+          5: Room
+          6: Tool
+          7: Contents
+          8: Phrase
+          9: Question
+          10: Report
+          11: WandererLow
+          12: WandererHigh
+          13: Etc
+      - name: Limit
+        description: ''
+        datatype: uint16
+      - name: Probability
+        description: ''
+        datatype: uint8
+      - name: Feel
+        description: ''
+        datatype: enum
+        enum_members:
+          0: Normal
+          1: Good
+          2: Nerves
+          3: Despond
+          4: Worry
+      - name: LimitResolved
+        description: ''
+        datatype: uint16
+      - name: Target[0]
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Food
+          2: Tool
+          3: Treasure
+          4: Special
+          5: Body
+          6: Headwear
+          7: Room
+          8: Mii
+      - name: Target[1]
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Food
+          2: Tool
+          3: Treasure
+          4: Special
+          5: Body
+          6: Headwear
+          7: Room
+          8: Mii
+      - name: FoodProp
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Category1
+          2: Category2
+          3: Category3
+          4: Dessert
+          5: Drink
+          6: Sweet
+          7: Spicy
+          8: Salty
+          9: Sour
+          10: Oily
+          11: Cool
+          12: Hot
+          13: Awful
+          14: Confectionery
+          15: Fruit
+          16: Vegetable
+          17: Rice
+          18: Bread
+          19: Meat
+          20: Fish
+          21: Egg
+          22: Japanese
+          23: Western
+          24: Chinese
+          25: Italian
+          26: Noodle
+          27: Luxury
+          28: American
+          29: Asian
+          30: British
+          31: French
+          32: German
+          33: Spanish
+          34: Junk
+          35: Korean
+          36: All
+      - name: ClothesProp
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Warm
+          2: Cold
+          3: Showy
+          4: Quiet
+          5: Formal
+          6: Casual
+          7: Cute
+          8: Sexy
+          9: Cool
+          10: Frumpy
+          11: Eccentric
+          12: Safe
+          13: Skirt
+          14: Work
+          15: Sports
+          16: All
+      - name: HeadwearProp
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: All
+          2: HeadGear
+          3: Accessory
+      - name: Priority
+        description: ''
+        datatype: uint8
+      - name: ResolveSuccessA
+        description: ''
+        datatype: int8
+      - name: ResolveFailureA
+        description: ''
+        datatype: int8
+      - name: ResolveEtcetraA
+        description: ''
+        datatype: int8
+      - name: ResolveSuccessB
+        description: ''
+        datatype: int8
+      - name: ResolveFailureB
+        description: ''
+        datatype: int8
+      - name: ResolveEtcetraB
+        description: ''
+        datatype: int8
+      - name: ResolveSuccessC
+        description: ''
+        datatype: int8
+      - name: ResolveFailureC
+        description: ''
+        datatype: int8
+      - name: ResolveEtcetraC
+        description: ''
+        datatype: int8
+      - name: ActionBestFood
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: ActionToolMusicBox
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: ActionToolDigestive
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: ActionToolCold
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: ActionToolTravel
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: ActionToolBath
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: ActionToolCamera
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: ActionToolHairdye
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: ActionToolAdultSpray
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: ActionToolChildSpray
+        description: ''
+        datatype: enum
+        enum_members:
+          0: 'False'
+          1: 'True'
+      - name: Window
+        description: ''
+        datatype: enum
+        enum_members:
+          0: None
+          1: Trouble
+          2: Love
+          3: Depress
+          4: Relation
+      - name: SolvedCount
+        description: ''
+        datatype: uint8

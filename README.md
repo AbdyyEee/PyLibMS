@@ -93,9 +93,9 @@ pip install -e .
 ```
 
 # AI Disclaimer
-PyLibMS and its code is developed and maintained by abdyyeee.
+PyLibMS and its code is hand-written, developed and maintained by abdyyeee.
 
-AI was utilized occasionally as a reference for minor portions of code in the development of MSBT and MSBF. No AI was utilized for UMSBT or MSBP. Any references were reviewed, and independently tested.
+AI was utilized occasionally as a reference for minor portions of code in the development of MSBT, USMBT and MSBF. No AI was utilized for MSBP. Any references were reviewed, and independently tested, and no code was ever directly pasted from any generative source. 
 
 The development of unit-tests were AI assisted.
 

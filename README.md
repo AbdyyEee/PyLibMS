@@ -93,8 +93,9 @@ pip install -e .
 ```
 
 # AI Disclaimer
+PyLibMS was developed by me. AI was utilized occasionally as a reference for minor portion of codes in the development of MSBT and MSBF. No AI was utilized for UMSBT or MSBP.
 
-Code in this library was written by me. AI was utilized occasionally when developing MSBT (specifically tag string importing) , MSBF and assisting in creating unit tests. 
+The development of unit-tests were AI assisted.
 
 # Credits & Sources
 

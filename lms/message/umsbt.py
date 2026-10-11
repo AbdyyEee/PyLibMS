@@ -38,12 +38,12 @@ class UMSBT:
 
     @property
     def files(self) -> tuple[MSBT, ...]:
-        """Maps of files tied to this instance."""
+        """List of files tied to this instance."""
         return tuple(self._files)
 
     @property
     def file_map(self) -> Mapping[str, MSBT]:
-        """Maps of files tied to this instance."""
+        """Maps of file to their name tied to this instance."""
         return MappingProxyType({msbt.filename: msbt for msbt in self._files})
 
     def add_msbt(self, msbt: MSBT) -> None:

@@ -27,6 +27,8 @@ keywords = [
 license = "MIT"
 license-files = ["LICENSE*"]
 classifiers = [
+    "Topic :: Software Development :: Libraries",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -36,6 +38,12 @@ classifiers = [
 dependencies = [
     "PyYAML>=6.0.3",
     "requests>=2.34.2"
+]
+
+[project.optional-dependencies]
+docs = [
+    "sphinx>=8.0.0",
+    "sphinx-rtd-theme>=2.0"
 ]
 
 [project.urls]

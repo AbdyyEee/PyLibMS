@@ -5,25 +5,22 @@
 [![PyPI version](https://badge.fury.io/py/PyLibMS.svg)](https://badge.fury.io/py/PyLibMS)
 ![Tests](https://github.com/abdyyeee/PyLibMS/actions/workflows/tests.yml/badge.svg?branch=main)
 
-PyLibMS is a library built in Python 3.11 and above for reading and writing of libMessageStudio (LMS) proprietary file
-formats from Nintendo.
+PyLibMS is a library built in Python 3.11 and above for reading and writing of revision >=3 of the libMessageStudio
+(LMS) proprietary file formats from Nintendo. These include files generated for late **Wii** titles, **Nintendo 3DS**,
+**Wii U**, **Mobile**, **Nintendo Switch** and **Nintendo Switch 2** games.
 
 The following is supported:
 
-| Format | Read | Write | Support                                                                                                                                                                                  |
-|--------|------|-------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `MSBT` | ✅   | ✅    | 1:1 Reading and writing. Support for majority of sections. Full attribute (`ATR1`) decoding with configurations. Tag decoding 1:1 with the official Nintendo `.mstxt` file format.        |
-| `UMSBT` | ✅   | ✅   | 1:1 Reading and writing. Accessing, adding, inserting and deleting `MSBT` files within `UMSBT` archives. |
-| `MSBF` | ✅   | ✅    | 1:1 Reading and writing flowcharts (`FLW3`). Support for custom node definitions, attaching names and descriptions to nodes. Altering parameter datatypes for flexibility between games. |
-| `MSBP` | ✅   | ❌    | Viewing all MSBP relevant metadata and generating configuration files for use with `MSBT` files.                                                                                         |
+| Format  | Read | Write | Support                                                                                                                                                                                  |
+|---------|------|-------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `MSBT`  | ✅   | ✅    | 1:1 Reading and writing. Support for majority of sections. Full attribute (`ATR1`) decoding with configurations. Tag decoding 1:1 with the official Nintendo `.mstxt` file format.       |
+| `UMSBT` | ✅   | ✅    | 1:1 Reading and writing. Accessing, adding, inserting and deleting `MSBT` files within `UMSBT` archives.                                                                                 |
+| `MSBF`  | ✅   | ✅    | 1:1 Reading and writing flowcharts (`FLW3`). Support for custom node definitions, attaching names and descriptions to nodes. Altering parameter datatypes for flexibility between games. |
+| `MSBP`  | ✅   | ❌    | Viewing all MSBP relevant metadata and generating configuration files for use with `MSBT` files.                                                                                         |                                                                        |
 
-This library is designed to support LMS revision >=3.0. These include files generated for late **Wii** titles,
-**Nintendo 3DS**, **Wii U**, **Mobile**, **Nintendo Switch** and **Nintendo Switch 2** games.
+# Documentation
 
-# Features and Usage
-
-Simple preview of the library is below. See [the wiki](https://github.com/AbdyyEee/PylibMS/wiki) for more explanations
-and examples.
+PyLibMS documentation is on [readthedocs](https://pylibms.readthedocs.io/en/latest/). A simple preview is below:
 
 ## Reading
 
@@ -74,6 +71,8 @@ To add or edit Preset, you may create an issue with the relevant `yaml` file and
 
 # Installation
 
+Python version must be `>=3.11.
+
 ```
 pip install PyLibMS
 ```
@@ -82,9 +81,7 @@ pip install PyLibMS
 
 # Build Instructions
 
-Python version must be `3.11` or higher.
-
-Clone the repository, then run `pip install` (venv recommended)
+Clone the repository, then run `pip install`.
 
 ```bash
 git clone https://github.com/AbdyyEee/PylibMS.git
@@ -93,9 +90,12 @@ pip install -e .
 ```
 
 # AI Disclaimer
-PyLibMS and its code is hand-written, developed and maintained by abdyyeee.
 
-AI was utilized occasionally as a reference for minor portions of code in the development of MSBT, USMBT and MSBF. No AI was utilized for MSBP. Any references were reviewed, and independently tested, and no code was ever directly pasted from any generative source. 
+PyLibMS and its code is handwritten, developed and maintained by abdyyeee.
+
+AI was occasionally consulted for minor implementation references during the development of MSBT, USMBT and MSBF. No AI
+was utilized for MSBP. Any references were reviewed and tested beforehand, and no code was ever directly pasted from any
+generative source.
 
 The development of unit-tests were AI assisted.
 

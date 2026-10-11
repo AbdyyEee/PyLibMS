@@ -26,7 +26,7 @@ keywords = [
     "libmessagestudio"]
 license = "MIT"
 license-files = ["LICENSE*"]
-classifiers = 
+classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",

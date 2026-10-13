@@ -27,7 +27,6 @@ class MSBT:
     def __init__(
             self,
             info: LMS_FileInfo | None = None,
-            uses_nli1: bool = False,
             section_list: list[str] | None = None,
             unsupported_section_map: dict[str, bytes] | None = None,
             attribute_config: AttributeConfig | None = None,

@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import itertools
 import string
 from collections import deque
+from operator import itemgetter
 from types import MappingProxyType
 from typing import Generator, TypeAlias, Mapping
 
@@ -340,7 +342,8 @@ class LMS_BranchNode(LMS_BaseNode):
 
         :param compress_shared_references: whether to compress shared references into one case.
         """
-        result, case_map = [], {}
+        result = []
+        case_map: dict[LMS_BaseNode | None, list[int]] = {}
 
         for case, branch in self._branches.items():
             case_map.setdefault(branch, []).append(case)
@@ -607,4 +610,27 @@ def verify_parameter_structure(
             f"Parameter type {parameter_type} expects {parameter_type.value_count} parameter values, got {len(value)}!"
         )
 
+
+# https://stackoverflow.com/a/69711845
+def merge_shared_cases(cases: list[int]) -> str:
+    result = []
+    values = sorted(cases)
+
+    first = last = values[0]
+
+    for i in values[1:]:
+        if i - last > 1:
+            if first == last:
+                result.append(str(first))
+            else:
+                result.append(f"{first}-{last}")
+            first = i
+        last = i
+
+    if first == last:
+        result.append(str(first))
+    else:
+        result.append(f"{first}-{last}")
+
+    return ", ".join(result)
 

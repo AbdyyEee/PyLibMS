@@ -89,7 +89,6 @@ class MSBT:
         """
         Create a new MSBT instance.
 
-        :param uses_nli1: flag to determine if to use nli1 section for labels.
         :param attribute_config: the attribute config object
         :param tag_config: the tag config object
         :param endian: if the file is big endian.

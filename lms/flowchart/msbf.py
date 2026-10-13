@@ -13,7 +13,7 @@ class MSBF:
     """
 
     MAGIC = "MsgFlwBn"
-    DEFAULT_SLOT_COUNT = 59
+    DEFAULT_SLOT_COUNT = 0x3B
 
     def __init__(
             self, info: LMS_FileInfo | None = None, flowcharts: dict[int, LMS_EntryNode] = None

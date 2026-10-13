@@ -19,7 +19,7 @@ class MSBT:
 
     MAGIC = "MsgStdBn"
 
-    DEFAULT_SLOT_COUNT = 101
+    DEFAULT_SLOT_COUNT = 0x65
 
     ATR1_INDEX = 1
     TXT2_INDEX = 2
@@ -89,6 +89,7 @@ class MSBT:
         """
         Create a new MSBT instance.
 
+        :param uses_nli1: flag to determine if to use nli1 section for labels.
         :param attribute_config: the attribute config object
         :param tag_config: the tag config object
         :param endian: if the file is big endian.
@@ -149,34 +150,6 @@ class MSBT:
         :param label: the label to check."""
         return label in self._label_map
 
-    # Backwards compatibility just in case
-    # Recommended to use accessors MSBT[index] or MSBT[label]
-    def get_entry_by_index(self, index: int) -> MSBTEntry:
-        """
-        Retrieves an entry given its index. Supports negative indexing.
-
-        Recommended to use ``MSBT[index]`` over this function.
-
-        :param index: the index of the entry.
-        """
-        if not (-len(self._entries) <= index < len(self._entries)):
-            raise IndexError(f"The index {index} is not a valid MSBT entry!")
-
-        return self._entries[index]
-
-    def get_entry_by_name(self, label: str) -> MSBTEntry:
-        """
-        Retrieves an entry given its name.
-
-        Recommended to use ``MSBT[label]`` over this function.
-
-        :param label: the label name for the entry.
-        """
-        if label not in self._label_map:
-            raise KeyError(f"The label '{label}' does not exist!")
-
-        return self._label_map[label]
-
     def add_entry(self, entry: MSBTEntry) -> None:
         """
         Adds an entry to the MSBT instance.
@@ -219,17 +192,18 @@ class MSBT:
         self._entries.append(entry)
         self._label_map[entry.name] = entry
 
-    def create_entry(self, name: str,
+    def create_entry(self,
+                     name: str,
                      message: str = None,
                      attribute: LMS_FieldMap | bytes | None = None,
                      style_index: int = None) -> MSBTEntry:
         """
         Creates an MSBT Entry and adds it to the file.
 
-        param name: the name of the entry.
-        param message: the message of the entry.
-        param attribute: the attribute of the entry.
-        param style_index: the style of the entry.
+        :param name: the name of the entry.
+        :param message: the message of the entry.
+        :param attribute: the attribute of the entry.
+        :param style_index: the style of the entry.
         """
         self.add_entry(entry := MSBTEntry(name,
                                           message=LMS_MessageText(message, self._tag_config),

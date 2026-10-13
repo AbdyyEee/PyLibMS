@@ -2,6 +2,7 @@ from types import MappingProxyType
 from typing import overload, Mapping
 
 from lms.common.field.lms_field import LMS_FieldMap
+from lms.common.lms_constants import LMS_MINIMUM_VERSION
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
 from lms.fileio.endian import FileEndian
@@ -82,7 +83,7 @@ class MSBT:
             tag_config: TagConfig | None = None,
             endian: FileEndian = FileEndian.LITTLE,
             encoding: FileEncoding = FileEncoding.UTF16,
-            version: int = 3,
+            version: int = LMS_MINIMUM_VERSION,
             section_count: int = 2,
     ):
         """
@@ -95,16 +96,10 @@ class MSBT:
         :param encoding: the file encoding.
         :param version: the file version.
         :param section_count: the number of sections.
-
-        ======
-        Usages
-        ======
-        See https://github.com/AbdyyEee/PylibMS/wiki/MSBT#creating-a-msbt
         """
         return MSBT(
             LMS_FileInfo(endian, encoding, version, section_count),
             section_list=["LBL1" if not uses_nli1 else "NLI1", "TXT2"],
-            uses_nli1=uses_nli1,
             attribute_config=attribute_config,
             tag_config=tag_config,
         )

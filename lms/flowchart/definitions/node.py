@@ -119,35 +119,38 @@ class LMS_BaseNode:
         self._next_node = node
         return node
 
-    def get_children(self) -> Generator[LMS_BaseNode | None, None, None]:
-        """A generator for all the connected nodes."""
-        if self._next_node is not None:
-            yield self.next_node
-
     def get_descendents(self) -> Generator[LMS_BaseNode, None, None]:
-        """Implementation of BFS that yields descendents from a node."""
-        visited: set[int] = set()
-        stack = deque([self])
+        """Implementation of iterative DFS that yields descendents from a node."""
+        visited = set()
+        stack: list[LMS_BaseNode | None] = [self]
 
         while stack:
-            node = stack.popleft()
+            current = stack.pop()
 
-            # Track memory address of the node in case the ID is unregistered
-            if node is None or id(node) in visited:
+            if current is None:
                 continue
 
-            visited.add(id(node))
-            yield node
-
-            # Prevent adding the entire next flowchart
-            if isinstance(node, LMS_JumpNode):
+            if current in visited:
                 continue
 
-            for child in node.get_children():
-                if child is None:
+            visited.add(current)
+            yield current
+
+            match current:
+                # Prevent adding the entire next flowchart
+                case LMS_JumpNode():
                     continue
+                case LMS_BranchNode():
+                    for node in current.branches.values():
+                        if node is None:
+                            continue
 
-                stack.append(child)
+                        stack.append(node)
+                case _:
+                    if current.next_node is None:
+                        continue
+
+                    stack.append(current.next_node)
 
 
 class LMS_MessageNode(LMS_BaseNode):
@@ -458,12 +461,6 @@ class LMS_BranchNode(LMS_BaseNode):
 
         self._branches[case] = new_node
 
-    def get_children(self) -> Generator[LMS_BaseNode, None, None]:
-        for node in self.branches.values():
-            if node is not None:
-                yield node
-
-
 class LMS_EventNode(LMS_BaseNode):
     """
     Class that represents an event node. Node utilized for in-game actions.
@@ -611,22 +608,3 @@ def verify_parameter_structure(
         )
 
 
-def merge_shared_cases(cases: list[int]) -> str:
-    cases = sorted(cases)
-
-    result = []
-    start = cases[0]
-    end = cases[0]
-
-    for case in cases[1:]:
-        if case == end + 1:
-            end = case
-            continue
-
-        result.append(str(start) if start == end else f"{start}-{end}")
-
-        start = case
-        end = case
-
-    result.append(str(start) if start == end else f"{start}-{end}")
-    return ", ".join(result)

@@ -8,16 +8,6 @@ from lms.project.definitions.tag import LMS_TagGroup
 class MSBP:
     """
     A class that represents a MSBP file.
-
-    ======
-    Usages
-    ======
-    https://github.com/AbdyyEee/PylibMS/wiki/MSBP
-
-    =========
-    File Info
-    =========
-    https://nintendo-formats.com/libs/lms/msbp.html
     """
 
     MAGIC = "MsgPrjBn"

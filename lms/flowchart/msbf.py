@@ -10,16 +10,6 @@ from lms.flowchart.definitions.node import LMS_EntryNode, LMS_JumpNode, LMS_Bran
 class MSBF:
     """
     Class that represents a MSBF instance.
-
-    ======
-    Usages
-    ======
-    https://github.com/AbdyyEee/PylibMS/wiki/MSBF
-
-    =========
-    File Info
-    =========
-    https://nintendo-formats.com/libs/lms/msbf.html
     """
 
     MAGIC = "MsgFlwBn"

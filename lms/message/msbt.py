@@ -14,16 +14,6 @@ from lms.titleconfig.definitions.tags import TagConfig
 class MSBT:
     """
     A class that represents a MSBT file.
-
-    ======
-    Usages
-    ======
-    https://github.com/AbdyyEee/PylibMS/wiki/MSBT
-
-    =========
-    File Info
-    =========
-    https://nintendo-formats.com/libs/lms/msbt.html
     """
 
     MAGIC = "MsgStdBn"

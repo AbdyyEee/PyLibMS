@@ -1,5 +1,6 @@
 # Common constant definitions between files
 LMS_MINIMUM_VERSION = 3
+LMS_VERSION_4 = 4
 
 PADDING_BYTE = b"\x00"
 

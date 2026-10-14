@@ -1,5 +1,7 @@
+from lms.common.lms_constants import LMS_VERSION_4
 from lms.fileio.io import FileReader
 from lms.project.definitions.tag import LMS_TagGroup
+
 
 
 def read_tgg2(reader: FileReader, version: int) -> tuple[LMS_TagGroup, ...]:
@@ -12,7 +14,7 @@ def read_tgg2(reader: FileReader, version: int) -> tuple[LMS_TagGroup, ...]:
 
         # in version 3 MSBP files, the group ID is the index in the list of groups
         # in version 4 MSBP files, the group ID is stored in the file.
-        group_id = reader.read_uint16() if version == 4 else i
+        group_id = reader.read_uint16() if version == LMS_VERSION_4 else i
 
         tag_count = reader.read_uint16()
         tag_indexes = reader.read_uint16_array(tag_count)

@@ -7,7 +7,7 @@
 
 PyLibMS is a library built in Python 3.11 and above for reading and writing of revision >=3 of the libMessageStudio
 (LMS) proprietary file formats from Nintendo. These include files generated for late **Wii** titles, **Nintendo 3DS**,
-**Wii U**, **Mobile**, **Nintendo Switch** and **Nintendo Switch 2** games.
+**Wii U**, **Mobile**, **Nintendo Switch** games.
 
 The following is supported:
 

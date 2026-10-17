@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 from types import MappingProxyType
-from typing import Mapping, TypeAlias
+from typing import Mapping, TypeAlias, Sequence
 
 from lms.common.field.lms_datatype import LMS_DataType, verify_number_from_datatype
 from lms.titleconfig.definitions.field import FieldDefinition
@@ -49,7 +49,7 @@ class LMS_FieldMap:
 
     @staticmethod
     def create_default_dict_map(
-            definitions: list[FieldDefinition],
+            definitions: Sequence[FieldDefinition],
     ) -> dict[str, FieldValue]:
         map = {}
         for definition in definitions:
@@ -67,11 +67,11 @@ class LMS_FieldMap:
         return map
 
     @classmethod
-    def create_default_map(cls, definitions: list[FieldDefinition]):
+    def create_default_map(cls, definitions: Sequence[FieldDefinition]):
         return cls.from_dict(LMS_FieldMap.create_default_map(definitions), definitions)
 
     @classmethod
-    def from_dict(cls, data: dict[str, FieldValue], definitions: list[FieldDefinition]):
+    def from_dict(cls, data: dict[str, FieldValue], definitions: Sequence[FieldDefinition]):
         return cls(
             {
                 definition.name: LMS_Field(data[definition.name], definition)

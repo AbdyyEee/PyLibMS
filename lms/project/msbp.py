@@ -1,9 +1,24 @@
+from enum import StrEnum
+
 from lms.common.lms_fileinfo import LMS_FileInfo
-from lms.project.definitions.attribute import LMS_AttributeDefinition
+from lms.project.definitions.attribute import LMS_AttrDefinition
 from lms.project.definitions.color import LMS_Color
 from lms.project.definitions.style import LMS_Style
 from lms.project.definitions.tag import LMS_TagGroup
 
+class MSBPSection(StrEnum):
+    CLR1 = "CLR1"
+    CLB1 = "CLB1"
+    ATI2 = "ATI2"
+    ALB1 = "ALB1"
+    ALI2 = "ALI2"
+    TGG2 = "TGG2"
+    TAG2 = "TAG2"
+    TGP2 = "TGP2"
+    TGL2 = "TGL2"
+    SYL3 = "SYL3"
+    SLB1 = "SLB1"
+    CTI1 = "CTI1"
 
 class MSBP:
     """
@@ -11,19 +26,23 @@ class MSBP:
     """
 
     MAGIC = "MsgPrjBn"
+    DEFAULT_SLOT_COUNT = 0x1D
 
     def __init__(
             self,
             info: LMS_FileInfo,
+            section_list: list[str] | None,
             colors: tuple[LMS_Color],
-            config: tuple[LMS_AttributeDefinition],
+            config: tuple[LMS_AttrDefinition],
             tag_groups: tuple[LMS_TagGroup],
             styles: tuple[LMS_Style],
             source_files: tuple[str],
     ):
         self.name = ""
+        self.slot_count = self.DEFAULT_SLOT_COUNT
 
         self._info = info
+        self._section_list = section_list
         self._colors = colors
         self._attribute_definitions = config
         self._tag_groups = tag_groups
@@ -36,12 +55,17 @@ class MSBP:
         return self._info
 
     @property
+    def section_list(self) -> tuple[str, ...]:
+        """List of sections in the MSBP file."""
+        return tuple(self._section_list)
+
+    @property
     def colors(self) -> tuple[LMS_Color, ...]:
         """The color definitions for the project."""
         return self._colors
 
     @property
-    def attribute_definitions(self) -> tuple[LMS_AttributeDefinition, ...]:
+    def attribute_definitions(self) -> tuple[LMS_AttrDefinition, ...]:
         """The attribute definitions for the project instance."""
         return self._attribute_definitions
 
@@ -51,7 +75,7 @@ class MSBP:
         return self._tag_groups
 
     @property
-    def style_list(self) -> tuple[LMS_Style, ...]:
+    def styles(self) -> tuple[LMS_Style, ...]:
         """The style definitions for the project instance."""
         return self._styles
 

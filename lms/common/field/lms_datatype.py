@@ -70,6 +70,9 @@ class LMS_DataType(IntEnum):
     # Interface type for UINT8
     BOOL = auto()
 
+    def __str__(self) -> str:
+        return self._name_
+
     @property
     def signed(self) -> bool:
         """Property for if the type is signed or not."""

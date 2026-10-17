@@ -1,11 +1,12 @@
 from typing import Any, Callable, Generator, Sequence
 
-from lms.common.lms_constants import SECTION_ALIGNMENT, SECTION_PADDING_BYTE
+from lms.common.lms_constants import SECTION_ALIGNMENT, SECTION_PADDING_BYTE, FILE_DATA_START
 from lms.fileio.io import FileReader, FileWriter
 
 
 def read_section_data(reader: FileReader, section_count: int) -> Generator[tuple[str, int], Any, None]:
-    reader.seek(0x20)
+    reader.seek(FILE_DATA_START)
+
     for _ in range(section_count):
         magic = reader.read_string_len(4)
         size = reader.read_uint32()
@@ -19,13 +20,8 @@ def read_section_data(reader: FileReader, section_count: int) -> Generator[tuple
         reader.align(SECTION_ALIGNMENT)
 
 
-def write_section(
-        writer: FileWriter,
-        magic: str,
-        section_call: Callable,
-        data: Sequence[Any],
-        *write_arguments: Any,
-) -> None:
+def write_section(writer: FileWriter, magic: str, write_function: Callable[[], Any], data: Sequence[Any],
+                  *args: Any) -> None:
     writer.write_string(magic)
     size_offset = writer.tell()
 
@@ -33,7 +29,7 @@ def write_section(
     writer.write_bytes(b"\x00" * 8)
     data_start = writer.tell()
 
-    section_call(writer, data, *write_arguments)
+    write_function(writer, data, *args)
 
     _write_end_data(writer, data_start, size_offset)
 

@@ -13,7 +13,7 @@ def read_strings(reader: FileReader, four_byte_count: bool) -> tuple[str]:
         string = reader.read_encoded_string()
         string_list.append(string)
 
-    return tuple(string_list)
+    return string_list
 
 def write_strings(writer: FileWriter, strings: list[str], four_byte_count: bool) -> None:
     data_start = writer.tell()

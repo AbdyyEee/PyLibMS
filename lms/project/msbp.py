@@ -5,6 +5,8 @@ from lms.project.definitions.attribute import LMS_AttrDefinition
 from lms.project.definitions.color import LMS_Color
 from lms.project.definitions.style import LMS_Style
 from lms.project.definitions.tag import LMS_TagGroup
+from lms.projectconfig.definitions.project import CTI1Source
+
 
 class MSBPSection(StrEnum):
     CLR1 = "CLR1"
@@ -32,11 +34,11 @@ class MSBP:
             self,
             info: LMS_FileInfo,
             section_list: list[str] | None,
-            colors: tuple[LMS_Color],
+            colors: list[LMS_Color],
             config: tuple[LMS_AttrDefinition],
             tag_groups: tuple[LMS_TagGroup],
-            styles: tuple[LMS_Style],
-            source_files: tuple[str],
+            styles: list[LMS_Style],
+            source_files: list[str],
     ):
         self.name = ""
         self.slot_count = self.DEFAULT_SLOT_COUNT
@@ -62,7 +64,7 @@ class MSBP:
     @property
     def colors(self) -> tuple[LMS_Color, ...]:
         """The color definitions for the project."""
-        return self._colors
+        return tuple(self._colors)
 
     @property
     def attribute_definitions(self) -> tuple[LMS_AttrDefinition, ...]:
@@ -77,9 +79,36 @@ class MSBP:
     @property
     def styles(self) -> tuple[LMS_Style, ...]:
         """The style definitions for the project instance."""
-        return self._styles
+        return tuple(self._styles)
 
     @property
     def source_files(self) -> tuple[str, ...]:
         """The source file definitions for the project instance."""
-        return self._source_files
+        return tuple(self._source_files)
+
+    def add_color(self, color: LMS_Color) -> None:
+        """
+        Add a color to the MSBP instance.
+
+        :param color: The color to add.
+        """
+        self._colors.append(color)
+
+    def add_style(self, style: LMS_Style) -> None:
+        """
+        Add a color to the MSBP instance.
+
+        :param style: The style to add.
+        """
+        self._styles.append(style)
+
+    def add_source(self, source: CTI1Source) -> None:
+        """
+        Add a source to the MSBP instance.
+
+        New files that are referenced in any MSBF flowcharts (e.g. Message nodes, Jump Nodes to external flowcharts),
+        must  have their source file added to the MSBP.
+
+        :param source: The source to add, a custom file. If an LMS format, should end in ``.mstxt`` or ``.msflow``
+        """
+        self._source_files.append(source)

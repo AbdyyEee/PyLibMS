@@ -69,7 +69,7 @@ def read_msbp(stream: BinaryIO | bytes) -> MSBP:
     styles = None
     source_list = None
 
-    last_read: tuple[Any] = ()
+    last_read = None
     section_list = []
     for magic, _ in read_section_data(reader, file_info.section_count):
         match magic:

@@ -3,7 +3,7 @@ from lms.project.definitions.style import LMS_Style
 
 DEFAULT = 0xFFFFFFFF
 
-def read_syl3(reader: FileReader) -> tuple[LMS_Style, ...]:
+def read_syl3(reader: FileReader) -> list[LMS_Style]:
     styles = []
 
     count = reader.read_uint32()

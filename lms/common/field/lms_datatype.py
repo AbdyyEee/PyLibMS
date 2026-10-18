@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ctypes
 from enum import IntEnum, auto
 from typing import Type, TypeGuard
 
@@ -14,6 +15,7 @@ ALIAS_MAP = {
     "i16": "INT16",
     "i32": "INT32",
     "f32": "FLOAT32",
+    "d": "double",
     "str": "STRING",
     # LIST fallback for ENUM datatype
     "list": "ENUM",
@@ -63,6 +65,7 @@ class LMS_DataType(IntEnum):
     INT32 = 5
 
     FLOAT32 = 6
+    DOUBLE = 7
 
     STRING = 8
     ENUM = 9
@@ -72,6 +75,33 @@ class LMS_DataType(IntEnum):
 
     def __str__(self) -> str:
         return self._name_
+
+    @property
+    def min(self) -> int | float:
+        """Minimum value for the datatype."""
+        if self in [LMS_DataType.BOOL, LMS_DataType.ENUM]:
+            raise ValueError(f"Min is not a valid property for {self.name}!")
+
+        if self in [LMS_DataType.FLOAT32, LMS_DataType.DOUBLE]:
+            return -self.max
+
+        return -(1 << (self.stream_size * 8 - 1)) if self.signed else 0
+
+    @property
+    def max(self) -> int | float:
+        """Maximum value for the datatype."""
+        if self in [LMS_DataType.BOOL, LMS_DataType.ENUM]:
+            raise ValueError(f"Max is not a valid property for {self.name}!")
+
+        bits = self.stream_size * 8
+
+        match self:
+            case LMS_DataType.FLOAT32:
+                return (2 - 2 ** -23) * 2 ** 127
+            case LMS_DataType.DOUBLE:
+                return (2 - 2 ** -52) * 2 ** 1023
+            case _:
+                return (1 << (bits - 1)) - 1 if self.signed else (1 << bits) - 1
 
     @property
     def signed(self) -> bool:
@@ -96,6 +126,7 @@ class LMS_DataType(IntEnum):
             self.INT16: int,
             self.INT32: int,
             self.FLOAT32: float,
+            self.DOUBLE: float,
             self.STRING: str,
             self.ENUM: str,
             self.BOOL: bool,
@@ -112,6 +143,7 @@ class LMS_DataType(IntEnum):
             self.INT16: 2,
             self.INT32: 4,
             self.FLOAT32: 4,
+            self.DOUBLE: 8,
         }
 
         try:
@@ -133,23 +165,3 @@ class LMS_DataType(IntEnum):
             raise ValueError(f"Unknown value of '{string}' was provided!")
 
 
-def verify_number_from_datatype(
-        value: int | float,
-        datatype: LMS_DataType,
-):
-    if datatype is LMS_DataType.FLOAT32:
-        max_value = FLOAT32_MAX
-        min_value = FLOAT32_MIN
-    else:
-        bits = datatype.stream_size * 8
-        if datatype.signed:
-            min_value = -(2 ** (bits - 1))
-            max_value = (2 ** (bits - 1)) - 1
-        else:
-            min_value, max_value = 0, (2 ** bits) - 1
-
-    if not min_value <= value <= max_value:
-        raise ValueError(
-            f"""The value '{value}' of type '{datatype.name}' provided
-            is out of range of ({min_value}, {max_value})"""
-        )

@@ -19,6 +19,7 @@ class StructLETypes(StrEnum):
     INT16 = "<h"
     INT32 = "<i"
     FLOAT32 = "<f"
+    DOUBLE = "<d"
 
 
 class StructBETypes(StrEnum):
@@ -29,6 +30,7 @@ class StructBETypes(StrEnum):
     INT16 = ">h"
     INT32 = ">i"
     FLOAT32 = ">f"
+    DOUBLE = ">d"
 
 
 class FileReader:
@@ -95,6 +97,9 @@ class FileReader:
 
     def read_float32(self) -> float:
         return struct.unpack(self.datatypes.FLOAT32, self._stream.read(4))[0]
+
+    def read_double(self) -> float:
+        return struct.unpack(self.datatypes.DOUBLE, self._stream.read(4))[0]
 
     def read_string_offset(self, section_start: int) -> str:
         offset = self.read_uint32()
@@ -179,6 +184,9 @@ class FileWriter:
 
     def write_float32(self, value: float) -> None:
         self.data.write(struct.pack(self.datatypes.FLOAT32, value))
+
+    def write_double(self, value: float) -> None:
+        self.data.write(struct.pack(self.datatypes.DOUBLE, value))
 
     def write_string(self, string: str) -> None:
         self.write_bytes(string.encode("UTF-8"))

@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 
 from lms.common.field.io import read_field, write_field
-from lms.common.field.lms_field import LMS_DataType, LMS_Field, LMS_FieldMap
+from lms.common.field.lms_datatype import LMS_DataType
+from lms.common.field.lms_field import LMS_Field, LMS_FieldMap
 from lms.fileio.io import FileReader, FileWriter
 from lms.titleconfig.definitions.attribute import AttributeDefinition
 

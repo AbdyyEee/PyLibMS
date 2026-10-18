@@ -4,7 +4,7 @@ from collections.abc import Iterator
 from types import MappingProxyType
 from typing import Mapping, TypeAlias, Sequence
 
-from lms.common.field.lms_datatype import LMS_DataType, verify_number_from_datatype
+from lms.common.field.lms_datatype import LMS_DataType
 from lms.titleconfig.definitions.field import FieldDefinition
 
 FieldValue: TypeAlias = int | str | float | bool | bytes
@@ -60,7 +60,7 @@ class LMS_FieldMap:
                     map[definition.name] = definition.enum_members[0]
                 case LMS_DataType.BOOL:
                     map[definition.name] = False
-                case LMS_DataType.FLOAT32:
+                case LMS_DataType.FLOAT32 | LMS_DataType.DOUBLE:
                     map[definition.name] = 0.0
                 case _:
                     map[definition.name] = 0
@@ -97,7 +97,7 @@ class LMS_FieldMap:
                     if value.lower() not in ("false", "true"):
                         raise ValueError("Invalid boolean value!")
                     casted_value = value.strip().lower() == "true"
-                case LMS_DataType.FLOAT32:
+                case LMS_DataType.FLOAT32 | LMS_DataType.DOUBLE:
                     casted_value = float(value)
                 case _:
                     casted_value = int(value)
@@ -176,7 +176,12 @@ def _verify_value_from_definition(
             else:
                 return
         case _ if isinstance(value, (int, float)):
-            verify_number_from_datatype(value, definition.datatype)
+            if not datatype.min <= value <= datatype.max:
+                raise ValueError(
+                    f"""The value '{value}' of type '{datatype.name}' provided
+                    is out of range of ({datatype.min}, {datatype.max})!)"""
+                )
+
             return
 
     raise TypeError(

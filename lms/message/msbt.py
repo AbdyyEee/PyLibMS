@@ -1,15 +1,28 @@
+import json
+from enum import StrEnum
 from types import MappingProxyType
-from typing import overload, Mapping
+from typing import overload, Mapping, Iterator, Self, Any
+
+import yaml
 
 from lms.common.field.lms_field import LMS_FieldMap
-from lms.common.lms_constants import LMS_MINIMUM_VERSION
+from lms.common.lms_constants import LMS_MINIMUM_VERSION, DEFAULT_SECTION_COUNT
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
 from lms.fileio.endian import FileEndian
 from lms.message.lms_messagetext import LMS_MessageText
 from lms.message.msbtentry import MSBTEntry
-from lms.titleconfig.definitions.attribute import AttributeConfig
-from lms.titleconfig.definitions.tags import TagConfig
+from lms.message.section.atr1 import NO_OFFSET
+from lms.titleconfig.definitions.project import Project
+
+
+class MSBTSection(StrEnum):
+    LBL1 = "LBL1"
+    NLI1 = "NLI1"
+    ATO1 = "ATO1"
+    ATR1 = "ATR1"
+    TXT2 = "TXT2"
+    TSY1 = "TSY1"
 
 
 class MSBT:
@@ -21,39 +34,37 @@ class MSBT:
 
     DEFAULT_SLOT_COUNT = 0x65
 
-    ATR1_INDEX = 1
-    TXT2_INDEX = 2
-    TSY1_INDEX = 3
+    ATR1_INDEX = 0x1
+    TXT2_INDEX = 0x2
+    TSY1_INDEX = 0x3
 
     def __init__(
             self,
             info: LMS_FileInfo | None = None,
-            section_list: list[str] | None = None,
+            section_list: list[str] = None,
             unsupported_section_map: dict[str, bytes] | None = None,
-            attribute_config: AttributeConfig | None = None,
-            tag_config: TagConfig | None = None,
+            attribute_offsets: list[int] | None = None,
+            project: Project | None = None
     ):
+        self.filename: str = ""
+
         self._info = info if info is not None else LMS_FileInfo()
 
         self._entries: list[MSBTEntry] = []
         self._label_map: dict[str, MSBTEntry] = {}
 
         self.size_per_attribute = 0
-
         self.slot_count = MSBT.DEFAULT_SLOT_COUNT
 
-        self.uses_encoded_attributes = True
         self.attr_string_table: bytes | None = None
+        self._attribute_offsets = attribute_offsets
 
         self._unsupported_section_map = unsupported_section_map or {}
 
         # Store the section list so that the order of any and all sections is preserved when writing
-        self._section_list: list[str] = section_list
+        self._section_list = section_list
 
-        self._attribute_config = attribute_config
-        self._tag_config = tag_config
-
-        self.filename: str = ""
+        self._project = project
 
     @overload
     def __getitem__(self, index: int) -> MSBTEntry:
@@ -72,26 +83,24 @@ class MSBT:
     def __len__(self) -> int:
         return len(self._entries)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[MSBTEntry]:
         return iter(self._entries)
 
     @classmethod
     def new(
             cls,
             uses_nli1: bool = False,
-            attribute_config: AttributeConfig | None = None,
-            tag_config: TagConfig | None = None,
+            project: Project | None = None,
             endian: FileEndian = FileEndian.LITTLE,
             encoding: FileEncoding = FileEncoding.UTF16,
             version: int = LMS_MINIMUM_VERSION,
-            section_count: int = 2,
+            section_count: int = DEFAULT_SECTION_COUNT,
     ):
         """
         Create a new MSBT instance.
 
         :param uses_nli1: flag to determine if to use nli1 section for labels.
-        :param attribute_config: the attribute config object
-        :param tag_config: the tag config object
+        :param project: specific project from a config.
         :param endian: if the file is big endian.
         :param encoding: the file encoding.
         :param version: the file version.
@@ -99,10 +108,98 @@ class MSBT:
         """
         return MSBT(
             LMS_FileInfo(endian, encoding, version, section_count),
-            section_list=["LBL1" if not uses_nli1 else "NLI1", "TXT2"],
-            attribute_config=attribute_config,
-            tag_config=tag_config,
+            section_list=[MSBTSection.LBL1 if not uses_nli1 else MSBTSection.NLI1, MSBTSection.TXT2],
+            project=project
         )
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any], project: Project = None) -> Self:
+        """
+        Instantiates a new MSBT object from a dictionary.
+
+        :param data: the dictionary to parse.
+        :param project: the project from a config.
+        """
+        endian = FileEndian(data["endian"])
+        encoding = FileEncoding(data["encoding"])
+        version = data["version"]
+        section_count = data["section_count"]
+
+        msbt = cls(LMS_FileInfo(endian, encoding, version, section_count), data["section_list"],
+                   attribute_offsets=data.get("attribute_offsets"), project=project)
+
+        for name, entry in data["entries"].items():
+            message = LMS_MessageText(entry["message"], None if project is None else project.tags)
+
+            if (attribute := entry.get("attribute")) is not None:
+                if isinstance(attribute, str):
+                    attr = bytes.fromhex(attribute)
+                else:
+                    attr = LMS_FieldMap.from_dict(attribute, project.attributes)
+
+            msbt.create_entry(name, message=message, attribute=attr, style_index=entry.get("style_index"))
+
+        msbt.slot_count = data["slot_count"]
+        return msbt
+
+    @classmethod
+    def from_json(cls, data: str, project: Project = None) -> Self:
+        """
+        Instantiates a new MSBT object from a JSON string.
+
+        :param data: the string to parse.
+        :param project: the project from a config.
+        """
+        return cls.from_dict(json.loads(data), project=project)
+
+    @classmethod
+    def from_yaml(cls, data: str, project: Project = None) -> Self:
+        """
+        Instantiates a new MSBT object from a YAML string.
+
+        :param data: the string to parse.
+        :param project: the project from a config.
+        """
+        return cls.from_dict(yaml.loads(data), project=project)
+
+    def to_dict(self) -> dict:
+        """Convert the MSBT object to a dictionary."""
+        data = {
+                "filename": self.filename,
+                "info": self.info.to_dict(),
+                "slot_count": self.slot_count,
+                "section_list": self.section_list,
+            }
+
+        if self.section_exists(MSBTSection.ATO1):
+            data["attribute_offsets"] = [NO_OFFSET if offset is None else offset for offset in self._attribute_offsets]
+
+        data |= self.info.to_dict()
+        entries = {}
+
+        for entry in self:
+            entries[entry.name] = entry_dict = {"message": entry.message.text}
+
+            if self.contains_attributes and entry.attribute is not None:
+
+                if isinstance(entry.attribute, bytes):
+                    entry_dict["attribute"] = entry.attribute.hex().upper()
+                else:
+                    entry_dict["attribute"] = entry.attribute.to_dict()
+
+            if self.contains_styles:
+                entry_dict["style_index"] = entry.style_index
+
+        data["entries"] = entries
+        return data
+
+    def to_json(self) -> str:
+        """Convert the MSBT object to a JSON string."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def to_yaml(self) -> str:
+        """Convert the MSBT object to a YAML string."""
+        return yaml.safe_dump(self.to_dict(), default_flow_style=False, sort_keys=False)
 
     @property
     def info(self) -> LMS_FileInfo:
@@ -130,24 +227,36 @@ class MSBT:
         return tuple(self._unsupported_section_map.keys())
 
     @property
-    def uses_nli1(self) -> bool:
+    def attribute_offsets(self) -> tuple[str, ...] | None:
+        """List of valid attribute offsets. Only valid if ATO1 is present."""
+        return tuple(self._attribute_offsets)
+
+    @property
+    def contains_nli1(self) -> bool:
         """If the MSBT contains the NLI1 section."""
-        return self.section_exists("NLI1")
+        return self.section_exists(MSBTSection.NLI1)
 
     @property
     def contains_attributes(self) -> bool:
         """If the MSBT contains attributes."""
-        return self.section_exists("ATR1")
+        return self.section_exists(MSBTSection.ATR1)
+
+    @property
+    def uses_encoded_attributes(self) -> bool:
+        """If the MSBT uses encoded attributes."""
+        return self.section_exists("ATR1") and self._project is None
 
     @property
     def contains_styles(self) -> bool:
         """If the MSBT contains style indexes."""
-        return self.section_exists("TSY1")
+        return self.section_exists(MSBTSection.TSY1)
 
     def label_exists(self, label: str) -> bool:
-        """Returns if a label already exists in the MSBT instance.
+        """
+        Returns if a label already exists in the MSBT instance.
 
-        :param label: the label to check."""
+        :param label: the label to check.
+        """
         return label in self._label_map
 
     def add_entry(self, entry: MSBTEntry) -> None:
@@ -194,9 +303,12 @@ class MSBT:
 
     def create_entry(self,
                      name: str,
+                     *,
                      message: str = None,
                      attribute: LMS_FieldMap | bytes | None = None,
-                     style_index: int = None) -> MSBTEntry:
+                     style_index: int = None,
+                     project: Project | None = None
+                     ) -> MSBTEntry:
         """
         Creates an MSBT Entry and adds it to the file.
 
@@ -204,11 +316,13 @@ class MSBT:
         :param message: the message of the entry.
         :param attribute: the attribute of the entry.
         :param style_index: the style of the entry.
+        :param project: optional project, used for styles.
         """
         self.add_entry(entry := MSBTEntry(name,
-                                          message=LMS_MessageText(message, self._tag_config),
+                                          message=LMS_MessageText(message, self._project.tags),
                                           attribute=attribute,
-                                          style_index=style_index))
+                                          style_index=style_index,
+                                          project=project))
         return entry
 
     def delete_entry(self, entry: MSBTEntry) -> None:

@@ -81,7 +81,7 @@ def read_flw3(reader: FileReader,
 
                 reader.seek(parameter_offset)
                 definition = get_config_definition(
-                    config, LMS_NodeType.BRANCH, parameter_type, condition_id
+                    config, LMS_NodeType.BRANCH, condition_id
                 )
                 parameter_value = evaluate_node_parameter(
                     reader, section_start, parameter_type, definition
@@ -104,7 +104,7 @@ def read_flw3(reader: FileReader,
                 reader.seek(parameter_offset)
 
                 definition = get_config_definition(
-                    config, LMS_NodeType.EVENT, parameter_type, event_id
+                    config, LMS_NodeType.EVENT, event_id
                 )
                 parameter_value = evaluate_node_parameter(
                     reader, section_start, parameter_type, definition
@@ -166,11 +166,10 @@ def read_next_node_id(reader: FileReader) -> int | None:
 def get_config_definition(
         config: NodeConfig | None,
         node_type: Literal[LMS_NodeType.BRANCH, LMS_NodeType.EVENT],
-        parameter_type: LMS_NodeParameterType,
         identifier: int,
 ) -> NodeDefinition:
     return (
-        None if config is None else config.get_definition(identifier, node_type, parameter_type)
+        None if config is None else config.get_definition(identifier, node_type)
     )
 
 

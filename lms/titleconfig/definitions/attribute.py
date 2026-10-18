@@ -1,28 +1,22 @@
+from dataclasses import dataclass
+from types import MappingProxyType
+from typing import Sequence, Mapping
+
+from lms.common.field.lms_datatype import LMS_DataType
 from lms.titleconfig.definitions.field import FieldDefinition
 
+@dataclass(frozen=True)
+class AttributeDefinition(FieldDefinition):
+    offset: int
 
-class AttributeConfig:
-    """Class that represents an attribute config definition."""
+    @classmethod
+    def from_dict(cls, data: dict):
+        name, description, offset  = data["name"], data.get("description", ""), data["offset"]
+        datatype = LMS_DataType.from_string(data["datatype"])
+        enum_members = data.get("enum_members", {})
+        return cls(name, description, datatype, MappingProxyType(enum_members), offset)
 
-    def __init__(self, name: str, description: str) -> None:
-        self._name = name
-        self._description = description
-        self._definitions = []
 
-    @property
-    def name(self) -> str:
-        """Name of the configuration."""
-        return self._name
 
-    @property
-    def description(self) -> str:
-        """Description of the configuration."""
-        return self._description
 
-    @property
-    def definitions(self) -> tuple[FieldDefinition, ...]:
-        """Definitions associated with the configuration."""
-        return tuple(self._definitions)
 
-    def add_definition(self, definition: FieldDefinition) -> None:
-        self._definitions.append(definition)

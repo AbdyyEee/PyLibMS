@@ -117,12 +117,12 @@ def read_msbp(stream: BinaryIO | bytes) -> MSBP:
 
     return MSBP(file_info, section_list, colors, attr_definitions, tag_groups, styles, source_list)
 
-def write_msbp_path(file_path: str | os.PathLike[str], file: MSBP) -> None:
+def write_msbp_path(file_path: str | os.PathLike[str], msbp: MSBP) -> None:
     """
     Writes a MSBP file to a given file path. If the target path does not exist, it will be created.
 
     :param file_path: the path to write the file to.
-    :param file: the MSBP file object.
+    :param msbp: the MSBP file object.
 
     =====
     Usage
@@ -130,7 +130,7 @@ def write_msbp_path(file_path: str | os.PathLike[str], file: MSBP) -> None:
     >>> write_msbp_path("path/to/file.msbp", msbp)
     """
     with open(file_path, "wb") as stream:
-        data = write_msbp(file)
+        data = write_msbp(msbp)
         stream.write(data)
 
 

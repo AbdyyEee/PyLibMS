@@ -5,7 +5,7 @@ from lms.project.definitions.attribute import LMS_AttrDefinition
 from lms.project.definitions.color import LMS_Color
 from lms.project.definitions.style import LMS_Style
 from lms.project.definitions.tag import LMS_TagGroup
-from lms.projectconfig.definitions.project import CTI1Source
+from lms.titleconfig.definitions.project import MessageSource
 
 
 class MSBPSection(StrEnum):
@@ -102,7 +102,7 @@ class MSBP:
         """
         self._styles.append(style)
 
-    def add_source(self, source: CTI1Source) -> None:
+    def add_source(self, source: MessageSource) -> None:
         """
         Add a source to the MSBP instance.
 

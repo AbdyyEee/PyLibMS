@@ -2,32 +2,43 @@ import hashlib
 import os.path
 import pathlib
 from types import MappingProxyType
-from typing import Literal, get_args, Mapping
+from typing import Literal, get_args, Mapping, Sequence, Self
 
 import requests
 import yaml
 
-from lms.common.field.lms_datatype import LMS_DataType
 from lms.flowchart.definitions.node_type import LMS_NodeType
+from lms.project.definitions.attribute import LMS_AttrDefinition
+from lms.project.definitions.color import LMS_Color
+from lms.project.definitions.style import LMS_Style
+from lms.project.definitions.tag import LMS_TagDefinition
 from lms.project.msbp import MSBP
-from lms.titleconfig.definitions.attribute import AttributeConfig
-from lms.titleconfig.definitions.field import FieldDefinition
-from lms.titleconfig.definitions.nodes import NodeConfig
+from lms.project.msbpio import read_msbp_path
+from lms.titleconfig.definitions.attribute import AttributeDefinition
+from lms.titleconfig.definitions.color import Color
+from lms.titleconfig.definitions.nodes import NodeConfig, NodeDefinition
+from lms.titleconfig.definitions.project import Project
+from lms.titleconfig.definitions.style import Style
 from lms.titleconfig.definitions.tags import TagConfig, TagDefinition
 
 PRESETS_URL = (
     "https://api.github.com/repos/AbdyyEee/PyLibMS/contents/lms/titleconfig/presets"
 )
 
+NO_COLOR = 0xFFFF
+
+COLOR_KEY = "colors"
+ATTR_KEY = "attributes"
+TAG_KEY = "tags"
+STYLE_KEY = "styles"
+SOURCE_KEY = "source_files"
+NODE_KEY = "nodes"
+
 
 class TitleConfig:
     """
     Represents a configuration for a specific title.
     """
-
-    TAG_KEY = "tag_definitions"
-    ATTR_KEY = "attribute_definitions"
-    NODE_KEY = "node_definitions"
 
     GAME_PRESET = Literal[
         "Badge Arcade",
@@ -45,19 +56,27 @@ class TitleConfig:
     def __init__(
             self,
             game: str | None,
-            attribute_config_map: dict[str, AttributeConfig] | None = None,
-            tag_config: TagConfig | None = None,
-            node_config: NodeConfig | None = None,
+            nodes: Mapping[str, NodeConfig] | None = None,
+            projects: Mapping[str, Project] | None = None,
     ):
         self._game = game
-        self._attribute_config_map = attribute_config_map
-        self._tag_config = tag_config
-        self._node_config = node_config
+        self._nodes = nodes or {}
+        self._projects: dict[str, Project] = projects or {}
 
     @property
     def game(self) -> str | None:
         """The name of the game for the titleconfig."""
         return self._game
+
+    @property
+    def node_configs(self) -> Mapping[str, NodeConfig] | None:
+        """Mapping of nodes for this configuration."""
+        return MappingProxyType(self._nodes)
+
+    @property
+    def projects(self) -> Mapping[str, Project]:
+        """Mapping of projects located in the configuration."""
+        return MappingProxyType(self._projects)
 
     @classmethod
     def get_preset_list(cls) -> tuple[str, ...]:
@@ -145,25 +164,8 @@ class TitleConfig:
 
         return raw_response
 
-    @property
-    def tag_config(self) -> TagConfig:
-        """The loaded tag config instance."""
-        return self._tag_config
-
-    @property
-    def attribute_configs(self) -> Mapping[str, AttributeConfig]:
-        """Returns a mapping of all attribute configurations in the configuration."""
-        if self._attribute_config_map is None:
-            return MappingProxyType({})
-        return MappingProxyType(self._attribute_config_map)
-
-    @property
-    def node_config(self) -> NodeConfig:
-        """The loaded node configuration."""
-        return self._node_config
-
     @classmethod
-    def load_file(cls, file_path: str):
+    def load_file(cls, file_path: str) -> Self:
         """
         Loads a config from a file.
 
@@ -173,7 +175,7 @@ class TitleConfig:
             return TitleConfig.load_config(f.read())
 
     @classmethod
-    def load_config(cls, content: str | dict):
+    def load_config(cls, content: str | dict) -> Self:
         """
         Loads the config of a specified game.
 
@@ -186,37 +188,75 @@ class TitleConfig:
             parsed_content = content
 
         game = parsed_content.get("game")
+        nodes: dict = parsed_content.get("nodes", {})
 
-        attribute_configs = {}
-        for config in parsed_content.get(cls.ATTR_KEY, []):
-            config_obj = AttributeConfig(config["name"], config.get("description", ""))
-            for value_def in config["definitions"]:
-                config_obj.add_definition(FieldDefinition.from_dict(value_def))
+        node_map = {}
+        for name, definition in nodes.items():
 
-            attribute_configs[config_obj.name] = config_obj
+            for node_data in [nodes.get("global", {}), definition]:
+                branch_definitions = {node["id"]: NodeDefinition.from_dict(node["id"], LMS_NodeType.BRANCH, node) for
+                                      node in node_data.get("branch", [])}
 
-        tag_content = parsed_content.get(cls.TAG_KEY, {})
-        group_map = tag_content.get("groups", {})
-        tag_config = TagConfig(group_map)
+                event_definitions = {node["id"]: NodeDefinition.from_dict(node["id"], LMS_NodeType.EVENT, node) for
+                                      node in node_data.get("event", [])}
 
-        for tag_def in tag_content.get("tags", ()):
-            tag_config.add_definition(TagDefinition.from_dict(tag_def, group_map))
+            node_map[name] = NodeConfig(branch_definitions, event_definitions)
 
-        node_config = NodeConfig()
+        projects: dict = parsed_content.get("projects", {})
 
-        node_data = parsed_content.get(cls.NODE_KEY, {})
-        branch_data, event_data = node_data.get("branch", []), node_data.get("event", [])
+        if not projects:
+            return cls(game, nodes=node_map)
 
-        for definition in branch_data:
-            node_config.add_definition(LMS_NodeType.BRANCH, definition)
+        project_map = {}
+        global_projects = projects.get("global", {})
 
-        for definition in event_data:
-            node_config.add_definition(LMS_NodeType.EVENT, definition)
+        for name, project in projects.items():
 
-        return cls(game, attribute_configs, tag_config, node_config)
+            project_obj = Project()
+            project_obj.name = name
+
+            for key in [COLOR_KEY, ATTR_KEY, TAG_KEY, STYLE_KEY, SOURCE_KEY]:
+                current_data = project.get(key)
+
+                # Override using global if data is omitted from the project and defined in global
+                # otherwise we can continue as there is no data defined
+                if current_data is None:
+                    if key not in global_projects:
+                        continue
+                    data = global_projects[key]
+                else:
+                    data = current_data
+
+                match key:
+                    case "colors":
+                        for color in data:
+                            project_obj.add_color(Color.from_dict(color))
+                    case "attributes":
+                        for attribute in data:
+                            project_obj.add_attribute(AttributeDefinition.from_dict(attribute))
+                    case "tags":
+                        groups = data["groups"]
+                        container = TagConfig(groups)
+                        for tag in data["definitions"]:
+                            container.add_definition(TagDefinition.from_dict(tag, groups))
+                        project_obj.set_tags(container)
+                    case "styles":
+                        for style in data:
+                            project_obj.add_style(Style.from_dict(style))
+                    case "source_files":
+                        for source in data:
+                            project_obj.add_source(source)
+
+            project_map[name] = project_obj
+
+        return cls(game, node_map, project_map)
 
     @staticmethod
-    def generate_file(file_path: str, game: str, project: MSBP) -> None:
+    def generate_file(
+            file_path: str | os.PathLike[str],
+            game: str,
+            project: MSBP | None = None,
+    ) -> None:
         """
         Generates a title config file for a specific game.
 
@@ -233,69 +273,142 @@ class TitleConfig:
             )
 
     @staticmethod
-    def generate_config(game: str, project: MSBP) -> dict | None:
+    def generate_merged_file(
+            directory: str | os.PathLike[str],
+            config_path: str | os.PathLike[str],
+            game: str) -> None:
+        """
+        Generates a config with all projects from each MSBP are merged into a file.
+
+        :param directory: directory of MSBP files.
+        :param config_path: the path to the config file.
+        :param game: the name of the game to create the config for.
+        """
+        msbps = []
+
+        for file in os.listdir(directory):
+            file_path = os.path.join(directory, file)
+            if not file_path.endswith(".msbp"):
+                raise ValueError("Detected a non-MSBP file in the directory!")
+
+            msbps.append(read_msbp_path(file_path))
+
+        with open(config_path, "w+") as f:
+            yaml.safe_dump(
+                TitleConfig.generate_merged_config(game, msbps),
+                f,
+                default_flow_style=False,
+                sort_keys=False,
+            )
+
+    @staticmethod
+    def generate_config(game: str, msbp: MSBP | None = None) -> dict | None:
         """
         Generates a title config file for the specified game.
 
         :param game: the name of the game to create the config for.
-        :param project: a MSBP object.
+        :param msbp: a MSBP object.
         """
-        config = {}
-        config["game"] = game
+        return {"game": game, "nodes": [], "projects": _msbp_to_dict(msbp)}
 
-        if project.tag_groups is not None:
-            config[TitleConfig.TAG_KEY] = {
-                "groups": {group.group_id: group.name for group in project.tag_groups},
-                "tags": [],
-            }
+    @staticmethod
+    def generate_merged_config(
+            game: str,
+            msbps: Sequence[MSBP]) -> dict:
+        """
+        Generates a config with all projects from each MSBP are merged.
 
-            for group in project.tag_groups:
-                for i, tag_def in enumerate(group.tag_definitions):
-                    definition = {
-                        "name": tag_def.name,
-                        "group_id": group.group_id,
-                        "tag_index": i,
-                        "description": "",
-                    }
+        :param game: the name of the game to create the config for.
+        :param msbps: a sequence of MSBP objects.
+        """
+        merged_projects = {}
 
-                    if tag_def.parameter_definitions:
-                        definition["parameters"] = []
+        for msbp in msbps:
+            merged_projects.update(_msbp_to_dict(msbp, False))
 
-                    for param_def in tag_def.parameter_definitions:
-                        param_definition = {
-                            "name": param_def.name,
-                            "description": "",
-                            "datatype": param_def.datatype.name.lower(),
-                        }
+        return {"game": game, "projects": merged_projects}
 
-                        if param_def.datatype is LMS_DataType.ENUM:
-                            param_definition["enum_members"] = dict(param_def.enum_members)
 
-                        definition["parameters"].append(param_definition)
+def _msbp_to_dict(msbp: MSBP | None, global_key: bool = True) -> dict:
+    if msbp is None:
+        return {}
 
-                    config[TitleConfig.TAG_KEY]["tags"].append(definition)
+    projects = {msbp.name if not global_key else "global": {
+        COLOR_KEY: (colors := []),
+        ATTR_KEY: (attributes := []),
+        TAG_KEY: (tags := {"groups": {}, "definitions": []}),
+        STYLE_KEY: (styles := []),
+        SOURCE_KEY: (source_files := []), }
+    }
 
-        config[TitleConfig.ATTR_KEY] = []
-        if project.attribute_definitions is not None:
-            attr_definitions = []
-            for attr_def in project.attribute_definitions:
-                definition = {
-                    "name": attr_def.name,
-                    "description": "",
-                    "datatype": attr_def.datatype.name.lower(),
-                }
-                if attr_def.datatype is LMS_DataType.ENUM:
-                    definition["enum_members"] = dict(attr_def.enum_members)
+    for color in msbp.colors:
+        colors.append(color_to_dict(color))
 
-                attr_definitions.append(definition)
+    for attribute in msbp.attribute_definitions:
+        attributes.append(attribute_to_dict(attribute))
 
-            # Main attribute entries
-            config[TitleConfig.ATTR_KEY].append(
-                {
-                    "name": project.name,
-                    "description": "",
-                    "definitions": attr_definitions,
-                }
-            )
+    for tag_group in msbp.tag_groups:
+        tags["groups"][tag_group.group_id] = tag_group.name
 
-        return config
+        for i, tag in enumerate(tag_group.tag_definitions):
+            tags["definitions"].append(tag_to_dict(tag_group.group_id, i, tag))
+
+    for style in msbp.styles:
+        styles.append(style_to_dict(style, msbp.colors))
+
+    for source in msbp.source_files:
+        source_files.append(source)
+
+    return projects
+
+
+def color_to_dict(color: LMS_Color) -> dict:
+    return {
+        "name": color.name,
+        "red": color.red,
+        "green": color.green,
+        "blue": color.blue,
+        "alpha": color.alpha,
+    }
+
+
+def attribute_to_dict(attribute: LMS_AttrDefinition) -> dict:
+    result = {
+        "name": attribute.name,
+        "datatype": attribute.datatype.name.lower(),
+        "offset": attribute.offset,
+    }
+
+    if attribute.enum_members:
+        result["enum_members"] = dict(attribute.enum_members)
+
+    return result
+
+
+def tag_to_dict(group_id: int, tag_index: int, tag_definition: LMS_TagDefinition) -> dict:
+    data = {
+        "name": tag_definition.name,
+        "group_id": group_id,
+        "tag_index": tag_index,
+    }
+    if tag_definition.parameters:
+        parameters = []
+        for parameter in tag_definition.parameters:
+            definition = {"name": parameter.name, "datatype": parameter.datatype.name.lower()}
+            if parameter.enum_members:
+                definition["enum_members"] = dict(parameter.enum_members)
+
+            parameters.append(definition)
+        data["parameters"] = parameters
+
+    return data
+
+
+def style_to_dict(style: LMS_Style, colors: tuple[LMS_Color]) -> dict:
+    return {
+        "name": style.name,
+        "region_width": style.region_width,
+        "line_number": style.line_number,
+        "font_index": style.font_index,
+        "color": None if style.color_index is None else colors[style.color_index]
+    }

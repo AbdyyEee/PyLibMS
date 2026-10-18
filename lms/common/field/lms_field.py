@@ -72,10 +72,11 @@ class LMS_FieldMap:
 
     @classmethod
     def from_dict(cls, data: dict[str, FieldValue], definitions: Sequence[FieldDefinition]):
+        definition_map = {field.name:field for field in definitions}
         return cls(
             {
-                definition.name: LMS_Field(data[definition.name], definition)
-                for definition in definitions
+                name: LMS_Field(value, definition_map[name])
+                for name, value in data.items()
             }
         )
 

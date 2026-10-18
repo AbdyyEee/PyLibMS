@@ -10,7 +10,7 @@ from lms.common.stream.hashtable import read_labels, write_labels
 from lms.common.stream.section import read_section_data, write_section
 from lms.fileio.io import FileReader, FileWriter
 from lms.flowchart.flw3 import read_flw3, write_flw3
-from lms.flowchart.msbf import MSBF
+from lms.flowchart.msbf import MSBF, MSBFSection
 from lms.message.msbt import MSBT
 from lms.titleconfig.definitions.nodes import NodeConfig
 
@@ -54,7 +54,6 @@ def read_msbf(
 
     :param stream: stream to read the file from.
     :param config: the node configuration to use.
-    :param msbt_directory: the directory of MSBT files, use for LMS_MessageNodes to auto determine the MSBT per node.
     :param msbt: Override for decoding message nodes to force all LMS_MessageNodes to utilize this MSBT. Best when
     you know a file utilizes only one MSBT.
     =====
@@ -72,11 +71,11 @@ def read_msbf(
     msbf = MSBF(file_info)
     for magic, size in read_section_data(reader, file_info.section_count):
         match magic:
-            case "FLW3":
+            case MSBFSection.FLW3:
                 entry_nodes = read_flw3(reader, config, msbt, msbt_files)
-            case "FEN1":
+            case MSBFSection.FEN1:
                 labels, slot_count = read_labels(reader)
-            case "REF1":
+            case MSBFSection.REF1:
                 raise LMS_UnsupportedSectionError("""REF1 was found in the MSBF file! Please report this file as an issue
                                                   in the PyLibMS repository https://github.com/AbdyyEee/PylibMS""")
 
@@ -127,10 +126,10 @@ def write_msbf(file: MSBF) -> bytes:
     stream_ids = {node: stream_id for stream_id, node in enumerate(file)}
     index_map = {entry.name: stream_ids[entry] for entry in file.entry_nodes}
 
-    write_section(writer, "FLW3", write_flw3, list(file.nodes.values()), stream_ids)
+    write_section(writer, MSBFSection.FLW3, write_flw3, list(file.nodes.values()), stream_ids)
     write_section(
         writer,
-        "FEN1",
+        MSBFSection.FEN1,
         write_labels,
         list(file.flowcharts.keys()),
         file.slot_count,

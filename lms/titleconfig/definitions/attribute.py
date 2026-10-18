@@ -7,6 +7,9 @@ from lms.titleconfig.definitions.field import FieldDefinition
 
 @dataclass(frozen=True)
 class AttributeDefinition(FieldDefinition):
+    """
+    Class that represents an attribute definition in a project.
+    """
     offset: int
 
     @classmethod

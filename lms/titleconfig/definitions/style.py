@@ -4,6 +4,9 @@ from typing import Self
 
 @dataclass
 class Style:
+    """
+    Class that represents a style entry in a project.
+    """
     name: str
     description: str
     region_width: int

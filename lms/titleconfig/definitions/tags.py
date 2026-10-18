@@ -9,7 +9,9 @@ from lms.titleconfig.definitions.field import FieldDefinition
 
 
 class TagConfig:
-    """Class that represents a tag structure definition."""
+    """
+    Class that represents a tag structure definition in a project.
+    """
 
     def __init__(self, group_map: dict[int, str] = None):
         self._group_map = MappingProxyType(group_map or {})

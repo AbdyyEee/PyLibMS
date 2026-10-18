@@ -4,6 +4,9 @@ from typing import Self
 
 @dataclass
 class Color:
+    """
+    Class that represents a color entry in a project.
+    """
     name: str
     description: str
     red: int

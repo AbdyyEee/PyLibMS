@@ -1,17 +1,19 @@
 from __future__ import annotations
 
-import itertools
 import string
-from collections import deque
-from operator import itemgetter
 from types import MappingProxyType
-from typing import Generator, TypeAlias, Mapping
+from typing import Generator, TypeAlias, Mapping, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from lms.flowchart.msbf import MSBF
 
 import lms.flowchart.definitions.lms_nodeexceptions as node_exceptions
-from lms.common.field.lms_datatype import LMS_DataType
-from lms.common.field.lms_field import LMS_FieldMap, verify_number_from_datatype
+from lms.common.field.lms_datatype import LMS_DataType, verify_number_from_datatype
+from lms.common.field.lms_field import LMS_FieldMap
 from lms.common.lms_exceptions import LMS_Error
 from lms.flowchart.definitions.node_type import LMS_NodeType, LMS_NodeParameterType
+
+from lms.flowchart.source_resolver import SourceResolver
 from lms.message.lms_messagetext import LMS_MessageText
 from lms.message.msbt import MSBT
 from lms.message.msbtentry import MSBTEntry
@@ -165,7 +167,7 @@ class LMS_MessageNode(LMS_BaseNode):
             node_id: int,
             msbt_index: int,
             label_index: int,
-            msbt: MSBT | None = None,
+            source_resolver: SourceResolver | None = None
     ):
         super().__init__(
             node_id,
@@ -176,7 +178,7 @@ class LMS_MessageNode(LMS_BaseNode):
 
         self.msbt_index = msbt_index
         self.label_index = label_index
-        self._msbt = msbt
+        self._source_resolver = source_resolver
 
     @classmethod
     def new(cls, file_index: int, label_index: int):
@@ -201,8 +203,17 @@ class LMS_MessageNode(LMS_BaseNode):
 
     @property
     def msbt(self) -> MSBT | None:
-        """MSBT instance the node references. Optional, is set by providing a ``MSBT`` file on reading."""
-        return self._msbt
+        """MSBT instance the node reference."""
+        if self._source_resolver is None:
+            raise ValueError("No message root and project were provided!")
+
+        if not self._source_resolver.message_root:
+            raise ValueError("No message root was provided!")
+
+        if not self._source_resolver.project:
+            raise ValueError("No project was provided!")
+
+        return self._source_resolver.resolve_msbt_index(self.msbt_index)
 
     @property
     def message_entry(self) -> MSBTEntry:
@@ -464,6 +475,7 @@ class LMS_BranchNode(LMS_BaseNode):
 
         self._branches[case] = new_node
 
+
 class LMS_EventNode(LMS_BaseNode):
     """
     Class that represents an event node. Node utilized for in-game actions.
@@ -558,29 +570,42 @@ class LMS_JumpNode(LMS_BaseNode):
     Class that represents a jump node. Node that jumps to another flowchart.
     """
 
-    def __init__(self, node_id: int, unknown_short0a: int, next: LMS_EntryNode = None):
+    def __init__(self, node_id: int, msbf_index: int | None, source_resolver: SourceResolver | None,
+                 next: LMS_EntryNode = None):
         super().__init__(node_id, LMS_NodeType.JUMP, LMS_NodeParameterType.NONE, None)
 
         self._next_entry = next
-
-        # TODO: Document this unknown value at 0xA in the node
-        # This value is usually -1 in TL 3DS but is a set value in other games
-        self.unknown_short0a = unknown_short0a
+        self.msbf_index = msbf_index
+        self._source_resolver = source_resolver
 
     @classmethod
-    def new(cls, next_entry_point: LMS_EntryNode | None = None, unknown_short0a: int = NO_VALUE):
+    def new(cls, next: LMS_EntryNode | None = None, unknown_short0a: int = NO_VALUE):
         """
         Instantiates a new jump node.
 
-        :param next_entry_point: the next entry point.
+        :param next: the next entry point.
         :param unknown_short0a: unknown short value. -1 if there is no value.
         """
-        return cls(None, unknown_short0a, next_entry_point)
+        return cls(None, unknown_short0a, next)
 
     @property
     def next_entry(self) -> LMS_EntryNode | None:
         """The pointing entry node."""
         return self._next_entry
+
+    @property
+    def msbf(self) -> MSBF | None:
+        """MSBF instance the node reference."""
+        if self._source_resolver is None:
+            raise ValueError("No message root and project were provided!")
+
+        if not self._source_resolver.message_root:
+            raise ValueError("No message root was provided!")
+
+        if not self._source_resolver.project:
+            raise ValueError("No project was provided!")
+
+        return self._source_resolver.resolve_msbf_index(self.msbf_index)
 
     @next_entry.setter
     def next_entry(self, node: LMS_EntryNode | None) -> None:
@@ -633,4 +658,3 @@ def merge_shared_cases(cases: list[int]) -> str:
         result.append(f"{first}-{last}")
 
     return ", ".join(result)
-

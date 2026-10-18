@@ -212,8 +212,7 @@ class TitleConfig:
 
         for name, project in projects.items():
 
-            project_obj = Project()
-            project_obj.name = name
+            project_obj = Project(name)
 
             for key in [COLOR_KEY, ATTR_KEY, TAG_KEY, STYLE_KEY, SOURCE_KEY]:
                 current_data = project.get(key)

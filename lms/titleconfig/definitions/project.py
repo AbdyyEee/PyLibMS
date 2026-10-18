@@ -14,13 +14,21 @@ from lms.titleconfig.definitions.tags import TagConfig
 MessageSource: TypeAlias = str
 
 class Project:
-    def __init__(self) -> None:
-        self.name: str = ""
+    """
+    Class that represents a project entry in a configuration.
+    """
+    def __init__(self, name: str = "") -> None:
+        self._name = name
         self._colors: list[Color] = []
         self._attributes: list[AttributeDefinition] = []
         self._tags: TagConfig = TagConfig()
         self._styles: list[Style] = []
         self._sources: list[MessageSource] = []
+
+    @property
+    def name(self) -> str:
+        """The name of the project."""
+        return self._name
 
     @property
     def colors(self) -> tuple[Color, ...]:

@@ -11,51 +11,50 @@ from lms.common.stream.section import read_section_data, write_section
 from lms.fileio.io import FileReader, FileWriter
 from lms.flowchart.flw3 import read_flw3, write_flw3
 from lms.flowchart.msbf import MSBF, MSBFSection
-from lms.message.msbt import MSBT
 from lms.titleconfig.definitions.nodes import NodeConfig
 
 __all__ = ("read_msbf", "read_msbf_path", "write_msbf", "write_msbf_path")
+
+from lms.titleconfig.definitions.project import Project
 
 
 def read_msbf_path(
         file_path: str | os.PathLike[str],
         *,
         config: NodeConfig | None = None,
-        msbt: MSBT | None = None,
-        msbt_files: Sequence[MSBT] | None = None
+        project: Project | None = None,
+        message_root: os.PathLike | None = None,
 ) -> MSBF:
     """
     Reads a MSBF file from a path.
 
     :param file_path: path to the MSBF file.
     :param config: the node configuration to use.
-    :param msbt_files: sequence of MSBT files utilized for converting ``LMS_MessageNode.msbt_index`` into a real objects.
-    :param msbt: Override for decoding message nodes to force all ``LMS_MessageNode`` nodes to utilize this MSBT. Best when
-    you know a file utilizes only one MSBT.
-
+    :param project: project object utilized for auto-source resolving.
+    :param message_root: root of the message folder/archive. Archives must be extracted first.
     =====
     Usage
     =====
     >>> msbf = read_msbf_path("path/to/file.msbf")
     """
     with open(file_path, "rb") as stream:
-        return read_msbf(stream, config=config, msbt=msbt, msbt_files=msbt_files)
+        return read_msbf(stream, config=config, project=project, message_root=message_root)
 
 
 def read_msbf(
         stream: BinaryIO | bytes,
         *,
         config: NodeConfig | None = None,
-        msbt: MSBT | None = None,
-        msbt_files: Sequence[MSBT] | None = None
+        project: Project | None = None,
+        message_root: os.PathLike | None = None,
 ) -> MSBF:
     """
     Reads a MSBF file from a stream.
 
     :param stream: stream to read the file from.
     :param config: the node configuration to use.
-    :param msbt: Override for decoding message nodes to force all LMS_MessageNodes to utilize this MSBT. Best when
-    you know a file utilizes only one MSBT.
+    :param project: project object utilized for auto-source resolving.
+    :param message_root: root of the message folder/archive. Archives must be extracted fir
     =====
     Usage
     =====
@@ -65,14 +64,11 @@ def read_msbf(
 
     file_info = read_file_info(reader, MSBF.MAGIC)
 
-    if msbt is not None and msbt_files:
-        raise ValueError("There may only be one of a directory or MSBT provided.")
-
     msbf = MSBF(file_info)
     for magic, size in read_section_data(reader, file_info.section_count):
         match magic:
             case MSBFSection.FLW3:
-                entry_nodes = read_flw3(reader, config, msbt, msbt_files)
+                entry_nodes = read_flw3(reader, config, project, message_root)
             case MSBFSection.FEN1:
                 labels, slot_count = read_labels(reader)
             case MSBFSection.REF1:

@@ -1,11 +1,8 @@
 from __future__ import annotations
 
-import ctypes
 from enum import IntEnum, auto
 from typing import Type, TypeGuard
 
-FLOAT32_MIN = -3.4028235e38
-FLOAT32_MAX = 3.4028235e38
 
 ALIAS_MAP = {
     "u8": "UINT8",
@@ -165,3 +162,12 @@ class LMS_DataType(IntEnum):
             raise ValueError(f"Unknown value of '{string}' was provided!")
 
 
+def verify_number_from_datatype(
+        value: int | float,
+        datatype: LMS_DataType,
+):
+    if not datatype.min <= value <= datatype.max:
+        raise ValueError(
+            f"""The value '{value}' of type '{datatype.name}' provided
+            is out of range of ({datatype.min}, {datatype.max})!)"""
+        )

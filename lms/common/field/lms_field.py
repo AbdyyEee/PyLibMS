@@ -4,7 +4,7 @@ from collections.abc import Iterator
 from types import MappingProxyType
 from typing import Mapping, TypeAlias, Sequence
 
-from lms.common.field.lms_datatype import LMS_DataType
+from lms.common.field.lms_datatype import LMS_DataType, verify_number_from_datatype
 from lms.titleconfig.definitions.field import FieldDefinition
 
 FieldValue: TypeAlias = int | str | float | bool | bytes
@@ -176,12 +176,7 @@ def _verify_value_from_definition(
             else:
                 return
         case _ if isinstance(value, (int, float)):
-            if not datatype.min <= value <= datatype.max:
-                raise ValueError(
-                    f"""The value '{value}' of type '{datatype.name}' provided
-                    is out of range of ({datatype.min}, {datatype.max})!)"""
-                )
-
+            verify_number_from_datatype(value, datatype)
             return
 
     raise TypeError(

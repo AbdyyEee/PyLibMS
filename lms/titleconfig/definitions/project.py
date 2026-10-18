@@ -41,7 +41,7 @@ class Project:
         return tuple(self._attributes)
 
     @property
-    def tags(self) -> TagConfig:
+    def tag_config(self) -> TagConfig:
         """Tags associated with the project."""
         return self._tags
 

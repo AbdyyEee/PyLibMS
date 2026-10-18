@@ -43,7 +43,7 @@ class UMSBT:
 
     @property
     def file_map(self) -> Mapping[str, MSBT]:
-        """Maps of file to their name tied to this instance."""
+        """Maps of files to their names tied to this instance."""
         return MappingProxyType({msbt.filename: msbt for msbt in self._files})
 
     def add_msbt(self, msbt: MSBT) -> None:

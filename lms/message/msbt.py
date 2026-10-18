@@ -129,7 +129,7 @@ class MSBT:
                    attribute_offsets=data.get("attribute_offsets"), project=project)
 
         for name, entry in data["entries"].items():
-            message = LMS_MessageText(entry["message"], None if project is None else project.tags)
+            message = LMS_MessageText(entry["message"], None if project is None else project.tag_config)
 
             if (attribute := entry.get("attribute")) is not None:
                 if isinstance(attribute, str):
@@ -318,8 +318,9 @@ class MSBT:
         :param style_index: the style of the entry.
         :param project: optional project, used for styles.
         """
+        tag_config = None if project is None else project.tag_config
         self.add_entry(entry := MSBTEntry(name,
-                                          message=LMS_MessageText(message, self._project.tags),
+                                          message=LMS_MessageText(message, tag_config),
                                           attribute=attribute,
                                           style_index=style_index,
                                           project=project))

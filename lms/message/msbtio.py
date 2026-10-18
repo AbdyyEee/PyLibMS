@@ -61,8 +61,7 @@ def read_msbt_path(
 
 
 def read_msbt_directory(directory: str | os.PathLike[str], *,
-                        attribute_config: AttributeConfig | None = None,
-                        tag_config: TagConfig | None = None,
+                        project: Project | None = None,
                         suppress_tag_errors: bool = False,
                         ignore_extensions: bool = False) -> Mapping[str, MSBT]:
     """
@@ -70,8 +69,7 @@ def read_msbt_directory(directory: str | os.PathLike[str], *,
 
     :param directory: directory of MSBT files. All files must have the `.msbt` extension (unless ``ignore_extensions``
     is True)
-    :param attribute_config: the attribute config to use for decoding attributes.
-    :param tag_config: the tag config to use for decoding tags.
+    :param project: a ``Project` object.
     :param suppress_tag_errors: when a tag config is used, suppress any errors while reading decoded tags.
     :param ignore_extensions: ignore the extensions in the directory.
 
@@ -89,8 +87,7 @@ def read_msbt_directory(directory: str | os.PathLike[str], *,
                              "this error.")
 
         msbt = read_msbt_path(os.path.join(directory, file),
-                              attribute_config=attribute_config,
-                              tag_config=tag_config, suppress_tag_errors=suppress_tag_errors)
+                              project=project, suppress_tag_errors=suppress_tag_errors)
         msbt.filename = file
         files[file] = msbt
 
@@ -144,7 +141,7 @@ def read_msbt(
             case MSBTSection.ATR1:
                 attribute_data = read_atr1(reader, attribute_offsets, None if project is None else project.attributes, size)
             case MSBTSection.TXT2:
-                messages = read_txt2(reader, None if project is None else project.tags, suppress_tag_errors)
+                messages = read_txt2(reader, None if project is None else project.tag_config, suppress_tag_errors)
             case MSBTSection.TSY1:
                 style_indices = read_tsy1(reader, len(labels))
             case _:

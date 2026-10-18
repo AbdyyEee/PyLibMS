@@ -62,8 +62,8 @@ class TestUMSBTCases(MSBTTestUtil):
         umsbt = read_umsbt_path(UMSBT_DIRECTORY / "simple.umsbt")
 
         msbt = MSBT.new()
-        msbt.create_entry("UMsbtFile04Label00", "UMSBT Message 08")
-        msbt.create_entry("UMsbtFile04Label01", "UMSBT Message 09")
+        msbt.create_entry("UMsbtFile04Label00", message="UMSBT Message 08")
+        msbt.create_entry("UMsbtFile04Label01", message="UMSBT Message 09")
         umsbt.add_msbt(msbt)
 
         expected = [
@@ -80,7 +80,7 @@ class TestUMSBTCases(MSBTTestUtil):
         umsbt = read_umsbt_path(UMSBT_DIRECTORY / "simple.umsbt")
 
         msbt = MSBT.new()
-        msbt.create_entry("InsertedFileLabel", "UMSBT File Inserted Message")
+        msbt.create_entry("InsertedFileLabel", message="UMSBT File Inserted Message")
         umsbt.insert_msbt(1, msbt)
 
         expected = [

@@ -32,6 +32,8 @@ def read_field(
             value = reader.read_int32()
         case LMS_DataType.FLOAT32:
             value = reader.read_float32()
+        case LMS_DataType.DOUBLE:
+            value = reader.read_double()
         case LMS_DataType.ENUM:
             if read_variable_width_value is not None:
                 index = read_variable_width_value()
@@ -61,6 +63,7 @@ def write_field(
             LMS_DataType.UINT32: writer.write_uint32,
             LMS_DataType.INT32: writer.write_int32,
             LMS_DataType.FLOAT32: writer.write_float32,
+            LMS_DataType.DOUBLE: writer.write_double,
         }
         write_functions[field.datatype](field.value)
         return

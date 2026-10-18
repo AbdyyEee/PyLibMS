@@ -1,3 +1,4 @@
+import os
 from typing import Literal, Sequence
 
 from lms.common.field.io import read_field, write_field
@@ -15,10 +16,11 @@ from lms.flowchart.definitions.node import (
     LMS_NodeParameter,
 )
 from lms.flowchart.definitions.node_type import LMS_NodeType, LMS_NodeParameterType
-from lms.message.msbt import MSBT
+from lms.flowchart.source_resolver import SourceResolver
 from lms.titleconfig.definitions.nodes import NodeConfig, NodeDefinition
+from lms.titleconfig.definitions.project import Project
 
-NO_NEXT_NODE = 0xFFFF
+NO_VALUE = 0xFFFF
 FLW3_HEADER_SIZE = 16
 NODE_SIZE = 16
 
@@ -27,11 +29,13 @@ VARIABLE_WIDTH_DATATYPES = (LMS_DataType.BOOL, LMS_DataType.ENUM)
 
 def read_flw3(reader: FileReader,
               config: NodeConfig | None,
-              msbt: MSBT | None = None,
-              msbt_files: Sequence[MSBT] | None = None) -> list[LMS_EntryNode]:
+              project: Project | None,
+              message_root: str | os.PathLike[str]) -> list[LMS_EntryNode]:
     section_start = reader.tell()
     node_count = reader.read_uint16()
     branch_table_id_count = reader.read_uint16()
+
+    source_resolver = SourceResolver(message_root, project, config)
 
     # Huge padding section skip
     reader.skip(12)
@@ -56,18 +60,10 @@ def read_flw3(reader: FileReader,
                 reader.skip(4)
 
                 stream_next_id = read_next_node_id(reader)
-                file_index = reader.read_uint16()
+                msbt_index = reader.read_uint16()
                 label_index = reader.read_uint16()
 
-                if msbt_files is not None:
-                    try:
-                        msbt = msbt_files[file_index]
-                    except IndexError:
-                        # Since we can't guarantee the user supplies the right directory or the indexing is always right
-                        # we swallow the exception and revert to no MSBT
-                        msbt = None
-
-                node = LMS_MessageNode(i, file_index, label_index, msbt)
+                node = LMS_MessageNode(i, msbt_index, label_index, source_resolver)
                 reader.skip(2)
             case LMS_NodeType.BRANCH:
                 # There is no next node id as the next node is determined by the branches
@@ -81,7 +77,7 @@ def read_flw3(reader: FileReader,
 
                 reader.seek(parameter_offset)
                 definition = get_config_definition(
-                    config, LMS_NodeType.BRANCH, parameter_type, condition_id
+                    config, LMS_NodeType.BRANCH, condition_id
                 )
                 parameter_value = evaluate_node_parameter(
                     reader, section_start, parameter_type, definition
@@ -104,7 +100,7 @@ def read_flw3(reader: FileReader,
                 reader.seek(parameter_offset)
 
                 definition = get_config_definition(
-                    config, LMS_NodeType.EVENT, parameter_type, event_id
+                    config, LMS_NodeType.EVENT, event_id
                 )
                 parameter_value = evaluate_node_parameter(
                     reader, section_start, parameter_type, definition
@@ -123,8 +119,8 @@ def read_flw3(reader: FileReader,
             case LMS_NodeType.JUMP:
                 reader.seek(node_data)
                 stream_next_id = read_next_node_id(reader)
-                unknown_short0a = reader.read_uint16()
-                node = LMS_JumpNode(i, unknown_short0a)
+                msbf_index = None if (value := reader.read_uint16()) == NO_VALUE else value
+                node = LMS_JumpNode(i, msbf_index, source_resolver)
                 reader.skip(4)
 
         next_id_map[node] = stream_next_id
@@ -160,17 +156,16 @@ def read_flw3(reader: FileReader,
 
 
 def read_next_node_id(reader: FileReader) -> int | None:
-    return None if (node_id := reader.read_uint16()) == NO_NEXT_NODE else node_id
+    return None if (node_id := reader.read_uint16()) == NO_VALUE else node_id
 
 
 def get_config_definition(
         config: NodeConfig | None,
         node_type: Literal[LMS_NodeType.BRANCH, LMS_NodeType.EVENT],
-        parameter_type: LMS_NodeParameterType,
         identifier: int,
 ) -> NodeDefinition:
     return (
-        None if config is None else config.get_definition(identifier, node_type, parameter_type)
+        None if config is None else config.get_definition(identifier, node_type)
     )
 
 
@@ -292,11 +287,11 @@ def write_flw3(
                 starting_index = len(branch_table)
                 for branch in node.branches.values():
                     if branch is None:
-                        branch_table.append(NO_NEXT_NODE)
+                        branch_table.append(NO_VALUE)
                     else:
                         branch_table.append(stream_ids[branch])
 
-                writer.write_uint16(NO_NEXT_NODE)
+                writer.write_uint16(NO_VALUE)
 
                 writer.write_uint16(node.condition_id)
                 writer.write_uint16(node.case_count)
@@ -418,4 +413,4 @@ def write_node_parameter(
 
 
 def write_next_node_id(writer: FileWriter, node_id: int | None) -> None:
-    writer.write_uint16(NO_NEXT_NODE if node_id is None else node_id)
+    writer.write_uint16(NO_VALUE if node_id is None else node_id)

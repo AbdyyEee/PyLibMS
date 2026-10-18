@@ -51,14 +51,12 @@ class NodeConfig:
             self,
             identifier: int,
             node_type: Literal[LMS_NodeType.BRANCH] | Literal[LMS_NodeType.EVENT],
-            parameter_type: LMS_NodeParameterType = None,
     ) -> NodeDefinition:
         """
         Retrieves a node definition by its ID and the type.
 
         :param identifier: The condition/event identifier of the node.
         :param node_type: The type of the node.
-        :param parameter_type: The parameter of the node.
         """
         match node_type:
             case LMS_NodeType.BRANCH:
@@ -73,11 +71,8 @@ class NodeConfig:
                 raise TypeError(
                     f"You may not use '{node_type}' with a node configuration."
                 )
-        for variant in definition:
-            if variant.parameter_type is parameter_type:
-                return variant
 
-        return None
+        return definition
 
 
 @dataclass(frozen=True)
@@ -95,7 +90,7 @@ class NodeDefinition:
     next_node_dependency: bool = False
 
     @classmethod
-    def from_dict(cls, identifier: int, node_type: LMS_NodeType, data: dict) -> NodeDefinition | None:
+    def from_dict(cls, identifier: int, node_type: LMS_NodeType, data: dict) -> NodeDefinition:
 
         name, description = data["name"], data.get("description", "")
         converted_parameters: list[FieldDefinition] = []

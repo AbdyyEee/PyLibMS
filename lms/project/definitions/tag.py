@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from types import MappingProxyType
-from typing import Mapping
+from typing import Mapping, Sequence
 
 from lms.common.field.lms_datatype import LMS_DataType
 
@@ -9,15 +9,13 @@ from lms.common.field.lms_datatype import LMS_DataType
 class LMS_TagGroup:
     """
     Represents a tag group, container for definition of tags.
-
-    https://nintendo-formats.com/libs/lms/msbp.html#tag-group
     """
 
     def __init__(
             self,
             name: str,
             group_id: int,
-            tag_indexes: list[int],
+            tag_indexes: Sequence[int],
     ):
         self._name = name
         self._id = group_id
@@ -40,6 +38,11 @@ class LMS_TagGroup:
         """Tag definitions owned by this group."""
         return tuple(self._tag_definitions)
 
+    @property
+    def tag_indices(self) -> tuple[int, ...]:
+        """Tag indicies owned by this group."""
+        return tuple(self._tag_indices)
+
     def set_all_definitions(
             self,
             tag_definitions: list[LMS_TagDefinition],
@@ -51,7 +54,7 @@ class LMS_TagGroup:
         for tag in self._tag_definitions:
             tag.set_parameter_definitions(param_definitions)
 
-            for parameter in tag.parameter_definitions:
+            for parameter in tag.parameters:
                 if parameter.datatype is not LMS_DataType.ENUM:
                     continue
 
@@ -61,8 +64,6 @@ class LMS_TagGroup:
 class LMS_TagDefinition:
     """
     Represents a singular tag definition.
-
-    https://nintendo-formats.com/libs/lms/msbp.html#tag
     """
 
     def __init__(
@@ -74,7 +75,8 @@ class LMS_TagDefinition:
         self._parameter_indices = (
             parameter_indices if parameter_indices is not None else []
         )
-        self._parameter_definitions: list[str] = None
+        self._parameter_definitions: list[str] = []
+
 
     @property
     def name(self) -> str:
@@ -82,13 +84,14 @@ class LMS_TagDefinition:
         return self._name
 
     @property
-    def parameter_definitions(self) -> tuple[LMS_TagParamDefinition, ...]:
+    def parameters(self) -> tuple[LMS_TagParamDefinition, ...]:
         """Parameter definitions of the tag."""
         return tuple(self._parameter_definitions)
 
     @property
-    def parameter_indices(self) -> list[int]:
-        return self._parameter_indices
+    def parameter_indices(self) -> tuple[int, ...]:
+        """Parameter indices of the tag."""
+        return tuple(self._parameter_indices)
 
     def set_parameter_definitions(self, definitions: list[LMS_TagParamDefinition]) -> None:
         self._parameter_definitions = [definitions[i] for i in self._parameter_indices]
@@ -97,8 +100,6 @@ class LMS_TagDefinition:
 class LMS_TagParamDefinition:
     """
     Represents a singular tag parameter definition.
-
-    https://nintendo-formats.com/libs/lms/msbp.html#tag-parameter
     """
 
     def __init__(
@@ -129,8 +130,9 @@ class LMS_TagParamDefinition:
         return self._enum_members
 
     @property
-    def enum_indices(self) -> list[int]:
-        return self._enum_indices
+    def enum_indices(self) -> tuple[int, ...]:
+        """Enum indices of the parameter."""
+        return tuple(self._enum_indices)
 
     def set_enum_members(self, tag_enums: list[str]) -> None:
         enum_members = tag_enums[self.enum_indices[0]:self.enum_indices[-1] + 1]

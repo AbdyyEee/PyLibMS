@@ -1,15 +1,19 @@
 from __future__ import annotations
 
 import string
-from collections import deque
 from types import MappingProxyType
-from typing import Generator, TypeAlias, Mapping
+from typing import Generator, TypeAlias, Mapping, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from lms.flowchart.msbf import MSBF
 
 import lms.flowchart.definitions.lms_nodeexceptions as node_exceptions
-from lms.common.field.lms_datatype import LMS_DataType
-from lms.common.field.lms_field import LMS_FieldMap, verify_number_from_datatype
+from lms.common.field.lms_datatype import LMS_DataType, verify_number_from_datatype
+from lms.common.field.lms_field import LMS_FieldMap
 from lms.common.lms_exceptions import LMS_Error
 from lms.flowchart.definitions.node_type import LMS_NodeType, LMS_NodeParameterType
+
+from lms.flowchart.source_resolver import SourceResolver
 from lms.message.lms_messagetext import LMS_MessageText
 from lms.message.msbt import MSBT
 from lms.message.msbtentry import MSBTEntry
@@ -119,35 +123,38 @@ class LMS_BaseNode:
         self._next_node = node
         return node
 
-    def get_children(self) -> Generator[LMS_BaseNode | None, None, None]:
-        """A generator for all the connected nodes."""
-        if self._next_node is not None:
-            yield self.next_node
-
     def get_descendents(self) -> Generator[LMS_BaseNode, None, None]:
-        """Implementation of BFS that yields descendents from a node."""
-        visited: set[int] = set()
-        stack = deque([self])
+        """Implementation of iterative DFS that yields descendents from a node."""
+        visited = set()
+        stack: list[LMS_BaseNode | None] = [self]
 
         while stack:
-            node = stack.popleft()
+            current = stack.pop()
 
-            # Track memory address of the node in case the ID is unregistered
-            if node is None or id(node) in visited:
+            if current is None:
                 continue
 
-            visited.add(id(node))
-            yield node
-
-            # Prevent adding the entire next flowchart
-            if isinstance(node, LMS_JumpNode):
+            if current in visited:
                 continue
 
-            for child in node.get_children():
-                if child is None:
+            visited.add(current)
+            yield current
+
+            match current:
+                # Prevent adding the entire next flowchart
+                case LMS_JumpNode():
                     continue
+                case LMS_BranchNode():
+                    for node in current.branches.values():
+                        if node is None:
+                            continue
 
-                stack.append(child)
+                        stack.append(node)
+                case _:
+                    if current.next_node is None:
+                        continue
+
+                    stack.append(current.next_node)
 
 
 class LMS_MessageNode(LMS_BaseNode):
@@ -160,7 +167,7 @@ class LMS_MessageNode(LMS_BaseNode):
             node_id: int,
             msbt_index: int,
             label_index: int,
-            msbt: MSBT | None = None,
+            source_resolver: SourceResolver | None = None
     ):
         super().__init__(
             node_id,
@@ -171,7 +178,7 @@ class LMS_MessageNode(LMS_BaseNode):
 
         self.msbt_index = msbt_index
         self.label_index = label_index
-        self._msbt = msbt
+        self._source_resolver = source_resolver
 
     @classmethod
     def new(cls, file_index: int, label_index: int):
@@ -196,8 +203,17 @@ class LMS_MessageNode(LMS_BaseNode):
 
     @property
     def msbt(self) -> MSBT | None:
-        """MSBT instance the node references. Optional, is set by providing a ``MSBT`` file on reading."""
-        return self._msbt
+        """MSBT instance the node reference."""
+        if self._source_resolver is None:
+            raise ValueError("No message root and project were provided!")
+
+        if not self._source_resolver.message_root:
+            raise ValueError("No message root was provided!")
+
+        if not self._source_resolver.project:
+            raise ValueError("No project was provided!")
+
+        return self._source_resolver.resolve_msbt_index(self.msbt_index)
 
     @property
     def message_entry(self) -> MSBTEntry:
@@ -337,7 +353,8 @@ class LMS_BranchNode(LMS_BaseNode):
 
         :param compress_shared_references: whether to compress shared references into one case.
         """
-        result, case_map = [], {}
+        result = []
+        case_map: dict[LMS_BaseNode | None, list[int]] = {}
 
         for case, branch in self._branches.items():
             case_map.setdefault(branch, []).append(case)
@@ -458,11 +475,6 @@ class LMS_BranchNode(LMS_BaseNode):
 
         self._branches[case] = new_node
 
-    def get_children(self) -> Generator[LMS_BaseNode, None, None]:
-        for node in self.branches.values():
-            if node is not None:
-                yield node
-
 
 class LMS_EventNode(LMS_BaseNode):
     """
@@ -558,29 +570,42 @@ class LMS_JumpNode(LMS_BaseNode):
     Class that represents a jump node. Node that jumps to another flowchart.
     """
 
-    def __init__(self, node_id: int, unknown_short0a: int, next: LMS_EntryNode = None):
+    def __init__(self, node_id: int, msbf_index: int | None, source_resolver: SourceResolver | None,
+                 next: LMS_EntryNode = None):
         super().__init__(node_id, LMS_NodeType.JUMP, LMS_NodeParameterType.NONE, None)
 
         self._next_entry = next
-
-        # TODO: Document this unknown value at 0xA in the node
-        # This value is usually -1 in TL 3DS but is a set value in other games
-        self.unknown_short0a = unknown_short0a
+        self.msbf_index = msbf_index
+        self._source_resolver = source_resolver
 
     @classmethod
-    def new(cls, next_entry_point: LMS_EntryNode | None = None, unknown_short0a: int = NO_VALUE):
+    def new(cls, next: LMS_EntryNode | None = None, unknown_short0a: int = NO_VALUE):
         """
         Instantiates a new jump node.
 
-        :param next_entry_point: the next entry point.
+        :param next: the next entry point.
         :param unknown_short0a: unknown short value. -1 if there is no value.
         """
-        return cls(None, unknown_short0a, next_entry_point)
+        return cls(None, unknown_short0a, next)
 
     @property
     def next_entry(self) -> LMS_EntryNode | None:
         """The pointing entry node."""
         return self._next_entry
+
+    @property
+    def msbf(self) -> MSBF | None:
+        """MSBF instance the node reference."""
+        if self._source_resolver is None:
+            raise ValueError("No message root and project were provided!")
+
+        if not self._source_resolver.message_root:
+            raise ValueError("No message root was provided!")
+
+        if not self._source_resolver.project:
+            raise ValueError("No project was provided!")
+
+        return self._source_resolver.resolve_msbf_index(self.msbf_index)
 
     @next_entry.setter
     def next_entry(self, node: LMS_EntryNode | None) -> None:
@@ -611,22 +636,25 @@ def verify_parameter_structure(
         )
 
 
+# https://stackoverflow.com/a/69711845
 def merge_shared_cases(cases: list[int]) -> str:
-    cases = sorted(cases)
-
     result = []
-    start = cases[0]
-    end = cases[0]
+    values = sorted(cases)
 
-    for case in cases[1:]:
-        if case == end + 1:
-            end = case
-            continue
+    first = last = values[0]
 
-        result.append(str(start) if start == end else f"{start}-{end}")
+    for i in values[1:]:
+        if i - last > 1:
+            if first == last:
+                result.append(str(first))
+            else:
+                result.append(f"{first}-{last}")
+            first = i
+        last = i
 
-        start = case
-        end = case
+    if first == last:
+        result.append(str(first))
+    else:
+        result.append(f"{first}-{last}")
 
-    result.append(str(start) if start == end else f"{start}-{end}")
     return ", ".join(result)

@@ -1,3 +1,4 @@
+from enum import StrEnum
 from types import MappingProxyType
 from typing import Mapping, Iterator
 
@@ -6,24 +7,18 @@ from lms.fileio.encoding import FileEncoding
 from lms.fileio.endian import FileEndian
 from lms.flowchart.definitions.node import LMS_EntryNode, LMS_JumpNode, LMS_BranchNode, LMS_BaseNode
 
+class MSBFSection(StrEnum):
+    FLW3 = "FLW3"
+    FEN1 = "FEN1"
+    REF1 = "REF1"
 
 class MSBF:
     """
     Class that represents a MSBF instance.
-
-    ======
-    Usages
-    ======
-    https://github.com/AbdyyEee/PylibMS/wiki/MSBF
-
-    =========
-    File Info
-    =========
-    https://nintendo-formats.com/libs/lms/msbf.html
     """
 
     MAGIC = "MsgFlwBn"
-    DEFAULT_SLOT_COUNT = 59
+    DEFAULT_SLOT_COUNT = 0x3B
 
     def __init__(
             self, info: LMS_FileInfo | None = None, flowcharts: dict[int, LMS_EntryNode] = None

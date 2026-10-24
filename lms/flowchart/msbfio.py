@@ -1,6 +1,7 @@
 """
 IO interface for ``MSBF`` files.
 """
+
 import os
 from typing import BinaryIO, Sequence
 
@@ -11,6 +12,7 @@ from lms.common.stream.section import read_section_data, write_section
 from lms.fileio.io import FileReader, FileWriter
 from lms.flowchart.flw3 import read_flw3, write_flw3
 from lms.flowchart.msbf import MSBF, MSBFSection
+from lms.flowchart.source_resolver import SourceResolver
 from lms.titleconfig.definitions.nodes import NodeConfig
 
 __all__ = ("read_msbf", "read_msbf_path", "write_msbf", "write_msbf_path")
@@ -19,61 +21,58 @@ from lms.titleconfig.definitions.project import Project
 
 
 def read_msbf_path(
-        file_path: str | os.PathLike[str],
-        *,
-        config: NodeConfig | None = None,
-        project: Project | None = None,
-        message_root: os.PathLike | None = None,
+    file_path: str | os.PathLike[str],
+    *,
+    node_config: NodeConfig | None = None,
+    project: Project | None = None,
+    message_root: os.PathLike | None = None,
 ) -> MSBF:
     """
     Reads a MSBF file from a path.
 
     :param file_path: path to the MSBF file.
-    :param config: the node configuration to use.
+    :param node_config: the node configuration to use.
     :param project: project object utilized for auto-source resolving.
     :param message_root: root of the message folder/archive. Archives must be extracted first.
-    =====
-    Usage
-    =====
-    >>> msbf = read_msbf_path("path/to/file.msbf")
     """
     with open(file_path, "rb") as stream:
-        return read_msbf(stream, config=config, project=project, message_root=message_root)
+        return read_msbf(
+            stream, node_config=node_config, project=project, message_root=message_root
+        )
 
 
 def read_msbf(
-        stream: BinaryIO | bytes,
-        *,
-        config: NodeConfig | None = None,
-        project: Project | None = None,
-        message_root: os.PathLike | None = None,
+    stream: BinaryIO | bytes,
+    *,
+    node_config: NodeConfig | None = None,
+    project: Project | None = None,
+    message_root: os.PathLike | None = None,
 ) -> MSBF:
     """
     Reads a MSBF file from a stream.
 
     :param stream: stream to read the file from.
-    :param config: the node configuration to use.
+    :param node_config: the node configuration to use.
     :param project: project object utilized for auto-source resolving.
     :param message_root: root of the message folder/archive. Archives must be extracted fir
-    =====
-    Usage
-    =====
-    >>> msbf = read_msbf(stream)
     """
     reader = FileReader(stream)
 
     file_info = read_file_info(reader, MSBF.MAGIC)
+    source_resolver = SourceResolver(message_root, project, node_config)
 
-    msbf = MSBF(file_info)
+    msbf = MSBF(file_info, source_resolver, node_config)
     for magic, size in read_section_data(reader, file_info.section_count):
         match magic:
             case MSBFSection.FLW3:
-                entry_nodes = read_flw3(reader, config, project, message_root)
+                entry_nodes = read_flw3(reader, node_config, source_resolver)
             case MSBFSection.FEN1:
                 labels, slot_count = read_labels(reader)
             case MSBFSection.REF1:
-                raise LMS_UnsupportedSectionError("""REF1 was found in the MSBF file! Please report this file as an issue
-                                                  in the PyLibMS repository https://github.com/AbdyyEee/PylibMS""")
+                raise LMS_UnsupportedSectionError(
+                    """REF1 was found in the MSBF file! Please report this file as an issue
+                                                  in the PyLibMS repository https://github.com/AbdyyEee/PylibMS"""
+                )
 
     for i, label in enumerate(labels.values()):
         entry_nodes[i].name = label
@@ -90,10 +89,6 @@ def write_msbf_path(file_path: str | os.PathLike[str], file: MSBF) -> None:
     :param file_path: the path to write the file to.
     :param file: the file object.
 
-    =====
-    Usage
-    =====
-    >>> write_msbf("path/to/file.msbf", msbt)
     """
     with open(file_path, "wb") as stream:
         data = write_msbf(file)
@@ -105,11 +100,6 @@ def write_msbf(file: MSBF) -> bytes:
     Writes a MSBF file.
 
     :param file: The MSBF file.
-
-    =====
-    Usage
-    =====
-    >>> data = write_msbf(msbf)
     """
     if not isinstance(file, MSBF):
         raise LMS_Error(f"File provided is not valid. Expected MSBT got {type(file)}.")
@@ -122,7 +112,9 @@ def write_msbf(file: MSBF) -> bytes:
     stream_ids = {node: stream_id for stream_id, node in enumerate(file)}
     index_map = {entry.name: stream_ids[entry] for entry in file.entry_nodes}
 
-    write_section(writer, MSBFSection.FLW3, write_flw3, list(file.nodes.values()), stream_ids)
+    write_section(
+        writer, MSBFSection.FLW3, write_flw3, list(file.nodes.values()), stream_ids
+    )
     write_section(
         writer,
         MSBFSection.FEN1,

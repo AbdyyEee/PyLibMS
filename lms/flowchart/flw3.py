@@ -27,15 +27,12 @@ NODE_SIZE = 16
 VARIABLE_WIDTH_DATATYPES = (LMS_DataType.BOOL, LMS_DataType.ENUM)
 
 
-def read_flw3(reader: FileReader,
-              config: NodeConfig | None,
-              project: Project | None,
-              message_root: str | os.PathLike[str]) -> list[LMS_EntryNode]:
+def read_flw3(
+    reader: FileReader, config: NodeConfig | None, source_resolver: SourceResolver
+) -> list[LMS_EntryNode]:
     section_start = reader.tell()
     node_count = reader.read_uint16()
     branch_table_id_count = reader.read_uint16()
-
-    source_resolver = SourceResolver(message_root, project, config)
 
     # Huge padding section skip
     reader.skip(12)
@@ -46,7 +43,7 @@ def read_flw3(reader: FileReader,
     next_id_map: dict[LMS_BaseNode, int | None] = {}
     branch_metadata: dict[LMS_BranchNode, tuple] = {}
 
-    stream_next_id = None
+    next_node_index = None
     for i in range(node_count):
         node_data = reader.tell() + 8
         node_type = LMS_NodeType(reader.read_uint8())
@@ -59,7 +56,7 @@ def read_flw3(reader: FileReader,
             case LMS_NodeType.MESSAGE:
                 reader.skip(4)
 
-                stream_next_id = read_next_node_id(reader)
+                next_node_index = read_next_node_id(reader)
                 msbt_index = reader.read_uint16()
                 label_index = reader.read_uint16()
 
@@ -93,15 +90,13 @@ def read_flw3(reader: FileReader,
             case LMS_NodeType.EVENT:
                 reader.skip(4)
 
-                stream_next_id = read_next_node_id(reader)
+                next_node_index = read_next_node_id(reader)
                 event_id = reader.read_uint16()
                 end = reader.tell() + 4
 
                 reader.seek(parameter_offset)
 
-                definition = get_config_definition(
-                    config, LMS_NodeType.EVENT, event_id
-                )
+                definition = get_config_definition(config, LMS_NodeType.EVENT, event_id)
                 parameter_value = evaluate_node_parameter(
                     reader, section_start, parameter_type, definition
                 )
@@ -112,18 +107,20 @@ def read_flw3(reader: FileReader,
                 reader.seek(end)
             case LMS_NodeType.ENTRY:
                 reader.seek(node_data)
-                stream_next_id = read_next_node_id(reader)
+                next_node_index = read_next_node_id(reader)
                 node = LMS_EntryNode(i)
                 entry_nodes.append(node)
                 reader.skip(6)
             case LMS_NodeType.JUMP:
                 reader.seek(node_data)
-                stream_next_id = read_next_node_id(reader)
-                msbf_index = None if (value := reader.read_uint16()) == NO_VALUE else value
-                node = LMS_JumpNode(i, msbf_index, source_resolver)
+                entry_node_index = next_node_index = read_next_node_id(reader)
+                msbf_index = (
+                    None if (value := reader.read_uint16()) == NO_VALUE else value
+                )
+                node = LMS_JumpNode(i, entry_node_index, msbf_index, source_resolver)
                 reader.skip(4)
 
-        next_id_map[node] = stream_next_id
+        next_id_map[node] = next_node_index
         nodes.append(node)
 
     node_map: dict[int, LMS_BaseNode | None] = {node.id: node for node in nodes}
@@ -136,7 +133,7 @@ def read_flw3(reader: FileReader,
             case_count, starting_index = branch_metadata[node]
 
             # Slice the portion of IDs linked to this branch node and add the node objects themselves
-            for branch_id in branch_ids[starting_index: starting_index + case_count]:
+            for branch_id in branch_ids[starting_index : starting_index + case_count]:
                 if branch_id is None:
                     node.add_branch(None)
                 else:
@@ -144,6 +141,8 @@ def read_flw3(reader: FileReader,
 
             continue
         elif isinstance(node, LMS_JumpNode):
+            # Set the next entry from the file if it is an external jump or the local file
+
             node.next_entry = node_map[next_node_id]
             continue
 
@@ -160,20 +159,20 @@ def read_next_node_id(reader: FileReader) -> int | None:
 
 
 def get_config_definition(
-        config: NodeConfig | None,
-        node_type: Literal[LMS_NodeType.BRANCH, LMS_NodeType.EVENT],
-        identifier: int,
+    config: NodeConfig | None,
+    node_type: Literal[LMS_NodeType.BRANCH, LMS_NodeType.EVENT],
+    identifier: int,
 ) -> NodeDefinition:
     return (
-        None if config is None else config.get_definition(identifier, node_type)
+        None if config is None else config.get_definition_by_id(identifier, node_type)
     )
 
 
 def evaluate_node_parameter(
-        reader: FileReader,
-        section_start: int,
-        parameter_type: LMS_NodeParameterType,
-        definition: NodeDefinition | None,
+    reader: FileReader,
+    section_start: int,
+    parameter_type: LMS_NodeParameterType,
+    definition: NodeDefinition | None,
 ) -> LMS_NodeParameter:
     # How functions may utilize node parameters vary, such that they may cast values as they wish.
     # By default, PyLibMS interprets the parameter types using signed integers for simplicity.
@@ -231,7 +230,7 @@ def evaluate_node_parameter(
 
 
 def write_flw3(
-        writer: FileWriter, nodes: list[LMS_BaseNode], stream_ids: dict[LMS_BaseNode, int]
+    writer: FileWriter, nodes: list[LMS_BaseNode], stream_ids: dict[LMS_BaseNode, int]
 ) -> None:
     node_count = len(nodes)
 
@@ -343,7 +342,7 @@ def write_flw3(
         writer.write_uint16(node_id)
 
     string_offset = (
-            FLW3_HEADER_SIZE + (NODE_SIZE * node_count) + (2 * len(branch_table))
+        FLW3_HEADER_SIZE + (NODE_SIZE * node_count) + (2 * len(branch_table))
     )
 
     for offset, string in zip(string_offsets, string_table):
@@ -366,7 +365,7 @@ def write_flw3(
 
 
 def write_node_parameter(
-        writer: FileWriter, value: LMS_NodeParameter, parameter_type: LMS_NodeParameterType
+    writer: FileWriter, value: LMS_NodeParameter, parameter_type: LMS_NodeParameterType
 ) -> None:
     if isinstance(value, LMS_FieldMap):
 

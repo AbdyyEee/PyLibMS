@@ -1,6 +1,7 @@
 """
 IO interface for ``UMSBT`` files.
 """
+
 import os
 from typing import Mapping, BinaryIO
 
@@ -12,15 +13,23 @@ from lms.message.umsbt import UMSBT
 from lms.titleconfig.definitions.project import Project
 from lms.titleconfig.definitions.tags import TagConfig
 
-__all__ = ("read_umsbt_path", "read_umsbt_directory", "read_umsbt", "write_umsbt_path", "write_umsbt")
+__all__ = (
+    "read_umsbt_path",
+    "read_umsbt_directory",
+    "read_umsbt",
+    "write_umsbt_path",
+    "write_umsbt",
+)
 
 UMSBT_ALIGNMENT = 16
 SIZE_PER_METADATA = 8
 
+
 def read_umsbt_path(
-        file_path: str | os.PathLike[str], *,
-        project: Project | None = None,
-        suppress_tag_errors: bool = False,
+    file_path: str | os.PathLike[str],
+    *,
+    project: Project | None = None,
+    suppress_tag_errors: bool = False,
 ) -> UMSBT:
     """
     Reads and retrieves a UMSBT file from a given path.
@@ -36,17 +45,20 @@ def read_umsbt_path(
     >>> umsbt = read_umsbt_path("path/to/file.umsbt")
     """
     with open(file_path, "rb") as stream:
-        umsbt = read_umsbt(stream,
-                           project=Project,
-                           suppress_tag_errors=suppress_tag_errors)
+        umsbt = read_umsbt(
+            stream, project=Project, suppress_tag_errors=suppress_tag_errors
+        )
 
     return umsbt
 
 
-def read_umsbt_directory(directory: str | os.PathLike[str], *,
-                         project: Project | None = None,
-                         suppress_tag_errors: bool = False,
-                         ignore_extensions: bool = False) -> Mapping[str, tuple[MSBT, ...]]:
+def read_umsbt_directory(
+    directory: str | os.PathLike[str],
+    *,
+    project: Project | None = None,
+    suppress_tag_errors: bool = False,
+    ignore_extensions: bool = False,
+) -> Mapping[str, tuple[MSBT, ...]]:
     """
     Reads and retrieves all UMSBT files from a given directory.
 
@@ -65,21 +77,27 @@ def read_umsbt_directory(directory: str | os.PathLike[str], *,
 
     for file in os.listdir(directory):
         if not file.endswith(".umsbt") and not ignore_extensions:
-            raise ValueError("This directory contains a non-UMSBT file. "
-                             "Only directories with UMSBT files can be used! Set ignore_extensions to True to ignore"
-                             "this error.")
+            raise ValueError(
+                "This directory contains a non-UMSBT file. "
+                "Only directories with UMSBT files can be used! Set ignore_extensions to True to ignore"
+                "this error."
+            )
 
-        umsbt = read_umsbt_path(os.path.join(directory, file),
-                                project=Project, suppress_tag_errors=suppress_tag_errors)
+        umsbt = read_umsbt_path(
+            os.path.join(directory, file),
+            project=Project,
+            suppress_tag_errors=suppress_tag_errors,
+        )
         files[os.path.basename(file)] = umsbt
 
     return files
 
 
 def read_umsbt(
-        stream: BinaryIO | bytes, *,
-        project: Project | None = None,
-        suppress_tag_errors: bool = False,
+    stream: BinaryIO | bytes,
+    *,
+    project: Project | None = None,
+    suppress_tag_errors: bool = False,
 ) -> UMSBT:
     """
     Reads and retrieves a UMSBT file from a specified stream.
@@ -112,9 +130,13 @@ def read_umsbt(
     files = []
     for i, (offset, size) in enumerate(zip(offsets, sizes)):
         reader.seek(offset)
-        files.append(read_msbt(reader.read_bytes(size),
-                               project=project,
-                               suppress_tag_errors=suppress_tag_errors))
+        files.append(
+            read_msbt(
+                reader.read_bytes(size),
+                project=project,
+                suppress_tag_errors=suppress_tag_errors,
+            )
+        )
 
     return UMSBT(files)
 

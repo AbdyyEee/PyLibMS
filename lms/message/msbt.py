@@ -39,15 +39,13 @@ class MSBT:
     TSY1_INDEX = 0x3
 
     def __init__(
-            self,
-            info: LMS_FileInfo | None = None,
-            section_list: list[str] = None,
-            unsupported_section_map: dict[str, bytes] | None = None,
-            attribute_offsets: list[int] | None = None,
-            project: Project | None = None
+        self,
+        info: LMS_FileInfo | None = None,
+        section_list: list[str] = None,
+        unsupported_section_map: dict[str, bytes] | None = None,
+        attribute_offsets: list[int] | None = None,
+        project: Project | None = None,
     ):
-        self.filename: str = ""
-
         self._info = info if info is not None else LMS_FileInfo()
 
         self._entries: list[MSBTEntry] = []
@@ -67,12 +65,10 @@ class MSBT:
         self._project = project
 
     @overload
-    def __getitem__(self, index: int) -> MSBTEntry:
-        ...
+    def __getitem__(self, index: int) -> MSBTEntry: ...
 
     @overload
-    def __getitem__(self, label: str) -> MSBTEntry:
-        ...
+    def __getitem__(self, label: str) -> MSBTEntry: ...
 
     def __getitem__(self, value: int | str) -> MSBTEntry:
         if isinstance(value, str):
@@ -88,13 +84,13 @@ class MSBT:
 
     @classmethod
     def new(
-            cls,
-            uses_nli1: bool = False,
-            project: Project | None = None,
-            endian: FileEndian = FileEndian.LITTLE,
-            encoding: FileEncoding = FileEncoding.UTF16,
-            version: int = LMS_MINIMUM_VERSION,
-            section_count: int = DEFAULT_SECTION_COUNT,
+        cls,
+        uses_nli1: bool = False,
+        project: Project | None = None,
+        endian: FileEndian = FileEndian.LITTLE,
+        encoding: FileEncoding = FileEncoding.UTF16,
+        version: int = LMS_MINIMUM_VERSION,
+        section_count: int = DEFAULT_SECTION_COUNT,
     ):
         """
         Create a new MSBT instance.
@@ -108,8 +104,11 @@ class MSBT:
         """
         return MSBT(
             LMS_FileInfo(endian, encoding, version, section_count),
-            section_list=[MSBTSection.LBL1 if not uses_nli1 else MSBTSection.NLI1, MSBTSection.TXT2],
-            project=project
+            section_list=[
+                MSBTSection.LBL1 if not uses_nli1 else MSBTSection.NLI1,
+                MSBTSection.TXT2,
+            ],
+            project=project,
         )
 
     @classmethod
@@ -125,11 +124,17 @@ class MSBT:
         version = data["version"]
         section_count = data["section_count"]
 
-        msbt = cls(LMS_FileInfo(endian, encoding, version, section_count), data["section_list"],
-                   attribute_offsets=data.get("attribute_offsets"), project=project)
+        msbt = cls(
+            LMS_FileInfo(endian, encoding, version, section_count),
+            data["section_list"],
+            attribute_offsets=data.get("attribute_offsets"),
+            project=project,
+        )
 
         for name, entry in data["entries"].items():
-            message = LMS_MessageText(entry["message"], None if project is None else project.tag_config)
+            message = LMS_MessageText(
+                entry["message"], None if project is None else project.tag_config
+            )
 
             if (attribute := entry.get("attribute")) is not None:
                 if isinstance(attribute, str):
@@ -137,7 +142,12 @@ class MSBT:
                 else:
                     attr = LMS_FieldMap.from_dict(attribute, project.attributes)
 
-            msbt.create_entry(name, message=message, attribute=attr, style_index=entry.get("style_index"))
+            msbt.create_entry(
+                name,
+                message=message,
+                attribute=attr,
+                style_index=entry.get("style_index"),
+            )
 
         msbt.slot_count = data["slot_count"]
         return msbt
@@ -165,14 +175,17 @@ class MSBT:
     def to_dict(self) -> dict:
         """Convert the MSBT object to a dictionary."""
         data = {
-                "filename": self.filename,
-                "info": self.info.to_dict(),
-                "slot_count": self.slot_count,
-                "section_list": self.section_list,
-            }
+            "filename": self.filename,
+            "info": self.info.to_dict(),
+            "slot_count": self.slot_count,
+            "section_list": self.section_list,
+        }
 
         if self.section_exists(MSBTSection.ATO1):
-            data["attribute_offsets"] = [NO_OFFSET if offset is None else offset for offset in self._attribute_offsets]
+            data["attribute_offsets"] = [
+                NO_OFFSET if offset is None else offset
+                for offset in self._attribute_offsets
+            ]
 
         data |= self.info.to_dict()
         entries = {}
@@ -301,14 +314,15 @@ class MSBT:
         self._entries.append(entry)
         self._label_map[entry.name] = entry
 
-    def create_entry(self,
-                     name: str,
-                     *,
-                     message: str = None,
-                     attribute: LMS_FieldMap | bytes | None = None,
-                     style_index: int = None,
-                     project: Project | None = None
-                     ) -> MSBTEntry:
+    def create_entry(
+        self,
+        name: str,
+        *,
+        message: str = None,
+        attribute: LMS_FieldMap | bytes | None = None,
+        style_index: int = None,
+        project: Project | None = None,
+    ) -> MSBTEntry:
         """
         Creates an MSBT Entry and adds it to the file.
 
@@ -319,11 +333,15 @@ class MSBT:
         :param project: optional project, used for styles.
         """
         tag_config = None if project is None else project.tag_config
-        self.add_entry(entry := MSBTEntry(name,
-                                          message=LMS_MessageText(message, tag_config),
-                                          attribute=attribute,
-                                          style_index=style_index,
-                                          project=project))
+        self.add_entry(
+            entry := MSBTEntry(
+                name,
+                message=LMS_MessageText(message, tag_config),
+                attribute=attribute,
+                style_index=style_index,
+                project=project,
+            )
+        )
         return entry
 
     def delete_entry(self, entry: MSBTEntry) -> None:

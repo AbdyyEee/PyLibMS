@@ -1,34 +1,46 @@
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Literal
+from typing import TYPE_CHECKING, Any
 
-from lms.message.umsbtio import read_umsbt_path
+from lms.message.umsbt import UMSBT
 
 if TYPE_CHECKING:
     from lms.flowchart.msbf import MSBF
     from lms.message.msbt import MSBT
+    from lms.message.umsbt import UMSBT
 
 from lms.titleconfig.definitions.nodes import NodeConfig
-from lms.titleconfig.definitions.project import Project, MessageSource
+from lms.titleconfig.definitions.project import Project
 
 
 # Class that maps virtual source paths into real paths
 # Files in projects function as paths to a virtual .mstxt/.msflow file,
 # given a message root these files are resolved automatically to their binary and read
-@dataclass
 class SourceResolver:
-    message_root: Path
-    project: Project
-    node_config: NodeConfig | None
-    uses_umsbt: bool = False
-    _resolved_cache: dict[str, Any] = field(default_factory=dict)
+    def __init__(self, project: Project, message_root: str | os.PathLike[str], node_config: NodeConfig):
+        self._project = project
+        self._message_root = Path(message_root)
+        self._node_config = node_config
 
-    def __post_init__(self):
-        # Determine umsbt/msbt extension
+        self._resolved_cache: dict[str, MSBT | UMSBT | MSBF] = {}
+        self._uses_umsbt = False
+
         for _ in self.message_root.rglob("*.umsbt"):
-            self.uses_umsbt = True
+            self._uses_umsbt = True
             break
+
+    @property
+    def project(self) -> Project:
+        return self._project
+
+    @property
+    def message_root(self) -> Path:
+        return self._message_root
+
+    @property
+    def node_config(self) -> NodeConfig:
+        return self._node_config
 
     def msbt_index_from_file(self, msbt_file: str) -> int:
         try:
@@ -54,7 +66,7 @@ class SourceResolver:
 
         return msbf_index
 
-    def resolve_msbt_index(self, msbt_index: int) -> MSBT:
+    def resolve_msbt_index(self, msbt_index: int) -> MSBT | UMSBT:
         from lms.message.msbtio import read_msbt_path
         from lms.message.umsbtio import read_umsbt_path
 
@@ -105,7 +117,7 @@ class SourceResolver:
         self, source_index: int, source_extension: str, binary_extension: str
     ) -> tuple[Path | None, str]:
         # Technically, CTI1 can store any file to reference by the game and does not have to be ending in
-        # mstxt or msflow, however we can ignore that for now since we are only supporting resolving external msbt/msbfs
+        # mstxt or msflow, however we can ignore that for now since we are only supporting resolving external msbt/umsbt/msbfs
         source_path = self.project.sources[source_index]
 
         # Resolve the file itself, the source directory may not exist since those were generated

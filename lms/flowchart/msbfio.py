@@ -3,6 +3,7 @@ IO interface for ``MSBF`` files.
 """
 
 import os
+from pathlib import Path
 from typing import BinaryIO, Sequence
 
 from lms.common.lms_exceptions import LMS_Error, LMS_UnsupportedSectionError
@@ -25,7 +26,7 @@ def read_msbf_path(
     *,
     node_config: NodeConfig | None = None,
     project: Project | None = None,
-    message_root: os.PathLike | None = None,
+    message_root: os.PathLike[str] | str | None = None,
 ) -> MSBF:
     """
     Reads a MSBF file from a path.
@@ -46,7 +47,7 @@ def read_msbf(
     *,
     node_config: NodeConfig | None = None,
     project: Project | None = None,
-    message_root: os.PathLike | None = None,
+    message_root: os.PathLike[str] | str | None = None,
 ) -> MSBF:
     """
     Reads a MSBF file from a stream.
@@ -54,12 +55,12 @@ def read_msbf(
     :param stream: stream to read the file from.
     :param node_config: the node configuration to use.
     :param project: project object utilized for auto-source resolving.
-    :param message_root: root of the message folder/archive. Archives must be extracted fir
+    :param message_root: root of the message folder/archive. Archives must be extracted for.
     """
     reader = FileReader(stream)
 
     file_info = read_file_info(reader, MSBF.MAGIC)
-    source_resolver = SourceResolver(message_root, project, node_config)
+    source_resolver = SourceResolver(project, message_root, node_config)
 
     msbf = MSBF(file_info, source_resolver, node_config)
     for magic, size in read_section_data(reader, file_info.section_count):

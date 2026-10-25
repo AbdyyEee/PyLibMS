@@ -46,7 +46,7 @@ def read_umsbt_path(
     """
     with open(file_path, "rb") as stream:
         umsbt = read_umsbt(
-            stream, project=Project, suppress_tag_errors=suppress_tag_errors
+            stream, project=project, suppress_tag_errors=suppress_tag_errors
         )
 
     return umsbt
@@ -85,7 +85,7 @@ def read_umsbt_directory(
 
         umsbt = read_umsbt_path(
             os.path.join(directory, file),
-            project=Project,
+            project=project,
             suppress_tag_errors=suppress_tag_errors,
         )
         files[os.path.basename(file)] = umsbt

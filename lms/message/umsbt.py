@@ -14,8 +14,6 @@ class UMSBT:
             if not isinstance(file, MSBT):
                 raise TypeError("Only MSBTs are allowed for UMSBT archives!")
 
-        self._realign_filenames()
-
     @overload
     def __getitem__(self, index: int) -> MSBT: ...
 

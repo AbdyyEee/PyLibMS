@@ -4,6 +4,8 @@ import string
 from types import MappingProxyType
 from typing import Generator, TypeAlias, Mapping, TYPE_CHECKING
 
+from lms.message.umsbt import UMSBT
+
 if TYPE_CHECKING:
     from lms.flowchart.msbf import MSBF
 
@@ -42,7 +44,6 @@ class LMS_BaseNode:
         self._parameter_type = parameter_type
         self._parameter_value = parameter_value
 
-        self._stream_next_id: int | None = None
         self._next_node: LMS_BaseNode | None = None
 
     def __contains__(self, node: LMS_BaseNode) -> bool:
@@ -68,9 +69,7 @@ class LMS_BaseNode:
     @property
     def next_node_id(self) -> int | None:
         """The next node id of the node."""
-        if self._next_node is not None:
-            return self._next_node.id
-        return self._stream_next_id
+        return self._next_node.id if self._next_node is not None else None
 
     @property
     def parameter_type(self) -> LMS_NodeParameterType:
@@ -186,8 +185,8 @@ class LMS_MessageNode(LMS_BaseNode):
         ...
 
     @property
-    def msbt(self) -> MSBT:
-        """MSBT instance the node reference."""
+    def msbt(self) -> MSBT | UMSBT:
+        """MSBT/UMSBT instance the node reference."""
         if self._source_resolver is None:
             raise ValueError("No message root and project were provided!")
 
@@ -202,11 +201,17 @@ class LMS_MessageNode(LMS_BaseNode):
     @property
     def msbt_entry(self) -> MSBTEntry:
         """The MSBTEntry instance tied to the node."""
+        if isinstance(self.msbt, UMSBT):
+            raise NotImplementedError("Retrieving data from a UMSBT is not supported yet!")
+
         return self.msbt[self.label_index]
 
     @property
     def message_text(self) -> LMS_MessageText:
         """Message text tied to this node."""
+        if isinstance(self.msbt, UMSBT):
+            raise NotImplementedError("Retrieving data from a UMSBT is not supported yet!")
+
         return self.msbt_entry.message
 
     def set_msbt_entry(self, entry: MSBTEntry) -> None:
@@ -215,8 +220,12 @@ class LMS_MessageNode(LMS_BaseNode):
 
         :param entry: the entry of the file.
         """
+        if isinstance(self.msbt, UMSBT):
+            raise NotImplementedError("Setting data with a UMSBT is not supported yet!")
+
         if entry not in self.msbt.entries:
             raise ValueError(f"This entry does not exist in the MSBT!")
+
         self.label_index = self._msbt.entries.index(entry)
 
 

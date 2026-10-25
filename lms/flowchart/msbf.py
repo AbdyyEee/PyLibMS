@@ -17,7 +17,8 @@ from lms.flowchart.definitions.node import (
     LMS_EventNode,
 )
 from lms.flowchart.definitions.node_type import LMS_NodeParameterType
-from lms.flowchart.source_resolver import SourceResolver
+from lms.source_extension import FileExtension
+from lms.source_resolver import SourceResolver
 from lms.titleconfig.definitions.nodes import NodeConfig
 
 
@@ -128,19 +129,19 @@ class MSBF:
             LMS_MessageNode(self._generate_next_id(), msbt_index, label_index)
         )
 
-    def add_message_node_msbt(self, msbt: str) -> LMS_MessageNode:
+    def add_message_node_msbt(self, msbt_filename: str) -> LMS_MessageNode:
         """
         Adds a message node to the msbf based on the filename of the msbt in the project. Defaults to first entry
         of the msbt.
 
-        :param msbt: the filename of the msbt (with the ``.msbt`` extension).
+        :param msbt_filename: the filename of the msbt (with the ``.msbt`` extension).
 
         The msbt must exist in the project source files. To see valid files, view ``project.source_files``.
         """
         return self._register_node(
             LMS_MessageNode(
                 self._generate_next_id(),
-                self._source_resolver.msbt_index_from_file(msbt),
+                self._source_resolver.retrieve_source_index(msbt_filename),
                 0,
                 self._source_resolver,
             )
@@ -288,16 +289,15 @@ class MSBF:
             )
         )
 
-    def add_jump_node_file(self, flowchart: str, msbf: str) -> LMS_JumpNode:
+    def add_jump_node_file(self, flowchart: str, msbf_filename: str) -> LMS_JumpNode:
         """
         Adds a jump node to the msbf based on the filename of the msbf in the project.
 
         :param flowchart: the name of the next flowchart to jump to.
-        :param msbf: name of the msbf file in the source (with the ``.msbf`` extension).
+        :param msbf_filename: name of the msbf file in the source (with the ``.msbf`` extension).
         """
-        msbf_index = self._source_resolver.msbf_index_from_file(msbf)
-        msbf = self._source_resolver.resolve_msbf_index(msbf_index)
-
+        msbf_index = self._source_resolver.retrieve_source_index(msbf_filename)
+        msbf = self._source_resolver.resolve_source(msbf_index, FileExtension.MSBF)
         next_flowchart: LMS_EntryNode = None
 
         for node in msbf.entry_nodes:
@@ -306,7 +306,7 @@ class MSBF:
                 break
 
         if next_flowchart is None:
-            raise KeyError(f"Flowchart '{next_flowchart}' does not exist!")
+            raise KeyError(f"Flowchart '{flowchart}' does not exist in '{msbf_filename}'!")
 
         return self._register_node(
             LMS_JumpNode(

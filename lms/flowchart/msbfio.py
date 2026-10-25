@@ -3,8 +3,7 @@ IO interface for ``MSBF`` files.
 """
 
 import os
-from pathlib import Path
-from typing import BinaryIO, Sequence
+from typing import BinaryIO
 
 from lms.common.lms_exceptions import LMS_Error, LMS_UnsupportedSectionError
 from lms.common.stream.fileinfo import read_file_info, write_file_info, write_file_size
@@ -13,7 +12,7 @@ from lms.common.stream.section import read_section_data, write_section
 from lms.fileio.io import FileReader, FileWriter
 from lms.flowchart.flw3 import read_flw3, write_flw3
 from lms.flowchart.msbf import MSBF, MSBFSection
-from lms.flowchart.source_resolver import SourceResolver
+from lms.source_resolver import SourceResolver
 from lms.titleconfig.definitions.nodes import NodeConfig
 
 __all__ = ("read_msbf", "read_msbf_path", "write_msbf", "write_msbf_path")
@@ -21,13 +20,9 @@ __all__ = ("read_msbf", "read_msbf_path", "write_msbf", "write_msbf_path")
 from lms.titleconfig.definitions.project import Project
 
 
-def read_msbf_path(
-    file_path: str | os.PathLike[str],
-    *,
-    node_config: NodeConfig | None = None,
-    project: Project | None = None,
-    message_root: os.PathLike[str] | str | None = None,
-) -> MSBF:
+def read_msbf_path(file_path: str | os.PathLike[str], *, node_config: NodeConfig | None = None,
+                   project: Project | None = None, message_root: os.PathLike[str] | str | None = None,
+                   _source_resolver: SourceResolver | None = None) -> MSBF:
     """
     Reads a MSBF file from a path.
 
@@ -36,11 +31,19 @@ def read_msbf_path(
     :param project: project object utilized for auto-source resolving.
     :param message_root: root of the message folder/archive. Archives must be extracted first.
     """
-    with open(file_path, "rb") as stream:
-        return read_msbf(
-            stream, node_config=node_config, project=project, message_root=message_root
-        )
+    source_resolver = _source_resolver
+    if message_root is not None:
+        source_resolver = SourceResolver(project, message_root, node_config)
 
+    with open(file_path, "rb") as stream:
+        msbf = read_msbf(stream, node_config=node_config, project=project, message_root=message_root,
+                         _source_resolver=source_resolver)
+
+        # Add the msbf to cache any circular references
+        if source_resolver is not None:
+            source_resolver.resolved_cache[os.path.basename(stream.name)] = msbf
+
+    return msbf
 
 def read_msbf(
     stream: BinaryIO | bytes,
@@ -48,6 +51,7 @@ def read_msbf(
     node_config: NodeConfig | None = None,
     project: Project | None = None,
     message_root: os.PathLike[str] | str | None = None,
+    _source_resolver: SourceResolver | None = None
 ) -> MSBF:
     """
     Reads a MSBF file from a stream.
@@ -60,7 +64,10 @@ def read_msbf(
     reader = FileReader(stream)
 
     file_info = read_file_info(reader, MSBF.MAGIC)
-    source_resolver = SourceResolver(project, message_root, node_config)
+
+    source_resolver = _source_resolver
+    if _source_resolver is None:
+        source_resolver = SourceResolver(project, message_root, node_config)
 
     msbf = MSBF(file_info, source_resolver, node_config)
     for magic, size in read_section_data(reader, file_info.section_count):
@@ -80,6 +87,7 @@ def read_msbf(
         msbf.add_flowchart(label, entry_nodes[i])
 
     msbf.slot_count = slot_count
+
     return msbf
 
 

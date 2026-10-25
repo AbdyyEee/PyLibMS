@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import os.path
 import string
 from types import MappingProxyType
 from typing import Generator, TypeAlias, Mapping, TYPE_CHECKING
 
 from lms.message.umsbt import UMSBT
+from lms.source_extension import FileExtension
 
 if TYPE_CHECKING:
     from lms.flowchart.msbf import MSBF
@@ -15,7 +17,7 @@ from lms.common.field.lms_field import LMS_FieldMap
 from lms.common.lms_exceptions import LMS_Error
 from lms.flowchart.definitions.node_type import LMS_NodeType, LMS_NodeParameterType
 
-from lms.flowchart.source_resolver import SourceResolver
+from lms.source_resolver import SourceResolver
 from lms.message.lms_messagetext import LMS_MessageText
 from lms.message.msbt import MSBT
 from lms.message.msbtentry import MSBTEntry
@@ -182,7 +184,8 @@ class LMS_MessageNode(LMS_BaseNode):
     @property
     def msbt_name(self) -> str:
         """Name of the msbt resolved from the project."""
-        ...
+        _validate_source_resolver(self._source_resolver)
+        return self._source_resolver.retrieve_filename(self.msbt_index)
 
     @property
     def msbt(self) -> MSBT | UMSBT:
@@ -196,22 +199,16 @@ class LMS_MessageNode(LMS_BaseNode):
         if not self._source_resolver.project:
             raise ValueError("No project was provided!")
 
-        return self._source_resolver.resolve_msbt_index(self.msbt_index)
+        return self._source_resolver.resolve_msbt(self.msbt_index)
 
     @property
     def msbt_entry(self) -> MSBTEntry:
         """The MSBTEntry instance tied to the node."""
-        if isinstance(self.msbt, UMSBT):
-            raise NotImplementedError("Retrieving data from a UMSBT is not supported yet!")
-
         return self.msbt[self.label_index]
 
     @property
     def message_text(self) -> LMS_MessageText:
         """Message text tied to this node."""
-        if isinstance(self.msbt, UMSBT):
-            raise NotImplementedError("Retrieving data from a UMSBT is not supported yet!")
-
         return self.msbt_entry.message
 
     def set_msbt_entry(self, entry: MSBTEntry) -> None:
@@ -220,9 +217,6 @@ class LMS_MessageNode(LMS_BaseNode):
 
         :param entry: the entry of the file.
         """
-        if isinstance(self.msbt, UMSBT):
-            raise NotImplementedError("Setting data with a UMSBT is not supported yet!")
-
         if entry not in self.msbt.entries:
             raise ValueError(f"This entry does not exist in the MSBT!")
 
@@ -333,7 +327,7 @@ class LMS_BranchNode(LMS_BaseNode):
                 if compress_shared_references:
                     for branch, cases in case_map.items():
                         case_message = self._format_case_message(
-                            merge_shared_cases(cases), definition.case_format
+                            _merge_shared_cases(cases), definition.case_format
                         )
                         result.append((tuple(cases), case_message, branch))
                 else:
@@ -350,7 +344,7 @@ class LMS_BranchNode(LMS_BaseNode):
                 case_message = (
                     f"Case {cases[0]}"
                     if len(cases) == 1
-                    else f"Cases {merge_shared_cases(cases)}"
+                    else f"Cases {_merge_shared_cases(cases)}"
                 )
                 result.append((tuple(cases), case_message, branch))
         else:
@@ -501,13 +495,22 @@ class LMS_JumpNode(LMS_BaseNode):
         self._source_resolver = source_resolver
 
     @property
+    def msbf_name(self) -> str:
+        """Name of the msbf resolved from the project."""
+        _validate_source_resolver(self._source_resolver)
+        return self._source_resolver.retrieve_filename(self.msbf_index)
+
+    @property
     def next_entry(self) -> LMS_EntryNode | None:
         """The pointing entry node."""
         return self._next_entry
 
     @property
-    def msbf(self) -> MSBF:
+    def msbf(self) -> MSBF | None:
         """MSBF instance the node reference."""
+        if self.msbf_index is None:
+            return None
+
         if self._source_resolver is None:
             raise ValueError("No message root and project were provided!")
 
@@ -517,7 +520,7 @@ class LMS_JumpNode(LMS_BaseNode):
         if not self._source_resolver.project:
             raise ValueError("No project was provided!")
 
-        return self._source_resolver.resolve_msbf_index(self.msbf_index)
+        return self._source_resolver.resolve_source(self.msbf_index, FileExtension.MSBF)
 
     @next_entry.setter
     def next_entry(self, node: LMS_EntryNode | None) -> None:
@@ -549,9 +552,15 @@ def verify_parameter_structure(
             f"Parameter type {parameter_type} expects {parameter_type.value_count} parameter values, got {len(value)}!"
         )
 
+def _validate_source_resolver(source_resolver: SourceResolver):
+    if not source_resolver.message_root:
+        raise ValueError("No message root was provided!")
+
+    if not source_resolver.project:
+        raise ValueError("No project was provided!")
 
 # https://stackoverflow.com/a/69711845
-def merge_shared_cases(cases: list[int]) -> str:
+def _merge_shared_cases(cases: list[int]) -> str:
     result = []
     values = sorted(cases)
 
@@ -572,3 +581,4 @@ def merge_shared_cases(cases: list[int]) -> str:
         result.append(f"{first}-{last}")
 
     return ", ".join(result)
+

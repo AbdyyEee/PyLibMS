@@ -29,10 +29,11 @@ def read_tgp2(reader: FileReader) -> tuple[LMS_TagParamDefinition, ...]:
 
     return tuple(param_definitions)
 
+
 def write_tgp2(writer: FileWriter, parameters: list[LMS_TagParamDefinition]) -> None:
     data_start = writer.tell()
     writer.write_uint16(len(parameters))
-    writer.write_bytes(b"\x00" *  len(parameters) * 4)
+    writer.write_bytes(b"\x00" * len(parameters) * 4)
 
     offset = 4 * len(parameters) + 4
 
@@ -49,9 +50,12 @@ def write_tgp2(writer: FileWriter, parameters: list[LMS_TagParamDefinition]) -> 
             writer.write_bytes(b"\x00")
             writer.write_uint16(len(param.enum_members))
             writer.write_uint16_array(param.enum_indices)
-            offset += 3 + 2 * len(param.enum_members) + writer.write_encoded_string(param.name)
+            offset += (
+                3
+                + 2 * len(param.enum_members)
+                + writer.write_encoded_string(param.name)
+            )
         else:
             offset += writer.write_encoded_string(param.name)
 
         offset += writer.write_alignment(b"\x00", 4)
-

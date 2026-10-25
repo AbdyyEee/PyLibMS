@@ -34,7 +34,11 @@ class StructBETypes(StrEnum):
 
 
 class FileReader:
-    def __init__(self, data: BinaryIO | bytes | bytearray | memoryview, endian: FileEndian = FileEndian.LITTLE) -> None:
+    def __init__(
+        self,
+        data: BinaryIO | bytes | bytearray | memoryview,
+        endian: FileEndian = FileEndian.LITTLE,
+    ) -> None:
         self._stream: BinaryIO = None
 
         match data:
@@ -65,7 +69,11 @@ class FileReader:
         return self._stream.read(length)
 
     def seek(self, offset: int, whence: int = 0) -> None:
-        self._stream.seek(self.tell() + offset) if offset < 0 else self._stream.seek(offset, whence)
+        (
+            self._stream.seek(self.tell() + offset)
+            if offset < 0
+            else self._stream.seek(offset, whence)
+        )
 
     def read_offset_array(self, count: int) -> Generator[int, None, None]:
         start = self.tell() - 4
@@ -114,7 +122,9 @@ class FileReader:
 
     def read_encoded_string(self):
         string = b""
-        while (raw_char := self.read_bytes(self.encoding.width)) != self.encoding.terminator:
+        while (
+            raw_char := self.read_bytes(self.encoding.width)
+        ) != self.encoding.terminator:
             string += raw_char
         return string.decode(self.encoding.to_string_format(self.endian))
 
@@ -127,7 +137,11 @@ class FileReader:
 
 
 class FileWriter:
-    def __init__(self, encoding: FileEncoding = FileEncoding.UTF8, endian: FileEndian = FileEndian.LITTLE) -> None:
+    def __init__(
+        self,
+        encoding: FileEncoding = FileEncoding.UTF8,
+        endian: FileEndian = FileEndian.LITTLE,
+    ) -> None:
         self.data = BytesIO(b"")
         self.encoding = encoding
         self.endian = endian
@@ -206,7 +220,6 @@ class FileWriter:
             length += len(self.encoding.terminator)
 
         return length
-
 
     def _align(self, number: int, alignment: int) -> int:
         return (-number % alignment + alignment) % alignment

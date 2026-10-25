@@ -1,8 +1,10 @@
 from lms.common import lms_exceptions
 from lms.common.lms_constants import (
     SECTION_DATA_START,
-    SIZE_OFFSET, LMS_MINIMUM_VERSION,
-    LITTLE_ENDIAN_BOM, BIG_ENDIAN_BOM,
+    SIZE_OFFSET,
+    LMS_MINIMUM_VERSION,
+    LITTLE_ENDIAN_BOM,
+    BIG_ENDIAN_BOM,
 )
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding

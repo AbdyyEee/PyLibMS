@@ -19,6 +19,7 @@ def read_tag2(reader: FileReader) -> tuple[LMS_TagDefinition]:
 
     return tuple(definitions)
 
+
 def write_tag2(writer: FileWriter, tags: list[LMS_TagDefinition]) -> None:
     data_start = writer.tell()
     writer.write_uint16(len(tags))

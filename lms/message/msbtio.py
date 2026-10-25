@@ -1,6 +1,7 @@
 """
 IO interface for ``MSBT`` files.
 """
+
 import os
 from enum import StrEnum
 from types import MappingProxyType
@@ -24,17 +25,24 @@ from lms.message.section.tsy1 import read_tsy1, write_tsy1
 from lms.message.section.txt2 import read_txt2, write_txt2
 from lms.titleconfig.config import TagConfig
 
-__all__ = ("read_msbt_path", "read_msbt_directory", "read_msbt", "write_msbt", "write_msbt_path")
+__all__ = (
+    "read_msbt_path",
+    "read_msbt_directory",
+    "read_msbt",
+    "write_msbt",
+    "write_msbt_path",
+)
 
 from lms.titleconfig.definitions.project import Project
 
 MSBT_EXTENSION = ".msbt"
 
+
 def read_msbt_path(
-        file_path: str | os.PathLike[str],
-        *,
-        project: Project | None = None,
-        suppress_tag_errors: bool = False,
+    file_path: str | os.PathLike[str],
+    *,
+    project: Project | None = None,
+    suppress_tag_errors: bool = False,
 ) -> MSBT:
     """
     Reads and retrieves a MSBT file from a given path.
@@ -60,10 +68,13 @@ def read_msbt_path(
     return msbt
 
 
-def read_msbt_directory(directory: str | os.PathLike[str], *,
-                        project: Project | None = None,
-                        suppress_tag_errors: bool = False,
-                        ignore_extensions: bool = False) -> Mapping[str, MSBT]:
+def read_msbt_directory(
+    directory: str | os.PathLike[str],
+    *,
+    project: Project | None = None,
+    suppress_tag_errors: bool = False,
+    ignore_extensions: bool = False,
+) -> Mapping[str, MSBT]:
     """
     Reads and retrieves all MSBT files from a given directory.
 
@@ -82,25 +93,27 @@ def read_msbt_directory(directory: str | os.PathLike[str], *,
 
     for file in os.listdir(directory):
         if not file.endswith(MSBT_EXTENSION) and not ignore_extensions:
-            raise ValueError("This directory contains a non-MSBT file. "
-                             "Only directories with MSBT files can be used! Set ignore_extensions to True to ignore"
-                             "this error.")
+            raise ValueError(
+                "This directory contains a non-MSBT file. "
+                "Only directories with MSBT files can be used! Set ignore_extensions to True to ignore"
+                "this error."
+            )
 
-        msbt = read_msbt_path(os.path.join(directory, file),
-                              project=project, suppress_tag_errors=suppress_tag_errors)
-        msbt.filename = file
+        msbt = read_msbt_path(
+            os.path.join(directory, file),
+            project=project,
+            suppress_tag_errors=suppress_tag_errors,
+        )
         files[file] = msbt
 
     return MappingProxyType(files)
 
 
-
-
 def read_msbt(
-        stream: BinaryIO | bytes,
-        *,
-        project: Project | None = None,
-        suppress_tag_errors: bool = False,
+    stream: BinaryIO | bytes,
+    *,
+    project: Project | None = None,
+    suppress_tag_errors: bool = False,
 ) -> MSBT:
     """
     Reads and retrieves a MSBT file from a specified stream.
@@ -139,9 +152,23 @@ def read_msbt(
             case MSBTSection.ATO1:
                 attribute_offsets = read_ato1(reader, size)
             case MSBTSection.ATR1:
-                attribute_data = read_atr1(reader, attribute_offsets, None if project is None else project.attributes, size)
+                attribute_definitions = None if project is None else project.attributes
+                # Defined but empty attributes, so read encoded attributes
+                if not project.attributes:
+                    attribute_definitions = None
+
+                attribute_data = read_atr1(
+                    reader,
+                    attribute_offsets,
+                    attribute_definitions,
+                    size,
+                )
             case MSBTSection.TXT2:
-                messages = read_txt2(reader, None if project is None else project.tag_config, suppress_tag_errors)
+                messages = read_txt2(
+                    reader,
+                    None if project is None else project.tag_config,
+                    suppress_tag_errors,
+                )
             case MSBTSection.TSY1:
                 style_indices = read_tsy1(reader, len(labels))
             case _:
@@ -159,7 +186,6 @@ def read_msbt(
     )
     file.slot_count = slot_count
 
-
     if attribute_data is not None:
         file.size_per_attribute = attribute_data.size_per_attribute
         file.attr_string_table = attribute_data.string_table
@@ -168,7 +194,9 @@ def read_msbt(
         text = None if messages is None else messages[i]
         attr = None if attribute_data is None else attribute_data.attributes[i]
         style = None if style_indices is None else style_indices[i]
-        file.create_entry(label, message=text, attribute=attr, style_index=style, project=project)
+        file.create_entry(
+            label, message=text, attribute=attr, style_index=style, project=project
+        )
     return file
 
 

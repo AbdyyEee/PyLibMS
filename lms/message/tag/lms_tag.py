@@ -22,12 +22,12 @@ class LMS_EncodedTag:
     PARAMETER_FORMAT = re.compile(r"^\s*([0-9A-Fa-f]{2})(\s*-\s*[0-9A-Fa-f]{2})*\s*$")
 
     def __init__(
-            self,
-            group_id: int,
-            tag_index: int,
-            parameters: list[int] | None = None,
-            is_fallback: bool = False,
-            is_closing: bool = False,
+        self,
+        group_id: int,
+        tag_index: int,
+        parameters: list[int] | None = None,
+        is_fallback: bool = False,
+        is_closing: bool = False,
     ):
         self.group_id = group_id
         self.tag_index = tag_index
@@ -99,7 +99,7 @@ class LMS_EncodedTag:
             )
 
         group_id, tag_index = int(group_id), int(tag_index)
-        param_str = tag[match.end(3):].strip().removesuffix("]").strip()
+        param_str = tag[match.end(3) :].strip().removesuffix("]").strip()
 
         if is_closing:
             if param_str:
@@ -143,10 +143,10 @@ class LMS_DecodedTag:
     PARAMETER_FORMAT = re.compile(r'(\w+)="([^"]*)"')
 
     def __init__(
-            self,
-            definition: TagDefinition,
-            parameters: LMS_FieldMap | None = None,
-            is_closing: bool = False,
+        self,
+        definition: TagDefinition,
+        parameters: LMS_FieldMap | None = None,
+        is_closing: bool = False,
     ):
         self._definition = definition
         self._parameters = parameters

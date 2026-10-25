@@ -17,13 +17,16 @@ class AttributeData:
 
 
 def read_atr1(
-        reader: FileReader,
-        offsets: list[int],
-        definitions: tuple[AttributeDefinition, ...] | None,
-        section_size: int
+    reader: FileReader,
+    offsets: list[int],
+    definitions: tuple[AttributeDefinition, ...] | None,
+    section_size: int,
 ) -> AttributeData:
-    return read_encoded_atr1(reader, section_size) if definitions is None else read_decoded_atr1(reader, offsets,
-                                                                                                 definitions)
+    return (
+        read_encoded_atr1(reader, section_size)
+        if definitions is None
+        else read_decoded_atr1(reader, offsets, definitions)
+    )
 
 
 def read_encoded_atr1(reader: FileReader, section_size: int) -> AttributeData:
@@ -41,8 +44,11 @@ def read_encoded_atr1(reader: FileReader, section_size: int) -> AttributeData:
     return AttributeData(attributes, size_per_attribute, string_table)
 
 
-def read_decoded_atr1(reader: FileReader, offsets: list[int | None] | None,
-                      definitions: tuple[AttributeDefinition, ...]) -> AttributeData:
+def read_decoded_atr1(
+    reader: FileReader,
+    offsets: list[int | None] | None,
+    definitions: tuple[AttributeDefinition, ...],
+) -> AttributeData:
     section_start = reader.tell()
 
     attr_count = reader.read_uint32()
@@ -58,7 +64,9 @@ def read_decoded_atr1(reader: FileReader, offsets: list[int | None] | None,
                 continue
             valid_definitions[offset] = definition
     else:
-        valid_definitions = {definition.offset: definition for definition in definitions}
+        valid_definitions = {
+            definition.offset: definition for definition in definitions
+        }
 
     for i in range(attr_count):
         container_start = attr_start + i * size_per_attribute
@@ -84,10 +92,10 @@ def read_decoded_atr1(reader: FileReader, offsets: list[int | None] | None,
 
 
 def write_encoded_atr1(
-        writer: FileWriter,
-        attributes: list[bytes],
-        size_per_attribute: int,
-        string_table: bytes | None,
+    writer: FileWriter,
+    attributes: list[bytes],
+    size_per_attribute: int,
+    string_table: bytes | None,
 ) -> None:
     writer.write_uint32(len(attributes))
 
@@ -104,7 +112,7 @@ def write_encoded_atr1(
 
 
 def write_decoded_atr1(
-        writer: FileWriter, attributes: list[LMS_FieldMap], size_per_attribute: int
+    writer: FileWriter, attributes: list[LMS_FieldMap], size_per_attribute: int
 ) -> None:
     writer.write_uint32(len(attributes))
     writer.write_uint32(size_per_attribute)

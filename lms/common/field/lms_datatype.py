@@ -3,7 +3,6 @@ from __future__ import annotations
 from enum import IntEnum, auto
 from typing import Type, TypeGuard
 
-
 ALIAS_MAP = {
     "u8": "UINT8",
     "u16": "UINT16",
@@ -94,9 +93,9 @@ class LMS_DataType(IntEnum):
 
         match self:
             case LMS_DataType.FLOAT32:
-                return (2 - 2 ** -23) * 2 ** 127
+                return (2 - 2**-23) * 2**127
             case LMS_DataType.DOUBLE:
-                return (2 - 2 ** -52) * 2 ** 1023
+                return (2 - 2**-52) * 2**1023
             case _:
                 return (1 << (bits - 1)) - 1 if self.signed else (1 << bits) - 1
 
@@ -163,11 +162,9 @@ class LMS_DataType(IntEnum):
 
 
 def verify_number_from_datatype(
-        value: int | float,
-        datatype: LMS_DataType,
+    value: int | float,
+    datatype: LMS_DataType,
 ):
     if not datatype.min <= value <= datatype.max:
-        raise ValueError(
-            f"""The value '{value}' of type '{datatype.name}' provided
-            is out of range of ({datatype.min}, {datatype.max})!)"""
-        )
+        raise ValueError(f"""The value '{value}' of type '{datatype.name}' provided
+            is out of range of ({datatype.min}, {datatype.max})!)""")

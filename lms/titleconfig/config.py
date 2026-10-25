@@ -1,6 +1,7 @@
 import hashlib
 import os.path
 import pathlib
+from enum import StrEnum
 from types import MappingProxyType
 from typing import Literal, get_args, Mapping, Sequence, Self
 
@@ -25,7 +26,7 @@ PRESETS_URL = (
     "https://api.github.com/repos/AbdyyEee/PyLibMS/contents/lms/titleconfig/presets"
 )
 
-NO_COLOR = 0xFFFF
+DEFAULT_COLOR = 0xFFFF
 
 COLOR_KEY = "colors"
 ATTR_KEY = "attributes"
@@ -35,29 +36,16 @@ SOURCE_KEY = "source_files"
 NODE_KEY = "nodes"
 
 
+
 class TitleConfig:
     """
     Represents a configuration for a specific title.
     """
-
-    GAME_PRESET = Literal[
-        "Badge Arcade",
-        "Brain Age Concentration Training",
-        "Kirby Planet Robobot",
-        "Super Mario Odyssey",
-        "Super Mario 3D Land",
-        "Super Mario 3D World + Bowsers Fury",
-        "The Legend of Zelda a Link Between Worlds",
-        "The Legend of Zelda Echos of Wisdom",
-        "Tomodachi Life Living The Dream",
-        "Tomodachi Life NA-EU",
-    ]
-
     def __init__(
-            self,
-            game: str | None,
-            nodes: Mapping[str, NodeConfig] | None = None,
-            projects: Mapping[str, Project] | None = None,
+        self,
+        game: str | None,
+        nodes: Mapping[str, NodeConfig] | None = None,
+        projects: Mapping[str, Project] | None = None,
     ):
         self._game = game
         self._nodes = nodes or {}
@@ -194,18 +182,23 @@ class TitleConfig:
         for name, definition in nodes.items():
 
             for node_data in [nodes.get("global", {}), definition]:
-                branch_definitions = {node["id"]: NodeDefinition.from_dict(node["id"], LMS_NodeType.BRANCH, node) for
-                                      node in node_data.get("branch", [])}
+                branch_definitions = {
+                    node["id"]: NodeDefinition.from_dict(
+                        node["id"], LMS_NodeType.BRANCH, node
+                    )
+                    for node in node_data.get("branch", [])
+                }
 
-                event_definitions = {node["id"]: NodeDefinition.from_dict(node["id"], LMS_NodeType.EVENT, node) for
-                                      node in node_data.get("event", [])}
+                event_definitions = {
+                    node["id"]: NodeDefinition.from_dict(
+                        node["id"], LMS_NodeType.EVENT, node
+                    )
+                    for node in node_data.get("event", [])
+                }
 
             node_map[name] = NodeConfig(branch_definitions, event_definitions)
 
         projects: dict = parsed_content.get("projects", {})
-
-        if not projects:
-            return cls(game, nodes=node_map)
 
         project_map = {}
         global_projects = projects.get("global", {})
@@ -232,12 +225,16 @@ class TitleConfig:
                             project_obj.add_color(Color.from_dict(color))
                     case "attributes":
                         for attribute in data:
-                            project_obj.add_attribute(AttributeDefinition.from_dict(attribute))
+                            project_obj.add_attribute(
+                                AttributeDefinition.from_dict(attribute)
+                            )
                     case "tags":
                         groups = data["groups"]
                         container = TagConfig(groups)
                         for tag in data["definitions"]:
-                            container.add_definition(TagDefinition.from_dict(tag, groups))
+                            container.add_definition(
+                                TagDefinition.from_dict(tag, groups)
+                            )
                         project_obj.set_tags(container)
                     case "styles":
                         for style in data:
@@ -252,9 +249,9 @@ class TitleConfig:
 
     @staticmethod
     def generate_file(
-            file_path: str | os.PathLike[str],
-            game: str,
-            project: MSBP | None = None,
+        file_path: str | os.PathLike[str],
+        game: str,
+        project: MSBP | None = None,
     ) -> None:
         """
         Generates a title config file for a specific game.
@@ -273,9 +270,10 @@ class TitleConfig:
 
     @staticmethod
     def generate_merged_file(
-            directory: str | os.PathLike[str],
-            config_path: str | os.PathLike[str],
-            game: str) -> None:
+        directory: str | os.PathLike[str],
+        config_path: str | os.PathLike[str],
+        game: str,
+    ) -> None:
         """
         Generates a config with all projects from each MSBP are merged into a file.
 
@@ -311,9 +309,7 @@ class TitleConfig:
         return {"game": game, "nodes": [], "projects": _msbp_to_dict(msbp)}
 
     @staticmethod
-    def generate_merged_config(
-            game: str,
-            msbps: Sequence[MSBP]) -> dict:
+    def generate_merged_config(game: str, msbps: Sequence[MSBP]) -> dict:
         """
         Generates a config with all projects from each MSBP are merged.
 
@@ -332,31 +328,38 @@ def _msbp_to_dict(msbp: MSBP | None, global_key: bool = True) -> dict:
     if msbp is None:
         return {}
 
-    projects = {msbp.name if not global_key else "global": {
-        COLOR_KEY: (colors := []),
-        ATTR_KEY: (attributes := []),
-        TAG_KEY: (tags := {"groups": {}, "definitions": []}),
-        STYLE_KEY: (styles := []),
-        SOURCE_KEY: (source_files := []), }
+    projects = {
+        msbp.name if not global_key else "global": {
+            COLOR_KEY: (colors := []),
+            ATTR_KEY: (attributes := []),
+            TAG_KEY: (tags := {"groups": {}, "definitions": []}),
+            STYLE_KEY: (styles := []),
+            SOURCE_KEY: (source_files := []),
+        }
     }
 
-    for color in msbp.colors:
-        colors.append(color_to_dict(color))
+    if msbp.colors is not None:
+        for color in msbp.colors:
+            colors.append(color_to_dict(color))
 
-    for attribute in msbp.attribute_definitions:
-        attributes.append(attribute_to_dict(attribute))
+    if msbp.attribute_definitions is not None:
+        for attribute in msbp.attribute_definitions:
+            attributes.append(attribute_to_dict(attribute))
 
-    for tag_group in msbp.tag_groups:
-        tags["groups"][tag_group.group_id] = tag_group.name
+    if msbp.tag_groups is not None:
+        for tag_group in msbp.tag_groups:
+            tags["groups"][tag_group.group_id] = tag_group.name
 
-        for i, tag in enumerate(tag_group.tag_definitions):
-            tags["definitions"].append(tag_to_dict(tag_group.group_id, i, tag))
+            for i, tag in enumerate(tag_group.tag_definitions):
+                tags["definitions"].append(tag_to_dict(tag_group.group_id, i, tag))
 
-    for style in msbp.styles:
-        styles.append(style_to_dict(style, msbp.colors))
+    if msbp.styles is not None:
+        for style in msbp.styles:
+            styles.append(style_to_dict(style, msbp.colors))
 
-    for source in msbp.source_files:
-        source_files.append(source)
+    if msbp.source_files is not None:
+        for source in msbp.source_files:
+            source_files.append(source)
 
     return projects
 
@@ -384,7 +387,9 @@ def attribute_to_dict(attribute: LMS_AttrDefinition) -> dict:
     return result
 
 
-def tag_to_dict(group_id: int, tag_index: int, tag_definition: LMS_TagDefinition) -> dict:
+def tag_to_dict(
+    group_id: int, tag_index: int, tag_definition: LMS_TagDefinition
+) -> dict:
     data = {
         "name": tag_definition.name,
         "group_id": group_id,
@@ -393,7 +398,10 @@ def tag_to_dict(group_id: int, tag_index: int, tag_definition: LMS_TagDefinition
     if tag_definition.parameters:
         parameters = []
         for parameter in tag_definition.parameters:
-            definition = {"name": parameter.name, "datatype": parameter.datatype.name.lower()}
+            definition = {
+                "name": parameter.name,
+                "datatype": parameter.datatype.name.lower(),
+            }
             if parameter.enum_members:
                 definition["enum_members"] = dict(parameter.enum_members)
 
@@ -409,5 +417,5 @@ def style_to_dict(style: LMS_Style, colors: tuple[LMS_Color]) -> dict:
         "region_width": style.region_width,
         "line_number": style.line_number,
         "font_index": style.font_index,
-        "color": None if style.color_index is None else colors[style.color_index]
+        "color_index": style.color_index,
     }

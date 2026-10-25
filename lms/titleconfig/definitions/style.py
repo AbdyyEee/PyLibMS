@@ -7,6 +7,7 @@ class Style:
     """
     Class that represents a style entry in a project.
     """
+
     name: str
     description: str
     region_width: int
@@ -23,4 +24,4 @@ class Style:
             data["line_number"],
             data["font_index"],
             data["color"],
-            )
+        )

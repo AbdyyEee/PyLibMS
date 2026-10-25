@@ -13,10 +13,12 @@ from lms.titleconfig.definitions.tags import TagConfig
 # Typealias for virtual CTI1 paths
 MessageSource: TypeAlias = str
 
+
 class Project:
     """
     Class that represents a project entry in a configuration.
     """
+
     def __init__(self, name: str = "") -> None:
         self._name = name
         self._colors: list[Color] = []
@@ -74,6 +76,3 @@ class Project:
     def add_source(self, source: MessageSource) -> None:
         """Adds a source to the project."""
         self._sources.append(source)
-
-
-

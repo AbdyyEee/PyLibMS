@@ -21,10 +21,11 @@ def read_ali2(reader: FileReader) -> list[Mapping[int, str]]:
 
     return attr_lists
 
+
 def write_ali2(writer: FileWriter, attribute_enums: list[Mapping[int, str]]) -> None:
     data_start = writer.tell()
     writer.write_uint32(len(attribute_enums))
-    writer.write_bytes(b"\x00" *  (4 + len(attribute_enums) * 4))
+    writer.write_bytes(b"\x00" * (4 + len(attribute_enums) * 4))
 
     offset = 4 * len(attribute_enums) + 4
 
@@ -53,13 +54,3 @@ def write_ali2(writer: FileWriter, attribute_enums: list[Mapping[int, str]]) -> 
             offset += member_length
 
         offset += writer.write_alignment(b"\x00", 4)
-
-
-
-
-
-
-
-
-
-

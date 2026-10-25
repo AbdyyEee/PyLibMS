@@ -42,8 +42,6 @@ def read_msbp_path(file_path: str | os.PathLike[str]) -> MSBP:
     return msbp
 
 
-
-
 def read_msbp(stream: BinaryIO | bytes) -> MSBP:
     """
     Reads and retrieves a MSBP file from a specified stream.
@@ -115,7 +113,16 @@ def read_msbp(stream: BinaryIO | bytes) -> MSBP:
         for group in tag_groups:
             group.set_all_definitions(tag_definitions, tag_param_definitions, tag_enums)
 
-    return MSBP(file_info, section_list, colors, attr_definitions, tag_groups, styles, source_list)
+    return MSBP(
+        file_info,
+        section_list,
+        colors,
+        attr_definitions,
+        tag_groups,
+        styles,
+        source_list,
+    )
+
 
 def write_msbp_path(file_path: str | os.PathLike[str], msbp: MSBP) -> None:
     """
@@ -146,27 +153,51 @@ def write_msbp(file: MSBP) -> bytes:
     for section in file.section_list:
         match section:
             case MSBPSection.CLB1 | MSBPSection.ALB1 | MSBPSection.SLB1:
-                labels = [item.name for item in {"CLB1":
-                        file.colors, "ALB1": file.attribute_definitions, "SLB1": file.styles}[section]]
+                labels = [
+                    item.name
+                    for item in {
+                        "CLB1": file.colors,
+                        "ALB1": file.attribute_definitions,
+                        "SLB1": file.styles,
+                    }[section]
+                ]
                 write_section(writer, section, write_labels, labels, file.slot_count)
             case MSBPSection.CLR1:
                 write_section(writer, section, write_clr1, file.colors)
             case MSBPSection.ATI2:
                 write_section(writer, section, write_ati2, file.attribute_definitions)
             case MSBPSection.ALI2:
-                enum_members = [definition.enum_members for definition in file.attribute_definitions if definition.datatype is LMS_DataType.ENUM]
+                enum_members = [
+                    definition.enum_members
+                    for definition in file.attribute_definitions
+                    if definition.datatype is LMS_DataType.ENUM
+                ]
                 write_section(writer, section, write_ali2, enum_members)
             case MSBPSection.TGG2:
-                write_section(writer, section, write_tgg2, file.tag_groups, file.info.version)
+                write_section(
+                    writer, section, write_tgg2, file.tag_groups, file.info.version
+                )
             case MSBPSection.TAG2:
-                tag_definitions = [tag for group in file.tag_groups for tag in group.tag_definitions]
+                tag_definitions = [
+                    tag for group in file.tag_groups for tag in group.tag_definitions
+                ]
                 write_section(writer, section, write_tag2, tag_definitions)
             case MSBPSection.TGP2:
-                tag_parameters = [param for tag in tag_definitions for param in tag.parameters]
+                tag_parameters = [
+                    param for tag in tag_definitions for param in tag.parameters
+                ]
                 write_section(writer, section, write_tgp2, tag_parameters)
             case MSBPSection.TGL2:
-                enum_parameters = [param for param in tag_parameters if param.datatype is LMS_DataType.ENUM]
-                enums = [member for param in enum_parameters for member in param.enum_members.values()]
+                enum_parameters = [
+                    param
+                    for param in tag_parameters
+                    if param.datatype is LMS_DataType.ENUM
+                ]
+                enums = [
+                    member
+                    for param in enum_parameters
+                    for member in param.enum_members.values()
+                ]
                 write_section(writer, section, write_strings, enums, False)
             case MSBPSection.SYL3:
                 write_section(writer, section, write_syl3, file.styles)

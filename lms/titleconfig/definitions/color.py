@@ -7,6 +7,7 @@ class Color:
     """
     Class that represents a color entry in a project.
     """
+
     name: str
     description: str
     red: int
@@ -22,5 +23,5 @@ class Color:
             data["red"],
             data["green"],
             data["blue"],
-            data["alpha"]\
+            data["alpha"],
         )

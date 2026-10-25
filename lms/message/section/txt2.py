@@ -6,7 +6,7 @@ from lms.titleconfig.definitions.tags import TagConfig
 
 
 def read_txt2(
-        reader: FileReader, tags: TagConfig | None, suppress_tag_errors: bool
+    reader: FileReader, tags: TagConfig | None, suppress_tag_errors: bool
 ) -> list[LMS_MessageText]:
     encoding = reader.encoding
 

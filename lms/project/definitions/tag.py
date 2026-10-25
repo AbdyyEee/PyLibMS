@@ -12,10 +12,10 @@ class LMS_TagGroup:
     """
 
     def __init__(
-            self,
-            name: str,
-            group_id: int,
-            tag_indexes: Sequence[int],
+        self,
+        name: str,
+        group_id: int,
+        tag_indexes: Sequence[int],
     ):
         self._name = name
         self._id = group_id
@@ -44,10 +44,10 @@ class LMS_TagGroup:
         return tuple(self._tag_indices)
 
     def set_all_definitions(
-            self,
-            tag_definitions: list[LMS_TagDefinition],
-            param_definitions: list[LMS_TagParamDefinition],
-            tag_enums: list[str] = None,
+        self,
+        tag_definitions: list[LMS_TagDefinition],
+        param_definitions: list[LMS_TagParamDefinition],
+        tag_enums: list[str] = None,
     ) -> None:
 
         self._tag_definitions.extend(tag_definitions[i] for i in self._tag_indices)
@@ -67,16 +67,15 @@ class LMS_TagDefinition:
     """
 
     def __init__(
-            self,
-            name: str,
-            parameter_indices: list[int],
+        self,
+        name: str,
+        parameter_indices: list[int],
     ):
         self._name = name
         self._parameter_indices = (
             parameter_indices if parameter_indices is not None else []
         )
         self._parameter_definitions: list[str] = []
-
 
     @property
     def name(self) -> str:
@@ -93,7 +92,9 @@ class LMS_TagDefinition:
         """Parameter indices of the tag."""
         return tuple(self._parameter_indices)
 
-    def set_parameter_definitions(self, definitions: list[LMS_TagParamDefinition]) -> None:
+    def set_parameter_definitions(
+        self, definitions: list[LMS_TagParamDefinition]
+    ) -> None:
         self._parameter_definitions = [definitions[i] for i in self._parameter_indices]
 
 
@@ -103,10 +104,10 @@ class LMS_TagParamDefinition:
     """
 
     def __init__(
-            self,
-            name: str,
-            datatype: LMS_DataType,
-            enum_indices: list[int] | None = None,
+        self,
+        name: str,
+        datatype: LMS_DataType,
+        enum_indices: list[int] | None = None,
     ):
         self._name = name
         self._enum_members: MappingProxyType[int, str] = None
@@ -135,5 +136,7 @@ class LMS_TagParamDefinition:
         return tuple(self._enum_indices)
 
     def set_enum_members(self, tag_enums: list[str]) -> None:
-        enum_members = tag_enums[self.enum_indices[0]:self.enum_indices[-1] + 1]
-        self._enum_members = MappingProxyType({i: enum for i, enum in enumerate(enum_members)})
+        enum_members = tag_enums[self.enum_indices[0] : self.enum_indices[-1] + 1]
+        self._enum_members = MappingProxyType(
+            {i: enum for i, enum in enumerate(enum_members)}
+        )

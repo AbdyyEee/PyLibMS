@@ -15,7 +15,10 @@ def read_strings(reader: FileReader, four_byte_count: bool) -> tuple[str]:
 
     return string_list
 
-def write_strings(writer: FileWriter, strings: list[str], four_byte_count: bool) -> None:
+
+def write_strings(
+    writer: FileWriter, strings: list[str], four_byte_count: bool
+) -> None:
     data_start = writer.tell()
 
     if four_byte_count:
@@ -33,6 +36,3 @@ def write_strings(writer: FileWriter, strings: list[str], four_byte_count: bool)
         writer.write_uint32(offset)
         writer.seek(offset + data_start)
         offset += writer.write_encoded_string(string)
-
-
-

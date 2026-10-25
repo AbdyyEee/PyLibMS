@@ -16,6 +16,7 @@ def read_ati2(reader: FileReader) -> tuple[LMS_AttrDefinition, ...]:
 
     return tuple(definitions)
 
+
 def write_ati2(writer: FileWriter, definitions: tuple[LMS_AttrDefinition, ...]) -> None:
     writer.write_uint32(len(definitions))
 
@@ -24,4 +25,3 @@ def write_ati2(writer: FileWriter, definitions: tuple[LMS_AttrDefinition, ...]) 
         writer.write_bytes(b"\x00")
         writer.write_uint16(definition.enum_index)
         writer.write_uint32(definition.offset)
-

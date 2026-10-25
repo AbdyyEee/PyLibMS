@@ -3,7 +3,6 @@ from lms.fileio.io import FileReader, FileWriter
 from lms.project.definitions.tag import LMS_TagGroup
 
 
-
 def read_tgg2(reader: FileReader, version: int) -> tuple[LMS_TagGroup, ...]:
     group_list = []
 
@@ -23,10 +22,11 @@ def read_tgg2(reader: FileReader, version: int) -> tuple[LMS_TagGroup, ...]:
 
     return tuple(group_list)
 
+
 def write_tgg2(writer: FileWriter, groups: list[LMS_TagGroup], version: int) -> None:
     data_start = writer.tell()
     writer.write_uint16(len(groups))
-    writer.write_bytes(b"\x00" *  len(groups) * 4)
+    writer.write_bytes(b"\x00" * len(groups) * 4)
 
     offset = 4 * len(groups) + 4
     writer.seek(data_start + 4)
@@ -44,7 +44,3 @@ def write_tgg2(writer: FileWriter, groups: list[LMS_TagGroup], version: int) -> 
         name_length = writer.write_encoded_string(group.name)
         alignment = writer.write_alignment(b"\x00", 4)
         offset += 2 + 2 * len(group.tag_definitions) + name_length + alignment
-
-
-
-

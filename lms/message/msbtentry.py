@@ -10,13 +10,13 @@ class MSBTEntry:
     """A class that represents an entry in a MSBT file."""
 
     def __init__(
-            self,
-            name: str,
-            *,
-            message: LMS_MessageText | str | None = "",
-            attribute: LMS_FieldMap | bytes | None = None,
-            style_index: int | None = None,
-            project: Project | None = None,
+        self,
+        name: str,
+        *,
+        message: LMS_MessageText | str | None = "",
+        attribute: LMS_FieldMap | bytes | None = None,
+        style_index: int | None = None,
+        project: Project | None = None,
     ):
         self.name = name
 
@@ -54,10 +54,14 @@ class MSBTEntry:
     def style(self) -> Style:
         """Style object for the instance, set from a project."""
         if self._project is None:
-            raise ValueError("A project must be provided for MSBT entry to view styles!")
+            raise ValueError(
+                "A project must be provided for MSBT entry to view styles!"
+            )
 
         if self._project.styles is None or self.style_index is None:
-            raise ValueError(f"There are no style definitions in the project '{self._project.name}'!")
+            raise ValueError(
+                f"There are no style definitions in the project '{self._project.name}'!"
+            )
 
         return self._project.styles[self.style_index]
 
@@ -71,7 +75,9 @@ class MSBTEntry:
             raise ValueError("A project must be provided for MSBT entry to set styles!")
 
         if self._project.styles is None:
-            raise ValueError(f"There are no style definitions in the project '{self._project.name}'!")
+            raise ValueError(
+                f"There are no style definitions in the project '{self._project.name}'!"
+            )
 
         style_index = None
         for i, style in enumerate(self._project.styles):
@@ -80,7 +86,9 @@ class MSBTEntry:
                 break
 
         if style_index is None:
-            raise ValueError(f"The style '{new.name}' does not exist in the project '{self._project.name}'!")
+            raise ValueError(
+                f"The style '{new.name}' does not exist in the project '{self._project.name}'!"
+            )
 
         self.style_index = style_index
 
@@ -102,10 +110,10 @@ class MSBTEntry:
 
     @classmethod
     def from_dict(
-            cls,
-            data: dict,
-            attribute_config: AttributeConfig | None = None,
-            tag_config: TagConfig | None = None,
+        cls,
+        data: dict,
+        attribute_config: AttributeConfig | None = None,
+        tag_config: TagConfig | None = None,
     ):
         """
         Creates a MSBTEntry from a dictionary object.

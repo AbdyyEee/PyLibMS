@@ -3,6 +3,7 @@ from lms.project.definitions.style import LMS_Style
 
 DEFAULT = 0xFFFFFFFF
 
+
 def read_syl3(reader: FileReader) -> list[LMS_Style]:
     styles = []
 
@@ -22,6 +23,7 @@ def read_syl3(reader: FileReader) -> list[LMS_Style]:
         styles.append(LMS_Style(region_width, line_number, font_index, color_index))
 
     return styles
+
 
 def write_syl3(writer: FileWriter, styles: tuple[LMS_Style, ...]) -> None:
     writer.write_uint32(len(styles))

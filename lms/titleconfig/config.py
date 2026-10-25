@@ -306,7 +306,7 @@ class TitleConfig:
         :param game: the name of the game to create the config for.
         :param msbp: a MSBP object.
         """
-        return {"game": game, "nodes": [], "projects": _msbp_to_dict(msbp)}
+        return {"game": game, "projects": _msbp_to_dict(msbp)}
 
     @staticmethod
     def generate_merged_config(game: str, msbps: Sequence[MSBP]) -> dict:

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 from types import MappingProxyType
-from typing import Mapping, TypeAlias
+from typing import Mapping, TypeAlias, Sequence
 
 from lms.common.field.lms_datatype import LMS_DataType, verify_number_from_datatype
 from lms.titleconfig.definitions.field import FieldDefinition
@@ -49,7 +49,7 @@ class LMS_FieldMap:
 
     @staticmethod
     def create_default_dict_map(
-            definitions: list[FieldDefinition],
+        definitions: Sequence[FieldDefinition],
     ) -> dict[str, FieldValue]:
         map = {}
         for definition in definitions:
@@ -60,22 +60,25 @@ class LMS_FieldMap:
                     map[definition.name] = definition.enum_members[0]
                 case LMS_DataType.BOOL:
                     map[definition.name] = False
-                case LMS_DataType.FLOAT32:
+                case LMS_DataType.FLOAT32 | LMS_DataType.DOUBLE:
                     map[definition.name] = 0.0
                 case _:
                     map[definition.name] = 0
         return map
 
     @classmethod
-    def create_default_map(cls, definitions: list[FieldDefinition]):
+    def create_default_map(cls, definitions: Sequence[FieldDefinition]):
         return cls.from_dict(LMS_FieldMap.create_default_map(definitions), definitions)
 
     @classmethod
-    def from_dict(cls, data: dict[str, FieldValue], definitions: list[FieldDefinition]):
+    def from_dict(
+        cls, data: dict[str, FieldValue], definitions: Sequence[FieldDefinition]
+    ):
+        definition_map = {field.name: field for field in definitions}
         return cls(
             {
-                definition.name: LMS_Field(data[definition.name], definition)
-                for definition in definitions
+                name: LMS_Field(value, definition_map[name])
+                for name, value in data.items()
             }
         )
 
@@ -96,7 +99,7 @@ class LMS_FieldMap:
                     if value.lower() not in ("false", "true"):
                         raise ValueError("Invalid boolean value!")
                     casted_value = value.strip().lower() == "true"
-                case LMS_DataType.FLOAT32:
+                case LMS_DataType.FLOAT32 | LMS_DataType.DOUBLE:
                     casted_value = float(value)
                 case _:
                     casted_value = int(value)
@@ -112,9 +115,9 @@ class LMS_Field:
     """
 
     def __init__(
-            self,
-            value: int | str | float | bytes | bool,
-            definition: FieldDefinition,
+        self,
+        value: int | str | float | bytes | bool,
+        definition: FieldDefinition,
     ):
         _verify_value_from_definition(value, definition)
         self._definition = definition
@@ -158,7 +161,7 @@ class LMS_Field:
 
 
 def _verify_value_from_definition(
-        value: int | str | float | bytes | bool, definition: FieldDefinition
+    value: int | str | float | bytes | bool, definition: FieldDefinition
 ) -> None:
     datatype = definition.datatype
 
@@ -175,7 +178,7 @@ def _verify_value_from_definition(
             else:
                 return
         case _ if isinstance(value, (int, float)):
-            verify_number_from_datatype(value, definition.datatype)
+            verify_number_from_datatype(value, datatype)
             return
 
     raise TypeError(

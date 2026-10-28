@@ -1,6 +1,7 @@
 """
 IO interface for ``UMSBT`` files.
 """
+
 import os
 from typing import Mapping, BinaryIO
 
@@ -9,28 +10,35 @@ from lms.fileio.io import FileReader, FileWriter
 from lms.message.msbt import MSBT
 from lms.message.msbtio import read_msbt, write_msbt
 from lms.message.umsbt import UMSBT
-from lms.titleconfig.definitions.attribute import AttributeConfig
+from lms.source_resolver import SourceResolver
+from lms.titleconfig.definitions.project import Project
 from lms.titleconfig.definitions.tags import TagConfig
 
-__all__ = ("read_umsbt_path", "read_umsbt_directory", "read_umsbt", "write_umsbt_path", "write_umsbt")
+__all__ = (
+    "read_umsbt_path",
+    "read_umsbt_directory",
+    "read_umsbt",
+    "write_umsbt_path",
+    "write_umsbt",
+)
 
-UMSBT_EXTENSION = ".umsbt"
 UMSBT_ALIGNMENT = 16
 SIZE_PER_METADATA = 8
 
 
 def read_umsbt_path(
-        file_path: str | os.PathLike[str], *,
-        attribute_config: AttributeConfig | None = None,
-        tag_config: TagConfig | None = None,
-        suppress_tag_errors: bool = False,
+    file_path: str | os.PathLike[str],
+    *,
+    project: Project | None = None,
+    language_map: Mapping[str, int] | None = None,
+    suppress_tag_errors: bool = False,
 ) -> UMSBT:
     """
     Reads and retrieves a UMSBT file from a given path.
 
     :param file_path: the path to the UMSBT file.
-    :param attribute_config: the attribute config to use for decoding attributes.
-    :param tag_config: the tag config to use for decoding tags.
+    :param project: a ``Project`` object.
+    :param suppress_tag_errors: when a tag config is used, suppress any errors while reading decoded tags.
     :param suppress_tag_errors: when a tag config is used, suppress any errors while reading decoded tags.
 
     =====
@@ -39,26 +47,27 @@ def read_umsbt_path(
     >>> umsbt = read_umsbt_path("path/to/file.umsbt")
     """
     with open(file_path, "rb") as stream:
-        umsbt = read_umsbt(stream,
-                           attribute_config=attribute_config,
-                           tag_config=tag_config,
-                           suppress_tag_errors=suppress_tag_errors)
+        umsbt = read_umsbt(
+            stream, project=project, language_map=language_map, suppress_tag_errors=suppress_tag_errors
+        )
 
     return umsbt
 
 
-def read_umsbt_directory(directory: str | os.PathLike[str], *,
-                         attribute_config: AttributeConfig | None = None,
-                         tag_config: TagConfig | None = None,
-                         suppress_tag_errors: bool = False,
-                         ignore_extensions: bool = False) -> Mapping[str, tuple[MSBT, ...]]:
+def read_umsbt_directory(
+    directory: str | os.PathLike[str],
+    *,
+    project: Project | None = None,
+    language_map: Mapping[str, int] | None = None,
+    suppress_tag_errors: bool = False,
+    ignore_extensions: bool = False,
+) -> Mapping[str, tuple[MSBT, ...]]:
     """
     Reads and retrieves all UMSBT files from a given directory.
 
     :param directory: directory of UMSBT files. All files must have the `.umsbt` extension (unless ``ignore_extensions``
     is True)
-    :param attribute_config: the attribute config to use for decoding attributes.
-    :param tag_config: the tag config to use for decoding tags.
+    :param project: a ``Project`` object.
     :param suppress_tag_errors: when a tag config is used, suppress any errors while reading decoded tags.
     :param ignore_extensions: ignore the extensions in the directory.
 
@@ -70,31 +79,36 @@ def read_umsbt_directory(directory: str | os.PathLike[str], *,
     files: dict[str, tuple[MSBT, ...]] = {}
 
     for file in os.listdir(directory):
-        if not file.endswith(UMSBT_EXTENSION) and not ignore_extensions:
-            raise ValueError("This directory contains a non-UMSBT file. "
-                             "Only directories with UMSBT files can be used! Set ignore_extensions to True to ignore"
-                             "this error.")
+        if not file.endswith(".umsbt") and not ignore_extensions:
+            raise ValueError(
+                "This directory contains a non-UMSBT file. "
+                "Only directories with UMSBT files can be used! Set ignore_extensions to True to ignore"
+                "this error."
+            )
 
-        umsbt = read_umsbt_path(os.path.join(directory, file),
-                                attribute_config=attribute_config,
-                                tag_config=tag_config, suppress_tag_errors=suppress_tag_errors)
+        umsbt = read_umsbt_path(
+            os.path.join(directory, file),
+            project=project,
+            language_map=language_map,
+            suppress_tag_errors=suppress_tag_errors,
+        )
         files[os.path.basename(file)] = umsbt
 
     return files
 
 
 def read_umsbt(
-        stream: BinaryIO | bytes, *,
-        attribute_config: AttributeConfig | None = None,
-        tag_config: TagConfig | None = None,
-        suppress_tag_errors: bool = False,
+    stream: BinaryIO | bytes,
+    *,
+    project: Project | None = None,
+    language_map: Mapping[str, int] | None = None,
+    suppress_tag_errors: bool = False,
 ) -> UMSBT:
     """
     Reads and retrieves a UMSBT file from a specified stream.
 
     :param stream: an ``IOBase``, ``BytesIO``, ``memoryview``, or ``bytes`` object.
-    :param attribute_config: the attribute config to use for decoding attributes.
-    :param tag_config: the tag config to use for decoding tags.
+    :param project: a ``Project`` object.
     :param suppress_tag_errors: when a tag config is used, suppress any errors while reading decoded tags.
 
     =====
@@ -121,12 +135,15 @@ def read_umsbt(
     files = []
     for i, (offset, size) in enumerate(zip(offsets, sizes)):
         reader.seek(offset)
-        files.append(read_msbt(reader.read_bytes(size),
-                               attribute_config=attribute_config,
-                               tag_config=tag_config,
-                               suppress_tag_errors=suppress_tag_errors))
+        files.append(
+            read_msbt(
+                reader.read_bytes(size),
+                project=project,
+                suppress_tag_errors=suppress_tag_errors,
+            )
+        )
 
-    return UMSBT(files)
+    return UMSBT(files, language_map)
 
 
 def write_umsbt_path(file_path: str | os.PathLike[str], file: UMSBT) -> None:

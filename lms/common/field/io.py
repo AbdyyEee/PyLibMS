@@ -12,9 +12,9 @@ from lms.titleconfig.definitions.field import FieldDefinition
 
 
 def read_field(
-        reader: FileReader,
-        definition: FieldDefinition,
-        read_variable_width_value: Callable | None = None,
+    reader: FileReader,
+    definition: FieldDefinition,
+    read_variable_width_value: Callable | None = None,
 ) -> LMS_Field:
     # String is excluded as their reading varies between MSBT/MSBF
     match definition.datatype:
@@ -32,6 +32,8 @@ def read_field(
             value = reader.read_int32()
         case LMS_DataType.FLOAT32:
             value = reader.read_float32()
+        case LMS_DataType.DOUBLE:
+            value = reader.read_double()
         case LMS_DataType.ENUM:
             if read_variable_width_value is not None:
                 index = read_variable_width_value()
@@ -48,9 +50,9 @@ def read_field(
 
 
 def write_field(
-        writer: FileWriter,
-        field: LMS_Field,
-        write_variable_width_value: Callable | None = None,
+    writer: FileWriter,
+    field: LMS_Field,
+    write_variable_width_value: Callable | None = None,
 ) -> None:
     if is_number_datatype(field.value, field.datatype):
         write_functions: dict[LMS_DataType, Callable] = {
@@ -61,6 +63,7 @@ def write_field(
             LMS_DataType.UINT32: writer.write_uint32,
             LMS_DataType.INT32: writer.write_int32,
             LMS_DataType.FLOAT32: writer.write_float32,
+            LMS_DataType.DOUBLE: writer.write_double,
         }
         write_functions[field.datatype](field.value)
         return

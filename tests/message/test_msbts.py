@@ -123,8 +123,8 @@ class TestMSBTCases(MSBTTestUtil):
             "Test05": "Test Message 05",
         }
 
-        entry_04 = msbt.create_entry("Test04", "Test Message 04")
-        entry_05 = msbt.create_entry("Test05", "Test Message 05")
+        entry_04 = msbt.create_entry("Test04", message="Test Message 04")
+        entry_05 = msbt.create_entry("Test05", message="Test Message 05")
 
         self.assertIsInstance(entry_04, MSBTEntry)
         self.assertIsInstance(entry_05, MSBTEntry)

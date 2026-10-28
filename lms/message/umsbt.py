@@ -2,27 +2,27 @@ from types import MappingProxyType
 from typing import overload, Mapping, Sequence, Iterator
 
 from lms.message.msbt import MSBT
+from lms.titleconfig.config import TitleConfig
 
 
 class UMSBT:
     """Class that represents a UMSBT file, an archive for MSBT files."""
 
-    def __init__(self, files: Sequence[MSBT] | None = None) -> None:
+    def __init__(self, files: Sequence[MSBT] | None = None,
+                 language_map: Mapping[str, int] | None = None) -> None:
         self._files = list(files) if files is not None else []
 
         for file in self._files:
             if not isinstance(file, MSBT):
                 raise TypeError("Only MSBTs are allowed for UMSBT archives!")
 
-        self._realign_filenames()
+        self._language_map = language_map
 
     @overload
-    def __getitem__(self, index: int) -> MSBT:
-        ...
+    def __getitem__(self, index: int) -> MSBT: ...
 
     @overload
-    def __getitem__(self, label: str) -> MSBT:
-        ...
+    def __getitem__(self, label: str) -> MSBT: ...
 
     def __getitem__(self, value: int | str) -> MSBT:
         if isinstance(value, str):
@@ -43,8 +43,11 @@ class UMSBT:
 
     @property
     def file_map(self) -> Mapping[str, MSBT]:
-        """Maps of file to their name tied to this instance."""
-        return MappingProxyType({msbt.filename: msbt for msbt in self._files})
+        """Maps of files to their names tied to this instance."""
+        return MappingProxyType(
+            {f"{i}.msbt" if not self._language_map else f"{self._language_map[i]}.msbt":
+                 msbt for i, msbt in enumerate(self._files)}
+        )
 
     def add_msbt(self, msbt: MSBT) -> None:
         """
@@ -53,7 +56,6 @@ class UMSBT:
         :param msbt: the msbt to add.
         """
         self._files.append(msbt)
-        self._realign_filenames()
 
     def insert_msbt(self, position: int, msbt: MSBT) -> None:
         """
@@ -63,15 +65,12 @@ class UMSBT:
         :param msbt: the msbt to insert.
         """
         self._files.insert(position, msbt)
-        self._realign_filenames()
 
     @overload
-    def remove_msbt(self, msbt: MSBT) -> None:
-        ...
+    def remove_msbt(self, msbt: MSBT) -> None: ...
 
     @overload
-    def remove_msbt(self, msbt: int) -> None:
-        ...
+    def remove_msbt(self, msbt: int) -> None: ...
 
     def remove_msbt(self, msbt: MSBT | int) -> None:
         """
@@ -83,9 +82,3 @@ class UMSBT:
             self._files.remove(msbt)
         else:
             del self._files[msbt]
-
-        self._realign_filenames()
-
-    def _realign_filenames(self) -> None:
-        for i, msbt in enumerate(self._files):
-            msbt.filename = f"{i}.msbt"

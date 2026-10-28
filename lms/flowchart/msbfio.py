@@ -22,6 +22,7 @@ from lms.titleconfig.definitions.project import Project
 
 def read_msbf_path(file_path: str | os.PathLike[str], *, node_config: NodeConfig | None = None,
                    project: Project | None = None, message_root: os.PathLike[str] | str | None = None,
+                   language_index: int | None = None,
                    _source_resolver: SourceResolver | None = None) -> MSBF:
     """
     Reads a MSBF file from a path.
@@ -30,10 +31,11 @@ def read_msbf_path(file_path: str | os.PathLike[str], *, node_config: NodeConfig
     :param node_config: the node configuration to use.
     :param project: project object utilized for auto-source resolving.
     :param message_root: root of the message folder/archive. Archives must be extracted first.
+    :param language_index: language index from a configuration to map UMSBT to msbt files in message nodes.
     """
     source_resolver = _source_resolver
     if message_root is not None:
-        source_resolver = SourceResolver(project, message_root, node_config)
+        source_resolver = SourceResolver(project, message_root, node_config, language_index)
 
     with open(file_path, "rb") as stream:
         msbf = read_msbf(stream, node_config=node_config, project=project, message_root=message_root,
@@ -51,6 +53,7 @@ def read_msbf(
     node_config: NodeConfig | None = None,
     project: Project | None = None,
     message_root: os.PathLike[str] | str | None = None,
+    language_index: int | None = None,
     _source_resolver: SourceResolver | None = None
 ) -> MSBF:
     """
@@ -60,6 +63,7 @@ def read_msbf(
     :param node_config: the node configuration to use.
     :param project: project object utilized for auto-source resolving.
     :param message_root: root of the message folder/archive. Archives must be extracted for.
+    :param language_index: language index from a configuration to map UMSBT to msbt files in message nodes.
     """
     reader = FileReader(stream)
 
@@ -67,7 +71,7 @@ def read_msbf(
 
     source_resolver = _source_resolver
     if _source_resolver is None:
-        source_resolver = SourceResolver(project, message_root, node_config)
+        source_resolver = SourceResolver(project, message_root, node_config, language_index)
 
     msbf = MSBF(file_info, source_resolver, node_config)
     for magic, size in read_section_data(reader, file_info.section_count):

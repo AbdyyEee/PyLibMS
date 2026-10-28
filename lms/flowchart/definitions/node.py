@@ -184,21 +184,19 @@ class LMS_MessageNode(LMS_BaseNode):
     @property
     def msbt_name(self) -> str:
         """Name of the msbt resolved from the project."""
-        _validate_source_resolver(self._source_resolver)
+        if self._source_resolver is None:
+            raise ValueError("No message data was provided!")
+
+        self._source_resolver.validate()
         return self._source_resolver.retrieve_filename(self.msbt_index)
 
     @property
     def msbt(self) -> MSBT | UMSBT:
         """MSBT/UMSBT instance the node reference."""
         if self._source_resolver is None:
-            raise ValueError("No message root and project were provided!")
+            raise ValueError("No message data was provided!")
 
-        if not self._source_resolver.message_root:
-            raise ValueError("No message root was provided!")
-
-        if not self._source_resolver.project:
-            raise ValueError("No project was provided!")
-
+        self._source_resolver.validate()
         return self._source_resolver.resolve_msbt(self.msbt_index)
 
     @property
@@ -497,7 +495,10 @@ class LMS_JumpNode(LMS_BaseNode):
     @property
     def msbf_name(self) -> str:
         """Name of the msbf resolved from the project."""
-        _validate_source_resolver(self._source_resolver)
+        if self._source_resolver is None:
+            raise ValueError("No message data was provided!")
+
+        self._source_resolver.validate()
         return self._source_resolver.retrieve_filename(self.msbf_index)
 
     @property
@@ -512,14 +513,9 @@ class LMS_JumpNode(LMS_BaseNode):
             return None
 
         if self._source_resolver is None:
-            raise ValueError("No message root and project were provided!")
+            raise ValueError("No message data was provided!")
 
-        if not self._source_resolver.message_root:
-            raise ValueError("No message root was provided!")
-
-        if not self._source_resolver.project:
-            raise ValueError("No project was provided!")
-
+        self._source_resolver.validate()
         return self._source_resolver.resolve_source(self.msbf_index, FileExtension.MSBF)
 
     @next_entry.setter
@@ -551,13 +547,6 @@ def verify_parameter_structure(
         raise node_exceptions.LMS_NodeMissingParameterValueError(
             f"Parameter type {parameter_type} expects {parameter_type.value_count} parameter values, got {len(value)}!"
         )
-
-def _validate_source_resolver(source_resolver: SourceResolver):
-    if not source_resolver.message_root:
-        raise ValueError("No message root was provided!")
-
-    if not source_resolver.project:
-        raise ValueError("No project was provided!")
 
 # https://stackoverflow.com/a/69711845
 def _merge_shared_cases(cases: list[int]) -> str:

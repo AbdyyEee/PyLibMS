@@ -1,5 +1,4 @@
-import os
-from typing import Literal, Sequence
+from typing import Literal
 
 from lms.common.field.io import read_field, write_field
 from lms.common.field.lms_datatype import LMS_DataType
@@ -16,9 +15,8 @@ from lms.flowchart.definitions.node import (
     LMS_NodeParameter,
 )
 from lms.flowchart.definitions.node_type import LMS_NodeType, LMS_NodeParameterType
-from lms.flowchart.source_resolver import SourceResolver
+from lms.source_resolver import SourceResolver
 from lms.titleconfig.definitions.nodes import NodeConfig, NodeDefinition
-from lms.titleconfig.definitions.project import Project
 
 NO_VALUE = 0xFFFF
 FLW3_HEADER_SIZE = 16
@@ -44,6 +42,8 @@ def read_flw3(
     branch_metadata: dict[LMS_BranchNode, tuple] = {}
 
     next_node_index = None
+
+
     for i in range(node_count):
         node_data = reader.tell() + 8
         node_type = LMS_NodeType(reader.read_uint8())
@@ -113,11 +113,12 @@ def read_flw3(
                 reader.skip(6)
             case LMS_NodeType.JUMP:
                 reader.seek(node_data)
-                entry_node_index = next_node_index = read_next_node_id(reader)
+                next_node_index = read_next_node_id(reader)
                 msbf_index = (
                     None if (value := reader.read_uint16()) == NO_VALUE else value
                 )
-                node = LMS_JumpNode(i, entry_node_index, msbf_index, source_resolver)
+
+                node = LMS_JumpNode(i, msbf_index, source_resolver)
                 reader.skip(4)
 
         next_id_map[node] = next_node_index

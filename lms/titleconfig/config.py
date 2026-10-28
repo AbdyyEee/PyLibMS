@@ -1,6 +1,7 @@
 import hashlib
 import os.path
 import pathlib
+from dataclasses import dataclass
 from enum import StrEnum
 from types import MappingProxyType
 from typing import Literal, get_args, Mapping, Sequence, Self
@@ -36,7 +37,6 @@ SOURCE_KEY = "source_files"
 NODE_KEY = "nodes"
 
 
-
 class TitleConfig:
     """
     Represents a configuration for a specific title.
@@ -46,10 +46,13 @@ class TitleConfig:
         game: str | None,
         nodes: Mapping[str, NodeConfig] | None = None,
         projects: Mapping[str, Project] | None = None,
+        umsbt_languages: dict[str, dict[str, int]] | None = None,
     ):
         self._game = game
         self._nodes = nodes or {}
         self._projects: dict[str, Project] = projects or {}
+
+        self._umsbt_languages: dict[str, int] = umsbt_languages or {}
 
     @property
     def game(self) -> str | None:
@@ -65,6 +68,29 @@ class TitleConfig:
     def projects(self) -> Mapping[str, Project]:
         """Mapping of projects located in the configuration."""
         return MappingProxyType(self._projects)
+
+    @property
+    def global_project(self) -> Project | None:
+        """The global project, if defined."""
+        try:
+            return self._projects["global"]
+        except KeyError:
+            return None
+
+    @property
+    def umsbt_languages(self) -> Mapping[str, Mapping[str, int]]:
+        """Mapping of languages to fixed UMSBT indexes."""
+        return MappingProxyType(self._umsbt_languages)
+
+    def get_language(self, region: str, language: str) -> int:
+        """Retrieve a language index in the UMSBT language map."""
+        languages: dict = self._umsbt_languages[region]
+
+        for i, lang in languages.items():
+            if lang == language:
+                return i
+
+        raise KeyError(f"{language} is not in the UMSBT language map.")
 
     @classmethod
     def get_preset_list(cls) -> tuple[str, ...]:
@@ -178,6 +204,8 @@ class TitleConfig:
         game = parsed_content.get("game")
         nodes: dict = parsed_content.get("nodes", {})
 
+        umsbt_languages = parsed_content.get("umsbt_languages", {})
+
         node_map = {}
         for name, definition in nodes.items():
 
@@ -245,7 +273,7 @@ class TitleConfig:
 
             project_map[name] = project_obj
 
-        return cls(game, node_map, project_map)
+        return cls(game, node_map, project_map, umsbt_languages)
 
     @staticmethod
     def generate_file(

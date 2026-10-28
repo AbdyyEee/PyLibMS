@@ -154,7 +154,7 @@ def read_msbt(
             case MSBTSection.ATR1:
                 attribute_definitions = None if project is None else project.attributes
                 # Defined but empty attributes, so read encoded attributes
-                if not project.attributes:
+                if project is None or not project.attributes:
                     attribute_definitions = None
 
                 attribute_data = read_atr1(

@@ -2,17 +2,21 @@ from types import MappingProxyType
 from typing import overload, Mapping, Sequence, Iterator
 
 from lms.message.msbt import MSBT
+from lms.titleconfig.config import TitleConfig
 
 
 class UMSBT:
     """Class that represents a UMSBT file, an archive for MSBT files."""
 
-    def __init__(self, files: Sequence[MSBT] | None = None) -> None:
+    def __init__(self, files: Sequence[MSBT] | None = None,
+                 language_map: Mapping[str, int] | None = None) -> None:
         self._files = list(files) if files is not None else []
 
         for file in self._files:
             if not isinstance(file, MSBT):
                 raise TypeError("Only MSBTs are allowed for UMSBT archives!")
+
+        self._language_map = language_map
 
     @overload
     def __getitem__(self, index: int) -> MSBT: ...
@@ -41,7 +45,8 @@ class UMSBT:
     def file_map(self) -> Mapping[str, MSBT]:
         """Maps of files to their names tied to this instance."""
         return MappingProxyType(
-            {f"{i}.msbt": msbt for i, msbt in enumerate(self._files)}
+            {f"{i}.msbt" if not self._language_map else f"{self._language_map[i]}.msbt":
+                 msbt for i, msbt in enumerate(self._files)}
         )
 
     def add_msbt(self, msbt: MSBT) -> None:

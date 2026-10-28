@@ -10,6 +10,7 @@ from lms.fileio.io import FileReader, FileWriter
 from lms.message.msbt import MSBT
 from lms.message.msbtio import read_msbt, write_msbt
 from lms.message.umsbt import UMSBT
+from lms.source_resolver import SourceResolver
 from lms.titleconfig.definitions.project import Project
 from lms.titleconfig.definitions.tags import TagConfig
 
@@ -29,6 +30,7 @@ def read_umsbt_path(
     file_path: str | os.PathLike[str],
     *,
     project: Project | None = None,
+    language_map: Mapping[str, int] | None = None,
     suppress_tag_errors: bool = False,
 ) -> UMSBT:
     """
@@ -46,7 +48,7 @@ def read_umsbt_path(
     """
     with open(file_path, "rb") as stream:
         umsbt = read_umsbt(
-            stream, project=project, suppress_tag_errors=suppress_tag_errors
+            stream, project=project, language_map=language_map, suppress_tag_errors=suppress_tag_errors
         )
 
     return umsbt
@@ -56,6 +58,7 @@ def read_umsbt_directory(
     directory: str | os.PathLike[str],
     *,
     project: Project | None = None,
+    language_map: Mapping[str, int] | None = None,
     suppress_tag_errors: bool = False,
     ignore_extensions: bool = False,
 ) -> Mapping[str, tuple[MSBT, ...]]:
@@ -86,6 +89,7 @@ def read_umsbt_directory(
         umsbt = read_umsbt_path(
             os.path.join(directory, file),
             project=project,
+            language_map=language_map,
             suppress_tag_errors=suppress_tag_errors,
         )
         files[os.path.basename(file)] = umsbt
@@ -97,6 +101,7 @@ def read_umsbt(
     stream: BinaryIO | bytes,
     *,
     project: Project | None = None,
+    language_map: Mapping[str, int] | None = None,
     suppress_tag_errors: bool = False,
 ) -> UMSBT:
     """
@@ -138,7 +143,7 @@ def read_umsbt(
             )
         )
 
-    return UMSBT(files)
+    return UMSBT(files, language_map)
 
 
 def write_umsbt_path(file_path: str | os.PathLike[str], file: UMSBT) -> None:

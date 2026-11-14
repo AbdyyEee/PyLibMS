@@ -23,9 +23,6 @@ from lms.titleconfig.definitions.project import Project
 from lms.titleconfig.definitions.style import Style
 from lms.titleconfig.definitions.tags import TagConfig, TagDefinition
 
-PRESETS_URL = (
-    "https://api.github.com/repos/AbdyyEee/PyLibMS/contents/lms/titleconfig/presets"
-)
 
 DEFAULT_COLOR = 0xFFFF
 
@@ -96,87 +93,6 @@ class TitleConfig:
     def get_preset_list(cls) -> tuple[str, ...]:
         """Get the current preset list."""
         return get_args(cls.GAME_PRESET)
-
-    @classmethod
-    def check_for_preset_updates(cls) -> dict[str, bool]:
-        """
-        Checks whether a preset has an available update.
-
-        :param game: the game preset.
-        """
-        preset_list = cls._request_preset_list()
-
-        result = {}
-
-        for preset in preset_list:
-            if f"{preset}.yaml" not in os.listdir("presets"):
-                continue
-
-            path = os.path.join("presets", f"{preset}.yaml")
-
-            with open(path, "rb") as f:
-                data = f.read().replace(b"\r\n", b"\n")
-
-            # Blob calculation https://git-scm.com/book/en/v2/Git-Internals-Git-Objects.html
-            local_hash = hashlib.sha1(f"blob {len(data)}\0".encode() + data).hexdigest()
-
-            result[preset] = local_hash != preset_list[preset]["sha"]
-
-        return result
-
-    @classmethod
-    def download_preset(cls, game: GAME_PRESET) -> None:
-        """
-        Fetches a preset from the repository and loads it to ./presets
-
-        :param game: the game preset.
-
-        List of presets:
-
-        https://github.com/AbdyyEee/PylibMS/tree/main/lms/titleconfig/presets
-        """
-
-        preset_list = cls._request_preset_list()
-
-        if game.lower() not in {
-            preset.lower(): data for preset, data in preset_list.items()
-        }:
-            raise FileNotFoundError(f"Preset '{game}' not found.")
-
-        raw = cls._request_preset_file(game, preset_list)
-
-        pathlib.Path("presets").mkdir(exist_ok=True)
-
-        path = os.path.join("presets", f"{game}.yaml")
-        with open(path, "wb") as f:
-            f.write(raw.content)
-
-    @classmethod
-    def _request_preset_list(cls) -> dict[str, dict]:
-        result = {}
-
-        try:
-            folder_response = requests.get(PRESETS_URL, timeout=10)
-            folder_response.raise_for_status()
-        except requests.exceptions.RequestException as e:
-            raise RuntimeError("An error occurred fetching the preset list!") from e
-
-        for preset in folder_response.json():
-            result[os.path.basename(preset["path"]).removesuffix(".yaml")] = preset
-
-        return result
-
-    @classmethod
-    def _request_preset_file(cls, game: str, preset_list: dict) -> requests.Response:
-        try:
-            raw_response = requests.get(preset_list[game]["download_url"], timeout=10)
-            raw_response.raise_for_status()
-        except requests.exceptions.RequestException as e:
-            raise RuntimeError(
-                f"An error occurred fetching the file data for preset '{game}'"
-            ) from e
-
-        return raw_response
 
     @classmethod
     def load_file(cls, file_path: str) -> Self:
@@ -263,7 +179,7 @@ class TitleConfig:
                             container.add_definition(
                                 TagDefinition.from_dict(tag, groups)
                             )
-                        project_obj.set_tags(container)
+                        project_obj.set_tag_config(container)
                     case "styles":
                         for style in data:
                             project_obj.add_style(Style.from_dict(style))

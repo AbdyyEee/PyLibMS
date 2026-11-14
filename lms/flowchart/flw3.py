@@ -26,8 +26,9 @@ VARIABLE_WIDTH_DATATYPES = (LMS_DataType.BOOL, LMS_DataType.ENUM)
 
 
 def read_flw3(
-    reader: FileReader, config: NodeConfig | None, source_resolver: SourceResolver
-) -> list[LMS_EntryNode]:
+    reader: FileReader, config: NodeConfig | None,
+        source_resolver: SourceResolver
+) -> tuple[list[LMS_EntryNode], list[tuple[LMS_JumpNode, int]]]:
     section_start = reader.tell()
     node_count = reader.read_uint16()
     branch_table_id_count = reader.read_uint16()
@@ -127,6 +128,7 @@ def read_flw3(
     node_map: dict[int, LMS_BaseNode | None] = {node.id: node for node in nodes}
     branch_ids = [read_next_node_id(reader) for _ in range(branch_table_id_count)]
 
+    external_jumps: list[tuple[LMS_JumpNode, int]] = []
     for node in nodes:
         next_node_id = next_id_map[node]
 
@@ -142,9 +144,12 @@ def read_flw3(
 
             continue
         elif isinstance(node, LMS_JumpNode):
-            # Set the next entry from the file if it is an external jump or the local file
+            # Defer resolving external node references until the current MSBF is registered in read_msbf
+            if node.msbf_index is not None:
+                external_jumps.append((node, next_node_id))
+            elif next_node_id is not None:
+                node.set_next_node(node_map[next_node_id])
 
-            node.next_entry = node_map[next_node_id]
             continue
 
         if next_node_id is None:
@@ -152,7 +157,7 @@ def read_flw3(
 
         node.set_next_node(node_map[next_node_id])
 
-    return entry_nodes
+    return entry_nodes, external_jumps
 
 
 def read_next_node_id(reader: FileReader) -> int | None:

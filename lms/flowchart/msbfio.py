@@ -47,6 +47,8 @@ def read_msbf_path(file_path: str | os.PathLike[str], *, node_config: NodeConfig
 
     return msbf
 
+
+
 def read_msbf(
     stream: BinaryIO | bytes,
     *,
@@ -54,6 +56,7 @@ def read_msbf(
     project: Project | None = None,
     message_root: os.PathLike[str] | str | None = None,
     language_index: int | None = None,
+    stream_name: str | None = None,
     _source_resolver: SourceResolver | None = None
 ) -> MSBF:
     """
@@ -74,10 +77,11 @@ def read_msbf(
         source_resolver = SourceResolver(project, message_root, node_config, language_index)
 
     msbf = MSBF(file_info, source_resolver, node_config)
+
     for magic, size in read_section_data(reader, file_info.section_count):
         match magic:
             case MSBFSection.FLW3:
-                entry_nodes = read_flw3(reader, node_config, source_resolver)
+                entry_nodes, external_jumps = read_flw3(reader, node_config, source_resolver)
             case MSBFSection.FEN1:
                 labels, slot_count = read_labels(reader)
             case MSBFSection.REF1:
@@ -91,6 +95,28 @@ def read_msbf(
         msbf.add_flowchart(label, entry_nodes[i])
 
     msbf.slot_count = slot_count
+
+    # If the stream has a name property this will work as intended
+    # however, since raw byte streams can be passed we can account this with stream_name argument
+    if stream_name is None:
+        stream_name = getattr(stream, "name", None)
+
+    filename_key = os.path.basename(stream_name) if isinstance(stream_name, (str, os.PathLike[str])) else None
+
+    if source_resolver is not None:
+
+        if stream_name is not None:
+            source_resolver.resolved_cache[filename_key] = msbf
+
+        try:
+            # Resolve the external jumps safely now
+            for jump, next_node_id in external_jumps:
+                if next_node_id is None:
+                    continue
+                jump.set_next_node(jump.msbf[next_node_id])
+        except Exception:
+            source_resolver.resolved_cache.clear()
+            raise
 
     return msbf
 

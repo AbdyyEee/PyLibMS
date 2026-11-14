@@ -371,7 +371,7 @@ class MSBF:
                 continue
 
             if isinstance(node, LMS_JumpNode) and node.next_entry == entry_node:
-                node.next_entry = None
+                node.set_next_node(None)
 
     def _register_node(self, node: LMS_BaseNode) -> LMS_BaseNode:
         if not isinstance(node, LMS_BaseNode):

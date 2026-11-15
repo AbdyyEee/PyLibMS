@@ -12,7 +12,7 @@ class FileEncoding(IntEnum):
     UTF32 = 0x02
 
     def to_string_format(
-            self, endian: FileEndian = FileEndian.LITTLE
+        self, endian: FileEndian = FileEndian.LITTLE
     ) -> Literal["UTF-8", "UTF-16-BE", "UTF-16-LE", "UTF-32-BE", "UTF-32-LE"]:
         """Converts the FileEncoding to string format."""
         match self:

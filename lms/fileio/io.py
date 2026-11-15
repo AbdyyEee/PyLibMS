@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import struct
 from enum import StrEnum
-from typing import BinaryIO, Generator, Type
+from typing import BinaryIO, Generator, Type, Sequence
 
 from io import BytesIO, IOBase, TextIOBase
 from lms.fileio.encoding import FileEncoding
@@ -19,6 +19,7 @@ class StructLETypes(StrEnum):
     INT16 = "<h"
     INT32 = "<i"
     FLOAT32 = "<f"
+    DOUBLE = "<d"
 
 
 class StructBETypes(StrEnum):
@@ -29,10 +30,15 @@ class StructBETypes(StrEnum):
     INT16 = ">h"
     INT32 = ">i"
     FLOAT32 = ">f"
+    DOUBLE = ">d"
 
 
 class FileReader:
-    def __init__(self, data: BinaryIO | bytes | bytearray | memoryview, endian: FileEndian = FileEndian.LITTLE) -> None:
+    def __init__(
+        self,
+        data: BinaryIO | bytes | bytearray | memoryview,
+        endian: FileEndian = FileEndian.LITTLE,
+    ) -> None:
         self._stream: BinaryIO = None
 
         match data:
@@ -63,7 +69,11 @@ class FileReader:
         return self._stream.read(length)
 
     def seek(self, offset: int, whence: int = 0) -> None:
-        self._stream.seek(self.tell() + offset) if offset < 0 else self._stream.seek(offset, whence)
+        (
+            self._stream.seek(self.tell() + offset)
+            if offset < 0
+            else self._stream.seek(offset, whence)
+        )
 
     def read_offset_array(self, count: int) -> Generator[int, None, None]:
         start = self.tell() - 4
@@ -96,6 +106,9 @@ class FileReader:
     def read_float32(self) -> float:
         return struct.unpack(self.datatypes.FLOAT32, self._stream.read(4))[0]
 
+    def read_double(self) -> float:
+        return struct.unpack(self.datatypes.DOUBLE, self._stream.read(4))[0]
+
     def read_string_offset(self, section_start: int) -> str:
         offset = self.read_uint32()
         last_position = self.tell()
@@ -109,7 +122,9 @@ class FileReader:
 
     def read_encoded_string(self):
         string = b""
-        while (raw_char := self.read_bytes(self.encoding.width)) != self.encoding.terminator:
+        while (
+            raw_char := self.read_bytes(self.encoding.width)
+        ) != self.encoding.terminator:
             string += raw_char
         return string.decode(self.encoding.to_string_format(self.endian))
 
@@ -122,7 +137,11 @@ class FileReader:
 
 
 class FileWriter:
-    def __init__(self, encoding: FileEncoding = FileEncoding.UTF8, endian: FileEndian = FileEndian.LITTLE) -> None:
+    def __init__(
+        self,
+        encoding: FileEncoding = FileEncoding.UTF8,
+        endian: FileEndian = FileEndian.LITTLE,
+    ) -> None:
         self.data = BytesIO(b"")
         self.encoding = encoding
         self.endian = endian
@@ -150,10 +169,12 @@ class FileWriter:
     def tell(self) -> int:
         return self.data.tell()
 
-    def write_alignment(self, data: bytes, alignment: int) -> None:
-        self.write_bytes(data * self._align(self.tell(), alignment))
+    def write_alignment(self, data: bytes, alignment: int) -> int:
+        data = data * self._align(self.tell(), alignment)
+        self.write_bytes(data)
+        return len(data)
 
-    def write_uint16_array(self, array: list[int]) -> None:
+    def write_uint16_array(self, array: Sequence[int]) -> None:
         for number in array:
             self.write_uint16(number)
 
@@ -178,6 +199,9 @@ class FileWriter:
     def write_float32(self, value: float) -> None:
         self.data.write(struct.pack(self.datatypes.FLOAT32, value))
 
+    def write_double(self, value: float) -> None:
+        self.data.write(struct.pack(self.datatypes.DOUBLE, value))
+
     def write_string(self, string: str) -> None:
         self.write_bytes(string.encode("UTF-8"))
 
@@ -185,12 +209,17 @@ class FileWriter:
         self.write_uint16(len(string) * self.encoding.width)
         self.write_encoded_string(string, False)
 
-    def write_encoded_string(self, string: str, terminate: bool = True) -> None:
+    def write_encoded_string(self, string: str, terminate: bool = True) -> int:
         self.write_bytes(
-            string.encode(self.encoding.to_string_format(self.endian))
+            string := string.encode(self.encoding.to_string_format(self.endian))
         )
+        length = len(string)
+
         if terminate:
-            self.write_bytes(b"\x00" * self.encoding.width)
+            self.write_bytes(self.encoding.terminator)
+            length += len(self.encoding.terminator)
+
+        return length
 
     def _align(self, number: int, alignment: int) -> int:
         return (-number % alignment + alignment) % alignment

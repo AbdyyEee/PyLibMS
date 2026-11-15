@@ -7,7 +7,8 @@ from lms.message.tag.lms_tag import (
     LMS_ControlTag,
     LMS_DecodedTag,
     LMS_EncodedTag,
-    is_tag, TAG_PADDING_VALUE,
+    is_tag,
+    TAG_PADDING_VALUE,
 )
 from lms.message.tag.lms_tagexceptions import LMS_TagForbiddenParametersError
 from lms.titleconfig.config import TagConfig
@@ -19,9 +20,9 @@ class LMS_MessageText:
     TAG_FORMAT = re.compile(r"(\[[^]]+])")
 
     def __init__(
-            self,
-            message: str | Sequence[str | LMS_ControlTag],
-            tag_config: TagConfig | None = None,
+        self,
+        message: str | Sequence[str | LMS_ControlTag],
+        tag_config: TagConfig | None = None,
     ):
         self._tag_config = tag_config
 
@@ -66,7 +67,7 @@ class LMS_MessageText:
         return MappingProxyType(positions)
 
     def append_encoded_tag(
-            self, group_id: int, tag_index: int, *parameters: int, is_closing: bool = False
+        self, group_id: int, tag_index: int, *parameters: int, is_closing: bool = False
     ) -> LMS_EncodedTag:
         """
         Appends an encoded tag to the current message and returns that tag.
@@ -102,11 +103,11 @@ class LMS_MessageText:
         return tag
 
     def append_decoded_tag(
-            self,
-            group_name: str,
-            tag_name: str,
-            is_closing: bool = False,
-            **parameters: FieldValue,
+        self,
+        group_name: str,
+        tag_name: str,
+        is_closing: bool = False,
+        **parameters: FieldValue,
     ) -> LMS_DecodedTag:
         """
         Appends a decoded tag to the current message and returns that tag.

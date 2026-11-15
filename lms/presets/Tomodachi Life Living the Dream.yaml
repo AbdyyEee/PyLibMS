@@ -1,0 +1,3284 @@
+game: Tomodachi Life Living the Dream
+projects:
+  project:
+    colors:
+    - name: Highlight
+      red: 210
+      green: 110
+      blue: 0
+      alpha: 255
+    attributes:
+    - name: SecToStartTalk
+      datatype: float32
+      offset: 0
+    - name: V000RandomWeight
+      datatype: float32
+      offset: 4
+    - name: FlowRandomWeight
+      datatype: float32
+      offset: 8
+    - name: V000Priority
+      datatype: uint8
+      offset: 12
+    - name: FlowPriority
+      datatype: uint8
+      offset: 13
+    - name: RelationMiiAToB
+      datatype: enum
+      offset: 14
+      enum_members:
+        0: Any
+        1: Other
+        2: NotOther
+        3: Know
+        4: Friend
+        5: ExFriend
+        6: Lover
+        7: ExLover
+        8: Couple
+        9: ExCouple
+        10: Parent
+        11: Child
+        12: BrotherSisterOlder
+        13: BrotherSisterYounger
+        14: GrandParent
+        15: GrandChild
+        16: Relative
+        17: OtherOrKnow
+        18: NotOtherNorKnow
+        19: LoverOrCouple
+        20: NotLoverNorCouple
+        21: Family
+        22: NotFamily
+        23: NotFamilyNorBloodRelation
+        24: BrotherSister
+        25: Roommate
+        26: Roommate_Other
+        27: Roommate_NotOther
+        28: Roommate_OtherOrKnow
+        29: Roommate_NotOtherNorKnow
+        30: Roommate_LoverOrCouple
+        31: Roommate_Family
+        32: Roommate_NotFamily
+        33: NotRoommate_Friend
+        34: OneSideLove
+        35: OneSideLove_Know
+        36: OneSideLove_MoreThanFriend
+        37: NotOneSideLove_Know
+        38: NotOneSideLove_MoreThanFriend
+    - name: RelationMiiA
+      datatype: enum
+      offset: 15
+      enum_members:
+        0: Talker
+        1: TalkingMii0
+        2: TalkingMii1
+        3: TalkingMii2
+        4: TalkingMii3
+        5: SlotMii0
+        6: SlotMii1
+        7: SlotMii2
+        8: SlotMii3
+        9: ParticipantMii0
+        10: ParticipantMii1
+        11: ParticipantMii2
+        12: ParticipantMii3
+    - name: RelationMiiB
+      datatype: enum
+      offset: 16
+      enum_members:
+        0: Talker
+        1: TalkingMii0
+        2: TalkingMii1
+        3: TalkingMii2
+        4: TalkingMii3
+        5: SlotMii0
+        6: SlotMii1
+        7: SlotMii2
+        8: SlotMii3
+        9: ParticipantMii0
+        10: ParticipantMii1
+        11: ParticipantMii2
+        12: ParticipantMii3
+    - name: RelationMeterRankMiiAtoB
+      datatype: enum
+      offset: 17
+      enum_members:
+        0: Any
+        1: Rank0
+        2: Rank1
+        3: Rank2
+        4: Rank3
+        5: Rank4
+        6: Rank5
+        7: Rank6
+        8: Low
+        9: Middle
+        10: High
+        11: MiddleOrLow
+        12: MiddleOrHigh
+    - name: FightingMiiAandB
+      datatype: enum
+      offset: 18
+      enum_members:
+        0: Any
+        1: 'True'
+        2: 'False'
+    - name: MiiX
+      datatype: enum
+      offset: 19
+      enum_members:
+        0: Talker
+        1: TalkingMii0
+        2: TalkingMii1
+        3: TalkingMii2
+        4: TalkingMii3
+        5: SlotMii0
+        6: SlotMii1
+        7: SlotMii2
+        8: SlotMii3
+        9: ParticipantMii0
+        10: ParticipantMii1
+        11: ParticipantMii2
+        12: ParticipantMii3
+        13: Default
+    - name: Character
+      datatype: enum
+      offset: 20
+      enum_members:
+        0: NNCD
+        1: N---
+        2: -N--
+        3: --C-
+        4: '---D'
+        5: NN--
+        6: --CD
+        7: N--D
+        8: -NC-
+        9: N-C-
+        10: -N-D
+        11: -NCD
+        12: N-CD
+        13: NN-D
+        14: NNC-
+        15: NoriGangan
+        16: NoriKirakira
+        17: NoriWaiwai
+        18: NoriMeramera
+        19: NagomiNikoniko
+        20: NagomiFuwafuwa
+        21: NagomiHonwaka
+        22: NagomiMattari
+        23: CoolKicchiri
+        24: CoolMojimoji
+        25: CoolSin
+        26: CoolJikkuri
+        27: DryBaribari
+        28: DryTekipaki
+        29: DrySabasaba
+        30: DryBassari
+    - name: BondLevel
+      datatype: enum
+      offset: 21
+      enum_members:
+        0: Lv01234
+        1: Lv0----
+        2: Lv-1---
+        3: Lv--2--
+        4: Lv---3-
+        5: Lv----4
+        6: Lv-1234
+        7: Lv--234
+        8: Lv---34
+        9: Lv01---
+        10: Lv012--
+        11: Lv0123-
+        12: Lv-123-
+        13: Lv-12--
+        14: Lv--23-
+    - name: Feeling
+      datatype: enum
+      offset: 22
+      enum_members:
+        0: NCGIADDW
+        1: N-------
+        2: -C------
+        3: --G-----
+        4: '---I----'
+        5: '----A---'
+        6: '-----D--'
+        7: '------D-'
+        8: '-------W'
+        9: NCG-----
+        10: NC------
+        11: N-G-----
+        12: -CG-----
+        13: '---IA---'
+        14: '-----DDW'
+        15: '-----DD-'
+        16: '------DW'
+        17: '---I-D--'
+        18: '----A-DW'
+        19: '---IADDW'
+        20: --GIADDW
+        21: -C-IADDW
+        22: N--IADDW
+        23: NCG--DDW
+        24: NCGIA---
+        25: NCGIA--W
+        26: NCGIAD--
+        27: NCG-A-DW
+        28: NCGI-D--
+        29: -CGIADDW
+        30: N-GIADDW
+        31: NC-IADDW
+        32: NCG-ADDW
+        33: NCGI-DDW
+        34: NCGIA-DW
+        35: NCGIAD-W
+        36: NCGIADD-
+    - name: Trouble
+      datatype: enum
+      offset: 23
+      enum_members:
+        0: Any
+        1: Invalid
+    - name: Location
+      datatype: enum
+      offset: 24
+      enum_members:
+        0: Any
+        1: MyHouse
+        2: NotMyHouse
+        3: MyRoom
+        4: NotMyRoom
+        5: Indoor
+        6: Outdoor
+        7: Restaurant
+        8: SportsGym
+    - name: Habit
+      datatype: enum
+      offset: 25
+      enum_members:
+        0: _AnyOne_
+        1: GreetingTypeNoting
+        2: GreetingTypeCackle
+        3: GreetingTypeFormally
+        4: GreetingTypeBig
+        5: GreetingShy
+        6: GreetingTypeShallow
+        7: GreetingVitality
+        8: GreetingSalute
+        9: GreetingNoble
+        10: GreetingLazy
+        11: GreetingOsu
+        12: GreetingBow
+        13: GreetingAnnoying
+        14: GreetingCurtsy
+        15: GreetingMacho
+        16: GreetingHeadOnly
+        17: Greeting_006
+        18: Greeting_007
+        19: Greeting_008
+        20: Greeting_009
+        21: OftenCrossArms
+        22: StandShakeHip
+        23: StandCute
+        24: StandAffected
+        25: StandRhythm
+        26: StandProudly
+        27: StandLeanForward
+        28: StandCareLooks
+        29: StandHandsBack
+        30: StandShy
+        31: StandSweatLot
+        32: StandStraight
+        33: StandSleepy
+        34: StandPutsGlasses
+        35: StandRestless
+        36: StandTiltHead
+        37: StandToeOut
+        38: StandHandsFront
+        39: Stand_002
+        40: Stand_003
+        41: WalkUneasily
+        42: WalkShuffle
+        43: WalkToeOut
+        44: WalkScurry
+        45: WalkUnsteady
+        46: WalkLikeModel
+        47: WalkLikeRobot
+        48: WalkToeIn
+        49: WalkNoSwinging
+        50: WalkStoop
+        51: WalkSwagger
+        52: WalkRhythm
+        53: WalkFloat
+        54: Walk_002
+        55: Walk_003
+        56: Walk_004
+        57: Walk_005
+        58: Walk_006
+        59: Walk_007
+        60: Walk_008
+        61: Dummy_000
+        62: Dummy_001
+        63: Dummy_002
+        64: Dummy_003
+        65: Dummy_004
+        66: Dummy_005
+        67: Dummy_006
+        68: EatCute
+        69: EatCarefully
+        70: EatSecretly
+        71: EatWild
+        72: EatElegantly
+        73: EatCrisp
+        74: EatMouthful
+        75: EatSmell
+        76: StomachBig
+        77: StomachSmall
+        78: GetAngryTypeHard
+        79: GetAngryTypeRegretfulTears
+        80: GetAngryTypeBrightly
+        81: ExpressionLess
+        82: FaceSmug
+        83: FaceSmile
+        84: FaceRaiseEyebrows
+        85: FaceWink
+        86: FaceBliss
+        87: FaceLousy
+        88: FaceOpenEyes
+        89: FaceCloseEyes
+        90: Face_000
+        91: VoiceLoud
+        92: VoiceSmall
+        93: VoiceShiny
+        94: VoiceGloomy
+        95: Voice_002
+        96: Voice_003
+        97: Voice_004
+        98: Voice_005
+        99: Voice_000
+        100: Voice_001
+        101: BlinkLot
+        102: SnoreLoudly
+        103: BreakGas
+        104: UntidySleeper
+        105: TakeItOutOnObject
+        106: LifeTimeNightOwl
+        107: Other_000
+        108: Chicken
+        109: ChangeCloth
+    - name: ReactionToFood0
+      datatype: enum
+      offset: 26
+      enum_members:
+        0: All
+        1: UWVB-----
+        2: '----N----'
+        3: '-----GVBU'
+    - name: AddBondMeter
+      datatype: int8
+      offset: 27
+    - name: Pattern
+      datatype: enum
+      offset: 28
+      enum_members:
+        0: Any
+        1: P0
+        2: P1
+        3: P2
+        4: P12
+        5: P02
+        6: P01
+    - name: TimeRange
+      datatype: enum
+      offset: 29
+      enum_members:
+        0: EMDENM
+        1: E-----
+        2: -M----
+        3: --D---
+        4: '---E--'
+        5: '----N-'
+        6: '-----M'
+        7: EM----
+        8: --DE--
+        9: '----NM'
+        10: '---ENM'
+    - name: MiiNum
+      datatype: enum
+      offset: 30
+      enum_members:
+        0: Any
+        1: Num1
+        2: Num2
+        3: Num3_100
+        4: Num1_20
+        5: Num21_50
+        6: Num51_99
+        7: Num100
+    - name: FocusLeadingDistance
+      datatype: enum
+      offset: 31
+      enum_members:
+        0: NF-
+        1: N--
+        2: -F-
+        3: --S
+    - name: MessageShufflerTalker
+      datatype: enum
+      offset: 32
+      enum_members:
+        0: TalkingMiiNext
+        1: TalkingMiiSame
+        2: TalkingMii0
+        3: TalkingMii1
+        4: TalkingMii2
+        5: TalkingMii3
+        6: Telop
+    - name: ChatResponseLaugh
+      datatype: enum
+      offset: 33
+      enum_members:
+        0: 'On'
+        1: 'Off'
+    - name: ChatResponseYes
+      datatype: enum
+      offset: 34
+      enum_members:
+        0: 'On'
+        1: 'Off'
+    - name: ChatResponseNo_Deny
+      datatype: enum
+      offset: 35
+      enum_members:
+        0: 'On'
+        1: 'Off'
+    - name: ChatResponseNo_Wrong
+      datatype: enum
+      offset: 36
+      enum_members:
+        0: 'On'
+        1: 'Off'
+    - name: ChatResponseNo_NotAllow
+      datatype: enum
+      offset: 37
+      enum_members:
+        0: 'On'
+        1: 'Off'
+    - name: ChatResponseQuestion
+      datatype: enum
+      offset: 38
+      enum_members:
+        0: 'On'
+        1: 'Off'
+    - name: ChatResponseSurprise
+      datatype: enum
+      offset: 39
+      enum_members:
+        0: 'On'
+        1: 'Off'
+    - name: ChatResponseYesSome
+      datatype: enum
+      offset: 40
+      enum_members:
+        0: 'On'
+        1: 'Off'
+    - name: InvalidateByMS
+      datatype: enum
+      offset: 41
+      enum_members:
+        0: Valid
+        1: InvalidateByMS
+        2: WaitForDelete
+    - name: MessageTest
+      datatype: enum
+      offset: 42
+      enum_members:
+        0: Normal
+        1: TestCategory001
+    - name: UgcTextGenreAttribute
+      datatype: enum
+      offset: 43
+      enum_members:
+        0: Invalid
+        1: PersonPositive
+        2: PersonNeutral
+        3: PersonNegative
+        4: ObjectPositive
+        5: ObjectNeutral
+        6: ObjectNegative
+        7: ActionPositive
+        8: ActionNeutral
+        9: ActionNegative
+        10: ImagePositive
+        11: ImageNeutral
+        12: ImageNegative
+        13: TopicPositive
+        14: TopicNeutral
+        15: TopicNegative
+        16: PhrasePositive
+        17: PhraseNeutral
+        18: PhraseNegative
+    - name: Season
+      datatype: enum
+      offset: 44
+      enum_members:
+        0: Any
+        1: Spring
+        2: Summer
+        3: Autumn
+        4: Winter
+    - name: Month
+      datatype: uint8
+      offset: 45
+    - name: Day
+      datatype: uint8
+      offset: 46
+    - name: Hemisphere
+      datatype: enum
+      offset: 47
+      enum_members:
+        0: Both
+        1: North
+        2: South
+    - name: JenkinsCheck
+      datatype: enum
+      offset: 48
+      enum_members:
+        0: Unchecked
+        1: CheckedUse
+        2: CheckedUnuse
+        3: CheckedForceUse
+    - name: VoiceOnly
+      datatype: enum
+      offset: 49
+      enum_members:
+        0: 'False'
+        1: 'True'
+    - name: UgcExteriorInteriorImpressionType
+      datatype: enum
+      offset: 50
+      enum_members:
+        0: ExteriorSimple
+        1: ExteriorFun
+        2: ExteriorWarmly
+        3: ExteriorCreepy
+        4: ExteriorRare
+        5: ExteriorDignified
+        6: InteriorSimple
+        7: InteriorFun
+        8: InteriorWarmly
+        9: InteriorCreepy
+        10: InteriorRare
+        11: InteriorDignified
+        12: Any
+    - name: NOE Comments
+      datatype: string
+      offset: 51
+    - name: AlphabeticalComment(JPja)
+      datatype: string
+      offset: 55
+    - name: AlphabeticalComment(CNzh)
+      datatype: uint32
+      offset: 59
+    - name: AlphabeticalComment(TWzh)
+      datatype: uint32
+      offset: 63
+    - name: NOE Glossary
+      datatype: string
+      offset: 67
+    - name: LanguageAndCurrency
+      datatype: enum
+      offset: 71
+      enum_members:
+        0: Invalid
+        1: Valid
+    - name: Facility
+      datatype: enum
+      offset: 72
+      enum_members:
+        0: Any
+        1: Atelier
+        2: PhotoStudio
+        3: Tower
+        4: PawnShop
+    - name: TagCheck(US)
+      datatype: enum
+      offset: 73
+      enum_members:
+        0: '-'
+        1: OK
+    - name: TagCheck(EU)
+      datatype: enum
+      offset: 74
+      enum_members:
+        0: '-'
+        1: OK
+    - name: TagCheck(Asia)
+      datatype: enum
+      offset: 75
+      enum_members:
+        0: '-'
+        1: OK
+    tags:
+      groups:
+        0: System
+        2: Replace
+        5: Player
+        6: Voice
+        8: Balloon
+        9: Etc
+        100: Variable
+        200: Mii
+        201: Grammar
+        300: MiiAdd
+      definitions:
+      - name: Ruby
+        group_id: 0
+        tag_index: 0
+        parameters:
+        - name: rt
+          datatype: string
+      - name: Font
+        group_id: 0
+        tag_index: 1
+        parameters:
+        - name: name
+          datatype: string
+      - name: Scale
+        group_id: 0
+        tag_index: 2
+        parameters:
+        - name: percent
+          datatype: uint16
+      - name: Color
+        group_id: 0
+        tag_index: 3
+        parameters:
+        - name: id
+          datatype: int16
+      - name: PageBreak
+        group_id: 0
+        tag_index: 4
+      - name: Reference
+        group_id: 0
+        tag_index: 5
+        parameters:
+        - name: mltxt
+          datatype: string
+        - name: label
+          datatype: string
+        - name: lang
+          datatype: string
+      - name: UGCText
+        group_id: 2
+        tag_index: 0
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: genre
+          datatype: enum
+          enum_members:
+            0: Person
+            1: Object
+            2: Action
+            3: Image
+            4: Topic
+            5: Phrase
+            6: ConditionalAny
+        - name: attr
+          datatype: enum
+          enum_members:
+            0: Any
+            1: Neutral
+            2: Positive
+            3: Negative
+            4: PositiveOrNeutral
+            5: NegativeOrNeutral
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: Random
+            2: UseOnlyIfOn
+            3: RandomOnlyIfOff
+      - name: UGCFood
+        group_id: 2
+        tag_index: 1
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: Random
+            2: UseOnlyIfOn
+            3: RandomOnlyIfOff
+      - name: UGCGoods
+        group_id: 2
+        tag_index: 2
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: Random
+            2: UseOnlyIfOn
+            3: RandomOnlyIfOff
+        - name: holder
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+      - name: UGCCloth
+        group_id: 2
+        tag_index: 3
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: Random
+            2: UseOnlyIfOn
+            3: RandomOnlyIfOff
+        - name: holder
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+      - name: UGCMapObject
+        group_id: 2
+        tag_index: 4
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: Random
+            2: UseOnlyIfOn
+            3: RandomOnlyIfOff
+      - name: UGCMapFloor
+        group_id: 2
+        tag_index: 5
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: Random
+            2: UseOnlyIfOn
+            3: RandomOnlyIfOff
+      - name: UGCInterior
+        group_id: 2
+        tag_index: 6
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: Random
+            2: UseOnlyIfOn
+            3: RandomOnlyIfOff
+      - name: UGCExterior
+        group_id: 2
+        tag_index: 7
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: Random
+            2: UseOnlyIfOn
+            3: RandomOnlyIfOff
+      - name: GeneralMessage
+        group_id: 2
+        tag_index: 8
+        parameters:
+        - name: slot
+          datatype: uint8
+      - name: GeneralMessage10
+        group_id: 2
+        tag_index: 9
+        parameters:
+        - name: slot
+          datatype: uint8
+      - name: GeneralMessage32
+        group_id: 2
+        tag_index: 10
+        parameters:
+        - name: slot
+          datatype: uint8
+      - name: GeneralMessageIgnorePhoneticSymbol
+        group_id: 2
+        tag_index: 11
+        parameters:
+        - name: slot
+          datatype: uint8
+      - name: GeneralItem
+        group_id: 2
+        tag_index: 12
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: Random
+            2: UseOnlyIfOn
+            3: RandomOnlyIfOff
+      - name: Food
+        group_id: 2
+        tag_index: 13
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: kind
+          datatype: enum
+          enum_members:
+            0: All
+            1: Awful
+            2: NotAwful
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: Random
+            2: UseOnlyIfOn
+            3: RandomOnlyIfOff
+        - name: style
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+      - name: Cloth
+        group_id: 2
+        tag_index: 14
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: Random
+            2: UseOnlyIfOn
+            3: RandomOnlyIfOff
+        - name: holder
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+        - name: style
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+      - name: Coordinate
+        group_id: 2
+        tag_index: 15
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: Random
+            2: UseOnlyIfOn
+            3: RandomOnlyIfOff
+        - name: holder
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+      - name: Goods
+        group_id: 2
+        tag_index: 16
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: category
+          datatype: enum
+          enum_members:
+            0: All
+            1: Levelup
+            2: Treasure
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: Random
+            2: UseOnlyIfOn
+            3: RandomOnlyIfOff
+        - name: holder
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+        - name: style
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+      - name: Habit
+        group_id: 2
+        tag_index: 17
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: set
+          datatype: enum
+          enum_members:
+            0: None
+            1: GreetingType
+            2: StandType
+            3: WalkType
+            4: EatType
+            5: StomachType
+            6: GetAngryType
+            7: ExpressionType
+            8: VoiceType
+            9: Must
+            10: Random
+        - name: holder
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+      - name: RoomStyleVariationGroup
+        group_id: 2
+        tag_index: 18
+        parameters:
+        - name: slot
+          datatype: uint8
+      - name: Relation
+        group_id: 2
+        tag_index: 19
+        parameters:
+        - name: type
+          datatype: enum
+          enum_members:
+            0: Normal
+            1: Pair
+      - name: RelationLong
+        group_id: 2
+        tag_index: 20
+        parameters:
+        - name: type
+          datatype: enum
+          enum_members:
+            0: PairDetail
+            1: PairSpoken
+      - name: RelationMeterRank
+        group_id: 2
+        tag_index: 21
+      - name: BloodRelation
+        group_id: 2
+        tag_index: 22
+      - name: BloodRelationLong
+        group_id: 2
+        tag_index: 23
+      - name: MapObject
+        group_id: 2
+        tag_index: 24
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: UseOnlyIfOn
+      - name: Ground
+        group_id: 2
+        tag_index: 25
+        parameters:
+        - name: set
+          datatype: enum
+          enum_members:
+            0: Must
+            1: UseOnlyIfOn
+      - name: EditMii
+        group_id: 2
+        tag_index: 26
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: highlight
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+      - name: Island
+        group_id: 2
+        tag_index: 27
+        parameters:
+        - name: highlight
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+      - name: IslandType
+        group_id: 2
+        tag_index: 28
+      - name: RoommateGroup
+        group_id: 2
+        tag_index: 29
+        parameters:
+        - name: belonger
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+        - name: highlight
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+      - name: EditUGC
+        group_id: 2
+        tag_index: 30
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: highlight
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+      - name: ReplicaSwordPreset
+        group_id: 2
+        tag_index: 31
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: type
+          datatype: enum
+          enum_members:
+            0: Attack0
+            1: Attack1
+            2: Phrase0
+            3: Phrase1
+      - name: WordAttrMessage
+        group_id: 2
+        tag_index: 32
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: highlight
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+      - name: Travel
+        group_id: 2
+        tag_index: 33
+      - name: BookText
+        group_id: 2
+        tag_index: 34
+        parameters:
+        - name: highlight
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+      - name: WordAttrGrammaticality
+        group_id: 2
+        tag_index: 35
+      - name: WordAttrCount
+        group_id: 2
+        tag_index: 36
+      - name: RandomSetUGCText
+        group_id: 2
+        tag_index: 37
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: genre
+          datatype: enum
+          enum_members:
+            0: Person
+            1: Object
+            2: Action
+            3: Image
+            4: Topic
+            5: Phrase
+            6: ConditionalAny
+        - name: attr
+          datatype: enum
+          enum_members:
+            0: Any
+            1: Neutral
+            2: Positive
+            3: Negative
+            4: PositiveOrNeutral
+            5: NegativeOrNeutral
+      - name: RandomSetUGCItem
+        group_id: 2
+        tag_index: 38
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: itemType
+          datatype: enum
+          enum_members:
+            0: Invalid
+            1: UGCFood
+            2: UGCGoods
+            3: UGCCloth
+            4: UGCMapObject
+            5: UGCInterior
+            6: UGCExterior
+        - name: holder
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+      - name: RandomSetPresetItem
+        group_id: 2
+        tag_index: 39
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: itemType
+          datatype: enum
+          enum_members:
+            0: Invalid
+            1: Food
+            2: Cloth
+            3: Coordinate
+            4: Goods
+        - name: holder
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+        - name: style
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+        - name: foodKind
+          datatype: enum
+          enum_members:
+            0: All
+            1: Awful
+            2: NotAwful
+        - name: goodsCategory
+          datatype: enum
+          enum_members:
+            0: All
+            1: Levelup
+            2: Treasure
+      - name: IsSetUGCText
+        group_id: 2
+        tag_index: 40
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: genre
+          datatype: enum
+          enum_members:
+            0: Person
+            1: Object
+            2: Action
+            3: Image
+            4: Topic
+            5: Phrase
+            6: ConditionalAny
+        - name: attr
+          datatype: enum
+          enum_members:
+            0: Any
+            1: Neutral
+            2: Positive
+            3: Negative
+            4: PositiveOrNeutral
+            5: NegativeOrNeutral
+      - name: PlayerNicknameByMii
+        group_id: 5
+        tag_index: 0
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+      - name: PlayerNicknameCommon
+        group_id: 5
+        tag_index: 1
+      - name: EmotionSadness
+        group_id: 6
+        tag_index: 0
+      - name: EmotionAnger
+        group_id: 6
+        tag_index: 1
+      - name: EmotionShout
+        group_id: 6
+        tag_index: 2
+      - name: EmotionWhisper
+        group_id: 6
+        tag_index: 3
+      - name: Break
+        group_id: 6
+        tag_index: 4
+        parameters:
+        - name: strength
+          datatype: uint8
+      - name: Pause
+        group_id: 6
+        tag_index: 5
+        parameters:
+        - name: msec
+          datatype: uint16
+        - name: break
+          datatype: int8
+      - name: Speed
+        group_id: 6
+        tag_index: 6
+        parameters:
+        - name: speed
+          datatype: uint16
+      - name: SpeedDirect
+        group_id: 6
+        tag_index: 7
+        parameters:
+        - name: speed
+          datatype: uint8
+      - name: Size
+        group_id: 6
+        tag_index: 8
+        parameters:
+        - name: size
+          datatype: uint16
+      - name: SizeAndSpeed
+        group_id: 6
+        tag_index: 9
+        parameters:
+        - name: size
+          datatype: uint16
+      - name: Sub
+        group_id: 6
+        tag_index: 10
+        parameters:
+        - name: alias
+          datatype: string
+      - name: SoundEffect
+        group_id: 6
+        tag_index: 11
+        parameters:
+        - name: type
+          datatype: enum
+          enum_members:
+            0: MiiLaungage
+            1: InSports
+            2: Mumble
+            3: Unspoken
+            4: DelayS
+            5: DelayM
+            6: DelayL
+            7: DelayL_LowPassL
+            8: ReverbS
+            9: ReverbM
+            10: ReverbL
+            11: EchoS
+            12: EchoM
+            13: EchoL
+      - name: FixPosition
+        group_id: 6
+        tag_index: 12
+        parameters:
+        - name: type
+          datatype: enum
+          enum_members:
+            0: Center
+            1: Left
+            2: Right
+      - name: MouthState
+        group_id: 6
+        tag_index: 13
+        parameters:
+        - name: type
+          datatype: enum
+          enum_members:
+            0: Open
+            1: Close
+      - name: BalloonStyle
+        group_id: 8
+        tag_index: 0
+        parameters:
+        - name: type
+          datatype: enum
+          enum_members:
+            0: Emphasis
+      - name: LipSyncOff
+        group_id: 8
+        tag_index: 1
+      - name: TelopOff
+        group_id: 8
+        tag_index: 2
+      - name: Pulldown
+        group_id: 9
+        tag_index: 0
+        parameters:
+        - name: type
+          datatype: enum
+          enum_members:
+            0: DefArt
+            1: IndefArt
+            2: Input
+        - name: Masculine
+          datatype: string
+        - name: Feminine
+          datatype: string
+        - name: Neuter
+          datatype: string
+      - name: RegisteredTrademark
+        group_id: 9
+        tag_index: 1
+      - name: AMPM
+        group_id: 100
+        tag_index: 0
+        parameters:
+        - name: slot
+          datatype: uint8
+      - name: ClockTime
+        group_id: 100
+        tag_index: 1
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: style
+          datatype: enum
+          enum_members:
+            0: 12-hour
+            1: 24-hour
+        - name: fillZero
+          datatype: enum
+          enum_members:
+            0: 'false'
+            1: 'true'
+      - name: ClockHour
+        group_id: 100
+        tag_index: 2
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: style
+          datatype: enum
+          enum_members:
+            0: 12-hour
+            1: 24-hour
+      - name: CurrentClockTimeHHMMSS
+        group_id: 100
+        tag_index: 3
+        parameters:
+        - name: style
+          datatype: enum
+          enum_members:
+            0: 12-hour
+            1: 24-hour
+        - name: fillZero
+          datatype: enum
+          enum_members:
+            0: 'false'
+            1: 'true'
+      - name: NumberNoSeparate
+        group_id: 100
+        tag_index: 4
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: digit
+          datatype: uint8
+        - name: format
+          datatype: enum
+          enum_members:
+            0: None
+            1: FillZero
+      - name: NumberSeparate_4
+        group_id: 100
+        tag_index: 5
+        parameters:
+        - name: slot
+          datatype: uint8
+      - name: NumberSeparate_5
+        group_id: 100
+        tag_index: 6
+        parameters:
+        - name: slot
+          datatype: uint8
+      - name: NumberSeparate_6
+        group_id: 100
+        tag_index: 7
+        parameters:
+        - name: slot
+          datatype: uint8
+      - name: NumberSeparate_7
+        group_id: 100
+        tag_index: 8
+        parameters:
+        - name: slot
+          datatype: uint8
+      - name: NumberSeparate_8
+        group_id: 100
+        tag_index: 9
+        parameters:
+        - name: slot
+          datatype: uint8
+      - name: Year
+        group_id: 100
+        tag_index: 10
+        parameters:
+        - name: style
+          datatype: enum
+          enum_members:
+            0: Ordinal
+            1: NumOnly
+      - name: Month
+        group_id: 100
+        tag_index: 11
+        parameters:
+        - name: style
+          datatype: enum
+          enum_members:
+            0: Long
+            1: Short
+            2: NumOnly
+      - name: Day
+        group_id: 100
+        tag_index: 12
+        parameters:
+        - name: style
+          datatype: enum
+          enum_members:
+            0: Ordinal
+            1: NumOnly
+      - name: Week
+        group_id: 100
+        tag_index: 13
+        parameters:
+        - name: style
+          datatype: enum
+          enum_members:
+            0: Long
+            1: Short
+      - name: MoneyUnitPrice
+        group_id: 100
+        tag_index: 14
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: cent00
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+        - name: unit
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+      - name: MoneyTotalAmount
+        group_id: 100
+        tag_index: 15
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: cent00
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+        - name: unit
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+      - name: Nickname
+        group_id: 200
+        tag_index: 0
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: n
+          datatype: enum
+          enum_members:
+            0: Third
+            1: Second
+            2: Nickname
+            3: NicknamePriorVoice
+        - name: highlight
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+        - name: fromMii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+      - name: Nickname_Ex_JPKR
+        group_id: 200
+        tag_index: 1
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: n
+          datatype: enum
+          enum_members:
+            0: Third
+            1: Second
+            2: Nickname
+            3: NicknamePriorVoice
+        - name: highlight
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+        - name: fromMii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+      - name: RelationMiiNickname
+        group_id: 200
+        tag_index: 2
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: n
+          datatype: enum
+          enum_members:
+            0: Third
+            1: Second
+            2: Nickname
+        - name: r
+          datatype: enum
+          enum_members:
+            0: MySelf
+            1: All
+            2: Other
+            3: Know
+            4: Friend
+            5: ExFriend
+            6: Lover
+            7: ExLover
+            8: Couple
+            9: ExCouple
+            10: Parent
+            11: Child
+            12: BrotherSisterOlder
+            13: BrotherSisterYounger
+            14: GrandParent
+            15: GrandChild
+            16: Relative
+            17: NotOther
+            18: LoverOrCouple
+            19: Family
+            20: BrotherSister
+            21: OneSideLove
+            22: OneSideLoveOrLover
+            23: OneSideLoveOrLoverOrCouple
+            24: Fight
+            25: Roommate
+        - name: num
+          datatype: uint8
+        - name: highlight
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+        - name: fighting
+          datatype: enum
+          enum_members:
+            0: 'True'
+            1: 'False'
+      - name: RelationPairMiiNickname
+        group_id: 200
+        tag_index: 3
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: n
+          datatype: enum
+          enum_members:
+            0: Third
+            1: Second
+            2: Nickname
+        - name: miiToA
+          datatype: enum
+          enum_members:
+            0: MySelf
+            1: All
+            2: Other
+            3: Know
+            4: Friend
+            5: ExFriend
+            6: Lover
+            7: ExLover
+            8: Couple
+            9: ExCouple
+            10: Parent
+            11: Child
+            12: BrotherSisterOlder
+            13: BrotherSisterYounger
+            14: GrandParent
+            15: GrandChild
+            16: Relative
+            17: NotOther
+            18: LoverOrCouple
+            19: Family
+            20: BrotherSister
+            21: OneSideLove
+            22: OneSideLoveOrLover
+            23: OneSideLoveOrLoverOrCouple
+            24: Fight
+            25: Roommate
+        - name: AToB
+          datatype: enum
+          enum_members:
+            0: MySelf
+            1: All
+            2: Other
+            3: Know
+            4: Friend
+            5: ExFriend
+            6: Lover
+            7: ExLover
+            8: Couple
+            9: ExCouple
+            10: Parent
+            11: Child
+            12: BrotherSisterOlder
+            13: BrotherSisterYounger
+            14: GrandParent
+            15: GrandChild
+            16: Relative
+            17: NotOther
+            18: LoverOrCouple
+            19: Family
+            20: BrotherSister
+            21: OneSideLove
+            22: OneSideLoveOrLover
+            23: OneSideLoveOrLoverOrCouple
+            24: Fight
+            25: Roommate
+        - name: num
+          datatype: uint8
+        - name: AOrB
+          datatype: enum
+          enum_members:
+            0: A
+            1: B
+        - name: highlight
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+        - name: fighting
+          datatype: enum
+          enum_members:
+            0: 'True'
+            1: 'False'
+      - name: FirstPerson
+        group_id: 200
+        tag_index: 4
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: n
+          datatype: enum
+          enum_members:
+            0: Normal
+            1: PriorVoice
+      - name: WordLong
+        group_id: 200
+        tag_index: 5
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: kind
+          datatype: enum
+          enum_members:
+            0: Phrase
+            1: Happy
+            2: Sad
+            3: Angry
+            4: Greeting
+            5: TalkInSleep
+            6: ShoutToSea
+            7: BeforeEat
+      - name: WordShortStart_Ex_JP
+        group_id: 200
+        tag_index: 6
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+      - name: WordShortEnd
+        group_id: 200
+        tag_index: 7
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+      - name: WordShortStart_Ex_USEU
+        group_id: 200
+        tag_index: 8
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: decap
+          datatype: enum
+          enum_members:
+            0: Valid
+            1: Invalid
+      - name: WordShortEnd_Ex_USEU
+        group_id: 200
+        tag_index: 9
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+      - name: WordShortStart_Ex_ASIA
+        group_id: 200
+        tag_index: 10
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+      - name: Icon
+        group_id: 200
+        tag_index: 11
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+      - name: Character4
+        group_id: 200
+        tag_index: 12
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: type4
+          datatype: enum
+          enum_members:
+            0: Invalid
+            1: Cool
+            2: Dry
+            3: Nagomi
+            4: Nori
+      - name: Character16
+        group_id: 200
+        tag_index: 13
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: type16
+          datatype: enum
+          enum_members:
+            0: Invalid
+            1: Sin
+            2: Jikkuri
+            3: Sabasaba
+            4: Bassari
+            5: Mojimoji
+            6: Kicchiri
+            7: Tekipaki
+            8: Baribari
+            9: Honwaka
+            10: Mattari
+            11: Waiwai
+            12: Meramera
+            13: Fuwafuwa
+            14: Nikoniko
+            15: Kirakira
+            16: Gangan
+      - name: IsExist
+        group_id: 200
+        tag_index: 14
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: i
+          datatype: enum
+          enum_members:
+            0: Is
+            1: Not
+        - name: r
+          datatype: enum
+          enum_members:
+            0: MySelf
+            1: All
+            2: Other
+            3: Know
+            4: Friend
+            5: ExFriend
+            6: Lover
+            7: ExLover
+            8: Couple
+            9: ExCouple
+            10: Parent
+            11: Child
+            12: BrotherSisterOlder
+            13: BrotherSisterYounger
+            14: GrandParent
+            15: GrandChild
+            16: Relative
+            17: NotOther
+            18: LoverOrCouple
+            19: Family
+            20: BrotherSister
+            21: OneSideLove
+            22: Fight
+            23: Roommate
+        - name: num
+          datatype: uint8
+      - name: IsSame
+        group_id: 200
+        tag_index: 15
+        parameters:
+        - name: mii0
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: mii1
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+      - name: FocusTelopSubject
+        group_id: 200
+        tag_index: 16
+      - name: FocusTelopSubjectOnePerson
+        group_id: 200
+        tag_index: 17
+      - name: ThirdPersonPronoun
+        group_id: 200
+        tag_index: 18
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: case
+          datatype: enum
+          enum_members:
+            0: NominativeCase
+            1: PossessiveCase
+            2: ObjectiveCase
+            3: PossessivePronoun
+        - name: mii_ex1
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+        - name: mii_ex2
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+      - name: ThirdPersonWord
+        group_id: 200
+        tag_index: 19
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: mii_ex1
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+        - name: mii_ex2
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+            13: Default
+        - name: he
+          datatype: string
+        - name: she
+          datatype: string
+        - name: they
+          datatype: string
+        - name: male_plural
+          datatype: string
+        - name: female_plural
+          datatype: string
+      - name: RelationMiiThirdPersonPronoun
+        group_id: 200
+        tag_index: 20
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: num
+          datatype: uint8
+        - name: r
+          datatype: enum
+          enum_members:
+            0: MySelf
+            1: All
+            2: Other
+            3: Know
+            4: Friend
+            5: ExFriend
+            6: Lover
+            7: ExLover
+            8: Couple
+            9: ExCouple
+            10: Parent
+            11: Child
+            12: BrotherSisterOlder
+            13: BrotherSisterYounger
+            14: GrandParent
+            15: GrandChild
+            16: Relative
+            17: NotOther
+            18: LoverOrCouple
+            19: Family
+            20: BrotherSister
+            21: OneSideLove
+            22: OneSideLoveOrLover
+            23: OneSideLoveOrLoverOrCouple
+            24: Fight
+            25: Roommate
+        - name: miiToA
+          datatype: enum
+          enum_members:
+            0: MySelf
+            1: All
+            2: Other
+            3: Know
+            4: Friend
+            5: ExFriend
+            6: Lover
+            7: ExLover
+            8: Couple
+            9: ExCouple
+            10: Parent
+            11: Child
+            12: BrotherSisterOlder
+            13: BrotherSisterYounger
+            14: GrandParent
+            15: GrandChild
+            16: Relative
+            17: NotOther
+            18: LoverOrCouple
+            19: Family
+            20: BrotherSister
+            21: OneSideLove
+            22: OneSideLoveOrLover
+            23: OneSideLoveOrLoverOrCouple
+            24: Fight
+            25: Roommate
+        - name: AToB
+          datatype: enum
+          enum_members:
+            0: MySelf
+            1: All
+            2: Other
+            3: Know
+            4: Friend
+            5: ExFriend
+            6: Lover
+            7: ExLover
+            8: Couple
+            9: ExCouple
+            10: Parent
+            11: Child
+            12: BrotherSisterOlder
+            13: BrotherSisterYounger
+            14: GrandParent
+            15: GrandChild
+            16: Relative
+            17: NotOther
+            18: LoverOrCouple
+            19: Family
+            20: BrotherSister
+            21: OneSideLove
+            22: OneSideLoveOrLover
+            23: OneSideLoveOrLoverOrCouple
+            24: Fight
+            25: Roommate
+        - name: AOrB
+          datatype: enum
+          enum_members:
+            0: A
+            1: B
+        - name: fighting
+          datatype: enum
+          enum_members:
+            0: 'True'
+            1: 'False'
+        - name: case
+          datatype: enum
+          enum_members:
+            0: NominativeCase
+            1: PossessiveCase
+            2: ObjectiveCase
+            3: PossessivePronoun
+      - name: RelationMiiThirdPersonWord
+        group_id: 200
+        tag_index: 21
+        parameters:
+        - name: mii
+          datatype: enum
+          enum_members:
+            0: Talker
+            1: TalkingMii0
+            2: TalkingMii1
+            3: TalkingMii2
+            4: TalkingMii3
+            5: SlotMii0
+            6: SlotMii1
+            7: SlotMii2
+            8: SlotMii3
+            9: ParticipantMii0
+            10: ParticipantMii1
+            11: ParticipantMii2
+            12: ParticipantMii3
+        - name: num
+          datatype: uint8
+        - name: r
+          datatype: enum
+          enum_members:
+            0: MySelf
+            1: All
+            2: Other
+            3: Know
+            4: Friend
+            5: ExFriend
+            6: Lover
+            7: ExLover
+            8: Couple
+            9: ExCouple
+            10: Parent
+            11: Child
+            12: BrotherSisterOlder
+            13: BrotherSisterYounger
+            14: GrandParent
+            15: GrandChild
+            16: Relative
+            17: NotOther
+            18: LoverOrCouple
+            19: Family
+            20: BrotherSister
+            21: OneSideLove
+            22: OneSideLoveOrLover
+            23: OneSideLoveOrLoverOrCouple
+            24: Fight
+            25: Roommate
+        - name: miiToA
+          datatype: enum
+          enum_members:
+            0: MySelf
+            1: All
+            2: Other
+            3: Know
+            4: Friend
+            5: ExFriend
+            6: Lover
+            7: ExLover
+            8: Couple
+            9: ExCouple
+            10: Parent
+            11: Child
+            12: BrotherSisterOlder
+            13: BrotherSisterYounger
+            14: GrandParent
+            15: GrandChild
+            16: Relative
+            17: NotOther
+            18: LoverOrCouple
+            19: Family
+            20: BrotherSister
+            21: OneSideLove
+            22: OneSideLoveOrLover
+            23: OneSideLoveOrLoverOrCouple
+            24: Fight
+            25: Roommate
+        - name: AToB
+          datatype: enum
+          enum_members:
+            0: MySelf
+            1: All
+            2: Other
+            3: Know
+            4: Friend
+            5: ExFriend
+            6: Lover
+            7: ExLover
+            8: Couple
+            9: ExCouple
+            10: Parent
+            11: Child
+            12: BrotherSisterOlder
+            13: BrotherSisterYounger
+            14: GrandParent
+            15: GrandChild
+            16: Relative
+            17: NotOther
+            18: LoverOrCouple
+            19: Family
+            20: BrotherSister
+            21: OneSideLove
+            22: OneSideLoveOrLover
+            23: OneSideLoveOrLoverOrCouple
+            24: Fight
+            25: Roommate
+        - name: AOrB
+          datatype: enum
+          enum_members:
+            0: A
+            1: B
+        - name: fighting
+          datatype: enum
+          enum_members:
+            0: 'True'
+            1: 'False'
+        - name: he
+          datatype: string
+        - name: she
+          datatype: string
+        - name: they
+          datatype: string
+      - name: WordAttr
+        group_id: 201
+        tag_index: 0
+        parameters:
+        - name: Type
+          datatype: enum
+          enum_members:
+            0: none
+            1: Masculine
+            2: Feminine
+            3: Neuter
+        - name: DefArt
+          datatype: int8
+        - name: IndefArt
+          datatype: int8
+        - name: Count
+          datatype: enum
+          enum_members:
+            0: Singular
+            1: Plural
+      - name: DefArt
+        group_id: 201
+        tag_index: 1
+      - name: IndefArt
+        group_id: 201
+        tag_index: 2
+      - name: Cap
+        group_id: 201
+        tag_index: 3
+      - name: Decap
+        group_id: 201
+        tag_index: 4
+      - name: Gender
+        group_id: 201
+        tag_index: 5
+        parameters:
+        - name: Masculine
+          datatype: string
+        - name: Feminine
+          datatype: string
+        - name: Neuter
+          datatype: string
+      - name: Count
+        group_id: 201
+        tag_index: 6
+        parameters:
+        - name: Singular
+          datatype: string
+        - name: Plural
+          datatype: string
+        - name: SingularPossessive
+          datatype: string
+      - name: Patchim
+        group_id: 201
+        tag_index: 7
+        parameters:
+        - name: 'Yes'
+          datatype: string
+        - name: 'No'
+          datatype: string
+      - name: PatchimX
+        group_id: 201
+        tag_index: 8
+        parameters:
+        - name: 'Yes'
+          datatype: string
+        - name: 'No'
+          datatype: string
+      - name: Case
+        group_id: 201
+        tag_index: 9
+      - name: Declension
+        group_id: 201
+        tag_index: 10
+      - name: Elision
+        group_id: 201
+        tag_index: 11
+        parameters:
+        - name: Original
+          datatype: string
+        - name: Elision
+          datatype: string
+      - name: CapAll
+        group_id: 201
+        tag_index: 12
+      - name: IgnoreCap
+        group_id: 201
+        tag_index: 13
+      - name: CapNext
+        group_id: 201
+        tag_index: 14
+      - name: DecapAll
+        group_id: 201
+        tag_index: 15
+      - name: DecapHyphenated
+        group_id: 201
+        tag_index: 16
+      - name: CountN
+        group_id: 201
+        tag_index: 17
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: Zero
+          datatype: string
+        - name: Singular
+          datatype: string
+        - name: Plural
+          datatype: string
+      - name: GenderT
+        group_id: 201
+        tag_index: 18
+        parameters:
+        - name: target
+          datatype: enum
+          enum_members:
+            0: UGCText
+            1: UGCFood
+            2: UGCGoods
+            3: UGCCloth
+            4: UGCMapObject
+            5: UGCMapFloor
+            6: UGCInterior
+            7: UGCExterior
+            8: GeneralItem
+            9: Food
+            10: Cloth
+            11: Coordinate
+            12: Goods
+            13: MapObject
+            14: RoommateGroup
+            15: EditUGC
+            16: WordAttrMessage
+            17: GoodsOrUGCGoods
+        - name: slot
+          datatype: uint8
+        - name: Masculine
+          datatype: string
+        - name: Feminine
+          datatype: string
+        - name: Neuter
+          datatype: string
+      - name: CountT
+        group_id: 201
+        tag_index: 19
+        parameters:
+        - name: target
+          datatype: enum
+          enum_members:
+            0: UGCText
+            1: UGCFood
+            2: UGCGoods
+            3: UGCCloth
+            4: UGCMapObject
+            5: UGCMapFloor
+            6: UGCInterior
+            7: UGCExterior
+            8: GeneralItem
+            9: Food
+            10: Cloth
+            11: Coordinate
+            12: Goods
+            13: MapObject
+            14: RoommateGroup
+            15: EditUGC
+            16: WordAttrMessage
+            17: GoodsOrUGCGoods
+        - name: slot
+          datatype: uint8
+        - name: Singular
+          datatype: string
+        - name: Plural
+          datatype: string
+      - name: GenderAndCountT
+        group_id: 201
+        tag_index: 20
+        parameters:
+        - name: target
+          datatype: enum
+          enum_members:
+            0: UGCText
+            1: UGCFood
+            2: UGCGoods
+            3: UGCCloth
+            4: UGCMapObject
+            5: UGCMapFloor
+            6: UGCInterior
+            7: UGCExterior
+            8: GeneralItem
+            9: Food
+            10: Cloth
+            11: Coordinate
+            12: Goods
+            13: MapObject
+            14: RoommateGroup
+            15: EditUGC
+            16: WordAttrMessage
+            17: GoodsOrUGCGoods
+        - name: slot
+          datatype: uint8
+        - name: Masculine
+          datatype: string
+        - name: Feminine
+          datatype: string
+        - name: Neuter
+          datatype: string
+        - name: MasculinePlural
+          datatype: string
+        - name: FemininePlural
+          datatype: string
+        - name: NeuterPlural
+          datatype: string
+      - name: CapSP
+        group_id: 201
+        tag_index: 21
+      - name: PrepositionDefArt_It_a
+        group_id: 201
+        tag_index: 22
+      - name: PrepositionDefArt_It_da
+        group_id: 201
+        tag_index: 23
+      - name: PrepositionDefArt_It_di
+        group_id: 201
+        tag_index: 24
+      - name: PrepositionDefArt_It_in
+        group_id: 201
+        tag_index: 25
+      - name: PrepositionDefArt_It_su
+        group_id: 201
+        tag_index: 26
+      - name: PrepositionDefArt_Es_a
+        group_id: 201
+        tag_index: 27
+      - name: PrepositionDefArt_Es_de
+        group_id: 201
+        tag_index: 28
+      - name: PrepositionDefArt_Fr_a
+        group_id: 201
+        tag_index: 29
+      - name: PrepositionDefArt_Fr_de
+        group_id: 201
+        tag_index: 30
+      - name: CountClockHour
+        group_id: 201
+        tag_index: 31
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: style
+          datatype: enum
+          enum_members:
+            0: 12-hour
+            1: 24-hour
+        - name: Zero
+          datatype: string
+        - name: Singular
+          datatype: string
+        - name: Plural
+          datatype: string
+      - name: CountClockHour_HHMMSS
+        group_id: 201
+        tag_index: 32
+        parameters:
+        - name: slot
+          datatype: uint8
+        - name: style
+          datatype: enum
+          enum_members:
+            0: 12-hour
+            1: 24-hour
+        - name: Zero
+          datatype: string
+        - name: Singular
+          datatype: string
+        - name: Plural
+          datatype: string
+      - name: CapNextIfNeed
+        group_id: 201
+        tag_index: 33
+      - name: AS
+        group_id: 300
+        tag_index: 0
+        parameters:
+        - name: c
+          datatype: enum
+          enum_members:
+            0: EmGreeting
+            1: EmThanks
+            2: EmYes
+            3: EmNo
+            4: EmJoy
+            5: EmLaugh
+            6: EmSadness
+            7: EmFear
+            8: EmShame
+            9: EmSurprise
+            10: EmQuestion
+            11: EmCheer
+            12: EmUpright
+            13: EmChat_Talker
+            14: EmChat_TalkerPositively
+            15: DemoPR000030_EmotionOverflow
+      - name: Expression
+        group_id: 300
+        tag_index: 1
+        parameters:
+        - name: e
+          datatype: enum
+          enum_members:
+            0: Normal
+            1: Smile
+            2: Anger
+            3: Sorrow
+            4: Surprise
+            5: SurpriseOpenMouth
+            6: Blink
+            7: WinkLeft
+            8: WinkRight
+            9: LikeWinkLeft
+            10: LikeWinkRight
+            11: Frustrated
+            12: Shout
+            13: EyesShutTightly
+            14: Cry
+            15: Disappoint
+            16: Unspeakable
+            17: Lousy
+            18: Stupefaction
+            19: Confusion
+            20: Impression
+            21: Smug
+            22: Napping
+            23: Sing
+            24: Jizoface
+            25: Blush
+            26: BlushSmile
+            27: BlushBlink
+            28: Great
+            29: FeelsGood
+            30: CryCM
+            31: Enthusiastic
+      - name: HabitFace
+        group_id: 300
+        tag_index: 2
+        parameters:
+        - name: Type
+          datatype: enum
+          enum_members:
+            0: None
+            1: Positive
+            2: Negative
+            3: All
+            4: FaceSmug
+            5: FaceSmile
+            6: FaceLousy
+            7: FaceRaiseEyebrows
+            8: FaceWink
+            9: FaceCloseEyes
+            10: FaceOpenEyes
+            11: FaceBliss
+    styles: []
+    source_files:
+    - mstxt????????????????.txt
+    - Dummy/Ain_Dummy.mstxt
+    - Dummy/Debug_AS_Anime.mstxt
+    - Dummy/DemoChatDebug00.mstxt
+    - Dummy/DemoChatRestaurantTest.mstxt
+    - Dummy/MessageShufflerDummy.mstxt
+    - Dummy/TestCommit.mstxt
+    - Dummy/UgcTestData.mstxt
+    - Dummy/UgcTextDummyData.mstxt
+    - Dummy/UgcTextLocalizeCheck202309.mstxt
+    - Dummy/VoiceTest.mstxt
+    - Dummy/Wordwrap_Dummy.mstxt
+    - LayoutMsg/Common_CinemaScope_00.mstxt
+    - LayoutMsg/Common_Dialog_00.mstxt
+    - LayoutMsg/Common_DialogS_00.mstxt
+    - LayoutMsg/Common_FadeDemo_00.mstxt
+    - LayoutMsg/Common_FadeWipe_00.mstxt
+    - LayoutMsg/Common_Footer_00.mstxt
+    - LayoutMsg/Common_InlineKeyboard_00.mstxt
+    - LayoutMsg/Common_ItemNew_00.mstxt
+    - LayoutMsg/Common_Load_00.mstxt
+    - LayoutMsg/Common_MoneyBottom_00.mstxt
+    - LayoutMsg/Common_Region_00.mstxt
+    - LayoutMsg/Common_Skip_00.mstxt
+    - LayoutMsg/Common_Style_00.mstxt
+    - LayoutMsg/Common_TalkChoice_00.mstxt
+    - LayoutMsg/Common_TalkChoiceForcus_00.mstxt
+    - LayoutMsg/Common_Text_00.mstxt
+    - LayoutMsg/Common_Title_00.mstxt
+    - LayoutMsg/EditorCommon_InfoOperation_00.mstxt
+    - LayoutMsg/EditorCommon_Title_00.mstxt
+    - LayoutMsg/Event_Camera_00.mstxt
+    - LayoutMsg/Event_DemoPlayerBirthday_00.mstxt
+    - LayoutMsg/Event_Hand_Clap_00.mstxt
+    - LayoutMsg/Event_News_00.mstxt
+    - LayoutMsg/Event_NewsBreaking_00.mstxt
+    - LayoutMsg/Event_NewsBreakingComplete_00.mstxt
+    - LayoutMsg/Event_NewsBreakingIslandDevelopment_00.mstxt
+    - LayoutMsg/Event_NewsBreakingUGCRewards_00.mstxt
+    - LayoutMsg/Event_NewsContent_00.mstxt
+    - LayoutMsg/Event_NewsInterview_00.mstxt
+    - LayoutMsg/Event_PlayerBirthdayED_00.mstxt
+    - LayoutMsg/Event_ProposeMiniGame_00.mstxt
+    - LayoutMsg/Event_RocketSwitch_00.mstxt
+    - LayoutMsg/Event_SelectBtn_00.mstxt
+    - LayoutMsg/Event_StaffRoll_00.mstxt
+    - LayoutMsg/Event_TripED_00.mstxt
+    - LayoutMsg/Event_TripOP_00.mstxt
+    - LayoutMsg/Island_3D_00.mstxt
+    - LayoutMsg/Island_Edit_01.mstxt
+    - LayoutMsg/Island_EntranceInfo_00.mstxt
+    - LayoutMsg/Island_EventDialog_00.mstxt
+    - LayoutMsg/Island_LevelUp_00.mstxt
+    - LayoutMsg/Island_Main_00.mstxt
+    - LayoutMsg/Island_Menu_00.mstxt
+    - LayoutMsg/Island_RelationGraph_01.mstxt
+    - LayoutMsg/Island_RelationGraphMulti_00.mstxt
+    - LayoutMsg/Island_UnlockDirection_00.mstxt
+    - LayoutMsg/LclNwk_Menu_00.mstxt
+    - LayoutMsg/Menu_Advice_00.mstxt
+    - LayoutMsg/Menu_ChangeClothes_00.mstxt
+    - LayoutMsg/Menu_House_00.mstxt
+    - LayoutMsg/Menu_HouseChange_00.mstxt
+    - LayoutMsg/Menu_HouseList_00.mstxt
+    - LayoutMsg/Menu_IslandInfo_00.mstxt
+    - LayoutMsg/Menu_IslandInfoDeteal_00.mstxt
+    - LayoutMsg/Menu_Item_00.mstxt
+    - LayoutMsg/Menu_ItemAll_00.mstxt
+    - LayoutMsg/Menu_ItemBook_00.mstxt
+    - LayoutMsg/Menu_ItemBookInfo_00.mstxt
+    - LayoutMsg/Menu_ItemBookList_01.mstxt
+    - LayoutMsg/Menu_ItemMiiGoods_00.mstxt
+    - LayoutMsg/Menu_LevelUpPresent_00.mstxt
+    - LayoutMsg/Menu_LiveTogetherList_00.mstxt
+    - LayoutMsg/Menu_MiiCharacteDistribution_00.mstxt
+    - LayoutMsg/Menu_MiiCharacter_00.mstxt
+    - LayoutMsg/Menu_MiiCharacterDeteal_00.mstxt
+    - LayoutMsg/Menu_MiiList_00.mstxt
+    - LayoutMsg/Menu_OptionSetting_00.mstxt
+    - LayoutMsg/Menu_PhotoStudio_00.mstxt
+    - LayoutMsg/Menu_PhotoStudioMiiList_00.mstxt
+    - LayoutMsg/Menu_Phrase_00.mstxt
+    - LayoutMsg/Menu_PlayerSetting_00.mstxt
+    - LayoutMsg/Menu_PocketMoney_00.mstxt
+    - LayoutMsg/Menu_PointChange_00.mstxt
+    - LayoutMsg/Menu_PointChangeBG_00.mstxt
+    - LayoutMsg/Menu_PointChangeDialog_00.mstxt
+    - LayoutMsg/Menu_PointChangeList_00.mstxt
+    - LayoutMsg/Menu_PointChangeList_01.mstxt
+    - LayoutMsg/Menu_PresetButton_00.mstxt
+    - LayoutMsg/Menu_ResidentList_00.mstxt
+    - LayoutMsg/Menu_SelectHand.mstxt
+    - LayoutMsg/Menu_SelectRoom_00.mstxt
+    - LayoutMsg/Menu_SettingDialog.mstxt
+    - LayoutMsg/Menu_SettingEntranceSpace_00.mstxt
+    - LayoutMsg/Menu_ShopBuilding_00.mstxt
+    - LayoutMsg/Menu_ShopClothes_00.mstxt
+    - LayoutMsg/Menu_ShopConfirm_00.mstxt
+    - LayoutMsg/Menu_ShopFood_00.mstxt
+    - LayoutMsg/Menu_ShopGoods_00.mstxt
+    - LayoutMsg/Menu_ShopHouse_00.mstxt
+    - LayoutMsg/Menu_ShopMarket_00.mstxt
+    - LayoutMsg/Menu_ShopTreasure_00.mstxt
+    - LayoutMsg/Menu_UGCTextList_00.mstxt
+    - LayoutMsg/MiiEditor_BodyType_00.mstxt
+    - LayoutMsg/MiiEditor_Confirm_00.mstxt
+    - LayoutMsg/MiiEditor_DlgEasyMiiCompare_00.mstxt
+    - LayoutMsg/MiiEditor_EasyComplete_00.mstxt
+    - LayoutMsg/MiiEditor_EasyMiiCompare_00.mstxt
+    - LayoutMsg/MiiEditor_EasySpace_01.mstxt
+    - LayoutMsg/MiiEditor_EditorSpace_00.mstxt
+    - LayoutMsg/MiiEditor_EntranceSpace_00.mstxt
+    - LayoutMsg/MiiEditor_Profile_00.mstxt
+    - LayoutMsg/MiiTouch_FavoriteFoodList_00.mstxt
+    - LayoutMsg/MiiTouch_Main_00.mstxt
+    - LayoutMsg/MiiTouch_Menu_00.mstxt
+    - LayoutMsg/MiiTouch_MiiBrain_00.mstxt
+    - LayoutMsg/MiiTouch_MiiProfile_00.mstxt
+    - LayoutMsg/MiiTouch_MiiStomach_00.mstxt
+    - LayoutMsg/MiiTouch_PetitPersonality_00.mstxt
+    - LayoutMsg/MiiTouch_Pronoun_00.mstxt
+    - LayoutMsg/MiiTouch_RelationNickname_00.mstxt
+    - LayoutMsg/MiiTouch_RelationshipsRanking_00.mstxt
+    - LayoutMsg/MiiTouch_WordsSelect_00.mstxt
+    - LayoutMsg/MiniGame_Base_00.mstxt
+    - LayoutMsg/MiniGame_Bowling_00.mstxt
+    - LayoutMsg/MiniGame_CafeLatte_00.mstxt
+    - LayoutMsg/MiniGame_Daruma_00.mstxt
+    - LayoutMsg/MiniGame_FindDifferences_00.mstxt
+    - LayoutMsg/MiniGame_PictQuiz_00.mstxt
+    - LayoutMsg/MiniGame_SwapCup_00.mstxt
+    - LayoutMsg/RelationDiagramTest.mstxt
+    - LayoutMsg/Tutorial_OpeningMii_00.mstxt
+    - LayoutMsg/UGCEditor_AtelierMenu_00.mstxt
+    - LayoutMsg/UGCEditor_Complete_00.mstxt
+    - LayoutMsg/UGCEditor_DrawMenu_00.mstxt
+    - LayoutMsg/UGCEditor_DrawSpace_00.mstxt
+    - LayoutMsg/UGCEditor_ProductionDetail_00.mstxt
+    - LayoutMsg/UGCEditor_StampSearch_00.mstxt
+    - LayoutMsg/UGCEditor_TheFirstHalfMenu_00.mstxt
+    - LayoutMsg/UGCEditor_TheLatterHalfMenu_00.mstxt
+    - LayoutMsg/UGCEditor_UGCListAll_00.mstxt
+    - LayoutMsg/LclNwk_DlgOverwriteSave_00.mstxt
+    - LayoutMsg/LclNwk_DlgSendAndReceive_00.mstxt
+    - ProgramMsg/Ai/Ain.mstxt
+    - ProgramMsg/Ai/AttributeGoods.mstxt
+    - ProgramMsg/Ai/FightThrow.mstxt
+    - ProgramMsg/Ai/GroupGreeting.mstxt
+    - ProgramMsg/Ai/MapObjectReaction.mstxt
+    - ProgramMsg/Ai/ScreamToSea.mstxt
+    - ProgramMsg/Ai/TalkInSleep.mstxt
+    - ProgramMsg/Chat/GroupSequentialChat.mstxt
+    - ProgramMsg/ChatMiiLanguage/ChatMiiLanguage.mstxt
+    - ProgramMsg/ChatMiiLanguage/ChatMiiLanguage_TalkEach.mstxt
+    - ProgramMsg/Child/ChildName.mstxt
+    - ProgramMsg/DemoChat/DemoChat_Title.mstxt
+    - ProgramMsg/DemoChat/HouseEtc/HouseEtc00.mstxt
+    - ProgramMsg/DemoChat/HouseEtc/HouseEtc00_Other.mstxt
+    - ProgramMsg/DemoChat/HouseTable/HouseTable00.mstxt
+    - ProgramMsg/DemoChat/HouseTable/HouseTable00_Response.mstxt
+    - ProgramMsg/DemoChat/Restaurant/For234/BadBoys.mstxt
+    - ProgramMsg/DemoChat/Restaurant/For234/Cheerup.mstxt
+    - ProgramMsg/DemoChat/Restaurant/For234/FashionableDream.mstxt
+    - ProgramMsg/DemoChat/Restaurant/For234/Fashionable.mstxt
+    - ProgramMsg/DemoChat/Restaurant/For234/Innocent.mstxt
+    - ProgramMsg/DemoChat/Restaurant/For234/Robot.mstxt
+    - ProgramMsg/DemoChat/Restaurant/For234/UgcFan.mstxt
+    - ProgramMsg/DemoChat/Restaurant/For2/CoupleBad.mstxt
+    - ProgramMsg/DemoChat/Restaurant/For2/CoupleGood.mstxt
+    - ProgramMsg/DemoChat/Restaurant/For2/LoverCouple.mstxt
+    - ProgramMsg/Demo/DemoDM_Choice.mstxt
+    - ProgramMsg/Demo/DemoDM.mstxt
+    - ProgramMsg/Demo/DemoDM_Telop.mstxt
+    - ProgramMsg/Demo/DemoFocusLeadingChat2.mstxt
+    - ProgramMsg/Demo/DemoMarket.mstxt
+    - ProgramMsg/Demo/DemoPR.mstxt
+    - ProgramMsg/Demo/DemoRocket.mstxt
+    - ProgramMsg/Demo/DemoStaffRoll.mstxt
+    - ProgramMsg/Demo/DemoTravel.mstxt
+    - ProgramMsg/Editor/EditorCommon.mstxt
+    - ProgramMsg/Editor/EditorTemplate.mstxt
+    - ProgramMsg/Editor/EditorTutorialDlg_00.mstxt
+    - ProgramMsg/Editor/EditorTutorialDlgS_00.mstxt
+    - ProgramMsg/Editor/Ugc_AttributeCategory.mstxt
+    - ProgramMsg/Editor/Ugc_AttributeValue.mstxt
+    - ProgramMsg/Editor/Ugc_SubType.mstxt
+    - ProgramMsg/Editor/MiiEditor/MiiEditorBloodRelation.mstxt
+    - ProgramMsg/Editor/MiiEditor/MiiEditorEasy.mstxt
+    - ProgramMsg/Editor/MiiEditor/MiiEditor.mstxt
+    - ProgramMsg/FocusLeading/FocusLeadingChoiceTelop.mstxt
+    - ProgramMsg/FocusLeading/FocusLeadingTalkToPlayer.mstxt
+    - ProgramMsg/FocusLeading/FocusLeadingTelop.mstxt
+    - ProgramMsg/FocusTelop/FocusTelopContent_GroupAction_EmotionTelopChat.mstxt
+    - ProgramMsg/FocusTelop/FocusTelopContent_GroupAction_FocusLeadingChat1.mstxt
+    - ProgramMsg/FocusTelop/FocusTelopContent_GroupAction_GroupChatTelop.mstxt
+    - ProgramMsg/FocusTelop/FocusTelopContent_GroupAction.mstxt
+    - ProgramMsg/FocusTelop/FocusTelopContent_SingleAction.mstxt
+    - ProgramMsg/FocusTelop/FocusTelopSubject.mstxt
+    - ProgramMsg/MiiNews/MiiNews_Breaking.mstxt
+    - ProgramMsg/MiiNews/MiiNews_Cmn.mstxt
+    - ProgramMsg/MiiNews/MiiNews_Content.mstxt
+    - ProgramMsg/MiiNews/MiiNews_Interview.mstxt
+    - ProgramMsg/MiiTouch/MiiTouchAccident.mstxt
+    - ProgramMsg/MiiTouch/MiiTouchAware.mstxt
+    - ProgramMsg/MiiTouch/MiiTouchCommon.mstxt
+    - ProgramMsg/MiiTouch/MiiTouchDream.mstxt
+    - ProgramMsg/MiiTouch/BalloonTalk/BalloonTalkAI.mstxt
+    - ProgramMsg/MiiTouch/BalloonTalk/BalloonTalkCustomizedSel.mstxt
+    - ProgramMsg/MiiTouch/BalloonTalk/BalloonTalkFixed.mstxt
+    - ProgramMsg/MiiTouch/BalloonTalk/BalloonTalkHairChange.mstxt
+    - ProgramMsg/MiiTouch/BalloonTalk/BalloonTalkHistory.mstxt
+    - ProgramMsg/MiiTouch/BalloonTalk/BalloonTalkOneDirection.mstxt
+    - ProgramMsg/MiiTouch/Greeting/MiiTouchGreeting.mstxt
+    - ProgramMsg/MiiTouch/Minigame/MiiTouchInviting.mstxt
+    - ProgramMsg/MiiTouch/Minigame/MiiTouchMinigame.mstxt
+    - ProgramMsg/PhotoStudio/PhotoStudio.mstxt
+    - ProgramMsg/SceneSequence/ChangeExterior.mstxt
+    - ProgramMsg/SceneSequence/ChangeInterior.mstxt
+    - ProgramMsg/SceneSequence/InvitingDemo.mstxt
+    - ProgramMsg/SceneSequence/ManualSave.mstxt
+    - ProgramMsg/SceneSequence/Preset.mstxt
+    - ProgramMsg/SceneSequence/Shop.mstxt
+    - ProgramMsg/SceneSequence/Tutorial.mstxt
+    - ProgramMsg/Song/SongLyrics.mstxt
+    - ProgramMsg/Tips/Tips.mstxt
+    - ProgramMsg/Trouble/TroubleAskPlayerFellowship.mstxt
+    - ProgramMsg/Trouble/TroubleAskUgcWord.mstxt
+    - ProgramMsg/Trouble/TroubleConfession.mstxt
+    - ProgramMsg/Trouble/TroubleDramaTelop.mstxt
+    - ProgramMsg/Trouble/TroubleFriendUgc.mstxt
+    - ProgramMsg/Trouble/Trouble.mstxt
+    - ReferenceMsg/Reference.mstxt
+    - ReplaceMsg/Character.mstxt
+    - ReplaceMsg/Clock.mstxt
+    - ReplaceMsg/ClothAccessory_Name.mstxt
+    - ReplaceMsg/ClothAll_Name.mstxt
+    - ReplaceMsg/ClothBottomsA_Name.mstxt
+    - ReplaceMsg/ClothBottomsB_Name.mstxt
+    - ReplaceMsg/ClothHeadwear_Name.mstxt
+    - ReplaceMsg/ClothShoes_Name.mstxt
+    - ReplaceMsg/ClothTopslong_Name.mstxt
+    - ReplaceMsg/ClothTops_Name.mstxt
+    - ReplaceMsg/Coordinate_Name.mstxt
+    - ReplaceMsg/Currency.mstxt
+    - ReplaceMsg/Day.mstxt
+    - ReplaceMsg/EnglishExceptionNounA_EU.mstxt
+    - ReplaceMsg/EnglishExceptionNounAn_EU.mstxt
+    - ReplaceMsg/EnglishExceptionNounAn_US.mstxt
+    - ReplaceMsg/EnglishExceptionNounA_US.mstxt
+    - ReplaceMsg/Food_Caption.mstxt
+    - ReplaceMsg/Food_Name.mstxt
+    - ReplaceMsg/Food_NamePlural.mstxt
+    - ReplaceMsg/Goods_Caption.mstxt
+    - ReplaceMsg/Goods_Name.mstxt
+    - ReplaceMsg/Goods_NamePlural.mstxt
+    - ReplaceMsg/Goods_Text.mstxt
+    - ReplaceMsg/GrammarArticle.mstxt
+    - ReplaceMsg/GrammarWordAttr.mstxt
+    - ReplaceMsg/Ground_Caption.mstxt
+    - ReplaceMsg/Ground_Name.mstxt
+    - ReplaceMsg/Habit_Caption.mstxt
+    - ReplaceMsg/Habit_Name.mstxt
+    - ReplaceMsg/HabitUnlockGroup_Caption.mstxt
+    - ReplaceMsg/HabitUnlockGroup_Name.mstxt
+    - ReplaceMsg/IslandType.mstxt
+    - ReplaceMsg/MapObjectFacility_Caption.mstxt
+    - ReplaceMsg/MapObjectFacility_Name.mstxt
+    - ReplaceMsg/MapObjectObj_Caption.mstxt
+    - ReplaceMsg/MapObjectObj_Name.mstxt
+    - ReplaceMsg/MiiWordKind.mstxt
+    - ReplaceMsg/Month.mstxt
+    - ReplaceMsg/PrepositionDefArt.mstxt
+    - ReplaceMsg/Pronoun.mstxt
+    - ReplaceMsg/RelationMeterRank.mstxt
+    - ReplaceMsg/Relation.mstxt
+    - ReplaceMsg/RelationState.mstxt
+    - ReplaceMsg/RoomStyleVariation_Caption.mstxt
+    - ReplaceMsg/RoomStyleVariation_Name.mstxt
+    - ReplaceMsg/SpanishExceptionNoun.mstxt
+    - ReplaceMsg/Travel_Caption.mstxt
+    - ReplaceMsg/Travel_Name.mstxt
+    - ReplaceMsg/UgcUnlockGroup_Caption.mstxt
+    - ReplaceMsg/Unreadable.mstxt
+    - ReplaceMsg/Week.mstxt
+    - ReplaceMsg/Year.mstxt
+    - ReplaceMsg/HonorificTitle.mstxt
+    - ReplaceMsg/FrenchExceptionNoun.mstxt
+    - _UserDictionary/Untitled.txt
+    - _UserDictionary/A8167420
+    - _UserDictionary/userdict_jpn.csv
+    - _UserDictionary/userdict_twn.csv
+    - _UserDictionary/userdict_chi.csv
+    - _UserDictionary/userdict_kor.csv
+    - _UserDictionary/userdict_esp.csv
+    - _UserDictionary/userdict_bre.csv
+    - _UserDictionary/userdict_ger.csv
+    - _UserDictionary/userdict_eng.csv
+    - _UserDictionary/userdict_fre.csv
+    - _UserDictionary/userdict_spa.csv
+    - _UserDictionary/userdict_cfr.csv
+    - _UserDictionary/userdict_ita.csv
+    - _UserDictionary/userdict_dut.csv

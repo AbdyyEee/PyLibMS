@@ -1,4 +1,4 @@
-from typing import Literal, Sequence
+from typing import Literal
 
 from lms.common.field.io import read_field, write_field
 from lms.common.field.lms_datatype import LMS_DataType
@@ -16,19 +16,20 @@ from lms.flowchart.definitions.node import (
 )
 from lms.flowchart.definitions.node_type import LMS_NodeType, LMS_NodeParameterType
 from lms.message.msbt import MSBT
+from lms.source_resolver import SourceResolver
 from lms.titleconfig.definitions.nodes import NodeConfig, NodeDefinition
 
-NO_NEXT_NODE = 0xFFFF
+NO_VALUE = 0xFFFF
 FLW3_HEADER_SIZE = 16
 NODE_SIZE = 16
 
 VARIABLE_WIDTH_DATATYPES = (LMS_DataType.BOOL, LMS_DataType.ENUM)
 
 
-def read_flw3(reader: FileReader,
-              config: NodeConfig | None,
-              msbt: MSBT | None = None,
-              msbt_files: Sequence[MSBT] | None = None) -> list[LMS_EntryNode]:
+def read_flw3(
+    reader: FileReader, config: NodeConfig | None,
+        source_resolver: SourceResolver, msbt_override: MSBT | None
+) -> tuple[list[LMS_EntryNode], list[tuple[LMS_JumpNode, int]]]:
     section_start = reader.tell()
     node_count = reader.read_uint16()
     branch_table_id_count = reader.read_uint16()
@@ -42,7 +43,8 @@ def read_flw3(reader: FileReader,
     next_id_map: dict[LMS_BaseNode, int | None] = {}
     branch_metadata: dict[LMS_BranchNode, tuple] = {}
 
-    stream_next_id = None
+    next_node_index = None
+
     for i in range(node_count):
         node_data = reader.tell() + 8
         node_type = LMS_NodeType(reader.read_uint8())
@@ -55,19 +57,11 @@ def read_flw3(reader: FileReader,
             case LMS_NodeType.MESSAGE:
                 reader.skip(4)
 
-                stream_next_id = read_next_node_id(reader)
-                file_index = reader.read_uint16()
+                next_node_index = read_next_node_id(reader)
+                msbt_index = reader.read_uint16()
                 label_index = reader.read_uint16()
 
-                if msbt_files is not None:
-                    try:
-                        msbt = msbt_files[file_index]
-                    except IndexError:
-                        # Since we can't guarantee the user supplies the right directory or the indexing is always right
-                        # we swallow the exception and revert to no MSBT
-                        msbt = None
-
-                node = LMS_MessageNode(i, file_index, label_index, msbt)
+                node = LMS_MessageNode(i, msbt_index, label_index, source_resolver, msbt_override)
                 reader.skip(2)
             case LMS_NodeType.BRANCH:
                 # There is no next node id as the next node is determined by the branches
@@ -81,7 +75,7 @@ def read_flw3(reader: FileReader,
 
                 reader.seek(parameter_offset)
                 definition = get_config_definition(
-                    config, LMS_NodeType.BRANCH, parameter_type, condition_id
+                    config, LMS_NodeType.BRANCH, condition_id
                 )
                 parameter_value = evaluate_node_parameter(
                     reader, section_start, parameter_type, definition
@@ -97,15 +91,13 @@ def read_flw3(reader: FileReader,
             case LMS_NodeType.EVENT:
                 reader.skip(4)
 
-                stream_next_id = read_next_node_id(reader)
+                next_node_index = read_next_node_id(reader)
                 event_id = reader.read_uint16()
                 end = reader.tell() + 4
 
                 reader.seek(parameter_offset)
 
-                definition = get_config_definition(
-                    config, LMS_NodeType.EVENT, parameter_type, event_id
-                )
+                definition = get_config_definition(config, LMS_NodeType.EVENT, event_id)
                 parameter_value = evaluate_node_parameter(
                     reader, section_start, parameter_type, definition
                 )
@@ -116,23 +108,28 @@ def read_flw3(reader: FileReader,
                 reader.seek(end)
             case LMS_NodeType.ENTRY:
                 reader.seek(node_data)
-                stream_next_id = read_next_node_id(reader)
+                next_node_index = read_next_node_id(reader)
                 node = LMS_EntryNode(i)
                 entry_nodes.append(node)
                 reader.skip(6)
             case LMS_NodeType.JUMP:
                 reader.seek(node_data)
-                stream_next_id = read_next_node_id(reader)
-                unknown_short0a = reader.read_uint16()
-                node = LMS_JumpNode(i, unknown_short0a)
+                next_node_index = read_next_node_id(reader)
+                msbf_index = (
+                    None if (value := reader.read_uint16()) == NO_VALUE else value
+                )
+
+                # Next node index is passed in for source jumps so they can be written without knowing the file
+                node = LMS_JumpNode(i, msbf_index, source_resolver, next_node_index)
                 reader.skip(4)
 
-        next_id_map[node] = stream_next_id
+        next_id_map[node] = next_node_index
         nodes.append(node)
 
     node_map: dict[int, LMS_BaseNode | None] = {node.id: node for node in nodes}
     branch_ids = [read_next_node_id(reader) for _ in range(branch_table_id_count)]
 
+    external_jumps: list[tuple[LMS_JumpNode, int]] = []
     for node in nodes:
         next_node_id = next_id_map[node]
 
@@ -140,7 +137,7 @@ def read_flw3(reader: FileReader,
             case_count, starting_index = branch_metadata[node]
 
             # Slice the portion of IDs linked to this branch node and add the node objects themselves
-            for branch_id in branch_ids[starting_index: starting_index + case_count]:
+            for branch_id in branch_ids[starting_index : starting_index + case_count]:
                 if branch_id is None:
                     node.add_branch(None)
                 else:
@@ -148,7 +145,12 @@ def read_flw3(reader: FileReader,
 
             continue
         elif isinstance(node, LMS_JumpNode):
-            node.next_entry = node_map[next_node_id]
+            # Defer resolving external node references until the current MSBF is registered in read_msbf
+            if node.msbf_index is not None:
+                external_jumps.append((node, next_node_id))
+            elif next_node_id is not None:
+                node.set_next_node(node_map[next_node_id])
+
             continue
 
         if next_node_id is None:
@@ -156,29 +158,28 @@ def read_flw3(reader: FileReader,
 
         node.set_next_node(node_map[next_node_id])
 
-    return entry_nodes
+    return entry_nodes, external_jumps
 
 
 def read_next_node_id(reader: FileReader) -> int | None:
-    return None if (node_id := reader.read_uint16()) == NO_NEXT_NODE else node_id
+    return None if (node_id := reader.read_uint16()) == NO_VALUE else node_id
 
 
 def get_config_definition(
-        config: NodeConfig | None,
-        node_type: Literal[LMS_NodeType.BRANCH, LMS_NodeType.EVENT],
-        parameter_type: LMS_NodeParameterType,
-        identifier: int,
+    config: NodeConfig | None,
+    node_type: Literal[LMS_NodeType.BRANCH, LMS_NodeType.EVENT],
+    identifier: int,
 ) -> NodeDefinition:
     return (
-        None if config is None else config.get_definition(identifier, node_type, parameter_type)
+        None if config is None else config.get_definition_by_id(identifier, node_type)
     )
 
 
 def evaluate_node_parameter(
-        reader: FileReader,
-        section_start: int,
-        parameter_type: LMS_NodeParameterType,
-        definition: NodeDefinition | None,
+    reader: FileReader,
+    section_start: int,
+    parameter_type: LMS_NodeParameterType,
+    definition: NodeDefinition | None,
 ) -> LMS_NodeParameter:
     # How functions may utilize node parameters vary, such that they may cast values as they wish.
     # By default, PyLibMS interprets the parameter types using signed integers for simplicity.
@@ -236,7 +237,10 @@ def evaluate_node_parameter(
 
 
 def write_flw3(
-        writer: FileWriter, nodes: list[LMS_BaseNode], stream_ids: dict[LMS_BaseNode, int]
+    writer: FileWriter,
+        nodes: list[LMS_BaseNode],
+        stream_ids: dict[LMS_BaseNode, int],
+        resolved_jump_ids: dict[LMS_BaseNode, int],
 ) -> None:
     node_count = len(nodes)
 
@@ -292,11 +296,11 @@ def write_flw3(
                 starting_index = len(branch_table)
                 for branch in node.branches.values():
                     if branch is None:
-                        branch_table.append(NO_NEXT_NODE)
+                        branch_table.append(NO_VALUE)
                     else:
                         branch_table.append(stream_ids[branch])
 
-                writer.write_uint16(NO_NEXT_NODE)
+                writer.write_uint16(NO_VALUE)
 
                 writer.write_uint16(node.condition_id)
                 writer.write_uint16(node.case_count)
@@ -340,15 +344,15 @@ def write_flw3(
                 writer.write_bytes(b"\x00" * 2)
                 writer.write_bytes(b"\x00" * 4)
 
-                write_next_node_id(writer, stream_ids[node.next_entry])
-                writer.write_uint16(node.unknown_short0a)
+                write_next_node_id(writer, resolved_jump_ids[node])
+                writer.write_uint16(NO_VALUE if node.msbf_index is None else node.msbf_index)
                 writer.skip(4)
 
     for node_id in branch_table:
         writer.write_uint16(node_id)
 
     string_offset = (
-            FLW3_HEADER_SIZE + (NODE_SIZE * node_count) + (2 * len(branch_table))
+        FLW3_HEADER_SIZE + (NODE_SIZE * node_count) + (2 * len(branch_table))
     )
 
     for offset, string in zip(string_offsets, string_table):
@@ -371,7 +375,7 @@ def write_flw3(
 
 
 def write_node_parameter(
-        writer: FileWriter, value: LMS_NodeParameter, parameter_type: LMS_NodeParameterType
+    writer: FileWriter, value: LMS_NodeParameter, parameter_type: LMS_NodeParameterType
 ) -> None:
     if isinstance(value, LMS_FieldMap):
 
@@ -418,4 +422,4 @@ def write_node_parameter(
 
 
 def write_next_node_id(writer: FileWriter, node_id: int | None) -> None:
-    writer.write_uint16(NO_NEXT_NODE if node_id is None else node_id)
+    writer.write_uint16(NO_VALUE if node_id is None else node_id)

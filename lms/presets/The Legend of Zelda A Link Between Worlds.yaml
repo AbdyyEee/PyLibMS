@@ -1,0 +1,2198 @@
+game: The Legend of Zelda A Link Between Worlds
+projects:
+  global:
+    colors:
+    - name: Black
+      red: 38
+      green: 38
+      blue: 38
+      alpha: 255
+    - name: Gray
+      red: 128
+      green: 128
+      blue: 128
+      alpha: 255
+    - name: White
+      red: 255
+      green: 255
+      blue: 255
+      alpha: 255
+    - name: Beige
+      red: 133
+      green: 92
+      blue: 47
+      alpha: 255
+    - name: Red
+      red: 89
+      green: 23
+      blue: 16
+      alpha: 255
+    - name: Green
+      red: 0
+      green: 100
+      blue: 0
+      alpha: 255
+    - name: Blue
+      red: 55
+      green: 89
+      blue: 96
+      alpha: 255
+    - name: Yellow
+      red: 186
+      green: 168
+      blue: 0
+      alpha: 255
+    - name: Purple
+      red: 58
+      green: 27
+      blue: 76
+      alpha: 255
+    - name: Name
+      red: 0
+      green: 63
+      blue: 151
+      alpha: 255
+    - name: Attention
+      red: 249
+      green: 35
+      blue: 0
+      alpha: 255
+    - name: YugaTalking
+      red: 74
+      green: 240
+      blue: 209
+      alpha: 255
+    attributes: []
+    tags:
+      groups:
+        0: System
+        1: InsertMessage
+        2: InsertName
+      definitions:
+      - name: Ruby
+        group_id: 0
+        tag_index: 0
+        parameters:
+        - name: rt
+          datatype: string
+      - name: Font
+        group_id: 0
+        tag_index: 1
+        parameters:
+        - name: face
+          datatype: string
+      - name: Size
+        group_id: 0
+        tag_index: 2
+        parameters:
+        - name: percent
+          datatype: uint16
+      - name: Color
+        group_id: 0
+        tag_index: 3
+        parameters:
+        - name: r
+          datatype: uint8
+        - name: g
+          datatype: uint8
+        - name: b
+          datatype: uint8
+        - name: a
+          datatype: uint8
+
+      - name: PageBreak
+        group_id: 0
+        tag_index: 4
+      - name: PlayerName
+        group_id: 1
+        tag_index: 0
+      - name: UserName
+        group_id: 1
+        tag_index: 1
+      - name: ShadowLinkPlayerName
+        group_id: 1
+        tag_index: 2
+      - name: ShadowLinkUserName
+        group_id: 1
+        tag_index: 3
+      - name: InsertMark
+        group_id: 1
+        tag_index: 4
+      - name: IntNumberN
+        group_id: 1
+        tag_index: 5
+        parameters:
+        - name: Figure
+          datatype: uint8
+        - name: Nth
+          datatype: uint8
+        - name: Value
+          datatype: int16
+        - name: Unit
+          datatype: enum
+          enum_members:
+            0: None
+            1: Rupee
+            2: Second
+            3: Minute
+      - name: ChoiceN
+        group_id: 1
+        tag_index: 6
+        parameters:
+        - name: Number
+          datatype: uint8
+      - name: AutoForward
+        group_id: 1
+        tag_index: 7
+        parameters:
+        - name: WaitFrame
+          datatype: uint16
+      - name: Wait
+        group_id: 1
+        tag_index: 8
+        parameters:
+        - name: WaitFrame
+          datatype: uint16
+      - name: MyRecordNum
+        group_id: 1
+        tag_index: 9
+      - name: ShadowLinkRecordNum
+        group_id: 1
+        tag_index: 10
+      - name: ShadowLinkPrizeMoney
+        group_id: 1
+        tag_index: 11
+      - name: ColoringStart
+        group_id: 1
+        tag_index: 12
+      - name: ColoringEnd
+        group_id: 1
+        tag_index: 13
+      - name: Flush
+        group_id: 1
+        tag_index: 14
+      - name: Vibrate
+        group_id: 1
+        tag_index: 15
+      - name: ChoicePositive
+        group_id: 1
+        tag_index: 16
+      - name: Cursor
+        group_id: 1
+        tag_index: 17
+        parameters:
+        - name: x
+          datatype: int16
+        - name: y
+          datatype: int16
+      - name: NpcName
+        group_id: 2
+        tag_index: 0
+        parameters:
+        - name: Who
+          datatype: enum
+          enum_members:
+            0: zelda
+            1: inpa
+            2: sahaspupil
+            3: zoraqueen
+            4: danpei
+            5: maple
+            6: priestgirl
+            7: miner
+            8: priest
+            9: sahas
+            10: ganon
+            11: darkzelda
+            12: darklink
+            13: darkganon
+            14: commander
+            15: hitghost
+            16: darklinkpet
+            17: blacksmithKid
+            18: shopmanmagic
+            19: kinstamother
+        - name: Coloring
+          datatype: enum
+          enum_members:
+            0: 'No'
+            1: 'Yes'
+      - name: LocationName
+        group_id: 2
+        tag_index: 1
+        parameters:
+        - name: Where
+          datatype: enum
+          enum_members:
+            0: dgn_east
+            1: dgn_wind
+            2: dgn_hera
+            3: dgn_castle
+            4: dgn_dark
+            5: dgn_water
+            6: dgn_dokuro
+            7: dgn_hagure
+            8: dgn_ice
+            9: dgn_sand
+            10: dgn_kame
+            11: dgn_ganon
+            12: loc_name_church
+            13: loc_name_villagelight
+            14: loc_name_lake
+            15: loc_name_linkhouse
+            16: MtHebra
+            17: MagicShopLight
+            18: HoleofHyakkai
+            19: FortuneHouseDark
+            20: HakabaDark
+            21: MagicshopDark
+            22: BlackSmithDark
+            23: LinkHouseDark
+            24: milkbar
+            25: DevilsMarsh
+            26: ZorasVillage
+            27: DeathMountain
+            28: Boss
+            29: Cuccos
+            30: HyruleHotfoot
+            31: OctballDarby
+            32: RupeeRush
+            33: FortunesChoice
+            34: LostWoods
+            35: ThievesHideout
+            36: HyruleCastleCore
+        - name: Coloring
+          datatype: enum
+          enum_members:
+            0: 'No'
+            1: 'Yes'
+        - name: ToUpper
+          datatype: enum
+          enum_members:
+            0: 'No'
+            1: 'Yes'
+      - name: ItemName
+        group_id: 2
+        tag_index: 2
+        parameters:
+        - name: Which
+          datatype: enum
+          enum_members:
+            0: icerod
+            1: sandrod
+            2: tornaderod
+            3: bomb
+            4: firerod
+            5: hookshot
+            6: boomerang
+            7: hammer
+            8: bow
+            9: shield
+            10: bottle
+            11: potshop_red
+            12: potshop_blue
+            13: potshop_heart
+            14: item_name_bracelet
+            15: item_name_lantern
+            16: item_name_kinsta
+            17: item_name_gamecoin
+            18: item_name_stonebeauty
+            19: item_name_durian
+            20: item_name_doron
+            21: item_name_heartpiece
+            22: item_name_bee
+            23: item_name_beebadge
+            24: item_name_powergloves
+            25: item_name_powerfulglove
+            26: item_name_pegasus
+            27: item_name_bell
+            28: item_name_hintglass
+            29: item_name_goldenbee
+            30: item_name_potshop_yellow
+            31: item_name_potshop_purple
+            32: item_name_web
+            33: item_name_net
+            34: item_name_wisdom
+            35: item_name_courage
+            36: item_name_power
+            37: item_name_fairy
+            38: item_name_ore
+            39: postsword
+            40: charm
+            41: emptybracelet
+            42: bigbombflower
+            43: sword
+            44: mastersword
+            45: item_name_liver_blue
+            46: item_name_liver_purple
+            47: item_name_liver_yellow
+            48: item_name_clothes_blue
+            49: item_name_clothes_red
+            50: item_name_hyrule_shield
+            51: item_name_ganbari_power_up
+            52: item_name_pouch
+            53: keysmall
+            54: keyboss
+            55: heartcontioner
+            56: compass
+            57: apple_red
+            58: apple_blue
+            59: milk
+            60: mild_matured
+            61: message_bottle
+            62: special_move
+            63: clothes_blacksmith
+            64: clothes_green
+            65: lantern_lv2
+            66: net_lv2
+            67: bow_light
+            68: ganbaritubo
+            69: trifoce_wisdom
+            70: triforce_courage
+            71: triforce_power
+            72: icerod_LV2
+            73: sandrod_LV2
+            74: tornadrod_LV2
+            75: bomb_LV2
+            76: firerod_LV2
+            77: hookshot_LV2
+            78: boomerang_LV2
+            79: hammer_LV2
+            80: bow_LV2
+            81: icerod_rental
+            82: sandrod_rental
+            83: tornaderod_rental
+            84: bomb_rental
+            85: firerod_rental
+            86: hookshot_rental
+            87: boomerang_rental
+            88: hammer_rental
+            89: bow_rental
+        - name: Coloring
+          datatype: enum
+          enum_members:
+            0: 'No'
+            1: 'Yes'
+        - name: ToUpper
+          datatype: enum
+          enum_members:
+            0: 'No'
+            1: 'Yes'
+    styles:
+    - name: default
+      region_width: 400
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_ItemGetWindowT_T_ItemGetMessage_00
+      region_width: 310
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_MainGameSceneT_L_DoButton_00_T_KeyA_00
+      region_width: 48
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Gm_MainGameSceneT_L_DoButton_00_T_Action_00
+      region_width: 48
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemCategoryB_L_CollectBtn_00_T_Btn_00
+      region_width: 108
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemCategoryB_L_ItemBtn_00_T_Btn_00
+      region_width: 108
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemCategoryB_L_MapBtn_00_T_Btn_00
+      region_width: 108
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Gm_SetItemB_T_Rupy_00
+      region_width: 50
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_message_window_T_00
+      region_width: 320
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_MessageWindowNomalT_T_3lines_00
+      region_width: 344
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Cm_MessageWindowNomalT_T_Name_00
+      region_width: 224
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_MessageWindowNomalT_L_Btn_00_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_MessageWindowNomalT_L_Btn_01_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_MessageWindowNomalT_L_Btn_02_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_MessageWindowNomalT_L_Btn_03_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemDungeonMapB_T_DungeonName_00
+      region_width: 180
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_PauseT_T_Pause_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemBaseB_T_Rupee_00
+      region_width: 50
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_ShopTutorialB_
+      region_width: 210
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_ShopRupeeT_T_Rupee_00
+      region_width: 80
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_ShopTutorialB_T_Txt_00
+      region_width: 274
+      line_number: 6
+      font_index: 0
+      color_index: null
+    - name: Gm_ShopTutorialB_T_Itm_00
+      region_width: 210
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemDungeonMapB_L_FloorButton_00_T_FloorNumber_00
+      region_width: 36
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemDungeonMapB_L_FloorButton_01_T_FloorNumber_00
+      region_width: 210
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemDungeonMapB_L_FloorButton_02_T_FloorNumber_00
+      region_width: 210
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemItemB_L_Close_00_T_Btn_00
+      region_width: 115
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemDungeonMapB_L_FloorButton_03_T_FloorNumber_00
+      region_width: 210
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowBoardT_T_Board_00
+      region_width: 340
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowStoneT_T_Stone_00
+      region_width: 326
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_WarpSystem_L_Back_00_T_Btn_00
+      region_width: 150
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Cm_DialogBoxB_T_TextBtn_00
+      region_width: 280
+      line_number: 6
+      font_index: 0
+      color_index: null
+    - name: Cm_DialogBoxB_T_TextBtnIcon_00
+      region_width: 280
+      line_number: 7
+      font_index: 0
+      color_index: null
+    - name: Cm_DialogBoxB_L_BtnL_00_T_Btn_00
+      region_width: 118
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_DialogBoxB_L_BtnR_00_T_Btn_00
+      region_width: 118
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_DialogBoxB_L_BtnC_00_T_Btn_00
+      region_width: 118
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_DialogBoxT_T_TextBtn_00
+      region_width: 280
+      line_number: 6
+      font_index: 0
+      color_index: null
+    - name: Cm_DialogBoxT_T_TextBtnIcon_00
+      region_width: 280
+      line_number: 7
+      font_index: 0
+      color_index: null
+    - name: Cm_DialogBoxT_L_BtnL_00_T_Btn_00
+      region_width: 118
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_DialogBoxT_L_BtnR_00_T_Btn_00
+      region_width: 118
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_DialogBoxT_L_BtnC_00_T_Btn_00
+      region_width: 118
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_GameOverT_L_Btn_00_T_GmOvr_00
+      region_width: 150
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_GameOverT_L_Btn_01_T_GmOvr_00
+      region_width: 150
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_DungeonNameT_T_DangionName_00
+      region_width: 280
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_FloorNumberT_T_DangionName_00
+      region_width: 80
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemBaseB_L_Warp_00_T_Btn_00
+      region_width: 86
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemBaseB_L_Collect_00_T_Btn_00
+      region_width: 115
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_E3CourseSelect_T_Text_00
+      region_width: 300
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Cm_E3CourseSelect_L_Dungeon_00_T_Text_00
+      region_width: 110
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_E3CourseSelect_L_Field_00_T_Text_00
+      region_width: 110
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_E3PressKey_T_Text_00
+      region_width: 300
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_FieldMap_T_PinStock_00
+      region_width: 39
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_FieldMap_L_BtnBack_00_T_Btn_00
+      region_width: 124
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_FieldMap_L_BtnCancel_00_T_Btn_00
+      region_width: 124
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_FieldMap_L_BtnOK_00_T_Btn_00
+      region_width: 124
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_WarpBtn_T_DungeonName_00
+      region_width: 120
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_WarpBtn_T_DungeonName_01
+      region_width: 120
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_E3ThankYou_T_Copyright_00
+      region_width: 350
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemCollectB_L_Close_00_T_Btn_00
+      region_width: 115
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_E3PressKey_T_Copyright_00
+      region_width: 320
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Gm_WarpChoices_L_BtnBack_00_T_Btn_00
+      region_width: 115
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_WarpChoices_L_BtnCancel_00_T_Btn_00
+      region_width: 115
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_WarpChoices_L_BtnOK_00_T_Btn_00
+      region_width: 115
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSettingB_Gm_SRCSettingB_PlayerName
+      region_width: 250
+      line_number: 0
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSettingB_Gm_SRCSettingB_RupeeText
+      region_width: 110
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSettingB_Gm_SRCSettingB_UserName
+      region_width: 270
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSettingB_Gm_SRCSettingB_Index
+      region_width: 30
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSettingT_Gm_SRCSettingB_PlayerName
+      region_width: 180
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSettingT_Gm_SRCSettingB_RupeeText
+      region_width: 110
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSettingT_L_BtnL_00_T_Btn_00
+      region_width: 130
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSettingT_L_BtnR_00_T_Btn_00
+      region_width: 130
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSettingT_P_MedalNum_00
+      region_width: 30
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSettingB_P_MedalNum_00
+      region_width: 30
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSignBoardT_T_PlayerName_00
+      region_width: 170
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSignBoardT_T_RupeeText_00
+      region_width: 80
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSignBoardT_T_UserName_00
+      region_width: 220
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSignBoardT_T_Message_00
+      region_width: 200
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSignBoardT_T_MedalNum_00
+      region_width: 30
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSignBoardT_T_Guide_00
+      region_width: 112
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCShadowLinkInfoB_T_UserName_00
+      region_width: 220
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCShadowLinkInfoB_T_PlayerName_00
+      region_width: 170
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCShadowLinkInfoB_T_RupeeText_00
+      region_width: 80
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCShadowLinkInfoB_T_Message_00
+      region_width: 187
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCShadowLinkInfoB_T_MedalNum_00
+      region_width: 30
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_TimeUpT_TextBox_00
+      region_width: 350
+      line_number: 0
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCMainSystemBaseB_T_Rupee_00
+      region_width: 50
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCMainSystemBaseB_T_UserName_00
+      region_width: 220
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCMainSystemBaseB_T_PlayerName_00
+      region_width: 170
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCMainSystemBaseB_Gm_SRCSettingB_RupeeText
+      region_width: 105
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCMainSystemBaseB_P_MedalNum_00
+      region_width: 30
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSettingB_T_NoInfo_00
+      region_width: 280
+      line_number: 5
+      font_index: 0
+      color_index: null
+    - name: Gm_ShopTutorialB_@
+      region_width: 200
+      line_number: 1
+      font_index: null
+      color_index: null
+    - name: Gm_SelectGuideT_TextBox_00
+      region_width: 300
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemBaseB_L_Item_00_T_Btn_00
+      region_width: 115
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowZeldaT_T_3lines_00
+      region_width: 344
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowZeldaT_L_Btn_00_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowZeldaT_L_Btn_01_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowZeldaT_L_Btn_02_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowZeldaT_L_Btn_03_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowHildaT_T_3lines_00
+      region_width: 344
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowHildaT_L_Btn_00_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowHildaT_L_Btn_01_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowHildaT_L_Btn_02_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowHildaT_L_Btn_03_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowKenjaT_T_3lines_00
+      region_width: 344
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowKenjaT_L_Btn_00_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowKenjaT_L_Btn_01_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowKenjaT_L_Btn_02_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowKenjaT_L_Btn_03_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowMediumT_T_3lines_00
+      region_width: 344
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowMediumT_L_Btn_00_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowMediumT_L_Btn_01_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowMediumT_L_Btn_02_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowMediumT_L_Btn_03_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowShadowLinkT_T_3lines_00
+      region_width: 344
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowShadowLinkT_L_Btn_00_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowShadowLinkT_L_Btn_01_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowShadowLinkT_L_Btn_02_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowShadowLinkT_L_Btn_03_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_MessageWindowSystemT_T_3lines_00
+      region_width: 344
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Cm_MessageWindowSystemT_L_Btn_00_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_MessageWindowSystemT_L_Btn_01_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_MessageWindowSystemT_L_Btn_02_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_MessageWindowSystemT_L_Btn_03_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCShadowLinkInfoB_Gm_SRCSettingB_PlayerName
+      region_width: 180
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCShadowLinkInfoB_Gm_SRCSettingB_RupeeText
+      region_width: 111
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSignBoardT_Gm_SRCSettingB_PlayerName
+      region_width: 186
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSignBoardT_Gm_SRCSettingB_RupeeText
+      region_width: 100
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCMainSystemBaseB_Gm_SRCSettingB_PlayerName
+      region_width: 210
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_GameOverT_L_Btn_02_T_GmOvr_00
+      region_width: 150
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_GameOverT_L_Btn_03_T_GmOvr_00
+      region_width: 150
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCRecordListT_T_Index_00
+      region_width: 290
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCRecordListT_T_Close_00
+      region_width: 250
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCRecordListT_T_Medal_00
+      region_width: 22
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCRecordListT_T_Panel_00
+      region_width: 280
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCRecordListT_T_Num_00
+      region_width: 11
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCResultT_T_Result_00
+      region_width: 200
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCResultT_T_PlusRupee_00
+      region_width: 60
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCStartT_T_PlayerName_00
+      region_width: 180
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCStartT_T_RupeeText_00
+      region_width: 105
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCStartT_T_UserName_00
+      region_width: 229
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemItemB_L_Btn_Decide_00
+      region_width: 70
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_CongratulationWindowT_T_Result_00
+      region_width: 220
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_CongratulationWindowT_T_Message_00
+      region_width: 300
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowDemo_T_Message_00
+      region_width: 360
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowDemo_L_Btn_00_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowDemo_L_Btn_01_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowDemo_L_Btn_02_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Cm_SkipB_T_SkipBtn_00
+      region_width: 82
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCStartT_P_MedalNum_00
+      region_width: 30
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCSettingT_T_UserName_00
+      region_width: 195
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemItemTutorialT_T_ItemName_00
+      region_width: 230
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemItemTutorialT_T_ItemText_00
+      region_width: 255
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowDemo_T_3lines_00
+      region_width: 344
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelect_T_File_00
+      region_width: 250
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelect_L_Copy_00_T_FileMenuBtn_00
+      region_width: 70
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelect_L_Delete_00_T_FileMenuBtn_00
+      region_width: 70
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelect_L_Start_00_T_FileStartBtn_00
+      region_width: 160
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelect_L_SetName_00_T_FileMenuBtn_00
+      region_width: 70
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_ExplainItemSetB_T_Drag_00
+      region_width: 64
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_ExplainItemSetB_T_Drop_00
+      region_width: 64
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_GameOverT_
+      region_width: 294
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_GameOverT_T_Message_00
+      region_width: 294
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_SelectGuideT_T_Guide_00
+      region_width: 300
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_TitleT_T_Copyright_00
+      region_width: 300
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_TitleB_T_PressButton_00
+      region_width: 300
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCResultTimeUpT_T_MeterNumS_00
+      region_width: 40
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCResultTimeUpT_T_MeterNumL_00
+      region_width: 40
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCResultTimeUpT_T_Message_00
+      region_width: 200
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCRecordListIndexT_T_Index_00
+      region_width: 290
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCRecordListIndexT_T_Close_00
+      region_width: 250
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCRecordListIndexT_T_Medal_00
+      region_width: 22
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemCollectContentsB_T_Rupee_00
+      region_width: 40
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemCollectContentsB_T_Kinsuta_00
+      region_width: 40
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemCollectContentsB_T_KimoB_00
+      region_width: 40
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemCollectContentsB_T_KimoY_00
+      region_width: 40
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemCollectContentsB_T_KimoP_00
+      region_width: 40
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemCollectContentsB_T_Kouseki_00
+      region_width: 20
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemCollectTutorialT_T_ItemName_00
+      region_width: 210
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemCollectTutorialT_T_ItemText_00
+      region_width: 270
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_SelectPowerUpT_T_ItemNameR_00
+      region_width: 230
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SelectPowerUpT_T_BtnIcon_00
+      region_width: 36
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SelectPowerUpT_T_Guide_00
+      region_width: 115
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SelectPowerUpT_T_ItemNameL_00
+      region_width: 230
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_AnalogTimerT_T_TimeUp_00
+      region_width: 65
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_GetWindowSilverT_T_ItemGetMessage_00
+      region_width: 310
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_GetWindowGoldT_T_ItemGetMessage_00
+      region_width: 310
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_GetWindowBronzeT_T_ItemGetMessage_00
+      region_width: 310
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_GiriGiriResultT_T_Result_00
+      region_width: 200
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_GiriGiriResultT_T_Text_00
+      region_width: 106
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_GiriGiriResultT_T_Time_00
+      region_width: 73
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_Stadium_T_Rupee_00
+      region_width: 50
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_Stadium_T_Pitches_00
+      region_width: 35
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapLight_T_KMapLight_00
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapLight_T_KMapLight_01
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapLight_T_KMapLight_02
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapLight_T_KMapLight_03
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapLight_T_KMapLight_06
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapLight_T_KMapLight_04
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapLight_T_KMapLight_07
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapLight_T_KMapLight_05
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapLight_T_KMapLight_08
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapDark_T_KMapDark_00
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapDark_T_KMapDark_01
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapDark_T_KMapDark_02
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapDark_T_KMapDark_03
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapDark_T_KMapDark_06
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapDark_T_KMapDark_04
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_KMapDark_T_KMapDark_05
+      region_width: 34
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_DigitalTimerT_T_Timer_00
+      region_width: 64
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemItemTutorialT_
+      region_width: 255
+      line_number: 5
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemItemTutorialT_T_SCTutorial_00
+      region_width: 210
+      line_number: 5
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectB_T_File_00
+      region_width: 250
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectB_T_Delete_00
+      region_width: 221
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectB_T_FileFull_00
+      region_width: 250
+      line_number: 6
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectB_L_Copy_00_T_FileMenuBtn_00
+      region_width: 70
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectB_L_Delete_00_T_FileMenuBtn_00
+      region_width: 70
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectB_L_Start_00_T_FileStartBtn_00
+      region_width: 160
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectB_L_SetName_00_T_FileMenuBtn_00
+      region_width: 70
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectB_L_OK_00_T_FileMenuBtn_00
+      region_width: 70
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MainSystemItemSlideTutorialT_T_SCTutorial_00
+      region_width: 230
+      line_number: 5
+      font_index: 0
+      color_index: null
+    - name: Gm_Stadium_T_PlusRupee_00
+      region_width: 60
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectT_T_FileNumber_00
+      region_width: 155
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectT_T_SavePlace_00
+      region_width: 243
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectT_T_Rupee_00
+      region_width: 50
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_PauseT_T_Message_00
+      region_width: 294
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_PauseT_L_Btn_00_T_GmOvr_00
+      region_width: 150
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_PauseT_L_Btn_01_T_GmOvr_00
+      region_width: 150
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_ItemSelectBaloonB_T_Decide_00
+      region_width: 78
+      line_number: 0
+      font_index: 0
+      color_index: null
+    - name: Gm_ItemSelectTextB_T_Text_00
+      region_width: 230
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_FloorNumberT_T_DungeonName_00
+      region_width: 80
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_DungeonNameT_T_DungeonName_00
+      region_width: 220
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SelectWarpPointT_T_ItemNameR_00
+      region_width: 250
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SelectWarpPointT_T_ItemNameL_00
+      region_width: 250
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SelectWarpPointT_T_Caption_00
+      region_width: 323
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_StoryDemoB_T_Text_00
+      region_width: 288
+      line_number: 9
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowHildaT_T_Name_00
+      region_width: 224
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowKenjaT_T_Name_00
+      region_width: 224
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowMediumT_T_Name_00
+      region_width: 224
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowZeldaT_T_Name_00
+      region_width: 224
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SellKimoT_T_Message_00
+      region_width: 300
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SellKimoT_T_RupeeNum_00
+      region_width: 64
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SellKimoT_T_AbtnGuide_00
+      region_width: 110
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SellKimoT_L_BtnL_00_T_Btn_00
+      region_width: 130
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SellKimoT_L_BtnR_00_T_Btn_00
+      region_width: 130
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_WarpBalloon_T_DungeonName_00
+      region_width: 260
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_KeyBoardGuideT_T_Guide_00
+      region_width: 350
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_KeyBoardGuideT_T_Message_00
+      region_width: 342
+      line_number: 5
+      font_index: 0
+      color_index: null
+    - name: Ed_StaffCreditT_T_Job_00
+      region_width: 190
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Ed_StaffCreditT_T_Name_00
+      region_width: 179
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Ed_StaffCreditT_T_Kenri_00
+      region_width: 370
+      line_number: 4
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowNenwaT_T_3lines_00
+      region_width: 344
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowNenwaT_T_Name_00
+      region_width: 224
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowNenwaT_L_Btn_00_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowNenwaT_L_Btn_01_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowNenwaT_L_Btn_02_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowNenwaT_L_Btn_03_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowYouseiT_T_3lines_00
+      region_width: 344
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowYouseiT_T_Name_00
+      region_width: 224
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowYouseiT_L_Btn_00_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowYouseiT_L_Btn_01_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowYouseiT_L_Btn_02_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowYouseiT_L_Btn_03_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowObakeT_T_3lines_00
+      region_width: 344
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowObakeT_T_Name_00
+      region_width: 224
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowObakeT_L_Btn_00_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowObakeT_L_Btn_01_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowObakeT_L_Btn_02_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowObakeT_L_Btn_03_T_Btn_00
+      region_width: 140
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectB_L_NormalMode_00_T_FileMenuBtn_00
+      region_width: 70
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectB_L_HardMode_00_T_FileMenuBtn_00
+      region_width: 70
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_SRCResultT_Gm_SRCSettingB_RupeeText
+      region_width: 115
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: 'Mn_FileSelectB_L_NormalMode_00_T_FileMenuButton_00 '
+      region_width: 70
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectB_L_HardMode_00_T_FileMenuButton_00
+      region_width: 70
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Ed_EpilogueT_T_End_00
+      region_width: 300
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowRBoardT_T_Board_00
+      region_width: 340
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: 'Mn_FileSelectB_L_HardMode_00_T_FileHardModeButton_00 '
+      region_width: 70
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Ed_PlayRecordT_T_Rupe_00
+      region_width: 200
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Ed_PlayRecordT_T_GameOver_00
+      region_width: 200
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Ed_PlayRecordT_TextBox_00
+      region_width: 280
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Ed_PlayRecordT_T_Mode_00
+      region_width: 200
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Ed_InfoWindowT_T_Message_00
+      region_width: 282
+      line_number: 5
+      font_index: 0
+      color_index: null
+    - name: Gm_StadiumT_T_Pitches_00
+      region_width: 35
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_StadiumT_T_PlusRupee_00
+      region_width: 60
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_RentalShopTutorialB_T_Itm_00
+      region_width: 258
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_RentalShopTutorialB_T_Txt_00
+      region_width: 274
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: Mn_FileSelectT_T_HardModeAttention_00
+      region_width: 508
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_WarpChoices_T_Information_00
+      region_width: 277
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: Mn_LoadIconT_T_Load_00
+      region_width: 146
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Ed_StaffCreditMessageT_T_Text_00
+      region_width: 300
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Ed_StaffCreditMessageT_T_Text_01
+      region_width: 300
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Ed_PlayRecordT_T_Name_00
+      region_width: 280
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_StadiumB_T_Caption_00
+      region_width: 112
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: Gm_MessageWindowShadowLinkT_T_Name_00
+      region_width: 224
+      line_number: 1
+      font_index: 0
+      color_index: null
+    source_files:
+    - flow/Common/CatchInsect.msflow
+    - flow/Common/GameOver.msflow
+    - flow/Common/HintGhost.msflow
+    - flow/Common/MessageBoard.msflow
+    - flow/Common/Telephone.msflow
+    - flow/Dungeon/Castle.msflow
+    - flow/Dungeon/Dark.msflow
+    - flow/Dungeon/Dokuro.msflow
+    - flow/Dungeon/East.msflow
+    - flow/Dungeon/Ganon.msflow
+    - flow/Dungeon/Hagure.msflow
+    - flow/Dungeon/Hera.msflow
+    - flow/Dungeon/Ice.msflow
+    - flow/Dungeon/Kame.msflow
+    - flow/Dungeon/Sand.msflow
+    - flow/Dungeon/Water.msflow
+    - flow/Dungeon/Wind.msflow
+    - flow/Dungeon/cl_Church_UG.msflow
+    - flow/E3/E3_flow.msflow
+    - flow/Field/Cave.msflow
+    - flow/Field/CaveDark10.msflow
+    - flow/Field/CrossBattle.msflow
+    - flow/Field/CrossBoard.msflow
+    - flow/Field/CrossForceTalk.msflow
+    - flow/Field/CrossOldMan.msflow
+    - flow/Field/DoorHouse.msflow
+    - flow/Field/Ending.msflow
+    - flow/Field/FieldDark_Tennokoe.msflow
+    - flow/Field/FieldLight_BlacksmithWife.msflow
+    - flow/Field/FieldLight_HyruleRace.msflow
+    - flow/Field/FieldLight_Tennokoe.msflow
+    - flow/Field/FieldLight_WarpEvent.msflow
+    - flow/Field/NpcShadowLink.msflow
+    - flow/Field/NpcStand.msflow
+    - flow/Field/ToRentalShopBoard.msflow
+    - flow/Field/FeildDark_2A/FieldDark_2A_GameMaster.msflow
+    - flow/Field/FieldDark_00/FieldDark_00_GoldenBeeShop.msflow
+    - flow/Field/FieldDark_05/FieldDark_05_GameTower.msflow
+    - flow/Field/FieldDark_0F/FieldDark_0F_Namazu.msflow
+    - flow/Field/FieldDark_13/FieldDark_13_Sinpu.msflow
+    - flow/Field/FieldDark_14/FieldDark_14_Danpei.msflow
+    - flow/Field/FieldDark_16/FieldDark_16_HagureHouse.msflow
+    - flow/Field/FieldDark_16/FieldDark_16_MagicShop.msflow
+    - flow/Field/FieldDark_17/FieldDark_17_NpcHinox.msflow
+    - flow/Field/FieldDark_18/FieldDark_18_BakudanTouzoku.msflow
+    - flow/Field/FieldDark_18/FieldDark_18_BoxManDark.msflow
+    - flow/Field/FieldDark_18/FieldDark_18_ItemShop.msflow
+    - flow/Field/FieldDark_1A/FieldDark_1A_FortuneGirlUra.msflow
+    - flow/Field/FieldDark_1B/FieldDark_1B_Bakudanya.msflow
+    - flow/Field/FieldDark_1B/FieldDark_1B_Hilda.msflow
+    - flow/Field/FieldDark_1E/FieldDark_1E_Sennyukun.msflow
+    - flow/Field/FieldDark_22/FiledDark_22_BlackSmithUra.msflow
+    - flow/Field/FieldDark_22/FiledDark_22_BlackSmithWifeUra.msflow
+    - flow/Field/FieldDark_28/FieldDark_28_Minigame.msflow
+    - flow/Field/FieldDark_29/FieldDark_29_BakudanShop.msflow
+    - flow/Field/FieldDark_29/FieldDark_29_HappyFairy.msflow
+    - flow/Field/FieldDark_2C/FieldDark_2C_RaviosDiary.msflow
+    - flow/Field/FieldDark_33/FieldDark_33_Daibakudankabe.msflow
+    - flow/Field/FieldDark_33/FieldDark_33_Touzoku.msflow
+    - flow/Field/FieldDark_35/FieldDark_35_ItemShop.msflow
+    - flow/Field/FieldDark_35/FieldDark_35_Kame.msflow
+    - flow/Field/FieldDark_3A/FieldDark_3A_CrazyMan.msflow
+    - flow/Field/FieldLight_00/FieldLight_00_JyohoShop.msflow
+    - flow/Field/FieldLight_00/FieldLight_00_Mayoinomori.msflow
+    - flow/Field/FieldLight_02/FieldLight_02_KikoriMan.msflow
+    - flow/Field/FieldLight_03/FieldLight_03_Kanban.msflow
+    - flow/Field/FieldLight_05/FieldLight_05_Climber.msflow
+    - flow/Field/FieldLight_0A/FieldLight_0A_Kanban.msflow
+    - flow/Field/FieldLight_0F/FieldLight_0F_Kanban.msflow
+    - flow/Field/FieldLight_0F/FieldLight_0F_Zora.msflow
+    - flow/Field/FieldLight_11/FieldLight_11_FortuneGirl.msflow
+    - flow/Field/FieldLight_11/FieldLight_11_Maple.msflow
+    - flow/Field/FieldLight_12/FieldLight_12_Maple.msflow
+    - flow/Field/FieldLight_12/FieldLight_12_SignBoard.msflow
+    - flow/Field/FieldLight_13/FieldLight_13_Danpei.msflow
+    - flow/Field/FieldLight_13/FieldLight_13_Medium.msflow
+    - flow/Field/FieldLight_13/FieldLight_13_SignBoard.msflow
+    - flow/Field/FieldLight_13/FieldLight_13_Sinpu.msflow
+    - flow/Field/FieldLight_13/FieldLight_13_Sister.msflow
+    - flow/Field/FieldLight_14/FieldLight_14_Danpei.msflow
+    - flow/Field/FieldLight_14/FieldLight_14_Maple.msflow
+    - flow/Field/FieldLight_16/FieldLight_16_Ending.msflow
+    - flow/Field/FieldLight_16/FieldLight_16_MagicShop.msflow
+    - flow/Field/FieldLight_16/FieldLight_16_Obaba.msflow
+    - flow/Field/FieldLight_16/FieldLight_16_SignBoard.msflow
+    - flow/Field/FieldLight_17/FieldLight_17_Kanban.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_Bard.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_BoxMan.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_ClosedHouse.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_InsectNet.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_ItemShop.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_KakarikoGirl.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_Kakarikoboy.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_MaidSahasulala.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_MiddleLady.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_MiddleMan.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_MilkbarMaster.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_MilkbarSoldier.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_Rotenshonin.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_SahasPupil.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_SignBoard.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_Soldier.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_StandItem.msflow
+    - flow/Field/FieldLight_18/FieldLight_18_Touzoku.msflow
+    - flow/Field/FieldLight_1A/FieldLight_1A_Maple.msflow
+    - flow/Field/FieldLight_1A/FieldLight_1A_SignBoard.msflow
+    - flow/Field/FieldLight_1B/FieldLight_1B_BlackSmithKid.msflow
+    - flow/Field/FieldLight_1B/FieldLight_1B_Hekiga.msflow
+    - flow/Field/FieldLight_1B/FieldLight_1B_Impa.msflow
+    - flow/Field/FieldLight_1B/FieldLight_1B_Rakcha.msflow
+    - flow/Field/FieldLight_1B/FieldLight_1B_Sahasrahla.msflow
+    - flow/Field/FieldLight_1B/FieldLight_1B_Soldier.msflow
+    - flow/Field/FieldLight_1B/FieldLight_1B_Zelda.msflow
+    - flow/Field/FieldLight_1E/FieldLight_1E_Sahasrahla.msflow
+    - flow/Field/FieldLight_22/FieldLight_22_BlackSmith.msflow
+    - flow/Field/FieldLight_22/FieldLight_22_BlackSmithKid.msflow
+    - flow/Field/FieldLight_22/FieldLight_22_BlackSmithWife.msflow
+    - flow/Field/FieldLight_22/FieldLight_22_Dwarf.msflow
+    - flow/Field/FieldLight_22/FieldLight_22_Maple.msflow
+    - flow/Field/FieldLight_28/FieldLight_28_Minigame.msflow
+    - flow/Field/FieldLight_29/FieldLight_29_Kokko.msflow
+    - flow/Field/FieldLight_2A/FieldLight_2A_BlacksmithKid.msflow
+    - flow/Field/FieldLight_2A/FieldLight_2A_BlacksmithWife.msflow
+    - flow/Field/FieldLight_2B/FieldLight_2B_AppleTree.msflow
+    - flow/Field/FieldLight_2B/FieldLight_2B_BlackSmithKid.msflow
+    - flow/Field/FieldLight_2B/FieldLight_2B_Maple.msflow
+    - flow/Field/FieldLight_2C/FieldLight_2C_BlackSmithKid.msflow
+    - flow/Field/FieldLight_2C/FieldLight_2C_GanbariTutorial.msflow
+    - flow/Field/FieldLight_2C/FieldLight_2C_Rental.msflow
+    - flow/Field/FieldLight_2C/FieldLight_2C_RentalItem.msflow
+    - flow/Field/FieldLight_2C/FieldLight_2C_SahasPupil.msflow
+    - flow/Field/FieldLight_2C/FieldLight_2C_Sahasrahla.msflow
+    - flow/Field/FieldLight_2C/FieldLight_2C_SignBoard.msflow
+    - flow/Field/FieldLight_2C/FieldLight_2C_Soldier.msflow
+    - flow/Field/FieldLight_2D/FieldLight_2D_Maple.msflow
+    - flow/Field/FieldLight_2D/FieldLight_2D_UnderBridgeStranger.msflow
+    - flow/Field/FieldLight_2E/FieldLight_2E_Maple.msflow
+    - flow/Field/FieldLight_33/FieldLight_33_Douguya.msflow
+    - flow/Field/FieldLight_35/FieldLight_35_Douguya.msflow
+    - flow/Field/FieldLight_35/FieldLight_35_ItemShop.msflow
+    - flow/Field/FieldLight_35/FieldLight_35_Kinsta.msflow
+    - flow/Field/FieldLight_35/FieldLight_35_Marutakun.msflow
+    - flow/Field/FieldLight_35/FieldLight_35_Zora.msflow
+    - flow/Field/FieldLight_37/FieldLight_37_MessageBottle.msflow
+    - flow/Field/IndoorDark1/IndoorDark1_ZoraQueen.msflow
+    - flow/Field/IndoorDark2/IndoorDark2_Demo080.msflow
+    - flow/MiniDungeon/MiniDungeon_FieldDark_2B.msflow
+    - flow/MiniDungeon/MiniDungeon_FieldLight_07.msflow
+    - flow/MiniDungeon/MiniDungeon_FieldLight_15.msflow
+    - flow/MiniDungeon/MiniDungeon_FieldLight_1E.msflow
+    - flow/MiniDungeon/MiniDungeon_FieldLight_32.msflow
+    - flow/MiniDungeon/MiniDungeon_FieldLight_33.msflow
+    - flow/Test/GirigiriGameTest.msflow
+    - flow/Test/NpcClimberTest.msflow
+    - flow/Test/NpcHinox.msflow
+    - flow/Test/NpcTestIwata.msflow
+    - flow/Test/NpcTownEtc.msflow
+    - flow/Test/npcTest00.msflow
+    - flow/Test/test.msflow
+    - flow/Test/yamazaki.msflow
+    - flow/Test/yamazaki2.msflow
+    - layout/Cm_E3CourseSelect.mstxt
+    - layout/Cm_E3PressKey.mstxt
+    - layout/Cm_E3ThankYou.mstxt
+    - layout/Cm_MessageWindowNomalT.mstxt
+    - layout/Cm_MessageWindowSystemT.mstxt
+    - layout/Cm_SkipB.mstxt
+    - layout/Ed_EpilogueT.mstxt
+    - layout/Ed_InfoWindowT.mstxt
+    - layout/Ed_PlayRecordT.mstxt
+    - layout/Ed_StaffCreditMessageT.mstxt
+    - layout/Ed_StaffCreditT.mstxt
+    - layout/Gm_AnalogTimerT.mstxt
+    - layout/Gm_CongratulationWindowT.mstxt
+    - layout/Gm_DigitalTimerT.mstxt
+    - layout/Gm_DungeonNameT.mstxt
+    - layout/Gm_ExplainItemSetB.mstxt
+    - layout/Gm_FieldMap.mstxt
+    - layout/Gm_FloorNumberT.mstxt
+    - layout/Gm_GameOverT.mstxt
+    - layout/Gm_GetWindowBronzeT.mstxt
+    - layout/Gm_GetWindowGoldT.mstxt
+    - layout/Gm_GetWindowSilverT.mstxt
+    - layout/Gm_GiriGiriResultT.mstxt
+    - layout/Gm_ItemSelectBaloonB.mstxt
+    - layout/Gm_ItemSelectTextB.mstxt
+    - layout/Gm_KMapDark.mstxt
+    - layout/Gm_KMapLight.mstxt
+    - layout/Gm_MainGameSceneT.mstxt
+    - layout/Gm_MainSystemBaseB.mstxt
+    - layout/Gm_MainSystemCollectB.mstxt
+    - layout/Gm_MainSystemCollectContentsB.mstxt
+    - layout/Gm_MainSystemCollectTutorialT.mstxt
+    - layout/Gm_MainSystemItemB.mstxt
+    - layout/Gm_MainSystemItemSlideTutorialT.mstxt
+    - layout/Gm_MainSystemItemTutorialT.mstxt
+    - layout/Gm_MessageWindowBoardT.mstxt
+    - layout/Gm_MessageWindowDemo.mstxt
+    - layout/Gm_MessageWindowHildaT.mstxt
+    - layout/Gm_MessageWindowKenjaT.mstxt
+    - layout/Gm_MessageWindowMediumT.mstxt
+    - layout/Gm_MessageWindowShadowLinkT.mstxt
+    - layout/Gm_MessageWindowStoneT.mstxt
+    - layout/Gm_MessageWindowZeldaT.mstxt
+    - layout/Gm_PauseT.mstxt
+    - layout/Gm_SRCMainSystemBaseB.mstxt
+    - layout/Gm_SRCRecordListIndexT.mstxt
+    - layout/Gm_SRCRecordListT.mstxt
+    - layout/Gm_SRCResultT.mstxt
+    - layout/Gm_SRCResultTimeUpT.mstxt
+    - layout/Gm_SRCSettingB.mstxt
+    - layout/Gm_SRCSettingT.mstxt
+    - layout/Gm_SRCShadowLinkInfoB.mstxt
+    - layout/Gm_SRCSignBoardT.mstxt
+    - layout/Gm_SRCStartT.mstxt
+    - layout/Gm_SelectGuideT.mstxt
+    - layout/Gm_SelectPowerUpT.mstxt
+    - layout/Gm_SelectWarpPointT.mstxt
+    - layout/Gm_SellKimoT.mstxt
+    - layout/Gm_SetItemB.mstxt
+    - layout/Gm_ShopRupeeT.mstxt
+    - layout/Gm_ShopTutorialB.mstxt
+    - layout/Gm_Stadium.mstxt
+    - layout/Gm_StadiumB.mstxt
+    - layout/Gm_StadiumT.mstxt
+    - layout/Gm_TimeUpT.mstxt
+    - layout/Gm_WarpChoices.mstxt
+    - layout/Mn_FileSelectB.mstxt
+    - layout/Mn_FileSelectT.mstxt
+    - layout/Mn_KeyBoardGuideT.mstxt
+    - layout/Mn_LoadIconT.mstxt
+    - layout/Mn_StoryDemoB.mstxt
+    - layout/Mn_TitleB.mstxt
+    - layout/Mn_TitleT.mstxt
+    - message/Common/Action.mstxt
+    - message/Common/Collect.mstxt
+    - message/Common/Common.mstxt
+    - message/Common/EventItemGet.mstxt
+    - message/Common/ExtraName.mstxt
+    - message/Common/HintGhost.mstxt
+    - message/Common/ItemName.mstxt
+    - message/Common/ItemNameUpper.mstxt
+    - message/Common/ItemSelect.mstxt
+    - message/Common/ItemTutorial.mstxt
+    - message/Common/LocationName.mstxt
+    - message/Common/LocationNameUpper.mstxt
+    - message/Common/NPCName.mstxt
+    - message/Common/Opening.mstxt
+    - message/Common/StaffCredit.mstxt
+    - message/Common/System.mstxt
+    - message/Demo/Demo010.mstxt
+    - message/Demo/Demo020.mstxt
+    - message/Demo/Demo030.mstxt
+    - message/Demo/Demo040.mstxt
+    - message/Demo/Demo050.mstxt
+    - message/Demo/Demo060.mstxt
+    - message/Demo/Demo070.mstxt
+    - message/Demo/Demo080.mstxt
+    - message/Demo/Demo090.mstxt
+    - message/Demo/Demo100.mstxt
+    - message/Demo/Demo110.mstxt
+    - message/Dungeon/Castle.mstxt
+    - message/Dungeon/Dark.mstxt
+    - message/Dungeon/Dokuro.mstxt
+    - message/Dungeon/East.mstxt
+    - message/Dungeon/Ganon.mstxt
+    - message/Dungeon/Hagure.mstxt
+    - message/Dungeon/Hera.mstxt
+    - message/Dungeon/Ice.mstxt
+    - message/Dungeon/Kame.mstxt
+    - message/Dungeon/Sand.mstxt
+    - message/Dungeon/Water.mstxt
+    - message/Dungeon/Wind.mstxt
+    - message/Dungeon/cl_Church_UG.mstxt
+    - message/E3/E3_message.mstxt
+    - message/Field/Cave.mstxt
+    - message/Field/CrossBattle.mstxt
+    - message/Field/CrossBoard.mstxt
+    - message/Field/CrossForceTalk.mstxt
+    - message/Field/CrossOldMan.mstxt
+    - message/Field/CrossRecordList.mstxt
+    - message/Field/DefaultShadowLink.mstxt
+    - message/Field/Ending.mstxt
+    - message/Field/Field.mstxt
+    - message/Field/FieldDark.mstxt
+    - message/Field/FieldDark_00.mstxt
+    - message/Field/FieldDark_02.mstxt
+    - message/Field/FieldDark_05.mstxt
+    - message/Field/FieldDark_0F.mstxt
+    - message/Field/FieldDark_13.mstxt
+    - message/Field/FieldDark_14.mstxt
+    - message/Field/FieldDark_16.mstxt
+    - message/Field/FieldDark_17.mstxt
+    - message/Field/FieldDark_18.mstxt
+    - message/Field/FieldDark_1A.mstxt
+    - message/Field/FieldDark_1B.mstxt
+    - message/Field/FieldDark_1E.mstxt
+    - message/Field/FieldDark_22.mstxt
+    - message/Field/FieldDark_28.mstxt
+    - message/Field/FieldDark_29.mstxt
+    - message/Field/FieldDark_2A.mstxt
+    - message/Field/FieldDark_2C.mstxt
+    - message/Field/FieldDark_33.mstxt
+    - message/Field/FieldDark_35.mstxt
+    - message/Field/FieldDark_3A.mstxt
+    - message/Field/FieldLight.mstxt
+    - message/Field/FieldLight_00.mstxt
+    - message/Field/FieldLight_02.mstxt
+    - message/Field/FieldLight_03.mstxt
+    - message/Field/FieldLight_05.mstxt
+    - message/Field/FieldLight_0A.mstxt
+    - message/Field/FieldLight_0F.mstxt
+    - message/Field/FieldLight_11.mstxt
+    - message/Field/FieldLight_12.mstxt
+    - message/Field/FieldLight_13.mstxt
+    - message/Field/FieldLight_14.mstxt
+    - message/Field/FieldLight_16.mstxt
+    - message/Field/FieldLight_17.mstxt
+    - message/Field/FieldLight_18.mstxt
+    - message/Field/FieldLight_1A.mstxt
+    - message/Field/FieldLight_1B.mstxt
+    - message/Field/FieldLight_1E.mstxt
+    - message/Field/FieldLight_22.mstxt
+    - message/Field/FieldLight_28.mstxt
+    - message/Field/FieldLight_29.mstxt
+    - message/Field/FieldLight_2A.mstxt
+    - message/Field/FieldLight_2B.mstxt
+    - message/Field/FieldLight_2C.mstxt
+    - message/Field/FieldLight_2D.mstxt
+    - message/Field/FieldLight_2E.mstxt
+    - message/Field/FieldLight_33.mstxt
+    - message/Field/FieldLight_35.mstxt
+    - message/Field/FieldLight_37.mstxt
+    - message/Field/FortuneMessage.mstxt
+    - message/Field/HintGhostDark.mstxt
+    - message/Field/HintGhostLight.mstxt
+    - message/Field/ToRentalShopBoard.mstxt
+    - message/MiniDungeon/MiniDungeon_FieldDark_2B.mstxt
+    - message/MiniDungeon/MiniDungeon_FieldLight_07.mstxt
+    - message/MiniDungeon/MiniDungeon_FieldLight_15.mstxt
+    - message/MiniDungeon/MiniDungeon_FieldLight_1E.mstxt
+    - message/MiniDungeon/MiniDungeon_FieldLight_32.mstxt
+    - message/MiniDungeon/MiniDungeon_FieldLight_33.mstxt
+    - message/Test/GirigiriGameTest.mstxt
+    - message/Test/NpcClimberTest.mstxt
+    - message/Test/NpcHinox.mstxt
+    - message/Test/NpcTestIwata.mstxt
+    - message/Test/StaffCreditTest.mstxt
+    - message/Test/npcTest00.mstxt
+    - message/Test/test.mstxt
+    - message/Test/yamazaki.mstxt

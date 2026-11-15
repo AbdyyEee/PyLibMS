@@ -14,6 +14,6 @@ class FileEndian(Enum):
         return self._name_.lower()
 
     @property
-    def byte_order_mark(self) -> Literal[b"\xFF\xFE", b"\xFE\xFF"]:
+    def byte_order_mark(self) -> Literal[b"\xff\xfe", b"\xfe\xff"]:
         """The BOM of the endian."""
-        return b"\xFF\xFE" if self is FileEndian.LITTLE else b"\xFE\xFF"
+        return b"\xff\xfe" if self is FileEndian.LITTLE else b"\xfe\xff"

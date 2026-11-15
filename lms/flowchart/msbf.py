@@ -1,40 +1,60 @@
+from enum import StrEnum
 from types import MappingProxyType
 from typing import Mapping, Iterator
 
+from lms.common.field.lms_field import FieldValue, LMS_FieldMap
+from lms.common.lms_constants import LMS_MINIMUM_VERSION, DEFAULT_SECTION_COUNT
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
 from lms.fileio.endian import FileEndian
-from lms.flowchart.definitions.node import LMS_EntryNode, LMS_JumpNode, LMS_BranchNode, LMS_BaseNode
+from lms.flowchart.definitions.node import (
+    LMS_EntryNode,
+    LMS_JumpNode,
+    LMS_BranchNode,
+    LMS_BaseNode,
+    LMS_MessageNode,
+    LMS_NodeParameter,
+    verify_parameter_structure,
+    LMS_EventNode,
+)
+from lms.flowchart.definitions.node_type import LMS_NodeParameterType
+from lms.message.msbt import MSBT
+from lms.source_extension import FileExtension
+from lms.source_resolver import SourceResolver
+from lms.titleconfig.definitions.nodes import NodeConfig
+
+
+class MSBFSection(StrEnum):
+    FLW3 = "FLW3"
+    FEN1 = "FEN1"
+    REF1 = "REF1"
 
 
 class MSBF:
     """
     Class that represents a MSBF instance.
-
-    ======
-    Usages
-    ======
-    https://github.com/AbdyyEee/PylibMS/wiki/MSBF
-
-    =========
-    File Info
-    =========
-    https://nintendo-formats.com/libs/lms/msbf.html
     """
 
     MAGIC = "MsgFlwBn"
-    DEFAULT_SLOT_COUNT = 59
+    DEFAULT_SLOT_COUNT = 0x3B
 
     def __init__(
-            self, info: LMS_FileInfo | None = None, flowcharts: dict[int, LMS_EntryNode] = None
+        self,
+        info: LMS_FileInfo,
+        source_resolver: SourceResolver,
+        node_config: NodeConfig | None,
+        msbt_override: MSBT | None = None,
     ):
         self._info = info if info is not None else LMS_FileInfo()
+        self._source_resolver = source_resolver
+        self._msbt_override = msbt_override
+        self._node_config = node_config
 
         # While unlikely to vary, and have yet to find a file that changes the slot count (unlike MSBT)
         # it is wiser to store an editable attribute just in case a game decides to vary the amount.
         self.slot_count = MSBF.DEFAULT_SLOT_COUNT
 
-        self._flowcharts: dict[int, LMS_EntryNode] = flowcharts or {}
+        self._flowcharts: dict[str, LMS_EntryNode] = {}
         self._nodes: dict[int, LMS_BaseNode] = {}
         self._global_node_id = 0
 
@@ -52,11 +72,13 @@ class MSBF:
 
     @classmethod
     def new(
-            cls,
-            endian: FileEndian = FileEndian.LITTLE,
-            encoding: FileEncoding = FileEncoding.UTF16,
-            version: int = 3,
-            section_count: int = 2,
+        cls,
+        endian: FileEndian = FileEndian.LITTLE,
+        encoding: FileEncoding = FileEncoding.UTF16,
+        version: int = LMS_MINIMUM_VERSION,
+        section_count: int = 2,
+        node_config: NodeConfig | None = None,
+        msbt_override: MSBT | None = None,
     ):
         """
         Create a new MSBF instance.
@@ -65,9 +87,11 @@ class MSBF:
         :param encoding: the file encoding.
         :param version: the file version.
         :param section_count: the number of sections.
+        :param node_config: a node config override.
+        :param msbt_override: the MSBT override.
 
         """
-        return MSBF(LMS_FileInfo(endian, encoding, version, section_count))
+        return cls(LMS_FileInfo(endian, encoding, version, section_count), node_config, msbt_override)
 
     @property
     def info(self) -> LMS_FileInfo:
@@ -101,8 +125,136 @@ class MSBF:
                 references.append(entry_node)
         return references
 
+    def add_message_node(self, msbt_index: int, label_index: int) -> LMS_MessageNode:
+        """
+        Adds a message node to the MSBF. Will inherit MSBT override if supplied.
+
+        :param msbt_index: the MSBT file index.
+        :param label_index: the index of the label in the MSBT
+        """
+        return self._register_node(
+            LMS_MessageNode(self._generate_next_id(), msbt_index, label_index,
+                            source_resolver=self._source_resolver, msbt_override=self._msbt_override)
+        )
+
+    def add_message_node_msbt(self, msbt_filename: str) -> LMS_MessageNode:
+        """
+        Adds a message node to the MSBF based on the filename of the msbt in the project. Defaults to first entry
+        of the msbt.
+
+        :param msbt_filename: the filename of the msbt (with the ``.msbt`` extension).
+
+        The msbt must exist in the project source files. To see valid files, view ``project.source_files``.
+        """
+        if self._source_resolver is None:
+            raise ValueError("No message data was provided to add a node by filename.")
+
+        return self._register_node(
+            LMS_MessageNode(
+                self._generate_next_id(),
+                self._source_resolver.retrieve_source_index(msbt_filename),
+                0,
+                self._source_resolver,
+            )
+        )
+
+    def add_branch_node(
+        self,
+        parameter_type: LMS_NodeParameterType,
+        parameter_value: LMS_NodeParameter,
+        condition_id: int,
+    ) -> LMS_BranchNode:
+        """
+        Adds a branch node to the MSBF file.
+
+        :param parameter_type: parameter type of the node.
+        :param parameter_value: parameter value.
+        :param condition_id: the condition id of the node.
+
+        """
+        return self._register_node(
+            LMS_BranchNode(
+                self._generate_next_id(), parameter_type, parameter_value, condition_id
+            )
+        )
+
+    def add_branch_node_definition(
+        self, name: str, **parameters: FieldValue
+    ) -> LMS_BranchNode:
+        """
+        Adds a branch node to the msbf file given its name,
+
+        :param name: name of the node in the configuration.
+        :param parameters: keyword arguments of parameters.
+        """
+        if self._node_config is None:
+            raise ValueError(f"There is no node configuration!")
+
+        definition = self._node_config.get_definition_by_name(name)
+
+        for parameter in parameters.values():
+            verify_parameter_structure(parameter, definition.parameter_type)
+
+        return self._register_node(
+            LMS_BranchNode(
+                self._generate_next_id(),
+                definition.parameter_type,
+                LMS_FieldMap.from_dict(parameters, definition.parameter_definitions),
+                definition.id,
+                definition,
+            )
+        )
+
+    def add_event_node(
+        self,
+        parameter_type: LMS_NodeParameterType,
+        parameter_value: LMS_NodeParameter,
+        event_id: int,
+    ) -> LMS_BranchNode:
+        """
+        Adds an event node to the msbf file.
+
+        :param parameter_type: parameter type of the node.
+        :param parameter_value: parameter value.
+        :param event_id: the event id of the node.
+
+        """
+        return self._register_node(
+            LMS_EventNode(
+                self._generate_next_id(), parameter_type, parameter_value, event_id
+            )
+        )
+
+    def add_event_node_definition(
+        self, name: str, **parameters: FieldValue
+    ) -> LMS_EventNode:
+        """
+        Adds an event node to the msbf file.
+
+        :param name: name of the node in the configuration.
+        :param parameters: keyword arguments of parameters.
+
+        """
+        if self._node_config is None:
+            raise ValueError(f"There is no node configuration!")
+
+        definition = self._node_config.get_definition_by_name(name)
+
+        for parameter in parameters.values():
+            verify_parameter_structure(parameter, definition.parameter_type)
+
+        return self._register_node(
+            LMS_EventNode(
+                self._generate_next_id(),
+                definition.parameter_type,
+                LMS_FieldMap.from_dict(parameters, definition.parameter_definitions),
+                definition.id,
+                definition,
+            )
+        )
+
     def add_flowchart(
-            self, name: str, entry_node: LMS_EntryNode = None
+        self, name: str, entry_node: LMS_EntryNode = None
     ) -> LMS_EntryNode:
         """
         Add a flowchart to the MSBF instance.
@@ -130,24 +282,43 @@ class MSBF:
 
         return entry_node
 
-    def register_node(self, node: LMS_BaseNode) -> None:
+    def add_jump_node(
+        self, msbf_index: int | None = None, flowchart: str | None = None,
+    ) -> LMS_JumpNode:
         """
-        Registers a node to the MSBF instance.
+        Adds a jump node to the msbf file.
 
-        :param node: The node to register.
+        :param msbf_index: the index of the msbf. Some games use None for current flowchart, other the current msbf.
+        :param flowchart: name of the flowchart to jump to. Only valid for local jumps.
         """
-        if not isinstance(node, LMS_BaseNode):
-            raise TypeError(
-                f"Node type '{type(node).__name__}' is not a child of LMS_BaseNode!"
-            )
+        node = LMS_JumpNode(self._generate_next_id(), msbf_index, self._source_resolver)
+        if flowchart is not None:
+            node.set_next_node(self._flowcharts[flowchart])
+        return self._register_node(node)
 
-        if node.id in self._nodes:
-            raise ValueError(
-                f"Node of ID '{node.id}' is already registered to this flowchart!"
-            )
+    def add_jump_node_file(self, flowchart: str, msbf_filename: str) -> LMS_JumpNode:
+        """
+        Adds a jump node to the msbf based on the filename of the msbf in the project.
 
-        node.id = self._generate_next_id()
-        self._nodes[node.id] = node
+        :param flowchart: the name of the next flowchart to jump to.
+        :param msbf_filename: name of the MSBF file in the source (with the ``.msbf`` extension).
+        """
+        msbf_index = self._source_resolver.retrieve_source_index(msbf_filename)
+        msbf = self._source_resolver.resolve_source(msbf_index, FileExtension.MSBF)
+        next_flowchart: LMS_EntryNode = None
+
+        for node in msbf.entry_nodes:
+            if node.name == flowchart:
+                next_flowchart = node
+                break
+
+        if next_flowchart is None:
+            raise KeyError(f"Flowchart '{flowchart}' does not exist in '{msbf_filename}'!")
+
+        node = LMS_JumpNode(self._generate_next_id(), msbf_index, self._source_resolver)
+        node.set_next_node(next_flowchart)
+
+        return self._register_node(node)
 
     def destroy_node(self, to_delete: LMS_BaseNode) -> None:
         """
@@ -156,7 +327,9 @@ class MSBF:
         :param to_delete: The node to delete.
         """
         if to_delete not in self._nodes:
-            raise KeyError(f"Node id '{to_delete.id}' does not exist in this flowchart!")
+            raise KeyError(
+                f"Node id '{to_delete.id}' does not exist in this flowchart!"
+            )
 
         if isinstance(to_delete, LMS_EntryNode):
             raise ValueError("Entry nodes cannot be deleted!")
@@ -201,7 +374,21 @@ class MSBF:
                 continue
 
             if isinstance(node, LMS_JumpNode) and node.next_entry == entry_node:
-                node.next_entry = None
+                node.set_next_node(None)
+
+    def _register_node(self, node: LMS_BaseNode) -> LMS_BaseNode:
+        if not isinstance(node, LMS_BaseNode):
+            raise TypeError(
+                f"Node type '{type(node).__name__}' is not a child of LMS_BaseNode!"
+            )
+
+        if node.id in self._nodes:
+            raise ValueError(
+                f"Node of ID '{node.id}' is already registered to this flowchart!"
+            )
+
+        self._nodes[node.id] = node
+        return node
 
     def _generate_next_id(self) -> int:
         next_id = self._global_node_id

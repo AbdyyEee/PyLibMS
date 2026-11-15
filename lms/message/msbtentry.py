@@ -1,6 +1,8 @@
 from lms.common.field.lms_field import LMS_FieldMap
 from lms.message.lms_messagetext import LMS_MessageText
-from lms.titleconfig.definitions.attribute import AttributeConfig
+from lms.project.definitions.style import LMS_Style
+from lms.titleconfig.definitions.project import Project
+from lms.titleconfig.definitions.style import Style
 from lms.titleconfig.definitions.tags import TagConfig
 
 
@@ -8,12 +10,13 @@ class MSBTEntry:
     """A class that represents an entry in a MSBT file."""
 
     def __init__(
-            self,
-            name: str,
-            *,
-            message: LMS_MessageText | str | None = "",
-            attribute: LMS_FieldMap | bytes | None = None,
-            style_index: int | None = None,
+        self,
+        name: str,
+        *,
+        message: LMS_MessageText | str | None = "",
+        attribute: LMS_FieldMap | bytes | None = None,
+        style_index: int | None = None,
+        project: Project | None = None,
     ):
         self.name = name
 
@@ -35,6 +38,7 @@ class MSBTEntry:
 
         self._attribute = attribute
         self.style_index = style_index
+        self._project = project
 
     @property
     def message(self) -> LMS_MessageText:
@@ -45,6 +49,48 @@ class MSBTEntry:
     def attribute(self) -> LMS_FieldMap | bytes | None:
         """The attribute for the instance."""
         return self._attribute
+
+    @property
+    def style(self) -> Style:
+        """Style object for the instance, set from a project."""
+        if self._project is None:
+            raise ValueError(
+                "A project must be provided for MSBT entry to view styles!"
+            )
+
+        if self._project.styles is None or self.style_index is None:
+            raise ValueError(
+                f"There are no style definitions in the project '{self._project.name}'!"
+            )
+
+        return self._project.styles[self.style_index]
+
+    def set_style(self, new: Style) -> None:
+        """
+        Sets the style of the MSBT entry given a style object.
+
+        :param new: the new style object to set.
+        """
+        if self._project is None:
+            raise ValueError("A project must be provided for MSBT entry to set styles!")
+
+        if self._project.styles is None:
+            raise ValueError(
+                f"There are no style definitions in the project '{self._project.name}'!"
+            )
+
+        style_index = None
+        for i, style in enumerate(self._project.styles):
+            if style.name == new.name:
+                style_index = i
+                break
+
+        if style_index is None:
+            raise ValueError(
+                f"The style '{new.name}' does not exist in the project '{self._project.name}'!"
+            )
+
+        self.style_index = style_index
 
     def to_dict(self) -> dict:
         """Converts the MSBTEntry instance into a dictionary object."""
@@ -64,10 +110,10 @@ class MSBTEntry:
 
     @classmethod
     def from_dict(
-            cls,
-            data: dict,
-            attribute_config: AttributeConfig | None = None,
-            tag_config: TagConfig | None = None,
+        cls,
+        data: dict,
+        attribute_config: AttributeConfig | None = None,
+        tag_config: TagConfig | None = None,
     ):
         """
         Creates a MSBTEntry from a dictionary object.

@@ -14,8 +14,11 @@ class NodeConfig:
     Class that represents a node configuration.
     """
 
-    def __init__(self, branch_definitions: dict[int, tuple[NodeDefinition, ...]] = None,
-                 event_definitions: dict[int, tuple[NodeDefinition, ...]] = None):
+    def __init__(
+        self,
+        branch_definitions: dict[int, NodeDefinition] = None,
+        event_definitions: dict[int, NodeDefinition] = None,
+    ):
 
         self._branch_definitions = branch_definitions or {}
         self._event_definitions = event_definitions or {}
@@ -30,7 +33,11 @@ class NodeConfig:
         """Mapping of branch definitions for this configuration."""
         return self._event_definitions
 
-    def add_definition(self, node_type: LMS_NodeType.BRANCH | LMS_NodeType.EVENT, data: Mapping[str, Any]) -> None:
+    def add_definition(
+        self,
+        node_type: LMS_NodeType.BRANCH | LMS_NodeType.EVENT,
+        data: Mapping[str, Any],
+    ) -> None:
         """
         Adds a ``NodeDefinition`` object to the configuration.
 
@@ -39,26 +46,42 @@ class NodeConfig:
         """
         node_id = data["id"]
         definition = NodeDefinition.from_dict(node_id, node_type, data)
-        attr = getattr(self, "_branch_definitions" if node_type is LMS_NodeType.BRANCH else "_event_definitions")
-        attr[node_id] = (definition,)
-
-        if node_id in attr:
-            attr[node_id] = attr[node_id] + (definition,)
-        else:
-            attr[node_id] = (definition,)
-
-    def get_definition(
+        attr = getattr(
             self,
-            identifier: int,
-            node_type: Literal[LMS_NodeType.BRANCH] | Literal[LMS_NodeType.EVENT],
-            parameter_type: LMS_NodeParameterType = None,
+            (
+                "_branch_definitions"
+                if node_type is LMS_NodeType.BRANCH
+                else "_event_definitions"
+            ),
+        )
+        attr[node_id] = definition
+
+    def get_definition_by_name(self, name: str) -> NodeDefinition:
+        """
+        Retrieves a node definition by its name.
+
+        :param name: the name of the node.
+        """
+        for branch_definition in self._branch_definitions.values():
+            if branch_definition.name == name:
+                return branch_definition
+
+        for event_definition in self._event_definitions.values():
+            if event_definition.name == name:
+                return event_definition
+
+        raise KeyError(f"The node '{name}' was not found as a definition!")
+
+    def get_definition_by_id(
+        self,
+        identifier: int,
+        node_type: Literal[LMS_NodeType.BRANCH] | Literal[LMS_NodeType.EVENT],
     ) -> NodeDefinition:
         """
         Retrieves a node definition by its ID and the type.
 
         :param identifier: The condition/event identifier of the node.
         :param node_type: The type of the node.
-        :param parameter_type: The parameter of the node.
         """
         match node_type:
             case LMS_NodeType.BRANCH:
@@ -73,11 +96,8 @@ class NodeConfig:
                 raise TypeError(
                     f"You may not use '{node_type}' with a node configuration."
                 )
-        for variant in definition:
-            if variant.parameter_type is parameter_type:
-                return variant
 
-        return None
+        return definition
 
 
 @dataclass(frozen=True)
@@ -95,7 +115,9 @@ class NodeDefinition:
     next_node_dependency: bool = False
 
     @classmethod
-    def from_dict(cls, identifier: int, node_type: LMS_NodeType, data: dict) -> NodeDefinition | None:
+    def from_dict(
+        cls, identifier: int, node_type: LMS_NodeType, data: dict
+    ) -> NodeDefinition:
 
         name, description = data["name"], data.get("description", "")
         converted_parameters: list[FieldDefinition] = []
@@ -115,7 +137,9 @@ class NodeDefinition:
                     datatype_from_dict = LMS_DataType.STRING
                 else:
                     datatype_from_dict = parameter_type.sliced_datatype[i]
-                definition = FieldDefinition(parameter["name"], description, datatype_from_dict, enum_members)
+                definition = FieldDefinition(
+                    parameter["name"], description, datatype_from_dict, enum_members
+                )
             else:
                 definition = FieldDefinition(
                     parameter["name"],
@@ -132,11 +156,19 @@ class NodeDefinition:
                 "There may only be one of enum_options and options in the definition."
             )
 
-        if (enum_options := data.get("enum_options", "")) and node_type is LMS_NodeType.EVENT:
-            raise ValueError(f"There may only be options for branch nodes for definition '{name}'")
+        if (
+            enum_options := data.get("enum_options", "")
+        ) and node_type is LMS_NodeType.EVENT:
+            raise ValueError(
+                f"There may only be options for branch nodes for definition '{name}'"
+            )
 
-        if (case_format := data.get("case_format", "")) and node_type == LMS_NodeType.EVENT:
-            raise ValueError(f"There may only be case_format for branch nodes, '{name}' is an event definition!")
+        if (
+            case_format := data.get("case_format", "")
+        ) and node_type == LMS_NodeType.EVENT:
+            raise ValueError(
+                f"There may only be case_format for branch nodes, '{name}' is an event definition!"
+            )
 
         return NodeDefinition(
             name=name,

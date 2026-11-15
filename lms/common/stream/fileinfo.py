@@ -1,8 +1,10 @@
 from lms.common import lms_exceptions
 from lms.common.lms_constants import (
     SECTION_DATA_START,
-    SIZE_OFFSET, LMS_MINIMUM_VERSION,
-    LITTLE_ENDIAN_BOM, BIG_ENDIAN_BOM,
+    SIZE_OFFSET,
+    LMS_MINIMUM_VERSION,
+    LITTLE_ENDIAN_BOM,
+    BIG_ENDIAN_BOM,
 )
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
@@ -49,7 +51,7 @@ def read_file_info(reader: FileReader, expected_magic: str) -> LMS_FileInfo:
     reader.seek(0, 2)
     if file_size != (real_size := reader.tell()):
         raise lms_exceptions.LMS_MisalignedSizeError(
-            f"File size is misaligned!` Got {file_size} expected {real_size}."
+            f"File size is misaligned! Expected {file_size} got {real_size}."
         )
 
     reader.seek(SECTION_DATA_START)

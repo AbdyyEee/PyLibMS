@@ -178,19 +178,25 @@ def write_msbf(file: MSBF) -> bytes:
 
     # Gather any jumps that have valid resolved references
     resolved_jump_ids: dict[LMS_BaseNode, int] = {}
+    file_id_cache: dict[MSBF, dict] = {}
+
     for node in file:
         if not isinstance(node, LMS_JumpNode):
             continue
 
+        # Use the original target id obtained directly from the stream as we can't resolve the actual MSBF
+        # Otherwise for local jumps we can use the current stream ids for indexing
+        # For source jumps we build the target ids from the file directly
         if node.next_node is None:
-            raise ValueError("There are unset jumps in this file!")
-        # Local jump we can use the current stream ids for indexing
+            resolved_jump_ids[node] = node.next_node_id
         elif node.next_node in stream_ids:
             resolved_jump_ids[node] = stream_ids[node.next_node]
-        # Source jump, build the target ids from the file
         else:
-            target_ids = {target: stream_id for stream_id, target in enumerate(node.msbf)}
-            resolved_jump_ids[node] = target_ids[node.next_node]
+            # Cache the stream id looks up per each local file
+            if node.msbf not in file_id_cache:
+                file_id_cache[node.msbf] = {target: stream_id for stream_id, target in enumerate(node.msbf)}
+
+            resolved_jump_ids[node] = file_id_cache[node.msbf][node.next_node]
 
     write_section(
         writer, MSBFSection.FLW3, write_flw3, list(file.nodes.values()), stream_ids,

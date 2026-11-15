@@ -172,6 +172,7 @@ class LMS_MessageNode(LMS_BaseNode):
         msbt_index: int,
         label_index: int,
         source_resolver: SourceResolver | None = None,
+        msbt_override: MSBT | None = None,
     ):
         super().__init__(
             node_id,
@@ -183,6 +184,7 @@ class LMS_MessageNode(LMS_BaseNode):
         self.msbt_index = msbt_index
         self.label_index = label_index
         self._source_resolver = source_resolver
+        self._msbt_override = msbt_override
 
     @property
     def msbt_name(self) -> str:
@@ -196,8 +198,11 @@ class LMS_MessageNode(LMS_BaseNode):
     @property
     def msbt(self) -> MSBT:
         """MSBT instance the node reference."""
+        if self._msbt_override is not None:
+            return self._msbt_override
+
         if self._source_resolver is None:
-            raise ValueError("No message data was provided!")
+            raise ValueError("No MSBT override or message data was provided!")
 
         self._source_resolver.validate()
         return self._source_resolver.resolve_msbt(self.msbt_index)
@@ -499,16 +504,24 @@ class LMS_JumpNode(LMS_BaseNode):
         node_id: int,
         msbf_index: int | None,
         source_resolver: SourceResolver | None,
+        original_target_id: int | None = None,
     ):
         super().__init__(node_id, LMS_NodeType.JUMP, LMS_NodeParameterType.NONE, None)
 
         self.msbf_index = msbf_index
         self._source_resolver = source_resolver
-    
-    
+        self._original_target_id = original_target_id
+
+    @property
+    def next_node_id(self) -> int | None:
+        if self.next_node is not None:
+            return super().next_node_id
+
+        return self._original_target_id
+
     @property
     def msbf_name(self) -> str:
-        """Name of the msbf resolved from the project."""
+        """Name of the MSBF resolved from the project."""
         if self._source_resolver is None:
             return None
 
@@ -523,7 +536,10 @@ class LMS_JumpNode(LMS_BaseNode):
         self._source_resolver.validate()
         return self._source_resolver.resolve_source(self.msbf_index, FileExtension.MSBF)
 
-
+    def set_next_node(self, node: LMS_BaseNode | None) -> LMS_BaseNode | None:
+        if node is None:
+            self._original_target_id = None
+        return super().set_next_node(node)
 
 def verify_parameter_structure(
     value: int | tuple[int, ...] | str, parameter_type: LMS_NodeParameterType

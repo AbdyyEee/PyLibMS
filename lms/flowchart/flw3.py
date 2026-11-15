@@ -119,7 +119,8 @@ def read_flw3(
                     None if (value := reader.read_uint16()) == NO_VALUE else value
                 )
 
-                node = LMS_JumpNode(i, msbf_index, source_resolver)
+                # Next node index is passed in for source jumps so they can be written without knowing the file
+                node = LMS_JumpNode(i, msbf_index, source_resolver, next_node_index)
                 reader.skip(4)
 
         next_id_map[node] = next_node_index

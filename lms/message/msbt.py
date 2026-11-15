@@ -33,6 +33,7 @@ class MSBT:
     MAGIC = "MsgStdBn"
 
     DEFAULT_SLOT_COUNT = 0x65
+    DEFAULT_ATTRIBUTE_SIZE = 0
 
     ATR1_INDEX = 0x1
     TXT2_INDEX = 0x2
@@ -41,7 +42,9 @@ class MSBT:
     def __init__(
         self,
         info: LMS_FileInfo | None = None,
-        section_list: list[str] = None,
+        slot_count: int = DEFAULT_SLOT_COUNT,
+        size_per_attribute: int = DEFAULT_ATTRIBUTE_SIZE,
+        section_list: list[MSBTSection] = None,
         unsupported_section_map: dict[str, bytes] | None = None,
         attribute_offsets: list[int] | None = None,
         project: Project | None = None,
@@ -51,8 +54,8 @@ class MSBT:
         self._entries: list[MSBTEntry] = []
         self._label_map: dict[str, MSBTEntry] = {}
 
-        self.size_per_attribute = 0
-        self.slot_count = MSBT.DEFAULT_SLOT_COUNT
+        self.size_per_attribute = size_per_attribute
+        self.slot_count = slot_count
 
         self.attr_string_table: bytes | None = None
         self._attribute_offsets = attribute_offsets
@@ -87,6 +90,8 @@ class MSBT:
         cls,
         uses_nli1: bool = False,
         project: Project | None = None,
+        slot_count: int = DEFAULT_SLOT_COUNT,
+        size_per_attribute: int = DEFAULT_ATTRIBUTE_SIZE,
         endian: FileEndian = FileEndian.LITTLE,
         encoding: FileEncoding = FileEncoding.UTF16,
         version: int = LMS_MINIMUM_VERSION,
@@ -97,13 +102,17 @@ class MSBT:
 
         :param uses_nli1: flag to determine if to use nli1 section for labels.
         :param project: specific project from a config.
+        :param slot_count: the number of slots to use. Default is 101 for most games.
+        :param size_per_attribute: the size per attribute. For encoded attributes.
         :param endian: if the file is big endian.
         :param encoding: the file encoding.
         :param version: the file version.
         :param section_count: the number of sections.
         """
-        return MSBT(
-            LMS_FileInfo(endian, encoding, version, section_count),
+        return cls(
+            info=LMS_FileInfo(endian, encoding, version, section_count),
+            slot_count=slot_count,
+            size_per_attribute=size_per_attribute,
             section_list=[
                 MSBTSection.LBL1 if not uses_nli1 else MSBTSection.NLI1,
                 MSBTSection.TXT2,
@@ -123,9 +132,11 @@ class MSBT:
         encoding = FileEncoding(data["encoding"])
         version = data["version"]
         section_count = data["section_count"]
+        size_per_attribute = data.get("size_per_attribute")
 
         msbt = cls(
             LMS_FileInfo(endian, encoding, version, section_count),
+            size_per_attribute,
             data["section_list"],
             attribute_offsets=data.get("attribute_offsets"),
             project=project,
@@ -136,6 +147,7 @@ class MSBT:
                 entry["message"], None if project is None else project.tag_config
             )
 
+            attr = None
             if (attribute := entry.get("attribute")) is not None:
                 if isinstance(attribute, str):
                     attr = bytes.fromhex(attribute)
@@ -170,18 +182,18 @@ class MSBT:
         :param data: the string to parse.
         :param project: the project from a config.
         """
-        return cls.from_dict(yaml.loads(data), project=project)
+        return cls.from_dict(yaml.safe_load(data), project=project)
 
     def to_dict(self) -> dict:
         """Convert the MSBT object to a dictionary."""
         data = {
-            "filename": self.filename,
             "info": self.info.to_dict(),
             "slot_count": self.slot_count,
-            "section_list": self.section_list,
+            "section_list": [section.value for section in self._section_list],
         }
 
         if self.section_exists(MSBTSection.ATO1):
+            data["size_per_attribute"] = self.size_per_attribute,
             data["attribute_offsets"] = [
                 NO_OFFSET if offset is None else offset
                 for offset in self._attribute_offsets
@@ -321,7 +333,6 @@ class MSBT:
         message: str = None,
         attribute: LMS_FieldMap | bytes | None = None,
         style_index: int = None,
-        project: Project | None = None,
     ) -> MSBTEntry:
         """
         Creates an MSBT Entry and adds it to the file.
@@ -330,16 +341,14 @@ class MSBT:
         :param message: the message of the entry.
         :param attribute: the attribute of the entry.
         :param style_index: the style of the entry.
-        :param project: optional project, used for styles.
         """
-        tag_config = None if project is None else project.tag_config
         self.add_entry(
             entry := MSBTEntry(
                 name,
-                message=LMS_MessageText(message, tag_config),
+                message=LMS_MessageText(message, None if self._project is None else self._project.tag_config),
                 attribute=attribute,
                 style_index=style_index,
-                project=project,
+                project=self._project,
             )
         )
         return entry

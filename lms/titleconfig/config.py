@@ -34,16 +34,29 @@ SOURCE_KEY = "source_files"
 NODE_KEY = "nodes"
 
 
+
 class TitleConfig:
     """
     Represents a configuration for a specific title.
     """
+
+    GAME_PRESET = Literal[
+        "Animal Crossing New Leaf",
+        "Nintendo Badge Arcade"
+        "Pikmin 3",
+        "The Legend of Zelda A Link Between Worlds",
+        "The Legend of Zelda Triforce Heros",
+        "The Legend of Zelda Skyward Sword",
+        "Tomodachi Life Living the Dream",
+        "Tomodachi Life NA-EU"
+    ]
+
     def __init__(
         self,
         game: str | None,
         nodes: Mapping[str, NodeConfig] | None = None,
         projects: Mapping[str, Project] | None = None,
-        umsbt_languages: dict[str, dict[str, int]] | None = None,
+        umsbt_languages: dict[str, int] | None = None,
     ):
         self._game = game
         self._nodes = nodes or {}
@@ -67,6 +80,14 @@ class TitleConfig:
         return MappingProxyType(self._projects)
 
     @property
+    def global_node_config(self) -> NodeConfig | None:
+        """The node config, if defined."""
+        try:
+            return self._nodes["global"]
+        except KeyError:
+            return None
+
+    @property
     def global_project(self) -> Project | None:
         """The global project, if defined."""
         try:
@@ -75,24 +96,24 @@ class TitleConfig:
             return None
 
     @property
-    def umsbt_languages(self) -> Mapping[str, Mapping[str, int]]:
+    def umsbt_languages(self) -> Mapping[str, int]:
         """Mapping of languages to fixed UMSBT indexes."""
         return MappingProxyType(self._umsbt_languages)
-
-    def get_language(self, region: str, language: str) -> int:
-        """Retrieve a language index in the UMSBT language map."""
-        languages: dict = self._umsbt_languages[region]
-
-        for i, lang in languages.items():
-            if lang == language:
-                return i
-
-        raise KeyError(f"{language} is not in the UMSBT language map.")
 
     @classmethod
     def get_preset_list(cls) -> tuple[str, ...]:
         """Get the current preset list."""
         return get_args(cls.GAME_PRESET)
+
+    @classmethod
+    def load_preset(cls, preset: GAME_PRESET) -> Self:
+        """
+        Loads a preset.
+
+        :param preset: the game preset to load.
+        """
+        with open(os.path.join("lms", "presets", f"{preset}.yaml"), "r") as f:
+            return TitleConfig.load_config(f.read())
 
     @classmethod
     def load_file(cls, file_path: str) -> Self:

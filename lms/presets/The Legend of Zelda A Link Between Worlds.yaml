@@ -99,8 +99,7 @@ projects:
           datatype: uint8
         - name: a
           datatype: uint8
-        - name: name
-          datatype: string
+
       - name: PageBreak
         group_id: 0
         tag_index: 4

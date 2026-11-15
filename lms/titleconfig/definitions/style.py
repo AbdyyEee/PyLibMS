@@ -23,5 +23,5 @@ class Style:
             data["region_width"],
             data["line_number"],
             data["font_index"],
-            data["color"],
+            data["color_index"],
         )

@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 from unittest import case
 
 from lms.source_extension import FileExtension
+from lms.titleconfig.config import TitleConfig
 
 if TYPE_CHECKING:
     from lms.flowchart.msbf import MSBF
@@ -17,10 +18,13 @@ from lms.titleconfig.definitions.project import Project
 # Files in projects function as paths to a virtual .msbt//.msbf file,
 # given a message root these files are resolved automatically to their binary and read
 class SourceResolver:
-    def __init__(self, project: Project,
+    def __init__(self,
+                 config: TitleConfig,
+                 project: Project,
                  message_root: str | os.PathLike[str],
                  node_config: NodeConfig,
-                 language_index: int | None = None):
+                 language: str | None = None):
+        self._config = config
         self._project = project
         self._message_root = Path(message_root or "")
         self._node_config = node_config
@@ -32,7 +36,7 @@ class SourceResolver:
             self._msbt_extension = FileExtension.UMSBT
             break
 
-        self._language_index = language_index
+        self._language = language
 
     def validate(self) -> None:
         if not self._message_root:
@@ -51,7 +55,16 @@ class SourceResolver:
             FileExtension.MSBT.source_format: self._msbt_extension,
             FileExtension.MSBF.source_format: FileExtension.MSBF,
         }[Path(source_path).suffix]
-        return os.path.basename(source_path).replace(extension.source_format, extension)
+        stem = Path(source_path).stem
+
+        # Add language suffix
+        if extension is FileExtension.UMSBT:
+            if self._language is None:
+                raise ValueError("No language was provided to map a UMSBT to a MSBT!")
+
+            return f"{stem}_{self._language}{FileExtension.MSBT}"
+
+        return f"{stem}{extension}"
 
     def resolve_msbt(self, source_index: int) -> MSBT | UMSBT:
         return self.resolve_source(source_index, self._msbt_extension)
@@ -98,10 +111,11 @@ class SourceResolver:
             case FileExtension.UMSBT:
                 umsbt = read_umsbt_path(real_path, project=self._project)
 
-                if self._language_index is None:
+                if self._language is None:
                     raise ValueError("No language was provided to map a UMSBT to a MSBT!")
 
-                file = umsbt.files[self._language_index]
+                language_index = self._config.umsbt_languages[self._language]
+                file = umsbt.files[language_index]
             case FileExtension.MSBF:
                 file = read_msbf_path(real_path, node_config=self._node_config, project=self._project,
                                       _source_resolver=self)

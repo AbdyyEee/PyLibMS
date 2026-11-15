@@ -143,6 +143,7 @@ def read_msbt(
     labels: dict[int, str] = {}
 
     attribute_offsets = None
+    size_per_attribute = MSBT.DEFAULT_ATTRIBUTE_SIZE
     for magic, size in read_section_data(reader, file_info.section_count):
         match magic:
             case MSBTSection.LBL1:
@@ -163,6 +164,8 @@ def read_msbt(
                     attribute_definitions,
                     size,
                 )
+
+                size_per_attribute = attribute_data.size_per_attribute
             case MSBTSection.TXT2:
                 messages = read_txt2(
                     reader,
@@ -179,6 +182,8 @@ def read_msbt(
 
     file = MSBT(
         file_info,
+        slot_count,
+        size_per_attribute,
         section_list,
         unsupported_sections,
         attribute_offsets,
@@ -195,7 +200,7 @@ def read_msbt(
         attr = None if attribute_data is None else attribute_data.attributes[i]
         style = None if style_indices is None else style_indices[i]
         file.create_entry(
-            label, message=text, attribute=attr, style_index=style, project=project
+            label, message=text, attribute=attr, style_index=style
         )
     return file
 

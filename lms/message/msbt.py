@@ -130,6 +130,7 @@ class MSBT:
         """
         endian = FileEndian(data["endian"])
         encoding = FileEncoding(data["encoding"])
+        slot_count = data["slot_count"]
         version = data["version"]
         section_count = data["section_count"]
         size_per_attribute = data.get("size_per_attribute")
@@ -137,6 +138,7 @@ class MSBT:
         msbt = cls(
             LMS_FileInfo(endian, encoding, version, section_count),
             size_per_attribute,
+            slot_count,
             data["section_list"],
             attribute_offsets=data.get("attribute_offsets"),
             project=project,

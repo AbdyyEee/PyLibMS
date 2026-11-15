@@ -14,8 +14,8 @@ if TYPE_CHECKING:
 from lms.titleconfig.definitions.nodes import NodeConfig
 from lms.titleconfig.definitions.project import Project
 
-# Class that maps virtual source paths into real paths
-# Files in projects function as paths to a virtual .msbt//.msbf file,
+# Class that maps virtual source paths into real paths.
+# Files in projects function as paths to a virtual .msbt/.msbf file,
 # given a message root these files are resolved automatically to their binary and read
 class SourceResolver:
     def __init__(self,
@@ -69,6 +69,7 @@ class SourceResolver:
     def resolve_msbt(self, source_index: int) -> MSBT | UMSBT:
         return self.resolve_source(source_index, self._msbt_extension)
 
+    # TODO: narrow matches better by not stripping base paths when utilizing os.path.basename
     def resolve_source(self, source_index: int, extension: FileExtension) -> MSBT | MSBF:
         from lms.message.msbtio import read_msbt_path
         from lms.message.umsbtio import read_umsbt_path
@@ -114,7 +115,15 @@ class SourceResolver:
                 if self._language is None:
                     raise ValueError("No language was provided to map a UMSBT to a MSBT!")
 
-                language_index = self._config.umsbt_languages[self._language]
+                language_index = None
+                for languages in self._config.umsbt_languages.values():
+                    if self._language in languages:
+                        language_index = languages[self._language]
+                        break
+
+                if language_index is None:
+                    raise ValueError(f"The language '{self._language}' could not be mapped to a UMSBT!")
+
                 file = umsbt.files[language_index]
             case FileExtension.MSBF:
                 file = read_msbf_path(real_path, node_config=self._node_config, project=self._project,

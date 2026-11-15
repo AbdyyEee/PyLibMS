@@ -56,13 +56,13 @@ class TitleConfig:
         game: str | None,
         nodes: Mapping[str, NodeConfig] | None = None,
         projects: Mapping[str, Project] | None = None,
-        umsbt_languages: dict[str, int] | None = None,
+        umsbt_languages: Mapping[str, Mapping[str, int]] | None = None,
     ):
         self._game = game
         self._nodes = nodes or {}
         self._projects: dict[str, Project] = projects or {}
 
-        self._umsbt_languages: dict[str, int] = umsbt_languages or {}
+        self._umsbt_languages = umsbt_languages or {}
 
     @property
     def game(self) -> str | None:
@@ -96,7 +96,7 @@ class TitleConfig:
             return None
 
     @property
-    def umsbt_languages(self) -> Mapping[str, int]:
+    def umsbt_languages(self) -> Mapping[str, Mapping[str, int]]:
         """Mapping of languages to fixed UMSBT indexes."""
         return MappingProxyType(self._umsbt_languages)
 

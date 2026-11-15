@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from types import MappingProxyType
-from typing import Mapping, overload
+from typing import Mapping, overload, Sequence
 
 from lms.project.definitions.tag import LMS_TagDefinition
 from lms.titleconfig.definitions.field import FieldDefinition

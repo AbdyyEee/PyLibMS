@@ -30,7 +30,7 @@ def read_umsbt_path(
     file_path: str | os.PathLike[str],
     *,
     project: Project | None = None,
-    language_map: Mapping[str, int] | None = None,
+    umsbt_languages: Mapping[str, int] | None = None,
     suppress_tag_errors: bool = False,
 ) -> UMSBT:
     """
@@ -38,9 +38,8 @@ def read_umsbt_path(
 
     :param file_path: the path to the UMSBT file.
     :param project: a ``Project`` object.
+    :param umsbt_languages: an umsbt language map from a config.
     :param suppress_tag_errors: when a tag config is used, suppress any errors while reading decoded tags.
-    :param suppress_tag_errors: when a tag config is used, suppress any errors while reading decoded tags.
-
     =====
     Usage
     =====
@@ -48,7 +47,7 @@ def read_umsbt_path(
     """
     with open(file_path, "rb") as stream:
         umsbt = read_umsbt(
-            stream, project=project, language_map=language_map, suppress_tag_errors=suppress_tag_errors
+            stream, project=project, umsbt_languages=umsbt_languages, suppress_tag_errors=suppress_tag_errors
         )
 
     return umsbt
@@ -58,7 +57,7 @@ def read_umsbt_directory(
     directory: str | os.PathLike[str],
     *,
     project: Project | None = None,
-    language_map: Mapping[str, int] | None = None,
+    umsbt_languages: Mapping[str, int] | None = None,
     suppress_tag_errors: bool = False,
     ignore_extensions: bool = False,
 ) -> Mapping[str, tuple[MSBT, ...]]:
@@ -68,6 +67,7 @@ def read_umsbt_directory(
     :param directory: directory of UMSBT files. All files must have the `.umsbt` extension (unless ``ignore_extensions``
     is True)
     :param project: a ``Project`` object.
+    :param umsbt_languages: an umsbt language map from a config.
     :param suppress_tag_errors: when a tag config is used, suppress any errors while reading decoded tags.
     :param ignore_extensions: ignore the extensions in the directory.
 
@@ -89,7 +89,7 @@ def read_umsbt_directory(
         umsbt = read_umsbt_path(
             os.path.join(directory, file),
             project=project,
-            language_map=language_map,
+            umsbt_languages=umsbt_languages,
             suppress_tag_errors=suppress_tag_errors,
         )
         files[os.path.basename(file)] = umsbt
@@ -101,7 +101,7 @@ def read_umsbt(
     stream: BinaryIO | bytes,
     *,
     project: Project | None = None,
-    language_map: Mapping[str, int] | None = None,
+    umsbt_languages: Mapping[str, int] | None = None,
     suppress_tag_errors: bool = False,
 ) -> UMSBT:
     """
@@ -109,6 +109,7 @@ def read_umsbt(
 
     :param stream: an ``IOBase``, ``BytesIO``, ``memoryview``, or ``bytes`` object.
     :param project: a ``Project`` object.
+    :param umsbt_languages: an umsbt language map from a config.
     :param suppress_tag_errors: when a tag config is used, suppress any errors while reading decoded tags.
 
     =====
@@ -143,7 +144,7 @@ def read_umsbt(
             )
         )
 
-    return UMSBT(files, language_map)
+    return UMSBT(files, umsbt_languages)
 
 
 def write_umsbt_path(file_path: str | os.PathLike[str], file: UMSBT) -> None:

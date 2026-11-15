@@ -1,15 +1,19 @@
 game: ACNL
 umsbt_languages:
-  USen: 0
-  USes: 1
-  USfr: 2
-  EUen: 0
-  EUes: 1
-  EUfr: 2
-  Euit: 3
-  EUde: 4
-  JPja: 0
-  KRko: 0
+  US:
+    USen: 0
+    USes: 1
+    USfr: 2
+  EU:
+    EUen: 0
+    EUes: 1
+    EUfr: 2
+    EUit: 3
+    EUde: 4
+  JP:
+    JPja: 0
+  KR:
+    KRko: 0
 # TODO: Game uses MSBF, add node definitions
 projects:
   global:

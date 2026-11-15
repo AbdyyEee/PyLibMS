@@ -43,7 +43,6 @@ class MSBF:
         info: LMS_FileInfo,
         source_resolver: SourceResolver,
         node_config: NodeConfig | None,
-        flowcharts: dict[int, LMS_EntryNode] = None,
         msbt_override: MSBT | None = None,
     ):
         self._info = info if info is not None else LMS_FileInfo()
@@ -55,7 +54,7 @@ class MSBF:
         # it is wiser to store an editable attribute just in case a game decides to vary the amount.
         self.slot_count = MSBF.DEFAULT_SLOT_COUNT
 
-        self._flowcharts: dict[int, LMS_EntryNode] = flowcharts or {}
+        self._flowcharts: dict[str, LMS_EntryNode] = {}
         self._nodes: dict[int, LMS_BaseNode] = {}
         self._global_node_id = 0
 
@@ -78,6 +77,7 @@ class MSBF:
         encoding: FileEncoding = FileEncoding.UTF16,
         version: int = LMS_MINIMUM_VERSION,
         section_count: int = 2,
+        node_config: NodeConfig | None = None,
         msbt_override: MSBT | None = None,
     ):
         """
@@ -87,10 +87,11 @@ class MSBF:
         :param encoding: the file encoding.
         :param version: the file version.
         :param section_count: the number of sections.
+        :param node_config: a node config override.
         :param msbt_override: the MSBT override.
 
         """
-        return cls(LMS_FileInfo(endian, encoding, version, section_count), msbt_override=msbt_override)
+        return cls(LMS_FileInfo(endian, encoding, version, section_count), node_config, msbt_override)
 
     @property
     def info(self) -> LMS_FileInfo:
@@ -290,21 +291,17 @@ class MSBF:
         :param msbf_index: the index of the msbf. Some games use None for current flowchart, other the current msbf.
         :param flowchart: name of the flowchart to jump to. Only valid for local jumps.
         """
-        return self._register_node(
-            LMS_JumpNode(
-                self._generate_next_id(),
-                msbf_index,
-                self._source_resolver,
-                self._nodes[flowchart] if flowchart is not None else None,
-            )
-        )
+        node = LMS_JumpNode(self._generate_next_id(), msbf_index, self._source_resolver)
+        if flowchart is not None:
+            node.set_next_node(self._flowcharts[flowchart])
+        return self._register_node(node)
 
     def add_jump_node_file(self, flowchart: str, msbf_filename: str) -> LMS_JumpNode:
         """
         Adds a jump node to the msbf based on the filename of the msbf in the project.
 
         :param flowchart: the name of the next flowchart to jump to.
-        :param msbf_filename: name of the msbf file in the source (with the ``.msbf`` extension).
+        :param msbf_filename: name of the MSBF file in the source (with the ``.msbf`` extension).
         """
         msbf_index = self._source_resolver.retrieve_source_index(msbf_filename)
         msbf = self._source_resolver.resolve_source(msbf_index, FileExtension.MSBF)
@@ -318,14 +315,10 @@ class MSBF:
         if next_flowchart is None:
             raise KeyError(f"Flowchart '{flowchart}' does not exist in '{msbf_filename}'!")
 
-        return self._register_node(
-            LMS_JumpNode(
-                self._generate_next_id(),
-                msbf_index,
-                self._source_resolver,
-                next_flowchart,
-            )
-        )
+        node = LMS_JumpNode(self._generate_next_id(), msbf_index, self._source_resolver)
+        node.set_next_node(next_flowchart)
+
+        return self._register_node(node)
 
     def destroy_node(self, to_delete: LMS_BaseNode) -> None:
         """

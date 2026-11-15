@@ -3,6 +3,7 @@ from types import MappingProxyType
 from typing import Mapping, Iterator
 
 from lms.common.field.lms_field import FieldValue, LMS_FieldMap
+from lms.common.lms_constants import LMS_MINIMUM_VERSION, DEFAULT_SECTION_COUNT
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.fileio.encoding import FileEncoding
 from lms.fileio.endian import FileEndian
@@ -17,6 +18,7 @@ from lms.flowchart.definitions.node import (
     LMS_EventNode,
 )
 from lms.flowchart.definitions.node_type import LMS_NodeParameterType
+from lms.message.msbt import MSBT
 from lms.source_extension import FileExtension
 from lms.source_resolver import SourceResolver
 from lms.titleconfig.definitions.nodes import NodeConfig
@@ -42,9 +44,11 @@ class MSBF:
         source_resolver: SourceResolver,
         node_config: NodeConfig | None,
         flowcharts: dict[int, LMS_EntryNode] = None,
+        msbt_override: MSBT | None = None,
     ):
         self._info = info if info is not None else LMS_FileInfo()
         self._source_resolver = source_resolver
+        self._msbt_override = msbt_override
         self._node_config = node_config
 
         # While unlikely to vary, and have yet to find a file that changes the slot count (unlike MSBT)
@@ -72,8 +76,9 @@ class MSBF:
         cls,
         endian: FileEndian = FileEndian.LITTLE,
         encoding: FileEncoding = FileEncoding.UTF16,
-        version: int = 3,
+        version: int = LMS_MINIMUM_VERSION,
         section_count: int = 2,
+        msbt_override: MSBT | None = None,
     ):
         """
         Create a new MSBF instance.
@@ -82,9 +87,10 @@ class MSBF:
         :param encoding: the file encoding.
         :param version: the file version.
         :param section_count: the number of sections.
+        :param msbt_override: the MSBT override.
 
         """
-        return MSBF(LMS_FileInfo(endian, encoding, version, section_count))
+        return cls(LMS_FileInfo(endian, encoding, version, section_count), msbt_override=msbt_override)
 
     @property
     def info(self) -> LMS_FileInfo:
@@ -120,24 +126,28 @@ class MSBF:
 
     def add_message_node(self, msbt_index: int, label_index: int) -> LMS_MessageNode:
         """
-        Adds a message node to the MSBF.
+        Adds a message node to the MSBF. Will inherit MSBT override if supplied.
 
         :param msbt_index: the MSBT file index.
         :param label_index: the index of the label in the MSBT
         """
         return self._register_node(
-            LMS_MessageNode(self._generate_next_id(), msbt_index, label_index)
+            LMS_MessageNode(self._generate_next_id(), msbt_index, label_index,
+                            source_resolver=self._source_resolver, msbt_override=self._msbt_override)
         )
 
     def add_message_node_msbt(self, msbt_filename: str) -> LMS_MessageNode:
         """
-        Adds a message node to the msbf based on the filename of the msbt in the project. Defaults to first entry
+        Adds a message node to the MSBF based on the filename of the msbt in the project. Defaults to first entry
         of the msbt.
 
         :param msbt_filename: the filename of the msbt (with the ``.msbt`` extension).
 
         The msbt must exist in the project source files. To see valid files, view ``project.source_files``.
         """
+        if self._source_resolver is None:
+            raise ValueError("No message data was provided to add a node by filename.")
+
         return self._register_node(
             LMS_MessageNode(
                 self._generate_next_id(),
@@ -154,7 +164,7 @@ class MSBF:
         condition_id: int,
     ) -> LMS_BranchNode:
         """
-        Adds a branch node to the msbf file.
+        Adds a branch node to the MSBF file.
 
         :param parameter_type: parameter type of the node.
         :param parameter_value: parameter value.

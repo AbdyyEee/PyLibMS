@@ -13,6 +13,7 @@ from lms.fileio.io import FileReader, FileWriter
 from lms.flowchart.definitions.node import LMS_JumpNode, LMS_BaseNode
 from lms.flowchart.flw3 import read_flw3, write_flw3
 from lms.flowchart.msbf import MSBF, MSBFSection
+from lms.message.msbt import MSBT
 from lms.source_resolver import SourceResolver
 from lms.titleconfig.config import TitleConfig
 from lms.titleconfig.definitions.nodes import NodeConfig
@@ -27,6 +28,7 @@ def read_msbf_path(file_path: str | os.PathLike[str], *,
                    node_config: NodeConfig | None = None,
                    project: Project | None = None, message_root: os.PathLike[str] | str | None = None,
                    language: str | None = None,
+                   msbt_override: MSBT | None = None,
                    _source_resolver: SourceResolver | None = None) -> MSBF:
     """
     Reads a MSBF file from a path.
@@ -36,10 +38,11 @@ def read_msbf_path(file_path: str | os.PathLike[str], *,
     :param project: project object utilized for auto-source resolving.
     :param message_root: root of the message folder/archive. Archives must be extracted first.
     :param language: language name from a configuration to map UMSBT to msbt files in message nodes.
+    :param msbt_override: optional MSBT override. All message nodes will utilize this MSBT reference.
     """
     with open(file_path, "rb") as stream:
         msbf = read_msbf(stream, config=config, node_config=node_config, project=project, message_root=message_root,
-                         language=language, _source_resolver=_source_resolver)
+                         language=language, msbt_override=msbt_override, _source_resolver=_source_resolver)
 
     return msbf
 
@@ -54,6 +57,7 @@ def read_msbf(
     message_root: os.PathLike[str] | str | None = None,
     language: str | None = None,
     stream_name: str | None = None,
+    msbt_override: MSBT | None = None,
     _source_resolver: SourceResolver | None = None
 ) -> MSBF:
     """
@@ -69,6 +73,7 @@ def read_msbf(
     :param message_root: root of the message folder/archive. Archives must be extracted for.
     :param language: language name from a configuration to map UMSBT to msbt files in message nodes, i.e. ``USen``.
     :param stream_name: optional stream name argument to link circular MSBF jump node references.
+    :param msbt_override: optional MSBT override. All message nodes will utilize this MSBT reference.
     """
     reader = FileReader(stream)
 
@@ -93,12 +98,12 @@ def read_msbf(
             node_config,
             language)
 
-    msbf = MSBF(file_info, source_resolver, node_config)
+    msbf = MSBF(file_info, source_resolver, node_config, msbt_override=msbt_override)
 
     for magic, size in read_section_data(reader, file_info.section_count):
         match magic:
             case MSBFSection.FLW3:
-                entry_nodes, external_jumps = read_flw3(reader, node_config, source_resolver)
+                entry_nodes, external_jumps = read_flw3(reader, node_config, source_resolver, msbt_override)
             case MSBFSection.FEN1:
                 labels, slot_count = read_labels(reader)
             case MSBFSection.REF1:
@@ -121,7 +126,7 @@ def read_msbf(
     if _source_resolver is not None and stream_name is None:
         raise ValueError("To resolve sources provide a filename or stream should implement a name attribute!")
 
-    filename_key = os.path.basename(stream_name) if isinstance(stream_name, (str, os.PathLike[str])) else None
+    filename_key = os.path.basename(stream_name) if isinstance(stream_name, (str, os.PathLike)) else None
 
     if source_resolver is not None:
 

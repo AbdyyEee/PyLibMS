@@ -15,6 +15,7 @@ from lms.flowchart.definitions.node import (
     LMS_NodeParameter,
 )
 from lms.flowchart.definitions.node_type import LMS_NodeType, LMS_NodeParameterType
+from lms.message.msbt import MSBT
 from lms.source_resolver import SourceResolver
 from lms.titleconfig.definitions.nodes import NodeConfig, NodeDefinition
 
@@ -27,7 +28,7 @@ VARIABLE_WIDTH_DATATYPES = (LMS_DataType.BOOL, LMS_DataType.ENUM)
 
 def read_flw3(
     reader: FileReader, config: NodeConfig | None,
-        source_resolver: SourceResolver
+        source_resolver: SourceResolver, msbt_override: MSBT | None
 ) -> tuple[list[LMS_EntryNode], list[tuple[LMS_JumpNode, int]]]:
     section_start = reader.tell()
     node_count = reader.read_uint16()
@@ -60,7 +61,7 @@ def read_flw3(
                 msbt_index = reader.read_uint16()
                 label_index = reader.read_uint16()
 
-                node = LMS_MessageNode(i, msbt_index, label_index, source_resolver)
+                node = LMS_MessageNode(i, msbt_index, label_index, source_resolver, msbt_override)
                 reader.skip(2)
             case LMS_NodeType.BRANCH:
                 # There is no next node id as the next node is determined by the branches

@@ -10,9 +10,6 @@ from lms.titleconfig.definitions.field import FieldDefinition
 from lms.titleconfig.definitions.style import Style
 from lms.titleconfig.definitions.tags import TagConfig
 
-# Typealias for virtual CTI1 paths
-MessageSource: TypeAlias = str
-
 
 class Project:
     """
@@ -25,7 +22,7 @@ class Project:
         self._attributes: list[AttributeDefinition] = []
         self._tags: TagConfig = TagConfig()
         self._styles: list[Style] = []
-        self._sources: list[MessageSource] = []
+        self._sources: list[str] = []
 
     @property
     def name(self) -> str:
@@ -43,7 +40,7 @@ class Project:
         return tuple(self._attributes)
 
     @property
-    def tag_config(self) -> TagConfig:
+    def tag_config(self) -> TagConfig | None:
         """Tags associated with the project."""
         return self._tags
 
@@ -53,7 +50,7 @@ class Project:
         return tuple(self._styles)
 
     @property
-    def sources(self) -> tuple[MessageSource, ...]:
+    def sources(self) -> tuple[str, ...]:
         """Source files associated with the project."""
         return tuple(self._sources)
 
@@ -65,14 +62,14 @@ class Project:
         """Adds a field definition to the project."""
         self._attributes.append(attribute)
 
-    def set_tags(self, container: TagConfig) -> None:
+    def set_tag_config(self, config: TagConfig) -> None:
         """Sets the tags associated with the project."""
-        self._tags = container
+        self._tags = config
 
     def add_style(self, style: Style) -> None:
         """Adds a style to the project."""
         self._styles.append(style)
 
-    def add_source(self, source: MessageSource) -> None:
+    def add_source(self, source: str) -> None:
         """Adds a source to the project."""
         self._sources.append(source)

@@ -3,7 +3,7 @@ from __future__ import annotations
 import os.path
 import string
 from types import MappingProxyType
-from typing import Generator, TypeAlias, Mapping, TYPE_CHECKING
+from typing import Generator, TypeAlias, Mapping, TYPE_CHECKING, Iterator
 
 from lms.message.umsbt import UMSBT
 from lms.source_extension import FileExtension
@@ -47,6 +47,9 @@ class LMS_BaseNode:
         self._parameter_value = parameter_value
 
         self._next_node: LMS_BaseNode | None = None
+
+    def __iter__(self) -> Iterator[LMS_BaseNode]:
+        return iter(self.get_descendents())
 
     def __contains__(self, node: LMS_BaseNode) -> bool:
         if self is node:
@@ -191,8 +194,8 @@ class LMS_MessageNode(LMS_BaseNode):
         return self._source_resolver.retrieve_filename(self.msbt_index)
 
     @property
-    def msbt(self) -> MSBT | UMSBT:
-        """MSBT/UMSBT instance the node reference."""
+    def msbt(self) -> MSBT:
+        """MSBT instance the node reference."""
         if self._source_resolver is None:
             raise ValueError("No message data was provided!")
 
@@ -205,9 +208,18 @@ class LMS_MessageNode(LMS_BaseNode):
         return self.msbt[self.label_index]
 
     @property
-    def message_text(self) -> LMS_MessageText:
+    def message(self) -> LMS_MessageText:
         """Message text tied to this node."""
         return self.msbt_entry.message
+
+    def set_msbt_file(self, filename: str) -> None:
+        """
+        Sets the MSBT file based on the filename a project. This will set the entry to the first one in that file.
+
+        :param filename: name of the msbt file.
+        """
+        self.msbt_index = self._source_resolver.retrieve_source_index(filename)
+        self.label_index = 0
 
     def set_msbt_entry(self, entry: MSBTEntry) -> None:
         """
@@ -218,7 +230,7 @@ class LMS_MessageNode(LMS_BaseNode):
         if entry not in self.msbt.entries:
             raise ValueError(f"This entry does not exist in the MSBT!")
 
-        self.label_index = self._msbt.entries.index(entry)
+        self.label_index = self.msbt.entries.index(entry)
 
 
 class LMS_BranchNode(LMS_BaseNode):
@@ -484,49 +496,30 @@ class LMS_JumpNode(LMS_BaseNode):
         node_id: int,
         msbf_index: int | None,
         source_resolver: SourceResolver | None,
-        next: LMS_EntryNode = None,
     ):
         super().__init__(node_id, LMS_NodeType.JUMP, LMS_NodeParameterType.NONE, None)
 
-        self._next_entry = next
         self.msbf_index = msbf_index
         self._source_resolver = source_resolver
-
+    
+    
     @property
     def msbf_name(self) -> str:
         """Name of the msbf resolved from the project."""
         if self._source_resolver is None:
-            raise ValueError("No message data was provided!")
+            return None
 
-        self._source_resolver.validate()
         return self._source_resolver.retrieve_filename(self.msbf_index)
-
-    @property
-    def next_entry(self) -> LMS_EntryNode | None:
-        """The pointing entry node."""
-        return self._next_entry
 
     @property
     def msbf(self) -> MSBF | None:
         """MSBF instance the node reference."""
-        if self.msbf_index is None:
-            return None
-
         if self._source_resolver is None:
-            raise ValueError("No message data was provided!")
+            return None
 
         self._source_resolver.validate()
         return self._source_resolver.resolve_source(self.msbf_index, FileExtension.MSBF)
 
-    @next_entry.setter
-    def next_entry(self, node: LMS_EntryNode | None) -> None:
-        if isinstance(node, LMS_EntryNode) or node is None:
-            super().set_next_node(node)
-            self._next_entry = node
-        else:
-            raise TypeError(
-                "The next pointing entry node must be a LMS_EntryNode or None"
-            )
 
 
 def verify_parameter_structure(

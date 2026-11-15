@@ -13,10 +13,8 @@ if TYPE_CHECKING:
 from lms.titleconfig.definitions.nodes import NodeConfig
 from lms.titleconfig.definitions.project import Project
 
-
-
 # Class that maps virtual source paths into real paths
-# Files in projects function as paths to a virtual .msbt/.umsbt/.msbf file,
+# Files in projects function as paths to a virtual .msbt//.msbf file,
 # given a message root these files are resolved automatically to their binary and read
 class SourceResolver:
     def __init__(self, project: Project,
@@ -24,7 +22,7 @@ class SourceResolver:
                  node_config: NodeConfig,
                  language_index: int | None = None):
         self._project = project
-        self._message_root = Path(message_root)
+        self._message_root = Path(message_root or "")
         self._node_config = node_config
 
         self.resolved_cache: dict[str, MSBT | UMSBT | MSBF] = {}
@@ -74,6 +72,16 @@ class SourceResolver:
         if filename in self.resolved_cache:
             return self.resolved_cache[filename]
 
+        try:
+            source_path = self._project.sources[source_index]
+        except KeyError as e:
+            raise KeyError(f"The source '{source_index}' could not be mapped to a file in the message root!") from e
+
+        filename = os.path.basename(source_path).replace(extension.source_format, extension)
+
+        if filename in self.resolved_cache:
+            return self.resolved_cache[filename]
+
         real_path = None
         for path in self._message_root.rglob(filename):
             real_path = path
@@ -91,7 +99,7 @@ class SourceResolver:
                 umsbt = read_umsbt_path(real_path, project=self._project)
 
                 if self._language_index is None:
-                    raise ValueError("No language was provied to map a UMSBT to a MSBT!")
+                    raise ValueError("No language was provided to map a UMSBT to a MSBT!")
 
                 file = umsbt.files[self._language_index]
             case FileExtension.MSBF:
@@ -103,11 +111,8 @@ class SourceResolver:
 
     def retrieve_source_index(self, file: str) -> int:
         extension = FileExtension(Path(file).suffix)
-
         try:
-            return [
-                os.path.basename(file) for file in self.project.sources
-            ].index(file.replace(extension, extension.source_format))
+            return [os.path.basename(file) for file in self._project.sources].index(file.replace(extension, extension.source_format))
         except ValueError as e:
             raise ValueError(f"The source '{file}' could not be mapped to a file in the message root!") from e
 

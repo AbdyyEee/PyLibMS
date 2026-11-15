@@ -1,0 +1,810 @@
+game: Nintendo Badge Arcade
+projects:
+  global:
+    colors:
+    - name: Red
+      red: 255
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: Blue
+      red: 0
+      green: 0
+      blue: 255
+      alpha: 255
+    - name: Green
+      red: 0
+      green: 155
+      blue: 0
+      alpha: 255
+    - name: Blue_light
+      red: 0
+      green: 254
+      blue: 255
+      alpha: 255
+    - name: HallCrane
+      red: 255
+      green: 63
+      blue: 0
+      alpha: 255
+    - name: HallCraneFree
+      red: 131
+      green: 35
+      blue: 35
+      alpha: 255
+    - name: HallPost
+      red: 0
+      green: 127
+      blue: 0
+      alpha: 255
+    - name: HallGate
+      red: 217
+      green: 90
+      blue: 0
+      alpha: 255
+    - name: HallDesk
+      red: 0
+      green: 132
+      blue: 241
+      alpha: 255
+    - name: HallBook
+      red: 215
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: Brown4
+      red: 131
+      green: 35
+      blue: 35
+      alpha: 255
+    - name: Chocolate3
+      red: 205
+      green: 102
+      blue: 29
+      alpha: 255
+    attributes: []
+    tags:
+      groups:
+        0: System
+        1: Sys
+        2: Talk
+        3: Util
+        4: Ref
+      definitions:
+      - name: Ruby
+        group_id: 0
+        tag_index: 0
+        parameters:
+        - name: rt
+          datatype: string
+      - name: Font
+        group_id: 0
+        tag_index: 1
+        parameters:
+        - name: face
+          datatype: string
+      - name: Size
+        group_id: 0
+        tag_index: 2
+        parameters:
+        - name: percent
+          datatype: uint16
+      - name: Color
+        group_id: 0
+        tag_index: 3
+        parameters:
+        - name: r
+          datatype: uint8
+        - name: g
+          datatype: uint8
+        - name: b
+          datatype: uint8
+        - name: a
+          datatype: uint8
+      - name: PageBreak
+        group_id: 0
+        tag_index: 4
+      - name: Wait
+        group_id: 1
+        tag_index: 0
+        parameters:
+        - name: f
+          datatype: int32
+      - name: Speed
+        group_id: 1
+        tag_index: 1
+        parameters:
+        - name: v
+          datatype: float32
+      - name: Flush
+        group_id: 1
+        tag_index: 2
+      - name: Action
+        group_id: 2
+        tag_index: 0
+        parameters:
+        - name: Onetime
+          datatype: enum
+          enum_members:
+            0: _
+            1: ActApologize_L00
+            2: ActApologize_S00
+            3: ActAskTiltHead_M00
+            4: ActAskTiltHead_M01
+            5: ActAttach_M00
+            6: ActAttentionOpenHand_M00
+            7: ActBowDeeply_M00
+            8: ActCry_M00
+            9: ActCuteGirl_End_M00
+            10: ActCuteGirl_Glad_M00
+            11: ActCuteGirl_Shock_M00
+            12: ActCuteGirl_Start_M00
+            13: ActDisappoint_M00
+            14: ActDrinkCarrotJuice_M00
+            15: ActDrinkCarrotJuiceAfter_M00
+            16: ActDrinkCarrotJuiceHide_M00
+            17: ActEarnest_L00
+            18: ActEarnest_L01
+            19: ActEcstasy_M00
+            20: ActFrameInBottom_M00
+            21: ActFrameOutBottom_M00
+            22: ActGladSmile_M00
+            23: ActGreetingsWaveHand_M00
+            24: ActGreetingsWaveHand_S01
+            25: ActLaugh_M00
+            26: ActMuscle_End_M00
+            27: ActMuscle_Start_M00
+            28: ActMuscle_TurnEnd_M00
+            29: ActNotice_M00
+            30: ActPointRight_M00
+            31: ActPointSelf_L00
+            32: ActShockBack_M00
+            33: ActShockBack_S00
+            34: ActSudden_CuteGirl_Normal_M00
+            35: ActSudden_Muscle_TurnEnd_M00
+            36: ActTakeCarrotJuice_M00
+            37: ActTension_M00
+            38: ActTransformEnd_M00
+            39: ActTransformEnd_Muscle_M00
+            40: ActTransformStart_M00
+            41: ActWhiteAsh_M00
+        - name: Talk
+          datatype: enum
+          enum_members:
+            0: TalkAdmirationCrossHand_M00_T
+            1: TalkAngry_M00_T
+            2: TalkApologize_L00_T
+            3: TalkApologize_M00_T
+            4: TalkApologize_S00_T
+            5: TalkAskTiltHead_M00_T
+            6: TalkAskTiltHead_M01_T
+            7: TalkAttentionOpenHand_M00_T
+            8: TalkAwkward_M00_T
+            9: TalkAwkward_M01_T
+            10: TalkCommentBoastfulness_M00_T
+            11: TalkCommentBoastfulness_M01_T
+            12: TalkCry_M00_T
+            13: TalkCuteGirl_Glad_M00_T
+            14: TalkCuteGirl_Normal_M00_T
+            15: TalkCuteGirl_Shock_M00_T
+            16: TalkDisappoint_M00_T
+            17: TalkDrinkCarrotJuice_M00_T
+            18: TalkDrinkCarrotJuiceAfter_M00_T
+            19: TalkEarnest_L00_T
+            20: TalkEarnest_L01_T
+            21: TalkEarnest_M00_T
+            22: TalkEcstasy_M00_T
+            23: TalkEmbarrass_M00_T
+            24: TalkGladCrap_M00_T
+            25: TalkGladCrap_M01_T
+            26: TalkGladHandUp_M00_T
+            27: TalkGladSmile_M00_T
+            28: TalkGladWaveHand_M00_T
+            29: TalkGreetingsWaveHand_M00_T
+            30: TalkGreetingsWaveHand_S00_T
+            31: TalkGreetingsWaveHand_S01_T
+            32: TalkGrin_M00_T
+            33: TalkLaugh_M00_T
+            34: TalkMuscle_Start_M00_T
+            35: TalkMuscle_Turn_M00_T
+            36: TalkMuscle_TurnEnd_M00_T
+            37: TalkNod_M00_T
+            38: TalkNod_Muscle_M00_T
+            39: TalkNotice_M00_T
+            40: TalkNotUnderstand_L00_T
+            41: TalkPointBottom_M00_T
+            42: TalkPointRight_M00_T
+            43: TalkPointSelf_L00_T
+            44: TalkRecommend_M00_T
+            45: TalkRunL_M00_T
+            46: TalkRunR_M00_T
+            47: TalkShockBack_M00_T
+            48: TalkShockBack_S00_T
+            49: TalkSmugFace_M00_T
+            50: TalkTakeCarrotJuice_M00_T
+            51: TalkTension_M00_T
+            52: TalkThinkCrossHand_M00_T
+            53: TalkTransformStart_M00_T
+            54: TalkWaitNormal_S00_T
+            55: TalkWaveOneHand_M00_T
+            56: TalkWhiteAsh_M00_T
+            57: TalkWishHandTogether_M00_T
+            58: TalkWishHandTogether_M01_T
+        - name: Wait
+          datatype: enum
+          enum_members:
+            0: TalkAdmirationCrossHand_M00_W
+            1: TalkAngry_M00_W
+            2: TalkApologize_L00_W
+            3: TalkApologize_M00_W
+            4: TalkApologize_S00_W
+            5: TalkAskTiltHead_M00_W
+            6: TalkAskTiltHead_M01_W
+            7: TalkAttentionOpenHand_M00_W
+            8: TalkAwkward_M00_W
+            9: TalkAwkward_M01_W
+            10: TalkCommentBoastfulness_M00_W
+            11: TalkCommentBoastfulness_M01_W
+            12: TalkCry_M00_W
+            13: TalkCuteGirl_Glad_M00_W
+            14: TalkCuteGirl_Normal_M00_W
+            15: TalkCuteGirl_Shock_M00_W
+            16: TalkDisappoint_M00_W
+            17: TalkDrinkCarrotJuice_M00_W
+            18: TalkDrinkCarrotJuiceAfter_M00_W
+            19: TalkEarnest_L00_W
+            20: TalkEarnest_L01_W
+            21: TalkEarnest_M00_W
+            22: TalkEcstasy_M00_W
+            23: TalkEmbarrass_M00_W
+            24: TalkGladCrap_M00_W
+            25: TalkGladCrap_M01_W
+            26: TalkGladHandUp_M00_W
+            27: TalkGladSmile_M00_W
+            28: TalkGladWaveHand_M00_W
+            29: TalkGreetingsWaveHand_M00_W
+            30: TalkGreetingsWaveHand_S00_W
+            31: TalkGreetingsWaveHand_S01_W
+            32: TalkGrin_M00_W
+            33: TalkLaugh_M00_W
+            34: TalkMuscle_Start_M00_W
+            35: TalkMuscle_Turn_M00_W
+            36: TalkMuscle_TurnEnd_M00_W
+            37: TalkNod_M00_W
+            38: TalkNod_Muscle_M00_W
+            39: TalkNotice_M00_W
+            40: TalkNotUnderstand_L00_W
+            41: TalkPointBottom_M00_W
+            42: TalkPointRight_M00_W
+            43: TalkPointSelf_L00_W
+            44: TalkRecommend_M00_W
+            45: TalkShockBack_M00_W
+            46: TalkShockBack_S00_W
+            47: TalkSmugFace_M00_W
+            48: TalkTakeCarrotJuice_M00_W
+            49: TalkTension_M00_W
+            50: TalkThinkCrossHand_M00_W
+            51: TalkTransformStart_M00_W
+            52: TalkWaitNormal_S00_W
+            53: TalkWaveOneHand_M00_W
+            54: TalkWhiteAsh_M00_W
+            55: TalkWishHandTogether_M00_W
+            56: TalkWishHandTogether_M01_W
+      - name: Blend
+        group_id: 2
+        tag_index: 1
+        parameters:
+        - name: Onetime
+          datatype: uint8
+        - name: Talk
+          datatype: uint8
+        - name: Wait
+          datatype: uint8
+      - name: NotClose
+        group_id: 2
+        tag_index: 2
+      - name: AutoScroll
+        group_id: 2
+        tag_index: 3
+        parameters:
+        - name: frame
+          datatype: int32
+      - name: ChoiceB
+        group_id: 2
+        tag_index: 4
+      - name: IgnoreA
+        group_id: 2
+        tag_index: 5
+      - name: Dictionary
+        group_id: 3
+        tag_index: 0
+        parameters:
+        - name: Key
+          datatype: string
+        - name: DefaultValue
+          datatype: string
+      - name: SP
+        group_id: 3
+        tag_index: 1
+        parameters:
+        - name: s
+          datatype: string
+        - name: pl
+          datatype: string
+        - name: value
+          datatype: enum
+          enum_members:
+            0: Bonus_FreeByLose
+            1: Bonus_FreeSum
+            2: CmpnBd_NumGet
+            3: CmpnBd_NumGet_1
+            4: CmpnBd_NumRemain
+            5: MonthPlay
+            6: PlayReport
+            7: ExtVar
+        - name: key
+          datatype: string
+      - name: MyName
+        group_id: 4
+        tag_index: 0
+      - name: PlayCount
+        group_id: 4
+        tag_index: 1
+        parameters:
+        - name: unit
+          datatype: uint8
+      - name: Price
+        group_id: 4
+        tag_index: 2
+        parameters:
+        - name: unit
+          datatype: uint8
+      - name: Bonus
+        group_id: 4
+        tag_index: 3
+        parameters:
+        - name: type
+          datatype: enum
+          enum_members:
+            0: PropFreeByWin
+            1: FreeByLose
+            2: FreeSum
+            3: Lose10Unit
+            4: PropFreeBySmallWin
+      - name: CmpnTm
+        group_id: 4
+        tag_index: 4
+        parameters:
+        - name: type
+          datatype: enum
+          enum_members:
+            0: DateLast
+            1: DateEnd
+            2: RemainPlay
+            3: RemainMoney
+            4: RemainUnit
+      - name: CmpnBd
+        group_id: 4
+        tag_index: 5
+        parameters:
+        - name: type
+          datatype: enum
+          enum_members:
+            0: DateEnd
+            1: NumGet
+            2: NumGet_1
+            3: NumRemain
+      - name: MonthLimit
+        group_id: 4
+        tag_index: 6
+      - name: MonthPlay
+        group_id: 4
+        tag_index: 7
+      - name: RenewTime
+        group_id: 4
+        tag_index: 8
+        parameters:
+        - name: minute
+          datatype: int32
+      - name: NexMntTime
+        group_id: 4
+        tag_index: 9
+      - name: PlayReport
+        group_id: 4
+        tag_index: 10
+        parameters:
+        - name: key
+          datatype: string
+      - name: ExtVar
+        group_id: 4
+        tag_index: 11
+        parameters:
+        - name: key
+          datatype: string
+    styles:
+    - name: CmnCaptionWindow_CaptionCenterCT
+      region_width: 250
+      line_number: 7
+      font_index: 0
+      color_index: null
+    - name: CmnCaptionWindow_CaptionUT
+      region_width: 250
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: CmnCaptionWindow_CaptionDT
+      region_width: 220
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: CmnCaptionWindow_2ndLine
+      region_width: 250
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: CmnTalkBalloonU_TalkT
+      region_width: 360
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: CmnTalkBalloonD_TalkT
+      region_width: 220
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: CmnTalkChoice_ChoiceT
+      region_width: 228
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: HallTalkSmallD
+      region_width: 220
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: MgTalkBalloonSmallD
+      region_width: 180
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: CmnCaptionWindowChoiceD
+      region_width: 254
+      line_number: 5
+      font_index: 0
+      color_index: null
+    - name: CmnCaptionBtn
+      region_width: 100
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: CmnWaitIconRightDownD_IconT
+      region_width: 250
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: CmnWaitIconRightDownU_IconT
+      region_width: 290
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: CmnBtnSign
+      region_width: 220
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: BtnBack
+      region_width: 68
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MgCrRsltSignD
+      region_width: 190
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MgCrBonusLoserNumber_LoserTextT
+      region_width: 150
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MgCrBonusLoserNumber_LoserTextUnitT
+      region_width: 22
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MgCrBonusBase
+      region_width: 272
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: MgCrEftCompleteBook_CompleteT
+      region_width: 280
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnBookD_BtnBack
+      region_width: 96
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnBookD_CnpExpT
+      region_width: 124
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnBookD_CnpExpNumT
+      region_width: 68
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnBookD_ExpT
+      region_width: 100
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnBookCategory
+      region_width: 100
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnDespairU_CenterT
+      region_width: 384
+      line_number: 2
+      font_index: 0
+      color_index: null
+    - name: MnExportCategoryD_HOMEMarkT
+      region_width: 280
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnExportCategoryD_ExplanationT
+      region_width: 82
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnExportCategoryU_CaseT
+      region_width: 148
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnExportCategoryU_ChangeT
+      region_width: 228
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnExportCategoryU_PrT
+      region_width: 270
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnExportCategoryU_CategoryT
+      region_width: 76
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnExportCategoryU_WaitT
+      region_width: 300
+      line_number: 3
+      font_index: 0
+      color_index: null
+    - name: MnExportCategoryBtnExport
+      region_width: 200
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnExportCategoryCategory
+      region_width: 46
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnTitleD_Ver.T
+      region_width: 100
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnTitleD_TimeT
+      region_width: 200
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnTitleD_NintendoT
+      region_width: 145
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnTitleStartD_StartT
+      region_width: 300
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnTitleStartD_HOMEGuideT
+      region_width: 320
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnPostLookD
+      region_width: 146
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MgPostBtnMiiverse
+      region_width: 156
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MgPostPictureD_PostT
+      region_width: 300
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnHallBtn
+      region_width: 142
+      line_number: 1
+      font_index: 0
+      color_index: null
+    - name: MnHallAttention
+      region_width: 340
+      line_number: 10
+      font_index: 0
+      color_index: null
+    source_files:
+    - LayoutMsg/CmnCaptionWindowChoiceD.mstxt
+    - LayoutMsg/CmnCaptionWindowU.mstxt
+    - LayoutMsg/CmnWaitIconRightDownU.mstxt
+    - LayoutMsg/MgCrBadgeSign.mstxt
+    - LayoutMsg/MgCrBonusBase.mstxt
+    - LayoutMsg/MgCrBonusLoserNumber.mstxt
+    - LayoutMsg/MgCrEftCompleteBook.mstxt
+    - LayoutMsg/MgCrRsltSignD.mstxt
+    - LayoutMsg/MnBookD.mstxt
+    - LayoutMsg/MnDespairU.mstxt
+    - LayoutMsg/MnExportCategoryD.mstxt
+    - LayoutMsg/MnExportCategoryU.mstxt
+    - LayoutMsg/MnHallAttention.mstxt
+    - LayoutMsg/MnHallBtnBadgeD.mstxt
+    - LayoutMsg/MnHallBtnBookD.mstxt
+    - LayoutMsg/MnHallNormalU.mstxt
+    - LayoutMsg/MnPostLookD.mstxt
+    - LayoutMsg/MnPostLookU.mstxt
+    - LayoutMsg/MnTitleD.mstxt
+    - LayoutMsg/MnTitleStartD.mstxt
+    - LayoutMsg/MnTitleWindowD.mstxt
+    - graphic/crane.mstxt
+    - system/ECApplet.mstxt
+    - system/ErrorApplet.mstxt
+    - system/Olv.mstxt
+    - talk/GamePlayEnd_ExplainSplitBadge.msflow
+    - talk/GamePlayEnd_ExplainSplitBadge.mstxt
+    - talk/GamePlayEnd_Get100thBadge.msflow
+    - talk/GamePlayEnd_Get100thBadge.mstxt
+    - talk/GamePlayEnd_GiveSpecialBadgeWhenGetNothing.msflow
+    - talk/GamePlayEnd_GiveSpecialBadgeWhenGetNothing.mstxt
+    - talk/GamePlayEnd_Over1000Badge.msflow
+    - talk/GamePlayEnd_Over1000Badge.mstxt
+    - talk/GamePlayEnd_Over950Badge.msflow
+    - talk/GamePlayEnd_Over950Badge.mstxt
+    - talk/GamePlayEnd_PromoteMorePlayAfterFreePlay.msflow
+    - talk/GamePlayEnd_PromoteMorePlayAfterFreePlay.mstxt
+    - talk/GamePlayEnd_RecoveryPlayEnd.msflow
+    - talk/GamePlayEnd_RecoveryPlayEnd.mstxt
+    - talk/GamePlayEnd_RetrySavingToServer.msflow
+    - talk/GamePlayEnd_RetrySavingToServer.mstxt
+    - talk/GamePlayEnd_Unlock10Play.msflow
+    - talk/GamePlayEnd_Unlock15Play.msflow
+    - talk/GamePlayEnd_Unlock20Play.msflow
+    - talk/GamePlayEnd_UnlockPlays.mstxt
+    - talk/GamePlayEnd_UnlockThemePresent.msflow
+    - talk/GamePlayEnd_UnlockThemePresent.mstxt
+    - talk/GamePlayPre_1stTimeEntrance.msflow
+    - talk/GamePlayPre_1stTimeEntrance.mstxt
+    - talk/GamePlayPre_DisableWireless.msflow
+    - talk/GamePlayPre_DisableWireless.mstxt
+    - talk/GamePlayPre_Disconnected.msflow
+    - talk/GamePlayPre_Disconnected.mstxt
+    - talk/GamePlayPre_ExplainBombArm.msflow
+    - talk/GamePlayPre_ExplainBombArm.mstxt
+    - talk/GamePlayPre_ExplainHammerArm.msflow
+    - talk/GamePlayPre_ExplainHammerArm.mstxt
+    - talk/GamePlayPre_ExplainShortcutBadge.msflow
+    - talk/GamePlayPre_ExplainShortcutBadge.mstxt
+    - talk/GamePlayPre_ExplainStickArm.msflow
+    - talk/GamePlayPre_ExplainStickArm.mstxt
+    - talk/GamePlayPre_LowBattery.msflow
+    - talk/GamePlayPre_LowBattery.mstxt
+    - talk/GamePlayPre_NEXMntNotice.msflow
+    - talk/GamePlayPre_NEXMntNotice.mstxt
+    - talk/GamePlayPre_NEXMntStarted.msflow
+    - talk/GamePlayPre_NEXMntStarted.mstxt
+    - talk/GamePlayPre_PaymentLimit.msflow
+    - talk/GamePlayPre_PaymentLimit.mstxt
+    - talk/GamePlayPre_RenewBossData.msflow
+    - talk/GamePlayPre_RenewBossData.mstxt
+    - talk/GamePlayPre_RetryFreeplay.msflow
+    - talk/GamePlayPre_RetryFreeplay.mstxt
+    - talk/GamePlay_SmallD.mstxt
+    - talk/GamePlay_TouchTheRabbit.msflow
+    - talk/GamePlay_TouchTheRabbit.mstxt
+    - talk/GamePlaying_AllBadgeGet.msflow
+    - talk/GamePlaying_AllBadgeGet.mstxt
+    - talk/GamePlaying_DontPowerOff.msflow
+    - talk/GamePlaying_DontPowerOff.mstxt
+    - talk/GamePlaying_LowBattery.msflow
+    - talk/GamePlaying_LowBattery.mstxt
+    - talk/GamePlaying_NEXMntNotice.msflow
+    - talk/GamePlaying_NEXMntNotice.mstxt
+    - talk/Hall_BonusPlayStopped.msflow
+    - talk/Hall_BonusPlayStopped.mstxt
+    - talk/Hall_BookAfterPresentation.msflow
+    - talk/Hall_BookAfterPresentation.mstxt
+    - talk/Hall_BookBeforePresentation.msflow
+    - talk/Hall_BookBeforePresentation.mstxt
+    - talk/Hall_DisableServer.msflow
+    - talk/Hall_DisableServer.mstxt
+    - talk/Hall_DisableWireless.msflow
+    - talk/Hall_DisableWireless.mstxt
+    - talk/Hall_Disconnected.msflow
+    - talk/Hall_Disconnected.mstxt
+    - talk/Hall_Information1stTimeEntrance.msflow
+    - talk/Hall_Information1stTimeEntrance.mstxt
+    - talk/Hall_RenewBossData.msflow
+    - talk/Hall_RenewBossData.mstxt
+    - talk/Hall_ThemeShop1stTimeEntrance.msflow
+    - talk/Hall_ThemeShop1stTimeEntrance.mstxt
+    - talk/Introduction_Day01.mstxt
+    - talk/Introduction_Day01_00.msflow
+    - talk/Introduction_Day01_00a.msflow
+    - talk/Introduction_Day01_00a2.msflow
+    - talk/Introduction_Day01_01.msflow
+    - talk/Introduction_Day01_02.msflow
+    - talk/Option.msflow
+    - talk/Option.mstxt
+    - talk/PostingPlaza_Introduction.msflow
+    - talk/PostingPlaza_Introduction.mstxt
+    - talk/PostingPlaza_Posting.msflow
+    - talk/PostingPlaza_Posting.mstxt
+    - talk/ServiceClosed.msflow
+    - talk/ServiceClosed.mstxt
+    - talk/Start_BadgeDataVersionUp.msflow
+    - talk/Start_BadgeDataVersionUp.mstxt
+    - talk/Start_BrokenServerFreePlayData.msflow
+    - talk/Start_BrokenServerFreePlayData.mstxt
+    - talk/Start_BrokenServerOwnBadgeData.msflow
+    - talk/Start_BrokenServerOwnBadgeData.mstxt
+    - talk/Start_DataSalvageEnd.msflow
+    - talk/Start_DataSalvageEnd.mstxt
+    - talk/Start_DataSalvageStart.msflow
+    - talk/Start_DataSalvageStart.mstxt
+    - talk/Start_DisableServer.msflow
+    - talk/Start_DisableServer.mstxt
+    - talk/Start_DisableWireless.msflow
+    - talk/Start_DisableWireless.mstxt
+    - talk/Start_Disconnected.msflow
+    - talk/Start_Disconnected.mstxt
+    - talk/Start_DownloadCanceled.msflow
+    - talk/Start_DownloadCanceled.mstxt
+    - talk/Start_IncompatibleBossData.msflow
+    - talk/Start_IncompatibleBossData.mstxt
+    - talk/Start_NEXMntStarted.msflow
+    - talk/Start_NEXMntStarted.mstxt
+    - talk/Start_NeedNNID.msflow
+    - talk/Start_NeedNNID.mstxt
+    - talk/Start_PowerOffLastPlay.msflow
+    - talk/Start_PowerOffLastPlay.mstxt
+    - talk/Start_SaveExtDataFailed.msflow
+    - talk/Start_SaveExtDataFailed.mstxt
+    - talk/Start_ServiceEnd.msflow
+    - talk/Start_ServiceEnd.mstxt
+    - talk/Start_VersionUp.msflow
+    - talk/Start_VersionUp.mstxt
+    - talk/Training_Introduction.msflow
+    - talk/Training_Introduction.mstxt
+    - talk/Training_Result.msflow
+    - talk/Training_Result.mstxt
+    - talk/Training_Result_Disconnected.msflow
+    - talk/Training_Result_Disconnected.mstxt
+    - talk/Training_Start_DisableWireless.msflow
+    - talk/Training_Start_DisableWireless.mstxt
+    - talk/Training_Start_Disconnected.msflow
+    - talk/Training_Start_Disconnected.mstxt
+    - ~debug/Debug_AnimationTest.msflow
+    - ~debug/Debug_AnimationTest.mstxt

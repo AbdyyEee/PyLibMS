@@ -81,28 +81,6 @@ node_definitions:
       parameters:
         - name: "Parameter 1"
         - name: "Parameter 2"
-    - id: 58
-      name: SetupButtonPrompt
-      next_node_dependency: true
-      parameter_type: string
-      parameters:
-        - name: var
-    - id: 90
-      name: LoadSEGroup
-      parameter_type: string
-      parameters:
-        - name: group
-          description: ''
-    - id: 96
-      name: PlaySE
-      parameter_type: string
-      parameters:
-        - name: name
-    - id: 106
-      name: SetLayoutVisibility
-      parameter_type: string
-      parameters:
-        - name: layout,visibility
 tag_definitions:
   groups:
     0: System
@@ -160,9 +138,6 @@ tag_definitions:
         - name: a
           description: ''
           datatype: uint8
-        - name: name
-          description: ''
-          datatype: string
     - name: PageBreak
       group_id: 0
       tag_index: 4

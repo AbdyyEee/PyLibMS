@@ -1,0 +1,256 @@
+game: The Legend of Zelda Skyward Sword
+# TODO: Game uses MSBF, add node definitions
+projects:
+  global:
+    colors:
+    - name: null
+      red: 255
+      green: 80
+      blue: 80
+      alpha: 255
+    - name: null
+      red: 255
+      green: 120
+      blue: 120
+      alpha: 255
+    - name: null
+      red: 230
+      green: 160
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 70
+      green: 155
+      blue: 235
+      alpha: 255
+    - name: null
+      red: 80
+      green: 220
+      blue: 65
+      alpha: 255
+    - name: null
+      red: 255
+      green: 100
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 140
+      green: 70
+      blue: 140
+      alpha: 255
+    - name: null
+      red: 30
+      green: 185
+      blue: 30
+      alpha: 255
+    - name: null
+      red: 0
+      green: 155
+      blue: 165
+      alpha: 255
+    - name: null
+      red: 245
+      green: 10
+      blue: 50
+      alpha: 255
+    - name: null
+      red: 145
+      green: 155
+      blue: 160
+      alpha: 255
+    - name: null
+      red: 239
+      green: 239
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 95
+      green: 150
+      blue: 105
+      alpha: 255
+    - name: null
+      red: 255
+      green: 255
+      blue: 255
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    - name: null
+      red: 0
+      green: 0
+      blue: 0
+      alpha: 255
+    attributes: []
+    tags:
+      groups: {}
+      definitions: []
+    styles: []
+    source_files: []

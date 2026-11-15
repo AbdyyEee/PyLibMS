@@ -5,8 +5,6 @@ from lms.project.definitions.attribute import LMS_AttrDefinition
 from lms.project.definitions.color import LMS_Color
 from lms.project.definitions.style import LMS_Style
 from lms.project.definitions.tag import LMS_TagGroup
-from lms.titleconfig.definitions.project import MessageSource
-
 
 class MSBPSection(StrEnum):
     CLR1 = "CLR1"
@@ -22,6 +20,7 @@ class MSBPSection(StrEnum):
     SLB1 = "SLB1"
     CTI1 = "CTI1"
 
+
 class MSBP:
     """
     A class that represents a MSBP file.
@@ -31,14 +30,14 @@ class MSBP:
     DEFAULT_SLOT_COUNT = 0x1D
 
     def __init__(
-            self,
-            info: LMS_FileInfo,
-            section_list: list[str] | None,
-            colors: list[LMS_Color],
-            config: tuple[LMS_AttrDefinition],
-            tag_groups: tuple[LMS_TagGroup],
-            styles: list[LMS_Style],
-            source_files: list[str],
+        self,
+        info: LMS_FileInfo,
+        section_list: list[str] | None,
+        colors: list[LMS_Color],
+        config: tuple[LMS_AttrDefinition],
+        tag_groups: tuple[LMS_TagGroup],
+        styles: list[LMS_Style],
+        source_files: list[str],
     ):
         self.name = ""
         self.slot_count = self.DEFAULT_SLOT_COUNT
@@ -79,12 +78,12 @@ class MSBP:
     @property
     def styles(self) -> tuple[LMS_Style, ...]:
         """The style definitions for the project instance."""
-        return tuple(self._styles)
+        return None if self._styles is None else tuple(self._styles)
 
     @property
     def source_files(self) -> tuple[str, ...]:
         """The source file definitions for the project instance."""
-        return tuple(self._source_files)
+        return None if self._source_files is None else tuple(self._source_files)
 
     def add_color(self, color: LMS_Color) -> None:
         """
@@ -102,7 +101,7 @@ class MSBP:
         """
         self._styles.append(style)
 
-    def add_source(self, source: MessageSource) -> None:
+    def add_source(self, source: str) -> None:
         """
         Add a source to the MSBP instance.
 

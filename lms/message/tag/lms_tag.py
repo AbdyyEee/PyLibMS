@@ -74,7 +74,7 @@ class LMS_EncodedTag:
 
         fallback_prefix = "!" if self._is_fallback else ""
 
-        if self._parameters is None:
+        if not self._parameters:
             return f"[{self.group_id}:{self.tag_index}]"
 
         # 02x format to convert any int to hexadecimal uppercase

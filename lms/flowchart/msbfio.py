@@ -10,6 +10,7 @@ from lms.common.stream.fileinfo import read_file_info, write_file_info, write_fi
 from lms.common.stream.hashtable import read_labels, write_labels
 from lms.common.stream.section import read_section_data, write_section
 from lms.fileio.io import FileReader, FileWriter
+from lms.flowchart.definitions.node import LMS_JumpNode, LMS_BaseNode
 from lms.flowchart.flw3 import read_flw3, write_flw3
 from lms.flowchart.msbf import MSBF, MSBFSection
 from lms.source_resolver import SourceResolver
@@ -170,9 +171,27 @@ def write_msbf(file: MSBF) -> bytes:
     stream_ids = {node: stream_id for stream_id, node in enumerate(file)}
     index_map = {entry.name: stream_ids[entry] for entry in file.entry_nodes}
 
+    # Gather any jumps that have valid resolved references
+    resolved_jump_ids: dict[LMS_BaseNode, int] = {}
+    for node in file:
+        if not isinstance(node, LMS_JumpNode):
+            continue
+
+        if node.next_node is None:
+            raise ValueError("There are unset jumps in this file!")
+        # Local jump we can use the current stream ids for indexing
+        elif node.next_node in stream_ids:
+            resolved_jump_ids[node] = stream_ids[node.next_node]
+        # Source jump, build the target ids from the file
+        else:
+            target_ids = {target: stream_id for stream_id, target in enumerate(node.msbf)}
+            resolved_jump_ids[node] = target_ids[node.next_node]
+
     write_section(
-        writer, MSBFSection.FLW3, write_flw3, list(file.nodes.values()), stream_ids
+        writer, MSBFSection.FLW3, write_flw3, list(file.nodes.values()), stream_ids,
+        resolved_jump_ids
     )
+
     write_section(
         writer,
         MSBFSection.FEN1,

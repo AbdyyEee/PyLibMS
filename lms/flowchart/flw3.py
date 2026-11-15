@@ -44,7 +44,6 @@ def read_flw3(
 
     next_node_index = None
 
-
     for i in range(node_count):
         node_data = reader.tell() + 8
         node_type = LMS_NodeType(reader.read_uint8())
@@ -236,7 +235,10 @@ def evaluate_node_parameter(
 
 
 def write_flw3(
-    writer: FileWriter, nodes: list[LMS_BaseNode], stream_ids: dict[LMS_BaseNode, int]
+    writer: FileWriter,
+        nodes: list[LMS_BaseNode],
+        stream_ids: dict[LMS_BaseNode, int],
+        resolved_jump_ids: dict[LMS_BaseNode, int],
 ) -> None:
     node_count = len(nodes)
 
@@ -340,8 +342,8 @@ def write_flw3(
                 writer.write_bytes(b"\x00" * 2)
                 writer.write_bytes(b"\x00" * 4)
 
-                write_next_node_id(writer, stream_ids[node.next_entry])
-                writer.write_uint16(node.unknown_short0a)
+                write_next_node_id(writer, resolved_jump_ids[node])
+                writer.write_uint16(NO_VALUE if node.msbf_index is None else node.msbf_index)
                 writer.skip(4)
 
     for node_id in branch_table:

@@ -218,6 +218,9 @@ class LMS_MessageNode(LMS_BaseNode):
 
         :param filename: name of the msbt file.
         """
+        if self._source_resolver is None:
+            raise ValueError("No message data was provided!")
+
         self.msbt_index = self._source_resolver.retrieve_source_index(filename)
         self.label_index = 0
 

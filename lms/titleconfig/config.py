@@ -6,7 +6,6 @@ from enum import StrEnum
 from types import MappingProxyType
 from typing import Literal, get_args, Mapping, Sequence, Self
 
-import requests
 import yaml
 
 from lms.flowchart.definitions.node_type import LMS_NodeType

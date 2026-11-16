@@ -2684,12 +2684,12 @@ projects:
       region_width: 308
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: common_Caption_U_Caption_00
       region_width: 384
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     source_files:
     - Chat_Cheerup.mstxt
     - Chat_Common.mstxt
@@ -3793,12 +3793,12 @@ projects:
       region_width: 270
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: ItemName
       region_width: 172
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     source_files:
     - Body/Body_Attr.mstxt
     - Body/Body_Desc.mstxt
@@ -3932,92 +3932,92 @@ projects:
       region_width: 308
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: common_Caption_U_Caption_00
       region_width: 384
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: FryingPan_FryingPan_BtnSelect_00S
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: FryingPan_FryingPan_BtnSelect_01
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: FryingPan_FryingPan_BtnSelect_01S
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: FryingPan_FryingPan_BtnSelect_00
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Machine_Machine_BtnSelect_00S
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Machine_Machine_BtnSelect_01
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Machine_Machine_BtnSelect_01S
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Machine_Machine_BtnSelect_00
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Dialog
       region_width: 270
       line_number: 7
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_BaseShadow_01
       region_width: 135
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Base_01
       region_width: 135
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_BaseShadow_02
       region_width: 135
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Base_02
       region_width: 135
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_BaseShadow_00
       region_width: 280
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Base_00
       region_width: 280
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_U_00_Dialog_U
       region_width: 350
       line_number: 9
       font_index: 0
-      color: null
+      color_index: null
     source_files:
     - DramaAgent.mstxt
     - Version.mstxt
@@ -4412,3677 +4412,3677 @@ projects:
       region_width: 384
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: MiniGame_Rule
       region_width: 400
       line_number: 5
       font_index: 0
-      color: null
+      color_index: null
     - name: albumList_AlbumList_U_AU_Top
       region_width: 80
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: albumList_AlbumList_U_AU_Numerator
       region_width: 32
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: albumList_AlbumList_U_AU_Denominator
       region_width: 32
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: albumList_AlbumList_U_AU_Name
       region_width: 200
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: albumList_AlbumList_U_AU_Intro
       region_width: 270
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: albumList_AlbumList_U_AU_Price
       region_width: 125
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: albumList_Present_U_PU_Name
       region_width: 200
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: albumList_Present_U_PU_Intro
       region_width: 285
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_Cityhall_BtnFList_00
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_Cityhall_BtnOpt
       region_width: 90
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_Cityhall_BtnEntry_00
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_Cityhall_BtnAlbum_00
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_Cityhall_BtnCom_00
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_Cityhall_BtnCDis_00
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_Cityhall_BtnQR
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_Dialog_Illust_DialogIllust
       region_width: 280
       line_number: 3
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_MenuQR_BtnQR_Read
       region_width: 210
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_MenuQR_BtnQR_Make
       region_width: 210
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_QR_MessageQR
       region_width: 260
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: common_BtnCmn_00_BtnCmn_00
       region_width: 70
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: common_BtnCmn_00_BtnCmn_00S
       region_width: 70
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: common_BtnCmn_01_BtnCmn_01S
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: common_BtnCmn_01_BtnCmn_01
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: common_Caption_Caption_00
       region_width: 308
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: common_Caption_U_Caption_00
       region_width: 384
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: common_Caption_U_Caption_00_Big
       region_width: 384
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: common_WinCmnMoney_WinCmnMoney
       region_width: 126
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_WinCha_00
       region_width: 84
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_WinCha_00S
       region_width: 84
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBir_00
       region_width: 22
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBir_01
       region_width: 22
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBir_02
       region_width: 22
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBir_03
       region_width: 22
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBir_04
       region_width: 22
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBir_05
       region_width: 22
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBir_06
       region_width: 22
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBir_07
       region_width: 22
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBir_08
       region_width: 22
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBir_09
       region_width: 22
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBir_10
       region_width: 22
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBir_11
       region_width: 22
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBir_12
       region_width: 22
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnGen_00
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnGen_01
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBlood_00
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBlood_01
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBlood_02
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBlood_03
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_CommonFL_BtnBlood_04
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_DialogFL_BtnName
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_DialogFL_BtnNickname
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_DialogFL_BtnGender
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_DialogFL_BtnYear
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_DialogFL_BtnBirthday
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_DialogFL_BtnBlood
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonFList_DialogFL_BtnCharacter
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Number_00
       region_width: 72
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Message_01
       region_width: 272
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Message_02
       region_width: 272
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Message_03
       region_width: 272
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Message_04
       region_width: 272
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Message_05
       region_width: 272
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Message_00
       region_width: 267
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Number_01
       region_width: 72
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Number_02
       region_width: 72
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Number_03
       region_width: 72
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Number_04
       region_width: 72
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Number_05
       region_width: 72
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Message_06
       region_width: 272
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Number_06
       region_width: 72
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Tag_00
       region_width: 34
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Tag_01
       region_width: 34
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Tag_02
       region_width: 34
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Tag_03
       region_width: 34
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Tag_04
       region_width: 34
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Tag_05
       region_width: 34
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Tag_06
       region_width: 34
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: communication_Communication_U_Cap_Have
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: communication_Communication_U_Cap_Have_Value
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: communication_DialogCommunication_WhichColors
       region_width: 256
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: communication_DialogCommunication_Have_Value
       region_width: 32
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: communication_DialogCommunication_Have
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Dialog
       region_width: 270
       line_number: 7
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_BaseShadow_01
       region_width: 135
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Base_01
       region_width: 135
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_BaseShadow_02
       region_width: 135
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Base_02
       region_width: 135
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_BaseShadow_00
       region_width: 280
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Base_00
       region_width: 280
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_U_00_Dialog_U
       region_width: 350
       line_number: 9
       font_index: 0
-      color: null
+      color_index: null
     - name: dialogSub_Dialog_2Button_Btn2B_00
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialogSub_Dialog_2Button_Btn2B_Top
       region_width: 280
       line_number: 3
       font_index: 0
-      color: null
+      color_index: null
     - name: dialogSub_Dialog_2Button_Btn2B_01
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialogSub_Dialog_3Button_Btn3B_00
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialogSub_Dialog_3Button_Btn3B_Top
       region_width: 280
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: dialogSub_Dialog_3Button_Btn3B_01
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialogSub_Dialog_3Button_Btn3B_02
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_BoxColor
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_12
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_13
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_08
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_09
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_14
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_15
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_10
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_11
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_04
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_05
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_00
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_01
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_06
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_07
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_02
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_Color_03
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_U_CapA_Intro
       region_width: 346
       line_number: 3
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_U_CapB_Intro
       region_width: 320
       line_number: 3
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_U_CapA_TitleS
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_U_CapA_Title
       region_width: 210
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_U_CapB_TitleS
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_U_CapB_Title
       region_width: 160
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogGender_BtnGender
       region_width: 274
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoColor_Camera_6Color
       region_width: 280
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoColor_Camera_8Color
       region_width: 280
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoOperation_Title
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoOperation_Ope03
       region_width: 255
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoOperation_Ope02
       region_width: 255
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoOperation_Ope01
       region_width: 255
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoOperation_Ope00
       region_width: 255
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoOperation_00
       region_width: 16
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoOperation_01
       region_width: 16
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoOperation_02
       region_width: 16
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoOperation_03
       region_width: 16
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoPoint_U_Title
       region_width: 274
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoPoint_U_Dialog_01
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoPoint_U_Dialog_00
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_DialogPhotoPoint_U_Dialog_02
       region_width: 240
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_EditAutoPhoto_U_Base_00
       region_width: 50
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_EditAutoPhoto_U_Base_01
       region_width: 50
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_EditAutoPhoto_U_Photo_02
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_EditAutoPhoto_U_Photo_01
       region_width: 253
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_EditAutoPhoto_U_PhotoShadow_01
       region_width: 253
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_EditAutoPhoto_U_PhotoShadow_02
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_EditAutoSelect_Auto
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_EditHair_Page_00
       region_width: 28
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_EditHair_Page_Slash_00
       region_width: 24
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_EditHair_Page_01
       region_width: 28
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editPhoto_EditPhotoPos_PhotoPos
       region_width: 270
       line_number: 3
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Action
       region_width: 210
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Action_L
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Action_R
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Words_L
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Words
       region_width: 210
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Words_R
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Express_L
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Express
       region_width: 210
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Express_R
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Thought
       region_width: 210
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Thought_L
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Thought_R
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Chara
       region_width: 210
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Chara_L
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Character_Chara_R
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogAdmission_BtnAdm_00
       region_width: 180
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogAdmission_BtnAdm_01
       region_width: 180
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogAdmission_Admission
       region_width: 279
       line_number: 4
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogBirthday_Month
       region_width: 70
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogBirthday_Day
       region_width: 70
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogBirthday_Slash
       region_width: 32
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogBloodType_BtnBlood_A
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogBloodType_BtnBlood_B
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogBloodType_BtnBlood_O
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogBloodType_BtnBlood_AB
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogCameraColor_Camera_6Color
       region_width: 280
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogCameraColor_Camera_8Color
       region_width: 280
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogGender_BtnGender
       region_width: 274
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogRelation_BtnCouple
       region_width: 220
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogRelation_BtnParent
       region_width: 220
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogRelation_BtnChild
       region_width: 220
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogRelation_BtnBrother
       region_width: 220
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogRelation_BtnAnother
       region_width: 220
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Dialog_Camera2Btn_Btn2B_00
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Dialog_Camera2Btn_Btn2B_Top
       region_width: 279
       line_number: 4
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Dialog_Camera2Btn_Btn2B_01
       region_width: 170
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditBase_BtnEnter_S
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditBase_BtnEnter
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditEye_Page_00
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditEye_Page_Slash_00
       region_width: 24
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditEye_Page_01
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditEye_ChangeReset
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditEye_ChangeReset_S
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditEyebrow_Page_00
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditEyebrow_Page_Slash_00
       region_width: 24
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditEyebrow_Page_01
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditEyebrow_ChangeReset
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditEyebrow_ChangeReset_S
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditGlasses_ChangeReset
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditGlasses_ChangeReset_S
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditHair_Page_00
       region_width: 28
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditHair_Page_Slash_00
       region_width: 24
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditHair_Page_01
       region_width: 28
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditMole_ChangeReset
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditMole_ChangeReset_S
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditMouth_Page_00
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditMouth_Page_Slash_00
       region_width: 24
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditMouth_Page_01
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditMouth_ChangeReset
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditMouth_ChangeReset_S
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditMustache_ChangeReset
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditMustache_ChangeReset_S
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditNose_Page_00
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditNose_Page_Slash_00
       region_width: 24
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditNose_Page_01
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditNose_ChangeReset
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_EditNose_ChangeReset_S
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Edit_U_Caption
       region_width: 310
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_Nickname
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_Birthday
       region_width: 140
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_Makeup
       region_width: 130
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_Color
       region_width: 106
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_NicknameIn
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_BirthdaySlash
       region_width: 18
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_CopyAdmin
       region_width: 160
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_BirthdayMonth
       region_width: 24
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_BirthdayDay
       region_width: 24
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_GenderIn
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_Gender
       region_width: 102
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_MakeupIn
       region_width: 144
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_Name_00
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_NameIn_00
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_Name_01
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_NameIn_01
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_BloodIn
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_Blood
       region_width: 58
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_RelationIn
       region_width: 144
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_Relation
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_AdminSlash
       region_width: 18
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_CopyAdminIn_R
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_CopyAdminIn_L
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_Required
       region_width: 84
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Voice_SettingEasy
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Voice_SettingVoice
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Voice_SettingRandom
       region_width: 129
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Voice_SettingCustum
       region_width: 129
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Voice_BtnDetail
       region_width: 82
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Voice_BtnDetail_S
       region_width: 82
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_VoiceDetail_control_00
       region_width: 115
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_VoiceDetail_control_01
       region_width: 115
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_VoiceDetail_control_02
       region_width: 115
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_VoiceDetail_control_03
       region_width: 115
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_VoiceDetail_control_04
       region_width: 115
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_VoiceDetail_BtnSwitch
       region_width: 115
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Title
       region_width: 140
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Name
       region_width: 90
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_IconPageL
       region_width: 6
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_IconPageR
       region_width: 6
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_IconPage
       region_width: 58
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_BoxName_00
       region_width: 202
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Type
       region_width: 90
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Nickname
       region_width: 170
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_BoxName_01
       region_width: 202
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Birthday
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Another
       region_width: 173
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_BoxType
       region_width: 173
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Made
       region_width: 90
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_BoxMade
       region_width: 202
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Relation
       region_width: 160
       line_number: 11
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_BirthdayMonth
       region_width: 30
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_BirthdayDay
       region_width: 30
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_BirthdayYear
       region_width: 72
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Age
       region_width: 68
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Gender
       region_width: 28
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Blood
       region_width: 50
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_BirthdayS_00
       region_width: 18
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_BirthdayS_01
       region_width: 18
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_BoxType_00
       region_width: 102
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_BoxType_01
       region_width: 102
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Relation_00
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Relation_01
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Relation_02
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Relation_03
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Relation_04
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Relation_05
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Relation_06
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Relation_07
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Relation_08
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Relation_09
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_Save_00
       region_width: 54
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_Apart
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_Cityhall
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_Dome
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_Fountain
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_News
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_Ranking
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_SFood
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_SRoom
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_SCostume
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_STreasure
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Scribble_Scribble_BtnReset
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Scribble_Scribble_BtnResetS
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_DialogPresent_WhichColors
       region_width: 256
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_DialogPresent_Have
       region_width: 64
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_List_00
       region_width: 72
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_List_00S
       region_width: 72
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_00S
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_00
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_01S
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_01
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_02S
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_02
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_03S
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_03
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchPresent_U_PU_Name
       region_width: 264
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchPresent_U_PU_Intro
       region_width: 278
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchPresent_U_PU_HaveColor
       region_width: 80
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Title_00
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Title_01
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Title_02
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Title_03
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Title_04
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Title_05
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Title_06
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Title_07
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Title_08
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Title_09
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Title_10
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Title_11
       region_width: 180
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Name_00
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Name_01
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Name_02
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Name_03
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Name_04
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Name_05
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Name_06
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Name_07
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Name_08
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Name_09
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Name_10
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Name_11
       region_width: 180
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Level_00
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Level_01
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Level_02
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Level_03
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Level_04
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Level_05
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Level_06
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Level_07
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Level_08
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Level_09
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Level_10
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Level_11
       region_width: 180
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_None_00
       region_width: 256
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_Sa_Cap
       region_width: 77
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_Sa_Level
       region_width: 50
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_FoBest_Cap
       region_width: 206
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_FoHate_Cap
       region_width: 185
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_FoFavorite_Cap
       region_width: 185
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_Fu_Cap
       region_width: 92
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_ReLove
       region_width: 132
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_ReFriend_Cap
       region_width: 95
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_ReFriend
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_ReLove_Cap
       region_width: 130
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_FoBest00
       region_width: 172
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_FoBest01
       region_width: 160
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_FoFavorite00
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_FoFavorite01
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_FoFavorite02
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_FoHate00
       region_width: 160
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_U_FoHate01
       region_width: 160
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiWatch_MiiWatch_U_Room
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiWatch_MiiWatch_U_Name
       region_width: 170
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: CommonMiniGame_CommonMiniGame_MGCmnBS_00S
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: CommonMiniGame_CommonMiniGame_MGCmnBS_00
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: CommonMiniGame_CommonMiniGame_U_MGCmnT_Cap
       region_width: 280
       line_number: 5
       font_index: 0
-      color: null
+      color_index: null
     - name: QCloseUp_QCloseUp_BtnQCU_00
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QCloseUp_QCloseUp_BtnQCU_01
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QCloseUp_QCloseUp_BtnQCU_02
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_BtnOption_00
       region_width: 152
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_BtnOption_01
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_BtnOption_02
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_BtnOption_03
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_BtnOption_04
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_BtnOption_05
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_BtnOption_06
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_Admission_BtnAdm_00
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_Admission_BtnAdm_01
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_Admission_BtnAdm_02
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: shopCategory_ShopFoods_BtnFoods_00
       region_width: 48
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: shopCategory_ShopFoods_BtnFoods_01
       region_width: 48
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: shopCategory_ShopFoods_BtnFoods_02
       region_width: 48
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: shopCategory_ShopFoods_BtnFoods_03
       region_width: 48
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: shopDialog_DialogShop_Price
       region_width: 180
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: shopDialog_DialogShop_quantity
       region_width: 24
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: shopDialog_DialogShop_HowMany
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: shopDialog_DialogShop_WhichColors_00
       region_width: 200
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_CapF_Intro_00
       region_width: 278
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_CapF_Have_00
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_CapCo_Intro_00
       region_width: 278
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_CapCo_Have_00
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_CapI_Intro_00
       region_width: 278
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_CapI_Have_00
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_CapH_Intro_00
       region_width: 278
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_CapH_Have_00
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_CapT_Intro_00
       region_width: 278
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_CapT_Have_00
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_IconY
       region_width: 86
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_IconPad
       region_width: 86
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Voice_SettingCustom
       region_width: 129
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_Relation_None
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: propose_propose_BtnProS
       region_width: 140
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: propose_propose_BtnPro
       region_width: 140
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_DialogDay_Year
       region_width: 70
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_DialogDay_Month
       region_width: 70
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_DialogDay_Day
       region_width: 70
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_DialogTime_Hour
       region_width: 70
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_DialogTime_Minute
       region_width: 70
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_DialogTime_AM_PM
       region_width: 160
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_IslandName_IName_00
       region_width: 180
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_CapIm_Intro_00
       region_width: 278
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_CapIm_Have_00
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_BtnCallS
       region_width: 182
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_BtnCall
       region_width: 182
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonEvent_CommonEvent_BtnEvent_00S
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonEvent_CommonEvent_BtnEvent_00
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonEvent_CommonEvent_BtnEvent_01S
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonEvent_CommonEvent_BtnEvent_01
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonEvent_CommonEvent_BtnEvent_02S
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonEvent_CommonEvent_BtnEvent_02
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonEvent_CommonEvent_BtnEvent_03S
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonEvent_CommonEvent_BtnEvent_03
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_DialogBirthYear_Year
       region_width: 70
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_AdultIn
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_Adult
       region_width: 92
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_BirthYear
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_OpenIn
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_CopyIn
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_Open
       region_width: 160
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Profile_Copy
       region_width: 160
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: mapHouse_MapHouse_U_Name
       region_width: 384
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Stomach_Stomach_Stomach
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_DialogConfession_BtnCon_00
       region_width: 135
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: photostudio_PhotoKind_KindFrame_00
       region_width: 256
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: photostudio_PhotoKind_KindFrame_01
       region_width: 256
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: photostudio_PhotoKind_KindFrame_02
       region_width: 256
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: photostudio_PhotoKind_PhotoKind
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: photostudio_PhotoStudio_List_ListMessage
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: photostudio_PhotoStudio_Title_U_TitleCap
       region_width: 280
       line_number: 5
       font_index: 0
-      color: null
+      color_index: null
     - name: ranking_Ranking_U_TitleCap
       region_width: 190
       line_number: 5
       font_index: 0
-      color: null
+      color_index: null
     - name: ranking_RankingList_Rank_00
       region_width: 50
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ranking_RankingList_Name_00
       region_width: 136
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ranking_RankingList_Point_00
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ranking_RankingList_PointRate_00
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ranking_RankingList_Rank_01
       region_width: 50
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ranking_RankingList_Name_01A
       region_width: 136
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ranking_RankingList_Percentage_01
       region_width: 44
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ranking_RankingList_Name_01B
       region_width: 136
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ranking_RankingList_Name_01_and
       region_width: 12
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongEdit_U
       region_width: 390
       line_number: 5
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_Song_U
       region_width: 390
       line_number: 6
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongGe_0
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongGe_1
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongGe_2
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongGe_3
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongGe_4
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongGe_5
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_IconCross
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_IconA
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_Name
       region_width: 380
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerBack_Letter_Caption_U_Caption_00
       region_width: 384
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerList_TravelerList_U_Cap
       region_width: 310
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerList_TravelerList_U_Number_00
       region_width: 30
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerList_TravelerList_U_History_NameT
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerList_TravelerList_U_History_DayT
       region_width: 70
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerList_TravelerList_U_History_PlaceT
       region_width: 122
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerList_TravelerList_U_CapMi_00T
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerList_TravelerList_U_CapMi_00
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerList_TravelerList_U_CapMi_01
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerList_TravelerList_U_InfoHis_00L
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerList_TravelerList_U_InfoHis_00R
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerList_TravelerList_U_CapMi_02T
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_Cap
       region_width: 310
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapIs_00T
       region_width: 312
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapIs_00
       region_width: 312
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapIs_01T
       region_width: 300
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapIs_01
       region_width: 300
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_Number_00
       region_width: 30
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_History_NameT
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_History_DayT
       region_width: 70
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_History_PlaceT
       region_width: 122
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapMi_00T
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapMi_00
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapMi_01
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapManP0_00T
       region_width: 312
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapManP0_00
       region_width: 312
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapManP0_01T
       region_width: 108
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapManP0_01
       region_width: 108
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapManP0_04T
       region_width: 182
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapManP0_04
       region_width: 182
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_InfoHis_00L
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_InfoHis_00R
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapManP0_06T
       region_width: 368
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapManP0_06
       region_width: 368
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_EditFirst_BtnEFirst_00
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_EditFirst_EditFirst_Top
       region_width: 265
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_EditFirst_BtnEFirst_01
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: cityhall_EditFirst_BtnEFirst_02
       region_width: 240
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: confession_Confession4_BtnSelect_00S
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: confession_Confession4_BtnSelect_00
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: confession_Confession4_BtnSelect_01S
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: confession_Confession4_BtnSelect_01
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Dialog_2Button_Btn2B_00
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Dialog_2Button_Btn2B_Top
       region_width: 280
       line_number: 3
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Dialog_2Button_Btn2B_01
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: friendList_FriendList_U_00_BirthdayAdult
       region_width: 68
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: market_Market_BtnBuyS
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: market_Market_BtnBuy
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_GameCoin
       region_width: 32
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_Sound_BGM
       region_width: 122
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_Sound_Stereo_00
       region_width: 122
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Kaleidoscope_Kaleidoscope_Top
       region_width: 300
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Mobile_Mobile_Top
       region_width: 300
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: MusicBox_MusicBox_BtnCenter_S
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: MusicBox_MusicBox_BtnCenter
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Travel_Travel_BtnCenter_S
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Travel_Travel_BtnCenter
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Travel_Travel_Title_U_Name
       region_width: 320
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Travel_Travel_Title_U_Destination
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_BtnLU_So
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_BtnLU_Mo
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_LvUp_Top
       region_width: 300
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_BtnLU_To
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_BtnLU_In
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_BtnLU_Wo
       region_width: 90
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: ARCamera_ARCamera_BtnStopS
       region_width: 182
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ARCamera_ARCamera_BtnStop
       region_width: 182
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ARCamera_DialogARCamera_DialogARCard
       region_width: 270
       line_number: 3
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_Admission_Adm_00Top
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_Admission_Adm_01Top
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_Admission_Adm_00
       region_width: 260
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_Admission_Adm_01
       region_width: 260
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_Admission_Adm_02
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_Admission_Adm_02Top
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_Admission_BtnJust
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_Admission_BtnJustS
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ARCamera_ARCamera_BtnSceS
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ARCamera_ARCamera_BtnSce
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ARCamera_DialogScenery_BtnSce_00
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_SHeadWear
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_SImport
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_PhotoStudio
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_Affinity
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_House
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_Hall
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_Wharf
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_VacantLand
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: FryingPan_FryingPan_BtnSelect_00S
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: FryingPan_FryingPan_BtnSelect_01
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: FryingPan_FryingPan_BtnSelect_01S
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: FryingPan_FryingPan_BtnSelect_00
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Machine_Machine_BtnSelect_00S
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Machine_Machine_BtnSelect_01
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Machine_Machine_BtnSelect_01S
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Machine_Machine_BtnSelect_00
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ApartInfo_ApartInfo_U_Cap
       region_width: 310
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ApartInfo_ApartInfo_U_CapManP0_00T
       region_width: 364
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ApartInfo_ApartInfo_U_CapManP0_00
       region_width: 364
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ApartInfo_ApartInfo_U_CapManP0_01T
       region_width: 108
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ApartInfo_ApartInfo_U_CapManP0_01
       region_width: 108
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ApartInfo_ApartInfo_U_CapManP0_04T
       region_width: 176
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ApartInfo_ApartInfo_U_CapManP0_04
       region_width: 176
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ApartInfo_ApartInfo_U_CapManP1_00T
       region_width: 364
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ApartInfo_ApartInfo_U_CapManP1_00
       region_width: 364
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ApartInfo_ApartInfo_U_CapManP0_06T
       region_width: 176
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ApartInfo_ApartInfo_U_CapManP0_06
       region_width: 176
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxName_00
       region_width: 148
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxName_01
       region_width: 148
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Name
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Birthday
       region_width: 84
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxBirthday
       region_width: 118
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Made
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxMade
       region_width: 148
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Gen_Blo
       region_width: 84
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxGender
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Self
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxSelf
       region_width: 122
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxBlood
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Word
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxAddress
       region_width: 208
       line_number: 4
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxWord
       region_width: 208
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Address
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Nickname
       region_width: 170
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Top
       region_width: 152
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: birthdayPlayer_BirthdayPlayer_Explanation
       region_width: 280
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: birthdayPlayer_DialogBirthdayPlayer_DialogBirP
       region_width: 270
       line_number: 3
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_EditFirst_CapA_Intro
       region_width: 286
       line_number: 3
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_EditFirst_CapB_Intro
       region_width: 256
       line_number: 3
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_EditFirst_CapA_Title
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: distribution_Distribution_EditFirst_CapB_Title
       region_width: 146
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_PublicHall
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_Tent
       region_width: 230
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_Explanation
       region_width: 1160
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiAsk_MiiAsk_BtnAsk_00T
       region_width: 256
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiAsk_MiiAsk_Top
       region_width: 270
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiAsk_MiiAsk_WinAsk_00
       region_width: 160
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiAsk_MiiAsk_BtnAsk_00E
       region_width: 116
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiAsk_MiiAsk_U_CapAsk_UT
       region_width: 256
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiAsk_MiiAsk_U_CapAsk_U
       region_width: 160
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiAsk_MiiAsk_U_CapAsk_UE
       region_width: 116
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_Money_BtnCal_7
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_Money_BtnCal_8
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_Money_BtnCal_9
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_Money_BtnCal_4
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_Money_BtnCal_5
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_Money_BtnCal_6
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_Money_BtnCal_1
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_Money_BtnCal_2
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_Money_BtnCal_3
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_Money_BtnCal_0
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_Money_BtnCal_Clear
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_Money_TextBox_11
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: CommonMiniGame_Q_2BtnSelect_BtnS_00
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: CommonMiniGame_Q_2BtnSelect_BtnS_01
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: CommonMiniGame_Q_3BtnSelect_BtnS_00
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: CommonMiniGame_Q_3BtnSelect_BtnS_01
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: CommonMiniGame_Q_3BtnSelect_BtnS_02
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: CommonMiniGame_Q_BtnSelect_BtnS_00
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: CommonMiniGame_Q_BtnSelect_BtnS_01
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: CommonMiniGame_Q_BtnSelect_BtnS_02
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: CommonMiniGame_Q_BtnSelect_BtnS_03
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: CommonMiniGame_Q_BtnSelect_BtnS_04
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Qsame_QSameBoard_Answer_00
       region_width: 244
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Qsame_QSameBoard_Answer_01
       region_width: 244
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: Qsame_QSameBoard_Answer_02
       region_width: 270
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: news_News_Caption_00
       region_width: 308
       line_number: 3
       font_index: 0
-      color: null
+      color_index: null
     - name: news_News_BtnNextS
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: news_News_BtnNext
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: photostudio_PhotoAlbum_AU_Numerator
       region_width: 42
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: photostudio_PhotoAlbum_AU_Denominator
       region_width: 42
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: saveImport_SaveImport_U_Possibility
       region_width: 180
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: song_DialogGenre_BtnGenre_00
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_DialogGenre_Genre_Top
       region_width: 274
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_DialogName_Name_00
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_DialogName_Name_Top
       region_width: 274
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_SongListG_Top
       region_width: 300
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_SongPurpose_BtnPur_00
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_SongPurpose_BtnPur_02
       region_width: 296
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_SongPurpose_BtnPur_03
       region_width: 144
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: song_SongPurpose_BtnPur_01
       region_width: 240
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongEdit_U_T
       region_width: 250
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerBack_TravelerBack_Island
       region_width: 244
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerBack_TravelerBack_Product
       region_width: 200
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wandererTalk_WandererTalk_BtnSelect_00S
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wandererTalk_WandererTalk_BtnSelect_00
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wandererTalk_WandererTalk_BtnSelect_01S
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wandererTalk_WandererTalk_BtnSelect_01
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderWatch_WanderLetter_To
       region_width: 300
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderWatch_WanderLetter_Message
       region_width: 216
       line_number: 4
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderWatch_WanderLetter_From
       region_width: 200
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: proposeToWedding_ProposeToWedding_BtnSelect_00S
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: proposeToWedding_ProposeToWedding_BtnSelect_00
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: proposeToWedding_ProposeToWedding_BtnSelect_01S
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: proposeToWedding_ProposeToWedding_BtnSelect_01
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_U_Forwarding
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_U_Coming
       region_width: 130
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ApartInfo_ApartInfo_U_CapManP1_03
       region_width: 350
       line_number: 4
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_U_Construction
       region_width: 300
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_BtnSelect_00S
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_BtnSelect_00
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_BtnSelect_01S
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_BtnSelect_01
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: albumList_AlbumList_U_AU_Numerato_C
       region_width: 32
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: albumList_AlbumList_U_AU_Denomina_C
       region_width: 32
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: albumList_AlbumList_U_AU_Color
       region_width: 44
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: albumList_AlbumList_U_AU_All
       region_width: 44
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ApartInfo_ApartInfo_U_CapManP2_00T
       region_width: 364
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ApartInfo_ApartInfo_U_CapManP2_00
       region_width: 368
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: map_Map_Save_00S
       region_width: 54
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnPreS
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnPre
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchPresent_U_AU_Price
       region_width: 125
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchRelation_U_Re_Top
       region_width: 310
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouchLvUp_Money_GiveMoney
       region_width: 150
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiWatch_MiiWatch_U_Roof
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiWatch_MiiWatch_U_Manager
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_IslandName_Top
       region_width: 290
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: option_Option_IslandName_Tail
       region_width: 20
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: photostudio_PhotoKind_KindFrame4_00
       region_width: 130
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: photostudio_PhotoKind_KindFrame4_01
       region_width: 130
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: photostudio_PhotoKind_KindFrame4_02
       region_width: 130
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: photostudio_PhotoKind_KindFrame4_03
       region_width: 130
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: shopList_ShopList_U_Cap_Limitation
       region_width: 132
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ARCamera_ARCamera_ExplanationLR
       region_width: 200
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: ARCamera_ARCamera_MessageSave
       region_width: 160
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: travelerList_TravelerList_U_Non
       region_width: 310
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapMi_00S
       region_width: 862
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_CapIs_00S
       region_width: 862
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_Non
       region_width: 310
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_Sa_Cap
       region_width: 114
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_Sa_Level
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wanderList_WanderList_U_Sa_LevelCap
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_BtnNextS
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_BtnNext
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_U_Message_M
       region_width: 390
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_U_Name_M
       region_width: 154
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_U_Message_I
       region_width: 390
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_U_Name_I
       region_width: 190
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_U_Message_Leave
       region_width: 390
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_U_Message_Top
       region_width: 320
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_U_Count
       region_width: 50
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_BalloonGe_0
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_BalloonGe_1
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_BalloonGe_2
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_BalloonGe_3
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_BalloonGe_4
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_BalloonGe_5
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: albumList_AlbumList_U_Ex_Room
       region_width: 350
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: propose_propose_Top
       region_width: 310
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_Word_BtnWord_00
       region_width: 216
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_Word_Word_00Top
       region_width: 274
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_Word_Top
       region_width: 310
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: screenShotError_ScreenShotError_U_ScreenSError
       region_width: 340
       line_number: 3
       font_index: 0
-      color: null
+      color_index: null
     - name: affinity_Affinity_Result_U_Top
       region_width: 350
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: affinity_Affinity_Result_U_Diagnosis
       region_width: 390
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: affinity_Affinity_Result_U_Diagnosis_S
       region_width: 390
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: affinity_Affinity_Result_U_Top_S
       region_width: 350
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: miiAsk_MiiAsk_BtnAsk_01T
       region_width: 256
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiAsk_MiiAsk_BtnAsk_01E
       region_width: 116
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiAsk_MiiAsk_BtnAsk_02T
       region_width: 256
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiAsk_MiiAsk_BtnAsk_02E
       region_width: 116
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: editor_Edit_U_Dist_00
       region_width: 256
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: affinity_BtnSelect_BtnS_00
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: affinity_BtnSelect_BtnS_01
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: affinity_Weather_Commentary_U_Commentary
       region_width: 1160
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: affinity_Weather_Commentary_U_Attention
       region_width: 400
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     source_files:
     - Drama/Drama.mstxt
     - Dream/Dream.mstxt
@@ -8732,12 +8732,12 @@ projects:
       region_width: 270
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: ItemName
       region_width: 172
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     source_files:
     - Equip/Equip_Attr.mstxt
     - Equip/Equip_Desc.mstxt
@@ -10477,102 +10477,102 @@ projects:
       region_width: 308
       line_number: 0
       font_index: 0
-      color: null
+      color_index: null
     - name: Title_Top
       region_width: 360
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: common_Caption_Caption_00
       region_width: 308
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: common_Caption_U_Caption_00
       region_width: 384
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: news_News_Caption_00
       region_width: 308
       line_number: 3
       font_index: 0
-      color: null
+      color_index: null
     - name: news_News_U_Title_00
       region_width: 360
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: news_News_U_Caption_00
       region_width: 370
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: news_News_U_Title_00S
       region_width: 360
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: news_News_U_Caption_00S
       region_width: 370
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: news_News_BtnLock
       region_width: 176
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: news_News_BtnNextS
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: news_News_BtnNext
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Dialog
       region_width: 270
       line_number: 7
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_BaseShadow_01
       region_width: 135
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Base_01
       region_width: 135
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_BaseShadow_02
       region_width: 135
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Base_02
       region_width: 135
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_BaseShadow_00
       region_width: 280
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Base_00
       region_width: 280
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_U_00_Dialog_U
       region_width: 350
       line_number: 9
       font_index: 0
-      color: null
+      color_index: null
     source_files:
     - Common.mstxt
     - Data.mstxt
@@ -10638,57 +10638,57 @@ projects:
       region_width: 270
       line_number: 7
       font_index: 0
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_BaseShadow_01
       region_width: 135
       line_number: 1
       font_index: null
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Base_01
       region_width: 135
       line_number: 1
       font_index: null
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_BaseShadow_02
       region_width: 135
       line_number: 1
       font_index: null
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Base_02
       region_width: 135
       line_number: 1
       font_index: null
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_BaseShadow_00
       region_width: 280
       line_number: 1
       font_index: null
-      color: null
+      color_index: null
     - name: dialog_Dialog_00_Base_00
       region_width: 280
       line_number: 1
       font_index: null
-      color: null
+      color_index: null
     - name: dialog_Dialog_U_00_Dialog_U
       region_width: 350
       line_number: 9
       font_index: null
-      color: null
+      color_index: null
     - name: commonList_CommonList_Number_00
       region_width: 72
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Message_00
       region_width: 267
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: commonList_CommonList_Tag_00
       region_width: 34
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     source_files:
     - PhotoStudio_BG.mstxt
   Room:
@@ -10870,12 +10870,12 @@ projects:
       region_width: 270
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: ItemName
       region_width: 172
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     source_files:
     - Room/Room_Attr.mstxt
     - Room/Room_Desc.mstxt
@@ -10888,7 +10888,7 @@ projects:
       region_width: 270
       line_number: 7
       font_index: 0
-      color: null
+      color_index: null
     source_files:
     - Sample.mstxt
     - SampleFlowchart.msflow
@@ -11158,202 +11158,202 @@ projects:
       region_width: 308
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: common_Caption_U_Caption_00
       region_width: 384
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Title
       region_width: 216
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word00
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word01
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word02
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word03
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word04
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word05
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word06
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word07
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word08
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word09
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word10
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word11
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word12
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word13
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word14
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word15
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word16
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word17
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word18
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word19
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word20
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word21
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word22
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_song_Word23
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongEdit_U
       region_width: 390
       line_number: 6
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_Song_U
       region_width: 390
       line_number: 6
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongGe_0
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongGe_1
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongGe_2
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongGe_3
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongGe_4
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_SongGe_5
       region_width: 128
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_IconCross
       region_width: 110
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_IconA
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: song_Song_U_Name
       region_width: 390
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_BtnCallS
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: wharf_wharf_BtnCall
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     source_files:
     - Ballad.mstxt
     - Ballad_Lyrics.mstxt
@@ -12091,17 +12091,17 @@ projects:
       region_width: 400
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: common_Caption_Caption_00
       region_width: 308
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: common_Caption_U_Caption_00
       region_width: 384
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     source_files:
     - TalkBirthday/TalkBirthday_Msg.mstxt
     - TalkChat/TalkChat_Msg.mstxt
@@ -12149,172 +12149,172 @@ projects:
       region_width: 308
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: common_Caption_U_Caption_00
       region_width: 384
       line_number: 2
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxName_00
       region_width: 148
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxName_01
       region_width: 148
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Name
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Birthday
       region_width: 84
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxBirthday
       region_width: 118
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Made
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxMade
       region_width: 148
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Gen_Blo
       region_width: 84
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxGender
       region_width: 40
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Self
       region_width: 80
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxSelf
       region_width: 122
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxBlood
       region_width: 60
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Word
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxAddress
       region_width: 208
       line_number: 4
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_BoxWord
       region_width: 208
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Address
       region_width: 190
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Nickname
       region_width: 170
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: QR_QRList_U_Top
       region_width: 152
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_DialogConfession_BtnCon_00
       region_width: 135
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_List_00
       region_width: 72
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_List_00S
       region_width: 72
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_00S
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_00
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_01S
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_01
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_02S
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_02
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_03S
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnSelect_03
       region_width: 120
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_GameCoin
       region_width: 32
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnPreS
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     - name: miiTouch_MiiTouch_BtnPre
       region_width: 100
       line_number: 1
       font_index: 0
-      color: null
+      color_index: null
     source_files:
     - Touch_Agent.mstxt
     - Touch_ScriptText.mstxt

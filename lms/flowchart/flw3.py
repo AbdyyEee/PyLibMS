@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Literal
 
 from lms.common.field.io import read_field, write_field
@@ -25,11 +26,15 @@ NODE_SIZE = 16
 
 VARIABLE_WIDTH_DATATYPES = (LMS_DataType.BOOL, LMS_DataType.ENUM)
 
+@dataclass
+class FLW3Data:
+    entries: list[LMS_EntryNode]
+    source_jumps: dict[LMS_JumpNode, int]
 
 def read_flw3(
     reader: FileReader, config: NodeConfig | None,
         source_resolver: SourceResolver, msbt_override: MSBT | None
-) -> tuple[list[LMS_EntryNode], list[tuple[LMS_JumpNode, int]]]:
+) -> FLW3Data:
     section_start = reader.tell()
     node_count = reader.read_uint16()
     branch_table_id_count = reader.read_uint16()
@@ -129,7 +134,7 @@ def read_flw3(
     node_map: dict[int, LMS_BaseNode | None] = {node.id: node for node in nodes}
     branch_ids = [read_next_node_id(reader) for _ in range(branch_table_id_count)]
 
-    external_jumps: list[tuple[LMS_JumpNode, int]] = []
+    source_jumps: dict[LMS_JumpNode, int] = {}
     for node in nodes:
         next_node_id = next_id_map[node]
 
@@ -147,7 +152,7 @@ def read_flw3(
         elif isinstance(node, LMS_JumpNode):
             # Defer resolving external node references until the current MSBF is registered in read_msbf
             if node.msbf_index is not None:
-                external_jumps.append((node, next_node_id))
+                source_jumps[node] = node.next_node_id
             elif next_node_id is not None:
                 node.set_next_node(node_map[next_node_id])
 
@@ -158,7 +163,7 @@ def read_flw3(
 
         node.set_next_node(node_map[next_node_id])
 
-    return entry_nodes, external_jumps
+    return FLW3Data(entry_nodes, source_jumps)
 
 
 def read_next_node_id(reader: FileReader) -> int | None:

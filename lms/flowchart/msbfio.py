@@ -103,7 +103,7 @@ def read_msbf(
     for magic, size in read_section_data(reader, file_info.section_count):
         match magic:
             case MSBFSection.FLW3:
-                entry_nodes, external_jumps = read_flw3(reader, node_config, source_resolver, msbt_override)
+                flw3_data = read_flw3(reader, node_config, source_resolver, msbt_override)
             case MSBFSection.FEN1:
                 labels, slot_count = read_labels(reader)
             case MSBFSection.REF1:
@@ -112,6 +112,7 @@ def read_msbf(
                                                   in the PyLibMS repository https://github.com/AbdyyEee/PylibMS"""
                 )
 
+    entry_nodes = flw3_data.entries
     for i, label in enumerate(labels.values()):
         entry_nodes[i].name = label
         msbf.add_flowchart(label, entry_nodes[i])
@@ -134,8 +135,8 @@ def read_msbf(
             source_resolver.resolved_cache[filename_key] = msbf
 
         try:
-            # Resolve the external jumps safely now
-            for jump, next_node_id in external_jumps:
+            # Resolve source jumps safely now
+            for jump, next_node_id in flw3_data.source_jumps.items():
                 if next_node_id is None:
                     continue
                 jump.set_next_node(jump.msbf[next_node_id])

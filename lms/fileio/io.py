@@ -128,9 +128,9 @@ class FileReader:
             string += raw_char
         return string.decode(self.encoding.to_string_format(self.endian))
 
-    def read_len_string_encoded(self):
+    def read_len_encoded_string(self, u8_prefix: bool = False):
         self.align(self.encoding.width)
-        length = self.read_uint16()
+        length = self.read_uint16() if not u8_prefix else self.read_uint8()
         return self.read_bytes(length).decode(
             self.encoding.to_string_format(self.endian)
         )
@@ -205,8 +205,12 @@ class FileWriter:
     def write_string(self, string: str) -> None:
         self.write_bytes(string.encode("UTF-8"))
 
-    def write_len_encoded_string(self, string: str) -> None:
-        self.write_uint16(len(string) * self.encoding.width)
+    def write_len_encoded_string(self, string: str, u8_prefix: bool = False) -> None:
+        if u8_prefix:
+            self.write_uint8(len(string))
+        else:
+            self.write_uint16(len(string) * FileEncoding.UTF16.width)
+
         self.write_encoded_string(string, False)
 
     def write_encoded_string(self, string: str, terminate: bool = True) -> int:

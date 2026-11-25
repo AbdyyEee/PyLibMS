@@ -32,9 +32,17 @@ class SourceResolver:
         self.resolved_cache: dict[str, MSBT | UMSBT | MSBF] = {}
         self._msbt_extension = FileExtension.MSBT
 
-        for _ in self._message_root.rglob(f"*{FileExtension.UMSBT}"):
-            self._msbt_extension = FileExtension.UMSBT
-            break
+        self._file_map: dict[str, list[Path]] = {}
+        for path in self._message_root.rglob("*"):
+            if not path.is_file():
+                continue
+
+            extension = path.suffix
+            if extension not in [FileExtension.MSBT, FileExtension.MSBF, FileExtension.UMSBT]:
+                continue
+
+            self._file_map.setdefault(path.name, []).append(path)
+
 
         self._language = language
 
@@ -79,7 +87,7 @@ class SourceResolver:
         try:
             source_path = self._project.sources[source_index]
         except KeyError as e:
-            raise KeyError(f"The source '{source_index}' could not be mapped to a file in the message root!") from e
+            raise KeyError(f"The source '{source_path}' could not be mapped to a file in the message root!") from e
 
         filename = os.path.basename(source_path).replace(extension.source_format, extension)
 
@@ -89,23 +97,17 @@ class SourceResolver:
         try:
             source_path = self._project.sources[source_index]
         except KeyError as e:
-            raise KeyError(f"The source '{source_index}' could not be mapped to a file in the message root!") from e
+            raise KeyError(f"The source '{source_path}' could not be mapped to a file in the message root!") from e
 
         filename = os.path.basename(source_path).replace(extension.source_format, extension)
 
         if filename in self.resolved_cache:
             return self.resolved_cache[filename]
 
-        real_path = None
-        for path in self._message_root.rglob(filename):
-            real_path = path
-            break
+        if (matches := self._file_map.get(filename)) is None:
+            raise KeyError(f"The source '{source_path}' could not be mapped to a file in the message root!") from e
 
-        if real_path is None:
-            raise ValueError(
-                f"The source {source_path} could not be mapped to a file in the message root!"
-            )
-
+        real_path = matches[0]
         match extension:
             case FileExtension.MSBT:
                 file = read_msbt_path(real_path, project=self._project)

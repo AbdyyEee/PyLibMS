@@ -249,9 +249,9 @@ class MSBT:
         return tuple(self._section_list)
 
     @property
-    def unsupported_sections(self) -> tuple[str, ...]:
-        """The list of unsupported sections."""
-        return tuple(self._unsupported_section_map.keys())
+    def unsupported_sections(self) -> Mapping[str, bytes]:
+        """Map of unsupported sections."""
+        return MappingProxyType(self._unsupported_sections)
 
     @property
     def attribute_offsets(self) -> tuple[str, ...] | None:
@@ -375,13 +375,3 @@ class MSBT:
         """
         return name in self._section_list
 
-    def get_unsupported_section_data(self, name: str) -> bytes:
-        """
-        Retrieves the raw data of an unsupported section.
-
-        :param name: the name of the section.
-        """
-        if name not in self._unsupported_section_map:
-            raise KeyError(f"The section '{name}' does not exist in the MSBT!")
-
-        return self._unsupported_section_map[name]

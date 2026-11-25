@@ -9,12 +9,13 @@ from lms.common import lms_exceptions
 from lms.common.field.lms_datatype import LMS_DataType
 from lms.common.stream.fileinfo import read_file_info, write_file_info, write_file_size
 from lms.common.stream.hashtable import read_labels, write_labels
-from lms.common.stream.section import read_section_data, write_section
+from lms.common.stream.section import read_section_data, write_section, write_unsupported_section
 from lms.fileio.io import FileReader, FileWriter
 from lms.project.msbp import MSBP, MSBPSection
 from lms.project.section.ali2 import read_ali2, write_ali2
 from lms.project.section.ati2 import read_ati2, write_ati2
 from lms.project.section.clr1 import read_clr1, write_clr1
+from lms.project.section.fnt1 import read_fnt1, write_fnt1
 from lms.project.section.string import read_strings, write_strings
 from lms.project.section.syl3 import read_syl3, write_syl3
 from lms.project.section.tag2 import read_tag2, write_tag2
@@ -65,11 +66,14 @@ def read_msbp(stream: BinaryIO | bytes) -> MSBP:
     tag_param_definitions = None
     tag_enums = None
     styles = None
+    font_names = None
     source_list = None
 
     last_read = None
     section_list = []
-    for magic, _ in read_section_data(reader, file_info.section_count):
+
+    unsupported_sections = {}
+    for magic, size in read_section_data(reader, file_info.section_count):
         match magic:
             case MSBPSection.CLB1 | MSBPSection.ALB1 | MSBPSection.SLB1:
                 # Set the name attribute of last read item
@@ -97,8 +101,10 @@ def read_msbp(stream: BinaryIO | bytes) -> MSBP:
                 last_read = styles
             case MSBPSection.CTI1:
                 source_list = read_strings(reader, True)
+            case MSBPSection.FNT1:
+                font_names = read_fnt1(reader)
             case _:
-                raise ValueError(f"Unknown section magic '{magic}' in MSBP file.")
+                unsupported_sections[magic] = reader.read_bytes(size)
 
         section_list.append(magic)
 
@@ -121,6 +127,8 @@ def read_msbp(stream: BinaryIO | bytes) -> MSBP:
         tag_groups,
         styles,
         source_list,
+        font_names,
+        unsupported_sections,
     )
 
 
@@ -203,6 +211,11 @@ def write_msbp(file: MSBP) -> bytes:
                 write_section(writer, section, write_syl3, file.styles)
             case MSBPSection.CTI1:
                 write_section(writer, section, write_strings, file.source_files, True)
-
+            case MSBPSection.FNT1:
+                write_section(writer, section, write_fnt1, file.font_names)
+            case _:
+                write_unsupported_section(
+                    writer, section, file.unsupported_sections[section]
+                )
     write_file_size(writer)
     return writer.get_data()

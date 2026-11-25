@@ -26,7 +26,7 @@ def read_decoded_parameters(
         param_offset = reader.tell()
         try:
             if param.datatype is LMS_DataType.STRING:
-                value = LMS_Field(reader.read_len_string_encoded(), param)
+                value = LMS_Field(reader.read_len_encoded_string(), param)
             else:
                 value = read_field(reader, param)
         except Exception as e:

@@ -277,7 +277,7 @@ def write_msbt(file: MSBT) -> bytes:
                 write_section(writer, "TSY1", write_tsy1, style_indexes)
             case _:
                 write_unsupported_section(
-                    writer, section, file.get_unsupported_section_data(section)
+                    writer, section, file.unsupported_sections[section],
                 )
 
     write_file_size(writer)

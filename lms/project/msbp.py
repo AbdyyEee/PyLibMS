@@ -1,4 +1,6 @@
 from enum import StrEnum
+from types import MappingProxyType
+from typing import Mapping
 
 from lms.common.lms_fileinfo import LMS_FileInfo
 from lms.project.definitions.attribute import LMS_AttrDefinition
@@ -19,6 +21,7 @@ class MSBPSection(StrEnum):
     SYL3 = "SYL3"
     SLB1 = "SLB1"
     CTI1 = "CTI1"
+    FNT1 = "FNT1"
 
 
 class MSBP:
@@ -38,6 +41,8 @@ class MSBP:
         tag_groups: tuple[LMS_TagGroup],
         styles: list[LMS_Style],
         source_files: list[str],
+        font_names: list[str],
+        unsupported_sections: dict[str, bytes] | None = None,
     ):
         self.name = ""
         self.slot_count = self.DEFAULT_SLOT_COUNT
@@ -49,6 +54,8 @@ class MSBP:
         self._tag_groups = tag_groups
         self._styles = styles
         self._source_files = source_files
+        self._font_names = font_names
+        self._unsupported_sections = unsupported_sections or {}
 
     @property
     def info(self) -> LMS_FileInfo:
@@ -84,6 +91,16 @@ class MSBP:
     def source_files(self) -> tuple[str, ...]:
         """The source file definitions for the project instance."""
         return None if self._source_files is None else tuple(self._source_files)
+
+    @property
+    def font_names(self) -> tuple[str, ...]:
+        """Font names for the project instance. Specific to MKWorld MSBP files."""
+        return tuple(self._font_names)
+
+    @property
+    def unsupported_sections(self) -> Mapping[str, bytes]:
+        """Map of unsupported sections."""
+        return MappingProxyType(self._unsupported_sections)
 
     def add_color(self, color: LMS_Color) -> None:
         """

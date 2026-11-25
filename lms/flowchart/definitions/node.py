@@ -169,7 +169,7 @@ class LMS_MessageNode(LMS_BaseNode):
     def __init__(
         self,
         node_id: int,
-        msbt_index: int,
+        msbt_index: int | None,
         label_index: int,
         source_resolver: SourceResolver | None = None,
         msbt_override: MSBT | None = None,
@@ -187,25 +187,21 @@ class LMS_MessageNode(LMS_BaseNode):
         self._msbt_override = msbt_override
 
     @property
-    def msbt_name(self) -> str:
-        """Name of the msbt resolved from the project."""
+    def msbt_name(self) -> str | None:
+        """Name of the MSBT resolved from the project."""
         if self._source_resolver is None:
-            raise ValueError("No message data was provided!")
+            return None
 
-        self._source_resolver.validate()
         return self._source_resolver.retrieve_filename(self.msbt_index)
 
     @property
-    def msbt(self) -> MSBT:
-        """MSBT instance the node reference."""
-        if self._msbt_override is not None:
-            return self._msbt_override
-
+    def msbt(self) -> MSBT | None:
+        """MSBT instance the node references."""
         if self._source_resolver is None:
-            raise ValueError("No MSBT override or message data was provided!")
+            return None
 
         self._source_resolver.validate()
-        return self._source_resolver.resolve_msbt(self.msbt_index)
+        return self._source_resolver.resolve_source(self.msbt_index, FileExtension.MSBT)
 
     @property
     def msbt_entry(self) -> MSBTEntry:
@@ -520,7 +516,7 @@ class LMS_JumpNode(LMS_BaseNode):
         return self._original_target_id
 
     @property
-    def msbf_name(self) -> str:
+    def msbf_name(self) -> str | None:
         """Name of the MSBF resolved from the project."""
         if self._source_resolver is None:
             return None

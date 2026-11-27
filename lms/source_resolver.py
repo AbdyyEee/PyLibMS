@@ -105,7 +105,7 @@ class SourceResolver:
             return self.resolved_cache[filename]
 
         if (matches := self._file_map.get(filename)) is None:
-            raise KeyError(f"The source '{source_path}' could not be mapped to a file in the message root!") from e
+            raise KeyError(f"The source '{source_path}' could not be mapped to a file in the message root!")
 
         real_path = matches[0]
         match extension:

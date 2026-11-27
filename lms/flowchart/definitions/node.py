@@ -113,7 +113,7 @@ class LMS_BaseNode:
                 for i, parameter in enumerate(value):
                     verify_number_from_datatype(
                         parameter,
-                        self._parameter_type.sliced_datatype[self._parameter_type][i],
+                        self._parameter_type.sliced_datatype[self._parameter_type],
                     )
 
         self._parameter_value = value
